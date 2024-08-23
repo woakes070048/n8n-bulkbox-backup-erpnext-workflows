@@ -1,0 +1,291 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Change Expiry Date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Purchase Receipt Items": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Purchase Receipt Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-03-07T13:29:31.456Z",
+  "id": "PRl5Wcx3DgLKbP3r",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Batch Expiry Date",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "batch-expiry",
+        "options": {}
+      },
+      "id": "58ed17a7-92b1-495c-838d-5c280c5f6884",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        160,
+        480
+      ],
+      "webhookId": "47b420c9-e7cd-4275-8cdf-5675cf5af663"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data.items",
+        "options": {}
+      },
+      "id": "68b80f8b-3b2e-48e2-869e-fe112c8ad69e",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        900,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "f80bfa05-f62a-4699-89cd-ff1181987116",
+              "leftValue": "={{ $json.item_code }}",
+              "rightValue": "={{ $('Webhook').item.json.body.item }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b24952e6-fbcd-435f-9b9f-c1941078cc5f",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "0e918dca-5605-4490-a116-05eb96f0facb",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Purchase%20Receipt/{{ $json.referenceName }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Basic ZDAyOTQxNTY0NmU4ZjUwOjA3YTcxNWM1MWZhMTljMw=="
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d0feb3cc-9720-414f-9a88-b29221f27e20",
+      "name": "Purchase Receipt Items",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        620,
+        480
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Batch/{{ $('Webhook').item.json.body.name }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Basic ZDAyOTQxNTY0NmU4ZjUwOjA3YTcxNWM1MWZhMTljMw=="
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "expiry_date",
+              "value": "={{ $('Split Out').item.json[\"expiry_date\"] }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "5810755f-80d1-4a45-badc-180b747ec35c",
+      "name": "Change Expiry Date",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1600,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const jsonData = items[0].json.body;\n\nconst referenceName = jsonData.reference_name;\n\nreturn [{json: { referenceName: referenceName }}];\n\n\n// const jsonData = items[0].json.body;\n\n// const referenceNames = jsonData.map((item, index) => {\n//   return item.reference_name;\n// });\n\n// return [{json: { referenceNames: referenceNames }}];\n"
+      },
+      "id": "3ccfa4f6-8b8c-45ec-b992-6c2f90b823a7",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        380,
+        480
+      ]
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "python-requests/2.31.0",
+            "content-length": "234",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "x-forwarded-for": "167.235.206.20",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "167.235.206.20"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "name": "PPK03300003",
+            "item": "PPK033",
+            "batch_qty": 0,
+            "expiry_date": "2024-09-04",
+            "manufacturing_date": "2024-03-08",
+            "reference_doctype": "Purchase Receipt",
+            "reference_name": "MAT-PRE-2024-00385",
+            "supplier": "Propack Kenya"
+          }
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-05-21T11:34:05.000Z",
+  "versionId": "dad3e7b3-9eda-4f8e-b6a4-d845bf95be98"
+}
