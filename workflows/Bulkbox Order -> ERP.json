@@ -1,0 +1,2940 @@
+{
+  "active": false,
+  "connections": {
+    "Get Order from website": {
+      "main": [
+        [
+          {
+            "node": "Split Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Total Item List",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get adjusted Units / Case SIze",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Items S.O": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Order": {
+      "main": [
+        [
+          {
+            "node": "Order ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Order ID": {
+      "main": [
+        [
+          {
+            "node": "Get Order from website",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get adjusted Units / Case SIze": {
+      "main": [
+        [
+          {
+            "node": "If Item in MASTER",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check for existing Customer - Email": {
+      "main": [
+        [
+          {
+            "node": "If  Customer Exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get customer addresses": {
+      "main": [
+        [
+          {
+            "node": "Split Addresses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Items": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Addresses": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Addresses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Addresses": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Address Exists in System",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create S.O with test item": {
+      "main": [
+        [
+          {
+            "node": "Update Sales Order with items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Address Exists in System": {
+      "main": [
+        [
+          {
+            "node": "Create S.O with test item",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Addresses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Address": {
+      "main": [
+        [
+          {
+            "node": "Create S.O with test item1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create S.O with test item1": {
+      "main": [
+        [
+          {
+            "node": "Update Sales Order with items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Create Address",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If  Customer Exists": {
+      "main": [
+        [
+          {
+            "node": "Get customer addresses",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Customer Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Customer Record": {
+      "main": [
+        [
+          {
+            "node": "Create Customer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Customer": {
+      "main": [
+        [
+          {
+            "node": "Create Address1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Address1": {
+      "main": [
+        [
+          {
+            "node": "Create S.O with test item2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create S.O with test item2": {
+      "main": [
+        [
+          {
+            "node": "Update Sales Order with items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qty": {
+      "main": [
+        [
+          {
+            "node": "Items S.O",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Total Item List": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Item in MASTER": {
+      "main": [
+        [
+          {
+            "node": "Qty",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Unites per Case from ERP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Unites per Case from ERP": {
+      "main": [
+        [
+          {
+            "node": "Items S.O",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Shipping Rule": {
+      "main": [
+        [
+          {
+            "node": "Tax",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get User Information": {
+      "main": [
+        [
+          {
+            "node": "Check for existing Customer - Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search State Name": {
+      "main": [
+        [
+          {
+            "node": "Get Shipping Rule",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tax": {
+      "main": [
+        [
+          {
+            "node": "Get User Information",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Order",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Tax1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Search State Name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get User Information1": {
+      "main": [
+        [
+          {
+            "node": "Check for existing Customer - Email1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check for existing Customer - Email1": {
+      "main": [
+        [
+          {
+            "node": "If  Customer Exists1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get customer addresses1": {
+      "main": [
+        [
+          {
+            "node": "Split Addresses1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Addresses1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Addresses1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Addresses1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Address Exists in System1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create S.O with test item3": {
+      "main": [
+        [
+          {
+            "node": "Update Sales Order with items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Address2": {
+      "main": [
+        [
+          {
+            "node": "Create S.O with test item4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Address Exists in System1": {
+      "main": [
+        [
+          {
+            "node": "Create S.O with test item3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Addresses1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create S.O with test item4": {
+      "main": [
+        [
+          {
+            "node": "Update Sales Order with items4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "Create Address2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If  Customer Exists1": {
+      "main": [
+        [
+          {
+            "node": "Get customer addresses1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Customer Record1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Customer Record1": {
+      "main": [
+        [
+          {
+            "node": "Create Customer1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Customer1": {
+      "main": [
+        [
+          {
+            "node": "Create Address3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Address3": {
+      "main": [
+        [
+          {
+            "node": "Create S.O with test item5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create S.O with test item5": {
+      "main": [
+        [
+          {
+            "node": "Update Sales Order with items5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tax1": {
+      "main": [
+        [
+          {
+            "node": "Get User Information1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-04-29T09:47:49.188Z",
+  "id": "PM5VTh1UfOPJ2ZRJ",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Bulkbox Order -> ERP",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "=https://bulkbox.co.ke/api/orders/{{ $('Order ID').item.json.order_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "66b5fdff-2949-4e74-989b-f2210eed1d84",
+      "name": "Get Order from website",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1400,
+        480
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ttlwVRmZ1lkIHlXQ",
+          "name": "Website"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "7a249628-49b3-490d-89fc-54b19d3022e4",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1920,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7f07ada1-1aea-4790-9e1d-89a7598a9537",
+              "name": "item_code",
+              "value": "={{ $('Split Items').item.json.products.product_code }}",
+              "type": "string"
+            },
+            {
+              "id": "8a6ec11f-0315-45fa-8e19-bff1b945ee9e",
+              "name": "qty",
+              "value": "=\n{{ $json.qty *  $('Loop Over Items').item.json.products.amount || $json.data.units_per_case *  $('Loop Over Items').item.json.products.amount}}",
+              "type": "number"
+            },
+            {
+              "id": "dba2d602-ee56-481f-92f6-ead1b3ec73e0",
+              "name": "idx",
+              "value": "={{$node[\"Loop Over Items\"].context[\"currentRunIndex\"]+1;}}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "05c13288-839b-4f03-a71e-f12da0891283",
+      "name": "Items S.O",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        2720,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "5ad574f5-01e4-43b7-92ca-6b6b833f9fba",
+              "leftValue": "={{ $json.body.subject }}",
+              "rightValue": "has been placed successfully",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "f0d01ce0-fe9a-42db-962a-6d348657294b",
+              "leftValue": "={{ $json.body.email }}",
+              "rightValue": "sales@bulkbox.co.ke",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "22735046-da32-473d-94ae-6c35e5cdf5e2",
+      "name": "Order",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        940,
+        480
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a5f2318c-ae12-4606-8953-e39b78998c54",
+              "name": "order_id",
+              "value": "={{ $json.body.subject.match(/\\d+/) }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f3e83cb0-be31-443f-bae1-14fdc0c6b4f9",
+      "name": "Order ID",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        1180,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://bulkbox.co.ke/api/users/{{ $('Get Order from website').item.json.user_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "908483bd-fe19-437e-b5b0-ee88b7576def",
+      "name": "Get User Information",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3720,
+        360
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ttlwVRmZ1lkIHlXQ",
+          "name": "Website"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appSCi0a1zPuJizxg",
+          "mode": "list",
+          "cachedResultName": "Bulkbox Final Master",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl2hGiQmpSg73Una",
+          "mode": "list",
+          "cachedResultName": "MASTER",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tbl2hGiQmpSg73Una"
+        },
+        "filterByFormula": "=({Item Code}=\"{{ $json.products.product_code }}\")",
+        "options": {}
+      },
+      "id": "03c062fd-44c8-464b-9b98-4042e8885487",
+      "name": "Get adjusted Units / Case SIze",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        2080,
+        540
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "a27216ad-ee94-4765-9756-a2af21189bd9",
+      "name": "Total Item List",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2080,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer?fields=[\"customer_name\",\"email_id\"]&filters=[[\"email_id\",\"=\",\"{{ $json.body.email }}\"]]",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "6f80660d-c8fe-4804-9150-b0217c849c68",
+      "name": "Check for existing Customer - Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4120,
+        360
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Address?fields=[\"name\",\"address_title\",\"address_line1\",\"address_line2\"]&filters=[[\"address_title\", \"like\", \"%{{ encodeURIComponent($json.body.data[0].customer_name) }}%\"]] ",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "1a4909b1-63f5-4116-ac0c-5c50f6fb9562",
+      "name": "Get customer addresses",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4820,
+        260
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "products",
+        "include": "=",
+        "options": {}
+      },
+      "id": "3a46a38b-246a-4d14-bbc9-db1171ac94bb",
+      "name": "Split Items",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        480
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "body.data",
+        "options": {}
+      },
+      "id": "7c566a7d-630d-4c3c-b6d3-4cc606a5ad16",
+      "name": "Split Addresses",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        5020,
+        260
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "ed2c37c2-f006-4e45-a190-a274dbced034",
+      "name": "Loop Over Addresses",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        5200,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Sales%20Order",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n      \"customer\":\"{{ $('Check for existing Customer - Email').item.json[\"body\"][\"data\"][0][\"customer_name\"] }}\",\n      \"order_type\":\"Sales\",\n      \"payment_method\":\"M-PESA\",\n      \"title\":\"{{ $('Check for existing Customer - Email').item.json[\"body\"][\"data\"][0][\"customer_name\"]}} - Online\",\n      \"company\":\"Three Spears Limited\",\n      \"transaction_date\":\"{{ $today.format(\"yyyy-MM-dd\")}}\",\n      \"delivery_date\":\"{{ $today.plus(1, \"day\").format(\"yyyy-MM-dd\")}}\",\"customer_address\":\"{{ $json.name }}\",\n      \"selling_price_list\":\"Standard Selling\",\n      \"po_no\":\"Order ‎#{{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"attach_order\":\"https://bulkbox.co.ke/admin.php?dispatch=orders.print_invoice&order_id={{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"doctype\":\"Sales Order\",\n      \"items\":[\n         {\n            \"item_code\":\"TEST01\",\n            \"qty\":1\n         }\n      ]\n   }\n} ",
+        "options": {}
+      },
+      "id": "87bf3387-a2e0-4827-86bb-300ace66d0e2",
+      "name": "Create S.O with test item",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5660,
+        340
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "Sales%20Order",
+        "documentName": "={{ $json.data.name }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "items",
+              "value": "={{ $('Total Item List').item.json.data }}"
+            },
+            {
+              "field": "taxes",
+              "value": "={{ $('Tax').item.json.data }}"
+            },
+            {
+              "field": "shipping_rule",
+              "value": "={{ $('Get Shipping Rule').item.json.data[0].name }}"
+            }
+          ]
+        }
+      },
+      "id": "b30f0401-4a91-4944-935b-73fb247333ee",
+      "name": "Update Sales Order with items",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        5880,
+        340
+      ],
+      "alwaysOutputData": true,
+      "retryOnFail": false,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Address",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"address_title\":\"{{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}} Address\",\n   \"name\":\"{{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}} Shipping\",\n   \"address_type\":\"Billing\",\n   \"address_line1\":\"{{$('Get Order from website').item.json[\"s_address\"]}}\",\n   \"address_line2\":\"{{$('Get Order from website').item.json[\"s_address_2\"]}}\",\n   \"city\":\"{{ $('Get Order from website').item.json.s_state_descr }}\",\n   \"state\":\"Nairobi\",\n   \"Country\":\"Kenya\",\"phone\":\"{{$('Get Order from website').item.json[\"phone\"]}} - {{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}}\",\n   \"is_primary_address\":1,\n   \"links\":[\n      {\n         \"link_doctype\":\"Customer\",\n         \"link_name\":\"{{$('Check for existing Customer - Email').item.json[\"body\"][\"data\"][0][\"customer_name\"]}}\"\n      }\n   ]\n}",
+        "options": {}
+      },
+      "id": "ebfc602c-f5b1-4ee2-900b-f4c3fcc5a695",
+      "name": "Create Address",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5660,
+        160
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "2c57bc1d-2a06-40ec-a188-a5bab2a1fc0e",
+              "leftValue": "={{ $json.address_line1 }}",
+              "rightValue": "={{ $('Get Order from website').item.json.s_address }}",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "27eb86c1-9212-4572-bf64-59083cbbd80a",
+              "leftValue": "={{ $json.address_line2 }}",
+              "rightValue": "={{ $('Get Order from website').item.json.s_address }}",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "e6408a83-77f8-4e2f-b7ae-d34572f1bfb5",
+      "name": "If Address Exists in System",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        5460,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Sales%20Order",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n      \"customer\":\"{{ $('Check for existing Customer - Email').item.json[\"body\"][\"data\"][0][\"customer_name\"] }}\",\n      \"order_type\":\"Sales\",\n      \"payment_method\":\"M-PESA\",\n      \"title\":\"{{ $('Check for existing Customer - Email').item.json[\"body\"][\"data\"][0][\"customer_name\"]}} - Online\",\n      \"company\":\"Three Spears Limited\",\n      \"transaction_date\":\"{{ $today.format(\"yyyy-MM-dd\")}}\",\n      \"delivery_date\":\"{{ $today.plus(1, \"day\").format(\"yyyy-MM-dd\")}}\",\"customer_address\":\"{{ $('Create Address').item.json[\"data\"][\"name\"] }}\",\n      \"selling_price_list\":\"Standard Selling\",\n      \"po_no\":\"Order ‎#{{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"attach_order\":\"https://bulkbox.co.ke/admin.php?dispatch=orders.print_invoice&order_id={{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"doctype\":\"Sales Order\",\n      \"items\":[\n         {\n            \"item_code\":\"TEST01\",\n            \"qty\":1\n         }\n      ]\n   }\n} ",
+        "options": {}
+      },
+      "id": "27ed29ee-44c7-4005-ad75-0470184c6ba1",
+      "name": "Create S.O with test item1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5880,
+        160
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "Sales%20Order",
+        "documentName": "={{ $json.data.name }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "items",
+              "value": "={{ $('Total Item List').item.json.data }}"
+            },
+            {
+              "field": "taxes",
+              "value": "={{ $('Tax').item.json.data }}"
+            },
+            {
+              "field": "shipping_rule",
+              "value": "={{ $('Get Shipping Rule').item.json.data[0].name }}"
+            }
+          ]
+        }
+      },
+      "id": "9c367d36-0230-47e2-9911-e4c4a88ea1e6",
+      "name": "Update Sales Order with items1",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        6100,
+        160
+      ],
+      "alwaysOutputData": true,
+      "retryOnFail": false,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "ddf63159-9522-4da6-901e-1ba32b46e720",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        5440,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "956198e5-14e4-4ad7-a6ef-e672241fd858",
+              "leftValue": "={{ $json.body.data[0].customer_name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "35b6077b-ada2-4e88-a240-856c066247af",
+      "name": "If  Customer Exists",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        4420,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appqmFBvp9I9IB1YV",
+          "mode": "list",
+          "cachedResultName": "Contact Database",
+          "cachedResultUrl": "https://airtable.com/appqmFBvp9I9IB1YV"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblBkafwuK7H4aReA",
+          "mode": "list",
+          "cachedResultName": "Contacts",
+          "cachedResultUrl": "https://airtable.com/appqmFBvp9I9IB1YV/tblBkafwuK7H4aReA"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Bio Check": false,
+            "Company Name": "={{ $ifEmpty($('Get User Information').item.json[\"body\"][\"company\"],$('Get User Information').item.json[\"body\"][\"firstname\"]+\" \"+$('Get User Information').item.json[\"body\"][\"lastname\"]) }}",
+            "User Group ID": 0,
+            "First Name": "={{ $('Get User Information').item.json.body.firstname }}",
+            "Last Name": "={{ $('Get User Information').item.json.body.lastname }}",
+            "Contact Status": "One Time Customers",
+            "Contact Type": "Unassigned",
+            "Source": "Website",
+            "Tel": "={{ $('Get User Information').item.json.body.phone }}",
+            "Email": "={{ $('Get User Information').item.json.body.email }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Company Name",
+              "displayName": "Company Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Job Role",
+              "displayName": "Job Role",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Owner",
+                  "value": "Owner"
+                },
+                {
+                  "name": "General Manager",
+                  "value": "General Manager"
+                },
+                {
+                  "name": "Procurement Manager",
+                  "value": "Procurement Manager"
+                },
+                {
+                  "name": "Procurement Officer",
+                  "value": "Procurement Officer"
+                },
+                {
+                  "name": "Office Adminstrator",
+                  "value": "Office Adminstrator"
+                },
+                {
+                  "name": "Undefined",
+                  "value": "Undefined"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Contact Status",
+              "displayName": "Contact Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Lead",
+                  "value": "Lead"
+                },
+                {
+                  "name": "One Time Customers",
+                  "value": "One Time Customers"
+                },
+                {
+                  "name": "Account",
+                  "value": "Account"
+                },
+                {
+                  "name": "Unassigned",
+                  "value": "Unassigned"
+                },
+                {
+                  "name": "Lost Customer",
+                  "value": "Lost Customer"
+                },
+                {
+                  "name": "Closed",
+                  "value": "Closed"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Contact Type",
+              "displayName": "Contact Type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Food Service",
+                  "value": "Food Service"
+                },
+                {
+                  "name": "Retail",
+                  "value": "Retail"
+                },
+                {
+                  "name": "Corporate",
+                  "value": "Corporate"
+                },
+                {
+                  "name": "Unassigned",
+                  "value": "Unassigned"
+                },
+                {
+                  "name": "Consumer",
+                  "value": "Consumer"
+                },
+                {
+                  "name": "Restaurant",
+                  "value": "Restaurant"
+                },
+                {
+                  "name": "Retailer",
+                  "value": "Retailer"
+                },
+                {
+                  "name": "Other",
+                  "value": "Other"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Website",
+                  "value": "Website"
+                },
+                {
+                  "name": "App",
+                  "value": "App"
+                },
+                {
+                  "name": "Landing Page",
+                  "value": "Landing Page"
+                },
+                {
+                  "name": "Other Forms",
+                  "value": "Other Forms"
+                },
+                {
+                  "name": "ERP",
+                  "value": "ERP"
+                },
+                {
+                  "name": "Whatsapp",
+                  "value": "Whatsapp"
+                },
+                {
+                  "name": "Email",
+                  "value": "Email"
+                },
+                {
+                  "name": "Call in",
+                  "value": "Call in"
+                },
+                {
+                  "name": "Supplier Referall",
+                  "value": "Supplier Referall"
+                },
+                {
+                  "name": "Customer Referall",
+                  "value": "Customer Referall"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tel",
+              "displayName": "Tel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Created Date",
+              "displayName": "Created Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Last Modified",
+              "displayName": "Last Modified",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Send to CRM / Moosend",
+              "displayName": "Send to CRM / Moosend",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Send to CRM",
+                  "value": "Send to CRM"
+                },
+                {
+                  "name": "Moosend",
+                  "value": "Moosend"
+                },
+                {
+                  "name": "Send to CRM Sophia",
+                  "value": "Send to CRM Sophia"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Created By",
+              "displayName": "Created By",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "User Group ID",
+              "displayName": "User Group ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Assigned",
+              "displayName": "Assigned",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Month",
+              "displayName": "Month",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Send Sales Email",
+              "displayName": "Send Sales Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Send Intro Sequence",
+                  "value": "Send Intro Sequence"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Bio Check",
+              "displayName": "Bio Check",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e794afaf-33df-42cb-8789-ee334971d9f7",
+      "name": "Create Customer Record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        4820,
+        580
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Customer",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":[\n      {\n         \"name\":\"{{ $ifEmpty($('Get User Information').item.json[\"body\"][\"company\"],$('Get User Information').item.json[\"body\"][\"firstname\"]+\" \"+$('Get User Information').item.json[\"body\"][\"lastname\"]).trim().toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}}\",\n         \"customer_name\":\"{{ $ifEmpty($('Get User Information').item.json[\"body\"][\"company\"],$('Get User Information').item.json[\"body\"][\"firstname\"]+\" \"+$('Get User Information').item.json[\"body\"][\"lastname\"]).trim().toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}}\",\n         \"customer_type\":\"Individual\",\n         \"customer_group\":\"Consumer\",\n         \"territory\":\"All Territories\",\n         \"mobile_no\":\"{{ $('Get User Information').item.json[\"body\"][\"phone\"] }}\",\n         \"email_id\":\"{{ $('Get User Information').item.json[\"body\"][\"email\"] }}\",\"tax_id\":\"{{ $ifEmpty($('Get User Information').item.json[\"body\"][\"tax_id\"], \"NILL\")}}\",\n         \"payment_terms\":\"Cash On Delivery\",\n         \"credit_limits\": [\n            {\n                \"parent\": \"{{ $ifEmpty($('Get User Information').item.json[\"body\"][\"company\"],$('Get User Information').item.json[\"body\"][\"firstname\"]+\" \"+$('Get User Information').item.json[\"body\"][\"lastname\"]).trim().toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}}\",\n                \"parentfield\": \"credit_limits\",\n                \"parenttype\": \"Customer\",\n                \"credit_limit\": 50000.0,\n                \"doctype\": \"Customer Credit Limit\"\n            }\n        ]\n      }\n   ]\n}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "11c1f195-b653-4180-bf97-623a28704265",
+      "name": "Create Customer",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5020,
+        580
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Address",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"address_title\":\"{{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}} Address\",\n   \"name\":\"{{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}} Shipping\",\n   \"address_type\":\"Billing\",\n   \"address_line1\":\"{{ $ifEmpty($('Get Order from website').item.json[\"s_address\"],\"n/a\")}}\",\n   \"address_line2\":\"{{$ifEmpty($('Get Order from website').item.json[\"s_address_2\"],\"n/a\")}}\",\n   \"city\":\"{{ $('Get Order from website').item.json.s_state_descr }}\",\n   \"state\":\"Nairobi\",\n   \"Country\":\"Kenya\",\"phone\":\"{{$('Get Order from website').item.json[\"phone\"]}} - {{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}}\",\n   \"is_primary_address\":1,\n   \"links\":[\n      {\n         \"link_doctype\":\"Customer\",\n         \"link_name\":\"{{ $('Create Customer').item.json[\"body\"][\"data\"][\"name\"] }}\"\n      }\n   ]\n} ",
+        "options": {}
+      },
+      "id": "2bd12c57-c4e5-4617-ae28-1a012468c251",
+      "name": "Create Address1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5240,
+        580
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Sales%20Order",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n      \"customer\":\"{{ $('Create Customer').item.json[\"body\"][\"data\"][\"customer_name\"] }}\",\n      \"order_type\":\"Sales\",\n      \"payment_method\":\"M-PESA\",\n      \"title\":\"{{ $('Create Customer').item.json[\"body\"][\"data\"][\"customer_name\"] }} - Online\",\n      \"company\":\"Three Spears Limited\",\n      \"transaction_date\":\"{{ $today.format(\"yyyy-MM-dd\")}}\",\n      \"delivery_date\":\"{{ $today.plus(1, \"day\").format(\"yyyy-MM-dd\")}}\",\"customer_address\":\"{{ $json.name }}\",\n      \"selling_price_list\":\"Standard Selling\",\n      \"po_no\":\"Order ‎#{{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"attach_order\":\"https://bulkbox.co.ke/admin.php?dispatch=orders.print_invoice&order_id={{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"doctype\":\"Sales Order\",\n      \"items\":[\n         {\n            \"item_code\":\"TEST01\",\n            \"qty\":1\n         }\n      ]\n   }\n} ",
+        "options": {}
+      },
+      "id": "00dfe5ec-e592-404f-98bd-58bca432842c",
+      "name": "Create S.O with test item2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5460,
+        580
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "Sales%20Order",
+        "documentName": "={{ $json.data.name }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "=items",
+              "value": "={{ $('Total Item List').item.json.data }}"
+            },
+            {
+              "field": "taxes",
+              "value": "={{ $('Tax').item.json.data }}"
+            },
+            {
+              "field": "shipping_rule",
+              "value": "={{ $('Get Shipping Rule').item.json.data[0].name }}"
+            }
+          ]
+        }
+      },
+      "id": "e0bd2db6-7c91-4eb6-be9f-51363d06ff16",
+      "name": "Update Sales Order with items2",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        5660,
+        580
+      ],
+      "alwaysOutputData": true,
+      "retryOnFail": false,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5853b6b1-9668-4788-890e-ee684f692012",
+              "name": "qty",
+              "value": "={{ $ifEmpty( $json[\"Adjusted Units\"], $json[\"Units Per Case\"] )}}\n",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c020da78-33f0-4a07-b799-cdaef0b593c5",
+      "name": "Qty",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        2520,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Flow of Automation\n## * Receives webhook from brevo.\n## * Filers to only check for orders successfully placed.\n## * GEts the order details form the website using the order_id.\n## * Splits the items in the order, and loops through airtable to get their adjusted quantity /  case size.\n## * Gives the items 'idx' postion to be placed in the sales order.\n## * Gets the user information from the website.\n## * Checks if user is existent in the ERP.\n## * Checks if address given exists.\n## * Creates S.O with test items usng http node.\n## * Updates the created items with items from website.",
+        "height": 512.2006141248717,
+        "width": 1314.7799385875135
+      },
+      "id": "18dcecda-6407-46b7-8689-e7114394666b",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        740,
+        -440
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n   \"data\":[\n      {\n         \"charge_type\":\"On Net Total\",\n         \"account_head\":\"VAT - 16% - TSL\",\n         \"description\": \"VAT - 16% - TSL\"\n      },\n      {\n         \"charge_type\":\"On Net Total\",\n         \"account_head\":\"Zero Rated Tax - TSL\",\n         \"description\":\"Zero Rated Tax - TSL\"\n      }\n   ]\n}",
+        "options": {}
+      },
+      "id": "43b5f255-8d06-4887-94bd-4094f0de1f5d",
+      "name": "Tax",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        3320,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item/{{ $('Loop Over Items').item.json.products.product_code }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "07177b43-2d31-4a17-918d-a5cdca865a84",
+      "name": "Get Unites per Case from ERP",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2520,
+        680
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "190ac8db-c2cf-4d63-bc53-a652680eb60f",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a538d944-71fa-498c-9932-814d8d48bd19",
+      "name": "If Item in MASTER",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2280,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "method": "=GET",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Shipping%20Rule?filters=[[\"name\",\"like\",\"%{{ $('Search State Name').item.json[\"Shipping CS Name\"] }}%\"]]",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "4ea1eb91-6c2f-4aa8-a274-a451083cb5e7",
+      "name": "Get Shipping Rule",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3060,
+        320
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appSCi0a1zPuJizxg",
+          "mode": "list",
+          "cachedResultName": "Bulkbox Final Master",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHwkMVbotHdnwON",
+          "mode": "list",
+          "cachedResultName": "Shipping Rule",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tblHwkMVbotHdnwON"
+        },
+        "filterByFormula": "=({Shipping CS Code}=\"{{ $('Get Order from website').item.json.s_state }}\")",
+        "options": {}
+      },
+      "id": "42177a7e-cd48-402d-88aa-202b6f8d1502",
+      "name": "Search State Name",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        2720,
+        320
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "bkyswNNfOLjWVLuS",
+          "name": "n8n Gatu token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "730b4433-4805-42be-bdfd-59a13ae1919d",
+        "options": {}
+      },
+      "id": "1ce70480-6449-4495-b9f4-99d0d86bccdb",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        720,
+        480
+      ],
+      "webhookId": "730b4433-4805-42be-bdfd-59a13ae1919d"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "874f5efd-4cf7-40ac-af80-92f6fec7d91f",
+              "leftValue": "={{ $('Get Order from website').item.json.shipping_cost }}",
+              "rightValue": "0.00",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "c6654a8c-5e3f-458c-9f30-ecec300c0daf",
+              "leftValue": "={{ $('Get Order from website').item.json.b_state }}",
+              "rightValue": "PICKUP",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "48433c6b-2c02-4bad-a010-617c486a59fc",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2340,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://bulkbox.co.ke/api/users/{{ $('Get Order from website').item.json.user_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "64405d20-07e2-4c5f-938f-9f9f579f3d60",
+      "name": "Get User Information1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2840,
+        -120
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ttlwVRmZ1lkIHlXQ",
+          "name": "Website"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer?fields=[\"customer_name\",\"email_id\"]&filters=[[\"email_id\",\"=\",\"{{ $json.body.email }}\"]]",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "f02244cb-f580-4dde-b72e-f891b704351d",
+      "name": "Check for existing Customer - Email1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3100,
+        -120
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Address?fields=[\"name\",\"address_title\",\"address_line1\",\"address_line2\"]&filters=[[\"address_title\", \"like\", \"%{{ encodeURIComponent($json.body.data[0].customer_name) }}%\"]] ",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "2b04ce02-5dc2-408a-9999-d85903ebc8cd",
+      "name": "Get customer addresses1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3720,
+        -160
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "body.data",
+        "options": {}
+      },
+      "id": "12be628f-8808-4c0c-81cb-d0a2f5e67dc0",
+      "name": "Split Addresses1",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        3920,
+        -160
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "a32e0c0a-a815-49ea-b012-c1ec33967c61",
+      "name": "Loop Over Addresses1",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        4100,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Sales%20Order",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n      \"customer\":\"{{ $('Check for existing Customer - Email1').item.json[\"body\"][\"data\"][0][\"customer_name\"] }}\",\n      \"order_type\":\"Sales\",\n      \"payment_method\":\"M-PESA\",\n      \"title\":\"{{ $('Check for existing Customer - Email1').item.json[\"body\"][\"data\"][0][\"customer_name\"]}} - Online\",\n      \"company\":\"Three Spears Limited\",\n      \"transaction_date\":\"{{ $today.format(\"yyyy-MM-dd\")}}\",\n      \"delivery_date\":\"{{ $today.plus(1, \"day\").format(\"yyyy-MM-dd\")}}\",\"customer_address\":\"{{ $json.name }}\",\n      \"selling_price_list\":\"Standard Selling\",\n      \"po_no\":\"Order ‎#{{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"attach_order\":\"https://bulkbox.co.ke/admin.php?dispatch=orders.print_invoice&order_id={{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"doctype\":\"Sales Order\",\n      \"items\":[\n         {\n            \"item_code\":\"TEST01\",\n            \"qty\":1\n         }\n      ]\n   }\n} ",
+        "options": {}
+      },
+      "id": "5dd371f5-2ec1-4458-9363-d2092d97fe04",
+      "name": "Create S.O with test item3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4560,
+        -80
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "Sales%20Order",
+        "documentName": "={{ $json.data.name }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "items",
+              "value": "={{ $('Total Item List').item.json.data }}"
+            },
+            {
+              "field": "taxes",
+              "value": "={{ $('Tax1').item.json.data }}"
+            }
+          ]
+        }
+      },
+      "id": "c6578246-57bf-4828-b776-7b2e365c3c17",
+      "name": "Update Sales Order with items3",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        4780,
+        -80
+      ],
+      "alwaysOutputData": true,
+      "retryOnFail": false,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Address",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"address_title\":\"{{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}} Address\",\n   \"name\":\"{{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}} Shipping\",\n   \"address_type\":\"Billing\",\n   \"address_line1\":\"{{$('Get Order from website').item.json[\"s_address\"]}}\",\n   \"address_line2\":\"{{$('Get Order from website').item.json[\"s_address_2\"]}}\",\n   \"city\":\"{{ $('Get Order from website').item.json.s_state_descr }}\",\n   \"state\":\"Nairobi\",\n   \"Country\":\"Kenya\",\"phone\":\"{{$('Get Order from website').item.json[\"phone\"]}} - {{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}}\",\n   \"is_primary_address\":1,\n   \"links\":[\n      {\n         \"link_doctype\":\"Customer\",\n         \"link_name\":\"{{$('Check for existing Customer - Email1').item.json[\"body\"][\"data\"][0][\"customer_name\"]}}\"\n      }\n   ]\n}",
+        "options": {}
+      },
+      "id": "105eb5fe-01a3-48cd-a8b0-e2654a7bb43d",
+      "name": "Create Address2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4560,
+        -260
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "2c57bc1d-2a06-40ec-a188-a5bab2a1fc0e",
+              "leftValue": "={{ $json.address_line1 }}",
+              "rightValue": "={{ $('Get Order from website').item.json.s_address }}",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "27eb86c1-9212-4572-bf64-59083cbbd80a",
+              "leftValue": "={{ $json.address_line2 }}",
+              "rightValue": "={{ $('Get Order from website').item.json.s_address }}",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "f7d66866-8fe9-4702-89a3-c8b0d13df63f",
+      "name": "If Address Exists in System1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        4360,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Sales%20Order",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n      \"customer\":\"{{ $('Check for existing Customer - Email1').item.json[\"body\"][\"data\"][0][\"customer_name\"] }}\",\n      \"order_type\":\"Sales\",\n      \"payment_method\":\"M-PESA\",\n      \"title\":\"{{ $('Check for existing Customer - Email1').item.json[\"body\"][\"data\"][0][\"customer_name\"]}} - Online\",\n      \"company\":\"Three Spears Limited\",\n      \"transaction_date\":\"{{ $today.format(\"yyyy-MM-dd\")}}\",\n      \"delivery_date\":\"{{ $today.plus(1, \"day\").format(\"yyyy-MM-dd\")}}\",\"customer_address\":\"{{ $('Create Address2').item.json[\"data\"][\"name\"] }}\",\n      \"selling_price_list\":\"Standard Selling\",\n      \"po_no\":\"Order ‎#{{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"attach_order\":\"https://bulkbox.co.ke/admin.php?dispatch=orders.print_invoice&order_id={{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"doctype\":\"Sales Order\",\n      \"items\":[\n         {\n            \"item_code\":\"TEST01\",\n            \"qty\":1\n         }\n      ]\n   }\n} ",
+        "options": {}
+      },
+      "id": "60924c16-1af1-4c0e-a4e8-24bf540dbd98",
+      "name": "Create S.O with test item4",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4780,
+        -260
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "Sales%20Order",
+        "documentName": "={{ $json.data.name }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "items",
+              "value": "={{ $('Total Item List').item.json.data }}"
+            },
+            {
+              "field": "taxes",
+              "value": "={{ $('Tax1').item.json.data }}"
+            }
+          ]
+        }
+      },
+      "id": "674bcf94-37d7-4cf4-ac7f-06eaa5d275bc",
+      "name": "Update Sales Order with items4",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        5000,
+        -260
+      ],
+      "alwaysOutputData": true,
+      "retryOnFail": false,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "c083db84-1ab3-4607-933d-9e1fc79f6be1",
+      "name": "Aggregate1",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        4340,
+        -260
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "956198e5-14e4-4ad7-a6ef-e672241fd858",
+              "leftValue": "={{ $json.body.data[0].customer_name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "9bb8b512-95ce-4918-918a-2c100fbd56e2",
+      "name": "If  Customer Exists1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        3360,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appqmFBvp9I9IB1YV",
+          "mode": "list",
+          "cachedResultName": "Contact Database",
+          "cachedResultUrl": "https://airtable.com/appqmFBvp9I9IB1YV"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblBkafwuK7H4aReA",
+          "mode": "list",
+          "cachedResultName": "Contacts",
+          "cachedResultUrl": "https://airtable.com/appqmFBvp9I9IB1YV/tblBkafwuK7H4aReA"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Bio Check": false,
+            "Company Name": "={{ $ifEmpty($('Get User Information1').item.json[\"body\"][\"company\"],$('Get User Information1').item.json[\"body\"][\"firstname\"]+\" \"+$('Get User Information1').item.json[\"body\"][\"lastname\"]) }}",
+            "User Group ID": 0,
+            "First Name": "={{ $('Get User Information1').item.json.body.firstname }}",
+            "Last Name": "={{ $('Get User Information1').item.json.body.lastname }}",
+            "Contact Status": "One Time Customers",
+            "Contact Type": "Unassigned",
+            "Source": "Website",
+            "Tel": "={{ $('Get User Information1').item.json.body.phone }}",
+            "Email": "={{ $('Get User Information1').item.json.body.email }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Company Name",
+              "displayName": "Company Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Job Role",
+              "displayName": "Job Role",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Owner",
+                  "value": "Owner"
+                },
+                {
+                  "name": "General Manager",
+                  "value": "General Manager"
+                },
+                {
+                  "name": "Procurement Manager",
+                  "value": "Procurement Manager"
+                },
+                {
+                  "name": "Procurement Officer",
+                  "value": "Procurement Officer"
+                },
+                {
+                  "name": "Office Adminstrator",
+                  "value": "Office Adminstrator"
+                },
+                {
+                  "name": "Undefined",
+                  "value": "Undefined"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Contact Status",
+              "displayName": "Contact Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Lead",
+                  "value": "Lead"
+                },
+                {
+                  "name": "One Time Customers",
+                  "value": "One Time Customers"
+                },
+                {
+                  "name": "Account",
+                  "value": "Account"
+                },
+                {
+                  "name": "Unassigned",
+                  "value": "Unassigned"
+                },
+                {
+                  "name": "Lost Customer",
+                  "value": "Lost Customer"
+                },
+                {
+                  "name": "Closed",
+                  "value": "Closed"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Contact Type",
+              "displayName": "Contact Type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Food Service",
+                  "value": "Food Service"
+                },
+                {
+                  "name": "Retail",
+                  "value": "Retail"
+                },
+                {
+                  "name": "Corporate",
+                  "value": "Corporate"
+                },
+                {
+                  "name": "Unassigned",
+                  "value": "Unassigned"
+                },
+                {
+                  "name": "Consumer",
+                  "value": "Consumer"
+                },
+                {
+                  "name": "Restaurant",
+                  "value": "Restaurant"
+                },
+                {
+                  "name": "Retailer",
+                  "value": "Retailer"
+                },
+                {
+                  "name": "Other",
+                  "value": "Other"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Website",
+                  "value": "Website"
+                },
+                {
+                  "name": "App",
+                  "value": "App"
+                },
+                {
+                  "name": "Landing Page",
+                  "value": "Landing Page"
+                },
+                {
+                  "name": "Other Forms",
+                  "value": "Other Forms"
+                },
+                {
+                  "name": "ERP",
+                  "value": "ERP"
+                },
+                {
+                  "name": "Whatsapp",
+                  "value": "Whatsapp"
+                },
+                {
+                  "name": "Email",
+                  "value": "Email"
+                },
+                {
+                  "name": "Call in",
+                  "value": "Call in"
+                },
+                {
+                  "name": "Supplier Referall",
+                  "value": "Supplier Referall"
+                },
+                {
+                  "name": "Customer Referall",
+                  "value": "Customer Referall"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tel",
+              "displayName": "Tel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Created Date",
+              "displayName": "Created Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Last Modified",
+              "displayName": "Last Modified",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Send to CRM / Moosend",
+              "displayName": "Send to CRM / Moosend",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Send to CRM",
+                  "value": "Send to CRM"
+                },
+                {
+                  "name": "Moosend",
+                  "value": "Moosend"
+                },
+                {
+                  "name": "Send to CRM Sophia",
+                  "value": "Send to CRM Sophia"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Created By",
+              "displayName": "Created By",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "User Group ID",
+              "displayName": "User Group ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Assigned",
+              "displayName": "Assigned",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Month",
+              "displayName": "Month",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Send Sales Email",
+              "displayName": "Send Sales Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Send Intro Sequence",
+                  "value": "Send Intro Sequence"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Bio Check",
+              "displayName": "Bio Check",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "311d5ac1-5e20-4e8d-b754-89f87eb72540",
+      "name": "Create Customer Record1",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        3720,
+        160
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Customer",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":[\n      {\n         \"name\":\"{{ $ifEmpty($('Get User Information1').item.json[\"body\"][\"company\"],$('Get User Information1').item.json[\"body\"][\"firstname\"]+\" \"+$('Get User Information1').item.json[\"body\"][\"lastname\"]).trim().toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}}\",\n         \"customer_name\":\"{{ $ifEmpty($('Get User Information1').item.json[\"body\"][\"company\"],$('Get User Information1').item.json[\"body\"][\"firstname\"]+\" \"+$('Get User Information1').item.json[\"body\"][\"lastname\"]).trim().toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}}\",\n         \"customer_type\":\"Individual\",\n         \"customer_group\":\"Consumer\",\n         \"territory\":\"All Territories\",\n         \"mobile_no\":\"{{ $('Get User Information1').item.json[\"body\"][\"phone\"] }}\",\n         \"email_id\":\"{{ $('Get User Information1').item.json[\"body\"][\"email\"] }}\",\"tax_id\":\"{{ $ifEmpty($('Get User Information1').item.json[\"body\"][\"tax_id\"], \"NILL\")}}\",\n         \"payment_terms\":\"Cash On Delivery\",\n         \"credit_limits\": [\n            {\n                \"parent\": \"{{ $ifEmpty($('Get User Information1').item.json[\"body\"][\"company\"],$('Get User Information1').item.json[\"body\"][\"firstname\"]+\" \"+$('Get User Information1').item.json[\"body\"][\"lastname\"]).trim().toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}}\",\n                \"parentfield\": \"credit_limits\",\n                \"parenttype\": \"Customer\",\n                \"credit_limit\": 50000.0,\n                \"doctype\": \"Customer Credit Limit\"\n            }\n        ]\n      }\n   ]\n}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "4dd4e28b-1f54-4506-b749-f8839711c72a",
+      "name": "Create Customer1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3920,
+        160
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Address",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"address_title\":\"{{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}} Address\",\n   \"name\":\"{{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}} Shipping\",\n   \"address_type\":\"Billing\",\n   \"address_line1\":\"{{ $ifEmpty($('Get Order from website').item.json[\"s_address\"],\"n/a\")}}\",\n   \"address_line2\":\"{{$ifEmpty($('Get Order from website').item.json[\"s_address_2\"],\"n/a\")}}\",\n   \"city\":\"{{ $('Get Order from website').item.json.s_state_descr }}\",\n   \"state\":\"Nairobi\",\n   \"Country\":\"Kenya\",\"phone\":\"{{$('Get Order from website').item.json[\"phone\"]}} - {{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}}\",\n   \"is_primary_address\":1,\n   \"links\":[\n      {\n         \"link_doctype\":\"Customer\",\n         \"link_name\":\"{{ $('Create Customer1').item.json[\"body\"][\"data\"][\"name\"] }}\"\n      }\n   ]\n} ",
+        "options": {}
+      },
+      "id": "c0446b46-0f90-4242-977d-7a4f4be9cac7",
+      "name": "Create Address3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4140,
+        160
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Sales%20Order",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n      \"customer\":\"{{ $('Create Customer1').item.json[\"body\"][\"data\"][\"customer_name\"] }}\",\n      \"order_type\":\"Sales\",\n      \"payment_method\":\"M-PESA\",\n      \"title\":\"{{ $('Create Customer1').item.json[\"body\"][\"data\"][\"customer_name\"] }} - Online\",\n      \"company\":\"Three Spears Limited\",\n      \"transaction_date\":\"{{ $today.format(\"yyyy-MM-dd\")}}\",\n      \"delivery_date\":\"{{ $today.plus(1, \"day\").format(\"yyyy-MM-dd\")}}\",\"customer_address\":\"{{ $json.name }}\",\n      \"selling_price_list\":\"Standard Selling\",\n      \"po_no\":\"Order ‎#{{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"attach_order\":\"https://bulkbox.co.ke/admin.php?dispatch=orders.print_invoice&order_id={{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"doctype\":\"Sales Order\",\n      \"items\":[\n         {\n            \"item_code\":\"TEST01\",\n            \"qty\":1\n         }\n      ]\n   }\n} ",
+        "options": {}
+      },
+      "id": "cb951be3-5ac5-46dc-a8d4-a1815583db11",
+      "name": "Create S.O with test item5",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4360,
+        160
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "Sales%20Order",
+        "documentName": "={{ $json.data.name }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "=items",
+              "value": "={{ $('Total Item List').item.json.data }}"
+            },
+            {
+              "field": "taxes",
+              "value": "={{ $('Tax1').item.json.data }}"
+            }
+          ]
+        }
+      },
+      "id": "e1a28dab-ca05-49ad-ab95-2ee8866a9d10",
+      "name": "Update Sales Order with items5",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        4560,
+        160
+      ],
+      "alwaysOutputData": true,
+      "retryOnFail": false,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n   \"data\":[\n      {\n         \"charge_type\":\"On Net Total\",\n         \"account_head\":\"VAT - 16% - TSL\",\n         \"description\": \"VAT - 16% - TSL\"\n      },\n      {\n         \"charge_type\":\"On Net Total\",\n         \"account_head\":\"Zero Rated Tax - TSL\",\n         \"description\":\"Zero Rated Tax - TSL\"\n      }\n   ]\n}",
+        "options": {}
+      },
+      "id": "b1ba9e72-bec2-45b6-8419-774b5e1b5e21",
+      "name": "Tax1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        2640,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## NO SHIPPING RULE\n",
+        "height": 137.27129722233346,
+        "width": 351.1181024685918
+      },
+      "id": "f39fe482-7b60-45ad-845e-c20cf5ebc56d",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2600,
+        -280
+      ]
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "SendinBlue Webhook",
+            "content-length": "383",
+            "accept": "*/*",
+            "accept-encoding": "gzip",
+            "content-type": "application/json",
+            "traceparent": "00-6834c0d839d27f9bb3a53850abed2961-db7642e3f32929da-01",
+            "x-forwarded-for": "1.179.112.170",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "1.179.112.170"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "id": 1039147,
+            "email": "sales@bulkbox.co.ke",
+            "message-id": "<707b1d4a243927d1fbf5ba1daf063529@bulkbox.co.ke>",
+            "date": "2024-06-22 08:07:16",
+            "tag": "",
+            "event": "delivered",
+            "subject": "Bulkbox: Order #32811 has been placed successfully",
+            "sending_ip": "77.32.148.23",
+            "ts_event": 1719032836,
+            "ts": 1719032836,
+            "reason": "sent",
+            "ts_epoch": 1719032836000,
+            "sender_email": "sales@bulkbox.co.ke"
+          },
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook/730b4433-4805-42be-bdfd-59a13ae1919d",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-04-08T16:32:00.511Z",
+      "updatedAt": "2024-04-08T16:32:00.511Z",
+      "id": "DiNqbjFU8kJfpBkX",
+      "name": "Review"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-07-07T07:29:08.000Z",
+  "versionId": "35c0a957-cb0d-4d9b-a8b9-baaf2e045be1"
+}
