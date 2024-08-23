@@ -1,0 +1,110 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Test workflow\"": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "ERPNext",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-03-26T08:59:18.452Z",
+  "id": "cLAiKJedvJOZ6lqh",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Purchase Receipt -> Purchase Invoice",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "8558901a-bcad-4302-9c0a-8fbb0b0c3d9b",
+      "name": "When clicking \"Test workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://portal.bulkbox.cloud/api/resource/Purchase%20Receipt/MAT-PRE-2024-00789",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "10aa191a-cb76-4042-86b6-922aed53e96b",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1280,
+        520
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "docType": "Purchase%20Invoice",
+        "properties": {
+          "customProperty": [
+            {
+              "field": ""
+            }
+          ]
+        }
+      },
+      "id": "748f206f-558c-4d13-a3d0-d37287cf691a",
+      "name": "ERPNext",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        520
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-04-13T07:17:56.132Z",
+      "updatedAt": "2024-04-13T07:17:56.132Z",
+      "id": "BREwPdgeEC5njFaD",
+      "name": "In Development"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2024-05-06T08:54:24.000Z",
+  "versionId": "b3652b48-4e56-4858-ac7b-7d0ac486fd95"
+}
