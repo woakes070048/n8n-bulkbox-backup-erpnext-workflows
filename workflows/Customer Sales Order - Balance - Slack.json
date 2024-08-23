@@ -1,0 +1,399 @@
+{
+  "active": true,
+  "connections": {
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Get Balance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Balance": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Slack1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-06-19T07:36:29.859Z",
+  "id": "RYjY659SGXaQJJGB",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Customer Sales Order - Balance - Slack",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "683e2620-3997-420c-afc5-e995164483ec",
+              "leftValue": "={{ $json.body.payment_schedule[0].payment_term }}",
+              "rightValue": "Cash on Delivery",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "fe78e3fb-6a50-4995-8b39-e48c80724b43",
+              "leftValue": "={{ $json.body.payment_schedule[0].payment_term }}",
+              "rightValue": "End of Day",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "70c5e54e-1fc7-4f92-9ee6-00540f350c2f",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        900,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/method/erpnext.accounts.utils.get_balance_on?party_type=Customer&party={{encodeURIComponent($('Webhook').item.json[\"body\"][\"customer_name\"])}}&company=Three Spears Limited",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "020bd5b5-76f2-4564-9d25-90ba2d1e9ec8",
+      "name": "Get Balance",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1100,
+        520
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "number",
+                      "operation": "lt"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Negative Balance"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "5a9e293b-e049-48d9-8016-ae23da4e2ff5",
+                    "leftValue": "={{ $json.message }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "number",
+                      "operation": "gt"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Positive Balance"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8aa0de7b-76b2-4ae3-8471-1a95cc8d229f",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        1320,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#account_management",
+          "mode": "name"
+        },
+        "messageType": "block",
+        "blocksUi": "={\n\t\"blocks\": [\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"ALERT:\\n{{$('Webhook').item.json[\"body\"][\"customer_name\"]}} has a negative balance of *{{$('Get Balance').item.json[\"message\"]}}*. Please investigate and allocate appropriately.\"\n\t\t\t}\n\t\t}\n\t]\n}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "id": "34f49d4b-80b5-4e7b-96d8-d69ddf698aa7",
+      "name": "Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        1560,
+        400
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer/{{ $('Webhook').item.json[\"body\"][\"customer_name\"] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "is_frozen",
+              "value": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0502918d-5b72-4e0b-b99b-a25b234a3e75",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1560,
+        620
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#account_management",
+          "mode": "name"
+        },
+        "messageType": "block",
+        "blocksUi": "={\n   \"blocks\":[\n      {\n         \"type\":\"section\",\n         \"text\":{\n            \"type\":\"mrkdwn\",\n            \"text\":\"ALERT:\\n{{$('Webhook').item.json[\"body\"][\"customer_name\"]}} has a pending balance of *{{$('Get Balance').item.json[\"message\"]}}*. The account is frozen until the balance is cleared.\"\n         },\n         \"accessory\":{\n            \"type\":\"button\",\n            \"text\":{\n               \"type\":\"plain_text\",\n               \"text\":\"Go To Customer\",\n               \"emoji\":true\n            },\n            \"value\":\"click_me_123\",\n            \"url\":\"https://portal.bulkbox.cloud/app/customer/{{encodeURIComponent($('Webhook').item.json[\"body\"][\"customer_name\"])}}\",\n            \"action_id\":\"button-action\"\n         }\n      }\n   ]\n}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "id": "f5e90d3e-6a58-4779-b47c-ee528ffb3603",
+      "name": "Slack1",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        1760,
+        620
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "687a3f81-2304-4a63-8d37-04a127e0ff17",
+        "options": {}
+      },
+      "id": "21d71bfc-33b7-4b29-a776-6d7b8dc7ac37",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        680,
+        520
+      ],
+      "webhookId": "687a3f81-2304-4a63-8d37-04a127e0ff17"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "python-requests/2.31.0",
+            "content-length": "872",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "x-forwarded-for": "167.235.206.20",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "167.235.206.20"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "customer": "Test Customer",
+            "customer_name": "Test Customer",
+            "total": 200,
+            "contact_phone": "",
+            "payment_terms_template": "Cash on Delivery",
+            "payment_schedule": [
+              {
+                "name": "e22a0c79ae",
+                "owner": "francnjenga99@gmail.com",
+                "creation": "2024-06-19 11:10:59.846407",
+                "modified": "2024-06-19 11:11:01.142100",
+                "modified_by": "francnjenga99@gmail.com",
+                "parent": "SAL-ORD-2024-03638",
+                "parentfield": "payment_schedule",
+                "parenttype": "Sales Order",
+                "idx": 1,
+                "docstatus": 0,
+                "payment_term": "Cash on Delivery",
+                "description": null,
+                "due_date": "2024-06-19",
+                "mode_of_payment": null,
+                "invoice_portion": 100,
+                "discount_type": "Percentage",
+                "discount_date": "2024-06-19",
+                "discount": 0,
+                "payment_amount": 232,
+                "outstanding": 232,
+                "paid_amount": 0,
+                "discounted_amount": 0,
+                "base_payment_amount": 232,
+                "doctype": "Payment Schedule"
+              }
+            ],
+            "delivery_date": "2024-06-20"
+          },
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook-test/687a3f81-2304-4a63-8d37-04a127e0ff17",
+          "executionMode": "test"
+        }
+      }
+    ],
+    "Get Balance": [
+      {
+        "json": {
+          "message": 100
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-07-23T06:30:32.000Z",
+  "versionId": "569d3529-acae-486c-9a6e-95d4a5e09810"
+}
