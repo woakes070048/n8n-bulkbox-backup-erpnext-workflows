@@ -1,0 +1,300 @@
+{
+  "active": false,
+  "connections": {
+    "Get customer email": {
+      "main": [
+        [
+          {
+            "node": "Email exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email exists": {
+      "main": [
+        [
+          {
+            "node": "Get S.O",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get S.O": {
+      "main": [
+        [
+          {
+            "node": "%delivered>85",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "%delivered>85": {
+      "main": [
+        [
+          {
+            "node": "Brevo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-04-15T07:17:31.557Z",
+  "id": "5hH51gJ96IhmQMck",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Send Partial Delivery Notification to Customer",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer?fields=[\"email_id\"]&filters=[[\"name\",\"=\",\"{{ $json[\"query\"][\"customer\"] }}\"]]",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "28594138-5920-4f88-97b2-b54ef93b3bab",
+      "name": "Get customer email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        700,
+        300
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "83422682-72b5-41b4-87ea-903d1879a0db",
+              "leftValue": "={{ $json.body.data[0].email_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "69459903-411a-441a-8bf9-ad6ebf5e429c",
+      "name": "Email exists",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        920,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Sales%20Order/{{ $('Webhook').item.json[\"query\"][\"Sales Order\"] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "7c3ba5ff-f041-4788-b72e-0bc43544c205",
+      "name": "Get S.O",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1140,
+        300
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "08c6c68b-f9af-42ef-9641-c31adfe063b7",
+              "leftValue": "={{ $json.body.data.per_delivered }}",
+              "rightValue": 85,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "8c552788-1ffd-43a0-9c73-ac9e59dad61d",
+      "name": "%delivered>85",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        1380,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "subject": "Partial Order Notification",
+        "textContent": "=Dear {{ $('Webhook').item.json[\"query\"][\"customer\"] }},\n\nThis is to notify you of a partial order against S.O {{ $('Webhook').item.json[\"query\"][\"Sales Order\"] }}. \nThe following items are out of stock and will not be delivered with your order. We will notify you once the items are back in stock.: {{ $('Webhook').item.json[\"query\"][\"Items\"] }}\n\nWe appreciate your business.\nBuslkbox Sales.\n",
+        "sender": "sales@bulkbox.co.ke",
+        "receipients": "={{ $('Get customer email').item.json[\"body\"][\"data\"][0][\"email_id\"] }}",
+        "additionalFields": {}
+      },
+      "id": "37db3fb4-b244-466f-be16-6f8eb620beea",
+      "name": "Brevo",
+      "type": "n8n-nodes-base.sendInBlue",
+      "typeVersion": 1,
+      "position": [
+        1580,
+        300
+      ],
+      "credentials": {
+        "sendInBlueApi": {
+          "id": "88mn4vQDZrcUEZV7",
+          "name": "Brevo Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### Get Item names from the codes and create a list.\n"
+      },
+      "id": "56dda3d5-738c-4427-b6b4-ca04a9684c88",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "send-customer-notification",
+        "options": {}
+      },
+      "id": "0d116f96-5b76-4566-b9d0-9c37df931bbf",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        480,
+        300
+      ],
+      "webhookId": "41cd15f8-82b0-40c0-9dce-d243d445417a"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "9fb2d9f3-8cc2-4d80-ad34-082ea36d3fc9",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        1700,
+        300
+      ]
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "Slackbot 1.0 (+https://api.slack.com/robots)",
+            "content-length": "2438",
+            "accept": "application/json,*/*",
+            "accept-encoding": "gzip,deflate",
+            "content-type": "application/x-www-form-urlencoded",
+            "x-forwarded-for": "54.147.104.222",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "54.147.104.222",
+            "x-slack-request-timestamp": "1716451133",
+            "x-slack-signature": "v0=f50b71e76ca10fd7beda9c2db117c0636b59599076f57b46f8438355b6f2be42"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "payload": "{\"type\":\"block_actions\",\"user\":{\"id\":\"U04PW767FT5\",\"username\":\"francnjenga99\",\"name\":\"francnjenga99\",\"team_id\":\"TGQ7AGHH6\"},\"api_app_id\":\"A06PH0LEFK4\",\"token\":\"CGdLRVWt3XuUDEx42BWEAqI8\",\"container\":{\"type\":\"message\",\"message_ts\":\"1716440617.537579\",\"channel_id\":\"C06M6EQ5UQM\",\"is_ephemeral\":false},\"trigger_id\":\"7162180973602.568248561584.c289df026a4568dab36c4cdd6058a4b7\",\"team\":{\"id\":\"TGQ7AGHH6\",\"domain\":\"bulkboxke\"},\"enterprise\":null,\"is_enterprise_install\":false,\"channel\":{\"id\":\"C06M6EQ5UQM\",\"name\":\"partial-orders\"},\"message\":{\"subtype\":\"bot_message\",\"text\":\"Sales Order:*SAL-ORD-2024-02994* for Customer: *Glovo Infrustracture Services Kenya Limited*  to be delivered: *2024-05-23*  *Items that will not be delivered:*  \",\"username\":\"PARTIAL DELIVERY\",\"type\":\"message\",\"ts\":\"1716440617.537579\",\"bot_id\":\"B06PGU7MNFM\",\"app_id\":\"A06PH0LEFK4\",\"blocks\":[{\"type\":\"section\",\"block_id\":\"NioIw\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Notify Glovo Infrustracture Services Kenya Limited.\",\"verbatim\":false},\"accessory\":{\"type\":\"button\",\"action_id\":\"button-action\",\"text\":{\"type\":\"plain_text\",\"text\":\"Send Email\",\"emoji\":true},\"value\":\"click_me_123\",\"url\":\"https:\\/\\/n8n.bulkbox.cloud\\/webhook-test\\/send-customer-notification?customer=Glovo Infrustracture Services Kenya Limited&sales_order=SAL-ORD-2024-02994&sales_invoice=IV05240812&delivery_date=2024-05-23\"}}]},\"state\":{\"values\":{}},\"response_url\":\"https:\\/\\/hooks.slack.com\\/actions\\/TGQ7AGHH6\\/7147622769863\\/2GyKc7bn5wwK61K0jd5v1YVA\",\"actions\":[{\"action_id\":\"button-action\",\"block_id\":\"NioIw\",\"text\":{\"type\":\"plain_text\",\"text\":\"Send Email\",\"emoji\":true},\"value\":\"click_me_123\",\"type\":\"button\",\"action_ts\":\"1716451133.885172\"}]}"
+          },
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook-test/send-customer-notification",
+          "executionMode": "test"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-04-13T07:17:56.132Z",
+      "updatedAt": "2024-04-13T07:17:56.132Z",
+      "id": "BREwPdgeEC5njFaD",
+      "name": "In Development"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-05-24T10:51:32.000Z",
+  "versionId": "94a7435d-3b27-4013-9d69-0adc1cb480e0"
+}
