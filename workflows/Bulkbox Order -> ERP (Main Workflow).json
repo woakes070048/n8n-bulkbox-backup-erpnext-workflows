@@ -1,0 +1,3635 @@
+{
+  "active": true,
+  "connections": {
+    "Get Order from website": {
+      "main": [
+        [
+          {
+            "node": "Split Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Total Item List",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get adjusted Units / Case SIze",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Items S.O": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Order": {
+      "main": [
+        [
+          {
+            "node": "Order ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Order ID": {
+      "main": [
+        [
+          {
+            "node": "Get Order from website",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get adjusted Units / Case SIze": {
+      "main": [
+        [
+          {
+            "node": "If Item in MASTER",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get customer addresses": {
+      "main": [
+        [
+          {
+            "node": "Split Addresses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Items": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Addresses": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Addresses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Addresses": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Address Exists in System",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create S.O with test item": {
+      "main": [
+        [
+          {
+            "node": "Update Sales Order with items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Address Exists in System": {
+      "main": [
+        [
+          {
+            "node": "Create S.O with test item",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Addresses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Address": {
+      "main": [
+        [
+          {
+            "node": "Create S.O with test item1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create S.O with test item1": {
+      "main": [
+        [
+          {
+            "node": "Update Sales Order with items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If  Customer Exists": {
+      "main": [
+        [
+          {
+            "node": "Get customer addresses",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Customer Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Customer Record": {
+      "main": [
+        [
+          {
+            "node": "Create Customer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Customer": {
+      "main": [
+        [
+          {
+            "node": "Create Address1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Address1": {
+      "main": [
+        [
+          {
+            "node": "Create S.O with test item2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create S.O with test item2": {
+      "main": [
+        [
+          {
+            "node": "Update Sales Order with items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qty": {
+      "main": [
+        [
+          {
+            "node": "Items S.O",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Total Item List": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Item in MASTER": {
+      "main": [
+        [
+          {
+            "node": "Qty",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Unites per Case from ERP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Unites per Case from ERP": {
+      "main": [
+        [
+          {
+            "node": "Items S.O",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get User Information": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search State Name": {
+      "main": [
+        [
+          {
+            "node": "Add Shipping Item to Items Array",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tax": {
+      "main": [
+        [
+          {
+            "node": "Get User Information",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "data items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Search State Name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "data items": {
+      "main": [
+        [
+          {
+            "node": "Tax",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Shipping Item to Items Array": {
+      "main": [
+        [
+          {
+            "node": "data items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Sales Order with items": {
+      "main": [
+        [
+          {
+            "node": "Filter1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Sales Order with items2": {
+      "main": [
+        [
+          {
+            "node": "Filter2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter PICKUP": {
+      "main": [
+        [
+          {
+            "node": "Create S.O with test item5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
+        [
+          {
+            "node": "Create S.O with test item4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter2": {
+      "main": [
+        [
+          {
+            "node": "Create S.O with test item6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Create Address",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Sales Order with items3": {
+      "main": [
+        [
+          {
+            "node": "Filter PICKUP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Check for existing Customer - Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Order",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check for existing Customer - Email": {
+      "main": [
+        [
+          {
+            "node": "If  Customer Exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-07-01T06:11:57.752Z",
+  "id": "uMVl0xWUVBz6AV8V",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Bulkbox Order -> ERP (Main Workflow)",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "=https://bulkbox.co.ke/api/orders/{{ $('Order ID').item.json.order_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "ed3942c5-c7ad-417e-8713-17334795070d",
+      "name": "Get Order from website",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1600,
+        480
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ttlwVRmZ1lkIHlXQ",
+          "name": "Website"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "a2618332-c7d2-4471-b3b9-a346f131388f",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2140,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7f07ada1-1aea-4790-9e1d-89a7598a9537",
+              "name": "item_code",
+              "value": "={{ $('Split Items').item.json.products.product_code }} ",
+              "type": "string"
+            },
+            {
+              "id": "8a6ec11f-0315-45fa-8e19-bff1b945ee9e",
+              "name": "qty",
+              "value": "=\n{{ $json.qty *  $('Loop Over Items').item.json.products.amount || $json.data.units_per_case *  $('Loop Over Items').item.json.products.amount}}",
+              "type": "number"
+            },
+            {
+              "id": "dba2d602-ee56-481f-92f6-ead1b3ec73e0",
+              "name": "idx",
+              "value": "={{$node[\"Loop Over Items\"].context[\"currentRunIndex\"]+1;}}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8c23b7ba-d186-45b2-8a5a-981b468e73f6",
+      "name": "Items S.O",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        2940,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "5ad574f5-01e4-43b7-92ca-6b6b833f9fba",
+              "leftValue": "={{ $json.body.subject }}",
+              "rightValue": "has been placed successfully",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "f0d01ce0-fe9a-42db-962a-6d348657294b",
+              "leftValue": "={{ $json.body.email }}",
+              "rightValue": "sales@bulkbox.co.ke",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "53f5d783-af39-4217-99f4-e8cadd6ebae7",
+      "name": "Order",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        1140,
+        480
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a5f2318c-ae12-4606-8953-e39b78998c54",
+              "name": "order_id",
+              "value": "={{ $json.body.subject.match(/\\d+/) }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f58ac059-cf0e-4f5c-b3dd-1972c6e28b03",
+      "name": "Order ID",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        1380,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://bulkbox.co.ke/api/users/{{ $('Get Order from website').item.json.user_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "706b0026-b19c-4234-b043-55cd809f02a8",
+      "name": "Get User Information",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3700,
+        300
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ttlwVRmZ1lkIHlXQ",
+          "name": "Website"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appSCi0a1zPuJizxg",
+          "mode": "list",
+          "cachedResultName": "Bulkbox Final Master",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl2hGiQmpSg73Una",
+          "mode": "list",
+          "cachedResultName": "MASTER",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tbl2hGiQmpSg73Una"
+        },
+        "filterByFormula": "=({Item Code}=\"{{ $json.products.product_code }}\")",
+        "options": {}
+      },
+      "id": "2b6ec9c5-70c3-425e-85e4-c15f59175bf2",
+      "name": "Get adjusted Units / Case SIze",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        2300,
+        540
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "52a9fa93-98c5-4fe3-b882-2816b61aa44a",
+      "name": "Total Item List",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2340,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer?fields=[\"customer_name\",\"email_id\"]&filters=[[\"email_id\",\"=\",\"{{ $('Get User Information').item.json.body.email }}\"]] ",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "69c83513-215f-4ba6-bceb-956a9239ebdb",
+      "name": "Check for existing Customer - Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4220,
+        300
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Address?fields=[\"name\",\"address_title\",\"address_line1\",\"address_line2\"]&filters=[[\"address_title\", \"like\", \"%{{ encodeURIComponent($json.body.data[0].customer_name) }}%\"]] ",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "b5323109-7d68-4e5a-b511-f917a2e61d78",
+      "name": "Get customer addresses",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4880,
+        180
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "products",
+        "include": "=",
+        "options": {}
+      },
+      "id": "48c1e023-66bc-4a56-9537-90606691febd",
+      "name": "Split Items",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        480
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "body.data",
+        "options": {}
+      },
+      "id": "4f47fcb8-55b3-4433-94f9-34c3f43464d9",
+      "name": "Split Addresses",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        5080,
+        180
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "73e92ab9-833b-465f-bc86-755353761e51",
+      "name": "Loop Over Addresses",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        5260,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Sales%20Order",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n      \"customer\":\"{{ $('Check for existing Customer - Email').item.json[\"body\"][\"data\"][0][\"customer_name\"] }}\",\n      \"order_type\":\"Sales\",\n      \"payment_method\":\"M-PESA\",\n      \"title\":\"{{ $('Check for existing Customer - Email').item.json[\"body\"][\"data\"][0][\"customer_name\"]}} - Online\",\n      \"company\":\"Three Spears Limited\",\n      \"transaction_date\":\"{{ $today.format(\"yyyy-MM-dd\")}}\",\n      \"delivery_date\":\"{{ $today.plus(1, \"day\").format(\"yyyy-MM-dd\")}}\",\"customer_address\":\"{{ $json.name }}\",\n      \"selling_price_list\":\"Standard Selling\",\n      \"po_no\":\"Order ‎#{{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"attach_order\":\"https://bulkbox.co.ke/admin.php?dispatch=orders.print_invoice&order_id={{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"doctype\":\"Sales Order\",\n      \"items\":[\n         {\n            \"item_code\":\"TEST01\",\n            \"qty\":1\n         }\n      ]\n   }\n} ",
+        "options": {}
+      },
+      "id": "cf85a417-041e-4fed-b6a3-86fc6787e2d9",
+      "name": "Create S.O with test item",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5720,
+        260
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "Sales%20Order",
+        "documentName": "={{ $json.data.name }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "items",
+              "value": "={{ $('data items').item.json.items }}"
+            },
+            {
+              "field": "taxes",
+              "value": "={{ $('Tax').item.json.data }}"
+            }
+          ]
+        }
+      },
+      "id": "3ab2bd6a-ef75-461e-8b42-62af3a4d0229",
+      "name": "Update Sales Order with items",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        5940,
+        260
+      ],
+      "alwaysOutputData": true,
+      "retryOnFail": false,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Address",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"address_title\":\"{{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}} Address\",\n   \"name\":\"{{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}} Shipping\",\n   \"address_type\":\"Billing\",\n   \"address_line1\":\"{{$('Get Order from website').item.json[\"s_address\"]}}\",\n   \"address_line2\":\"{{$('Get Order from website').item.json[\"s_address_2\"]}}\",\n   \"city\":\"{{ $('Get Order from website').item.json.s_state_descr }}\",\n   \"state\":\"Nairobi\",\n   \"Country\":\"Kenya\",\"phone\":\"{{$('Get Order from website').item.json[\"phone\"]}} - {{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}}\",\n   \"is_primary_address\":1,\n   \"links\":[\n      {\n         \"link_doctype\":\"Customer\",\n         \"link_name\":\"{{$('Check for existing Customer - Email').item.json[\"body\"][\"data\"][0][\"customer_name\"]}}\"\n      }\n   ]\n}",
+        "options": {}
+      },
+      "id": "583be0c2-0a67-4808-8869-78cd320d6b9c",
+      "name": "Create Address",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5720,
+        80
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "2c57bc1d-2a06-40ec-a188-a5bab2a1fc0e",
+              "leftValue": "={{ $json.address_line1 }}",
+              "rightValue": "={{ $('Get Order from website').item.json.s_address }}",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "27eb86c1-9212-4572-bf64-59083cbbd80a",
+              "leftValue": "={{ $json.address_line2 }}",
+              "rightValue": "={{ $('Get Order from website').item.json.s_address }}",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "410f6d63-f766-47dd-864b-c14bb559aa1b",
+      "name": "If Address Exists in System",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        5520,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Sales%20Order",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n      \"customer\":\"{{ $('Check for existing Customer - Email').item.json[\"body\"][\"data\"][0][\"customer_name\"] }}\",\n      \"order_type\":\"Sales\",\n      \"payment_method\":\"M-PESA\",\n      \"title\":\"{{ $('Check for existing Customer - Email').item.json[\"body\"][\"data\"][0][\"customer_name\"]}} - Online\",\n      \"company\":\"Three Spears Limited\",\n      \"transaction_date\":\"{{ $today.format(\"yyyy-MM-dd\")}}\",\n      \"delivery_date\":\"{{ $today.plus(1, \"day\").format(\"yyyy-MM-dd\")}}\",\"customer_address\":\"{{ $('Create Address').item.json[\"data\"][\"name\"] }}\",\n      \"selling_price_list\":\"Standard Selling\",\n      \"po_no\":\"Order ‎#{{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"attach_order\":\"https://bulkbox.co.ke/admin.php?dispatch=orders.print_invoice&order_id={{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"doctype\":\"Sales Order\",\n      \"items\":[\n         {\n            \"item_code\":\"TEST01\",\n            \"qty\":1\n         }\n      ]\n   }\n} ",
+        "options": {}
+      },
+      "id": "2b97c4a7-bbba-4872-bdd0-5733f0bb0ea9",
+      "name": "Create S.O with test item1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5940,
+        80
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "Sales%20Order",
+        "documentName": "={{ $json.data.name }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "items",
+              "value": "={{ $('data items').item.json.items }}"
+            },
+            {
+              "field": "taxes",
+              "value": "={{ $('Tax').item.json.data }}"
+            }
+          ]
+        }
+      },
+      "id": "2e04a2ea-fbeb-4eff-9bd0-692e7c161769",
+      "name": "Update Sales Order with items1",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        1460,
+        -1480
+      ],
+      "alwaysOutputData": true,
+      "retryOnFail": false,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "82425dca-4b53-43ce-94c7-5dc3bbc40536",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        5500,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "956198e5-14e4-4ad7-a6ef-e672241fd858",
+              "leftValue": "={{ $json.body.data[0].customer_name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "74114150-1a5a-407e-9268-b8763c6b7148",
+      "name": "If  Customer Exists",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        4520,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appqmFBvp9I9IB1YV",
+          "mode": "list",
+          "cachedResultName": "Contact Database",
+          "cachedResultUrl": "https://airtable.com/appqmFBvp9I9IB1YV"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblBkafwuK7H4aReA",
+          "mode": "list",
+          "cachedResultName": "Contacts",
+          "cachedResultUrl": "https://airtable.com/appqmFBvp9I9IB1YV/tblBkafwuK7H4aReA"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Contact Status": "Cash Customer",
+            "Company Name": "={{ $ifEmpty($('Get User Information').item.json[\"body\"][\"company\"],$('Get User Information').item.json[\"body\"][\"firstname\"]+\" \"+$('Get User Information').item.json[\"body\"][\"lastname\"]) }}",
+            "First Name": "={{ $('Get User Information').item.json.body.firstname }}",
+            "Last Name": "={{ $('Get User Information').item.json.body.lastname }}",
+            "Contact Type": "={{ $('Code').item.json.value }}",
+            "Source": "Website",
+            "Tel": "={{ $('Get User Information').item.json.body.phone }}",
+            "Email": "={{ $('Get User Information').item.json.body.email }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Company Name",
+              "displayName": "Company Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Job Role",
+              "displayName": "Job Role",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Owner",
+                  "value": "Owner"
+                },
+                {
+                  "name": "General Manager",
+                  "value": "General Manager"
+                },
+                {
+                  "name": "Procurement Manager",
+                  "value": "Procurement Manager"
+                },
+                {
+                  "name": "Procurement Officer",
+                  "value": "Procurement Officer"
+                },
+                {
+                  "name": "Office Adminstrator",
+                  "value": "Office Adminstrator"
+                },
+                {
+                  "name": "Undefined",
+                  "value": "Undefined"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Contact Status",
+              "displayName": "Contact Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Lead",
+                  "value": "Lead"
+                },
+                {
+                  "name": "One Time Customers",
+                  "value": "One Time Customers"
+                },
+                {
+                  "name": "Account",
+                  "value": "Account"
+                },
+                {
+                  "name": "Unassigned",
+                  "value": "Unassigned"
+                },
+                {
+                  "name": "Lost Customer",
+                  "value": "Lost Customer"
+                },
+                {
+                  "name": "Closed",
+                  "value": "Closed"
+                },
+                {
+                  "name": "Cash Customer",
+                  "value": "Cash Customer"
+                },
+                {
+                  "name": "Credit Customer",
+                  "value": "Credit Customer"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Contact Type",
+              "displayName": "Contact Type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Food Service",
+                  "value": "Food Service"
+                },
+                {
+                  "name": "Retail",
+                  "value": "Retail"
+                },
+                {
+                  "name": "Corporate",
+                  "value": "Corporate"
+                },
+                {
+                  "name": "Unassigned",
+                  "value": "Unassigned"
+                },
+                {
+                  "name": "Consumer",
+                  "value": "Consumer"
+                },
+                {
+                  "name": "Other",
+                  "value": "Other"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Website",
+                  "value": "Website"
+                },
+                {
+                  "name": "App",
+                  "value": "App"
+                },
+                {
+                  "name": "Landing Page",
+                  "value": "Landing Page"
+                },
+                {
+                  "name": "Other Forms",
+                  "value": "Other Forms"
+                },
+                {
+                  "name": "ERP",
+                  "value": "ERP"
+                },
+                {
+                  "name": "Whatsapp",
+                  "value": "Whatsapp"
+                },
+                {
+                  "name": "Email",
+                  "value": "Email"
+                },
+                {
+                  "name": "Call in",
+                  "value": "Call in"
+                },
+                {
+                  "name": "Supplier Referall",
+                  "value": "Supplier Referall"
+                },
+                {
+                  "name": "Customer Referall",
+                  "value": "Customer Referall"
+                },
+                {
+                  "name": "Outbound",
+                  "value": "Outbound"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tel",
+              "displayName": "Tel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Created Date",
+              "displayName": "Created Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Last Modified",
+              "displayName": "Last Modified",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Send to CRM / Moosend",
+              "displayName": "Send to CRM / Moosend",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Send to CRM",
+                  "value": "Send to CRM"
+                },
+                {
+                  "name": "Moosend",
+                  "value": "Moosend"
+                },
+                {
+                  "name": "Send to CRM Sophia",
+                  "value": "Send to CRM Sophia"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Created By",
+              "displayName": "Created By",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "User Group ID",
+              "displayName": "User Group ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Assigned",
+              "displayName": "Assigned",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Month",
+              "displayName": "Month",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Send Sales Email",
+              "displayName": "Send Sales Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Send Intro Sequence",
+                  "value": "Send Intro Sequence"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Bio Check",
+              "displayName": "Bio Check",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "New Opportunity Stage",
+              "displayName": "New Opportunity Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New",
+                  "value": "New"
+                },
+                {
+                  "name": "Info Shared",
+                  "value": "Info Shared"
+                },
+                {
+                  "name": "Meeting Scheduled",
+                  "value": "Meeting Scheduled"
+                },
+                {
+                  "name": "Negotiation",
+                  "value": "Negotiation"
+                },
+                {
+                  "name": "Account Opening",
+                  "value": "Account Opening"
+                },
+                {
+                  "name": "Closed Won",
+                  "value": "Closed Won"
+                },
+                {
+                  "name": "Closed Lost",
+                  "value": "Closed Lost"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Upsell Stage",
+              "displayName": "Upsell Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Outreach Stage",
+                  "value": "Outreach Stage"
+                },
+                {
+                  "name": "Meeting Stage",
+                  "value": "Meeting Stage"
+                },
+                {
+                  "name": "Closed-Won",
+                  "value": "Closed-Won"
+                },
+                {
+                  "name": "Closed-Lost",
+                  "value": "Closed-Lost"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Expected MRR",
+              "displayName": "Expected MRR",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Expected Close Date",
+              "displayName": "Expected Close Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "New Deals",
+              "displayName": "New Deals",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "New Deals copy",
+              "displayName": "New Deals copy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Upsell Deals copy",
+              "displayName": "Upsell Deals copy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Deals copy",
+              "displayName": "Deals copy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Assign Sales Member",
+              "displayName": "Assign Sales Member",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Ahmed Wurie",
+                  "value": "Ahmed Wurie"
+                },
+                {
+                  "name": "Assign Sales Member",
+                  "value": "Assign Sales Member"
+                },
+                {
+                  "name": "Brian Mong'are",
+                  "value": "Brian Mong'are"
+                },
+                {
+                  "name": "Elsie Watare",
+                  "value": "Elsie Watare"
+                },
+                {
+                  "name": "Emma Anagei Anagei",
+                  "value": "Emma Anagei Anagei"
+                },
+                {
+                  "name": "Eugene Aaron",
+                  "value": "Eugene Aaron"
+                },
+                {
+                  "name": "Rashid Salim",
+                  "value": "Rashid Salim"
+                },
+                {
+                  "name": "Sophia Khalid",
+                  "value": "Sophia Khalid"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Lead Allocation",
+              "displayName": "Lead Allocation",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Assign Sales (Round Robin)",
+              "displayName": "Assign Sales (Round Robin)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "803557e4-6d54-4b6d-b323-c108b176c04a",
+      "name": "Create Customer Record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        4880,
+        500
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Customer",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":[\n      {\n         \"name\":\"{{ $ifEmpty($('Get User Information').item.json[\"body\"][\"company\"],$('Get User Information').item.json[\"body\"][\"firstname\"]+\" \"+$('Get User Information').item.json[\"body\"][\"lastname\"]).trim().toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}}\",\n         \"customer_name\":\"{{ $ifEmpty($('Get User Information').item.json[\"body\"][\"company\"],$('Get User Information').item.json[\"body\"][\"firstname\"]+\" \"+$('Get User Information').item.json[\"body\"][\"lastname\"]).trim().toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}}\",\n         \"customer_type\":\"Individual\",\n         \"customer_group\":\"Consumer\",\n         \"territory\":\"All Territories\",\n         \"mobile_no\":\"{{ $('Get User Information').item.json[\"body\"][\"phone\"] }}\",\n         \"email_id\":\"{{ $('Get User Information').item.json[\"body\"][\"email\"] }}\",\"tax_id\":\"{{ $ifEmpty($('Get User Information').item.json[\"body\"][\"tax_id\"], \"NILL\")}}\",\n         \"payment_terms\":\"Cash On Delivery\",\n         \"credit_limits\": [\n            {\n                \"parent\": \"{{ $ifEmpty($('Get User Information').item.json[\"body\"][\"company\"],$('Get User Information').item.json[\"body\"][\"firstname\"]+\" \"+$('Get User Information').item.json[\"body\"][\"lastname\"]).trim().toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}}\",\n                \"parentfield\": \"credit_limits\",\n                \"parenttype\": \"Customer\",\n                \"credit_limit\": 50000.0,\n                \"doctype\": \"Customer Credit Limit\"\n            }\n        ]\n      }\n   ]\n}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "9f011a7d-c0a7-4427-9db3-8fe128b19049",
+      "name": "Create Customer",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5080,
+        500
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Address",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"address_title\":\"{{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}} Address\",\n   \"name\":\"{{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}} Shipping\",\n   \"address_type\":\"Billing\",\n   \"address_line1\":\"{{ $ifEmpty($('Get Order from website').item.json[\"s_address\"],\"n/a\")}}\",\n   \"address_line2\":\"{{$ifEmpty($('Get Order from website').item.json[\"s_address_2\"],\"n/a\")}}\",\n   \"city\":\"{{ $('Get Order from website').item.json.s_state_descr }}\",\n   \"state\":\"Nairobi\",\n   \"Country\":\"Kenya\",\"phone\":\"{{$('Get Order from website').item.json[\"phone\"]}} - {{$('Get Order from website').item.json[\"firstname\"]+\" \"+$('Get Order from website').item.json[\"lastname\"]}}\",\n   \"is_primary_address\":1,\n   \"links\":[\n      {\n         \"link_doctype\":\"Customer\",\n         \"link_name\":\"{{ $('Create Customer').item.json[\"body\"][\"data\"][\"name\"] }}\"\n      }\n   ]\n} ",
+        "options": {}
+      },
+      "id": "4917bbd4-7430-40b0-a5fc-6ff059572adc",
+      "name": "Create Address1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5300,
+        500
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Sales%20Order",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n      \"customer\":\"{{ $('Create Customer').item.json[\"body\"][\"data\"][\"customer_name\"] }}\",\n      \"order_type\":\"Sales\",\n      \"payment_method\":\"M-PESA\",\n      \"title\":\"{{ $('Create Customer').item.json[\"body\"][\"data\"][\"customer_name\"] }} - Online\",\n      \"company\":\"Three Spears Limited\",\n      \"transaction_date\":\"{{ $today.format(\"yyyy-MM-dd\")}}\",\n      \"delivery_date\":\"{{ $today.plus(1, \"day\").format(\"yyyy-MM-dd\")}}\",\"customer_address\":\"{{ $json.name }}\",\n      \"selling_price_list\":\"Standard Selling\",\n      \"po_no\":\"Order ‎#{{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"attach_order\":\"https://bulkbox.co.ke/admin.php?dispatch=orders.print_invoice&order_id={{ $('Order ID').item.json[\"order_id\"] }}\",\n      \"doctype\":\"Sales Order\",\n      \"items\":[\n         {\n            \"item_code\":\"TEST01\",\n            \"qty\":1\n         }\n      ]\n   }\n} ",
+        "options": {}
+      },
+      "id": "686cc02e-87ee-4176-9b83-7bb88f08dd82",
+      "name": "Create S.O with test item2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5520,
+        500
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "Sales%20Order",
+        "documentName": "={{ $json.data.name }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "=items",
+              "value": "={{ $('data items').item.json.items }}"
+            },
+            {
+              "field": "taxes",
+              "value": "={{ $('Tax').item.json.data }}"
+            }
+          ]
+        }
+      },
+      "id": "ae743d6d-0d3d-4441-83f6-e1b397ee436a",
+      "name": "Update Sales Order with items2",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        5720,
+        500
+      ],
+      "alwaysOutputData": true,
+      "retryOnFail": false,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5853b6b1-9668-4788-890e-ee684f692012",
+              "name": "qty",
+              "value": "={{ $ifEmpty( $json[\"Adjusted Units\"], $json[\"Units Per Case\"] )}}\n",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5ae516bc-3678-476e-8632-94c45fb71c9e",
+      "name": "Qty",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        2740,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Flow of Automation\n## * Receives webhook from brevo.\n## * Filers to only check for orders successfully placed.\n## * GEts the order details form the website using the order_id.\n## * Splits the items in the order, and loops through airtable to get their adjusted quantity /  case size.\n## * Gives the items 'idx' postion to be placed in the sales order.\n## * Gets the user information from the website.\n## * Checks if user is existent in the ERP.\n## * Checks if address given exists.\n## * Creates S.O with test items usng http node.\n## * Updates the created items with items from website.",
+        "height": 512.2006141248717,
+        "width": 1314.7799385875135
+      },
+      "id": "5b661c35-b92a-48d1-99ac-0eee524908f1",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        740,
+        -440
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n   \"data\":[\n      {\n         \"charge_type\":\"On Net Total\",\n         \"account_head\":\"VAT - 16% - TSL\",\n         \"description\": \"VAT - 16% - TSL\"\n      },\n      {\n         \"charge_type\":\"On Net Total\",\n         \"account_head\":\"Zero Rated Tax - TSL\",\n         \"description\":\"Zero Rated Tax - TSL\"\n      }\n   ]\n}",
+        "options": {}
+      },
+      "id": "30720f1d-b634-4998-a0c7-745e4ced1459",
+      "name": "Tax",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        3420,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item/{{ $('Loop Over Items').item.json.products.product_code }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "38c35f49-508b-4ab9-b01d-8033c130a4f3",
+      "name": "Get Unites per Case from ERP",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2740,
+        680
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "190ac8db-c2cf-4d63-bc53-a652680eb60f",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ea1ea70d-d259-403d-9e6e-ef340e3201b7",
+      "name": "If Item in MASTER",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2500,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appSCi0a1zPuJizxg",
+          "mode": "list",
+          "cachedResultName": "Bulkbox Final Master",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHwkMVbotHdnwON",
+          "mode": "list",
+          "cachedResultName": "Shipping Rule",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tblHwkMVbotHdnwON"
+        },
+        "filterByFormula": "=({Shipping CS Code}=\"{{ $('Get Order from website').item.json.s_state }}\")",
+        "options": {}
+      },
+      "id": "f0d90e0a-9545-40c9-aaea-ffdcab31b1cf",
+      "name": "Search State Name",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        2720,
+        340
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "bkyswNNfOLjWVLuS",
+          "name": "n8n Gatu token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d691e1f3-4754-4397-a6cc-26ddde4d5cad",
+              "name": "items",
+              "value": "={{ $json.data }}",
+              "type": "array"
+            },
+            {
+              "id": "9d6d0927-6933-4b8c-934c-34ef1a209180",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c700437e-bc48-4414-8aae-77faa4a2279d",
+      "name": "data items",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        3180,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "0c0ee924-f0ac-453e-bd9a-2e24ec2fbeb4",
+              "leftValue": "={{ $('Get Order from website').item.json.shipping_cost }}",
+              "rightValue": "0.00",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "f545cf02-76c9-41a7-bb4f-4e781cb8e4ed",
+              "leftValue": "={{ $('Get Order from website').item.json.s_state }}",
+              "rightValue": "PICKUP",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "740790c9-39ef-4cd6-91a5-27326cd3cc23",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2560,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Reference the data from the previous nodes\nlet array = $('Total Item List').all();\nlet previousNodeData = $('Search State Name').first(); // Retrieves the first item from the previous node\n\n// Extract the Item Code from the previous node\nlet newItemCode = previousNodeData.json[\"Item Code\"]; // Adjust this field name as necessary\n\n// Define the new item to be added\nlet newItem = {\n    \"item_code\": newItemCode,\n    \"qty\": 1,\n    // \"idx\": 3 // Adjust the index as needed\n};\n\n// Loop over the array and add the new item\narray.forEach(obj => {\n    if (obj.json.data && Array.isArray(obj.json.data)) {\n        obj.json.data.push(newItem);\n    }\n});\n\n// Return the modified array in the correct format\nreturn array.map(obj => ({ json: obj.json }));\n"
+      },
+      "id": "6f8d7906-b637-4516-8e46-e0df53a460b4",
+      "name": "Add Shipping Item to Items Array",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2940,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "ac3ef44d-4dfd-41ca-9c61-b25ba542525a",
+              "leftValue": "={{ $('Get Order from website').item.json.shipping_cost }}",
+              "rightValue": "0.00",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "ba224010-b37a-4ffd-a631-0dada76f3e02",
+              "leftValue": "={{ $('Get Order from website').item.json.s_state }}",
+              "rightValue": "PICKUP",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "4c17b1ec-d7b6-4bf4-b639-023f5fa00b9d",
+      "name": "Filter1",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        6160,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "ac3ef44d-4dfd-41ca-9c61-b25ba542525a",
+              "leftValue": "={{ $('Get Order from website').item.json.shipping_cost }}",
+              "rightValue": "0.00",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "ba224010-b37a-4ffd-a631-0dada76f3e02",
+              "leftValue": "={{ $('Get Order from website').item.json.s_state }}",
+              "rightValue": "PICKUP",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "849a11da-c353-4b9f-87d6-951580d1c2ce",
+      "name": "Filter2",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        5940,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "ac3ef44d-4dfd-41ca-9c61-b25ba542525a",
+              "leftValue": "={{ $('Get Order from website').item.json.shipping_cost }}",
+              "rightValue": "0.00",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "ba224010-b37a-4ffd-a631-0dada76f3e02",
+              "leftValue": "={{ $('Get Order from website').item.json.s_state }}",
+              "rightValue": "PICKUP",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "0f43806f-c039-4132-a5df-356ee692b9ae",
+      "name": "Filter PICKUP",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        6380,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### \n   \"links\":[\n      {\n         \"link_doctype\":\"Customer\",\n         \"link_name\":\"{{$('Check for existing Customer - Email').item.json[\"body\"][\"data\"][0][\"customer_name\"]}}\"\n      }\n   ]",
+        "height": 245.56712328767122,
+        "width": 441.55811263318117
+      },
+      "id": "bb1ba60c-d57d-4e10-92bc-81a73131319b",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4100,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Sales%20Order/{{ $('Update Sales Order with items').item.json.name }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\"delivery_slot\":\"Pickup\"}\n} ",
+        "options": {}
+      },
+      "id": "6efac4e8-30fb-49af-b979-e0d558b918f5",
+      "name": "Create S.O with test item4",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        6380,
+        260
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Sales%20Order/{{ $('Update Sales Order with items3').item.json.name }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\"delivery_slot\":\"Pickup\"}\n} ",
+        "options": {}
+      },
+      "id": "eae1b5a0-cc45-478c-8af2-e963692e4985",
+      "name": "Create S.O with test item5",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        6620,
+        80
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Sales%20Order/{{ $('Update Sales Order with items2').item.json.name }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\"delivery_slot\":\"Pickup\"}\n} ",
+        "options": {}
+      },
+      "id": "a9bbb763-b563-4e48-9fbc-af5151d3c52a",
+      "name": "Create S.O with test item6",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        6160,
+        500
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Add Sections where if name of ERP is not similar to customer name on website, update the companyh section in the website\n",
+        "height": 255.63567732115678,
+        "width": 651.9690715372908
+      },
+      "id": "ef708c62-582e-4237-aee3-17bd8380ca09",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2080,
+        -400
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "=Sales%20Order",
+        "documentName": "={{ $json.data.name }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "items",
+              "value": "={{ $('data items').item.json.items }}"
+            },
+            {
+              "field": "taxes",
+              "value": "={{ $('Tax').item.json.data }}"
+            }
+          ]
+        }
+      },
+      "id": "eb281d36-7b1c-41d9-a619-50406b81473b",
+      "name": "Update Sales Order with items3",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        6160,
+        80
+      ],
+      "alwaysOutputData": true,
+      "retryOnFail": false,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Access the usergroup_id from the incoming JSON\nconst userGroupId = parseInt(items[0].json.body.user_groups[0].usergroup_id, 10);\n\n// Log the usergroup_id to ensure it is captured correctly\nconsole.log('User Group ID:', userGroupId);\n\n// Switch statement to return different values based on usergroup_id\nlet result;\n\nswitch(userGroupId) {\n    case 7:\n        result = \"Consumer\";\n        break;\n    case 8:\n        result = \"Food Service\";\n        break;\n    case 10:\n        result = \"Retail\";\n        break;\n    case 11:\n        result = \"Other Business\";\n        break;\n    default:\n        result = \"Corporate\";\n}\n\n// Return the result in the required format\nreturn [{ value: result }];"
+      },
+      "id": "fcc7b4e1-7641-4905-ae25-cf250bea2c24",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3960,
+        300
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "730b4433-4805-42be-bdfd-59a13ae1919d",
+        "options": {}
+      },
+      "id": "245ae735-bfa5-47ef-b168-2ba227de6cd1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        920,
+        480
+      ],
+      "webhookId": "24c6c903-c83b-403d-9649-7348e31a9c89"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "SendinBlue Webhook",
+            "content-length": "383",
+            "accept": "*/*",
+            "accept-encoding": "gzip",
+            "content-type": "application/json",
+            "traceparent": "00-d4f2108e3ba4ce63c264f4e68950450e-9e17d2abf2fe3add-01",
+            "x-forwarded-for": "1.179.112.136",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "1.179.112.136"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "id": 1039147,
+            "email": "sales@bulkbox.co.ke",
+            "message-id": "<a40b68c11cca44bb7b941b52a2f65c77@bulkbox.co.ke>",
+            "date": "2024-07-03 11:50:14",
+            "tag": "",
+            "event": "delivered",
+            "subject": "Bulkbox: Order #32875 has been placed successfully",
+            "sending_ip": "77.32.148.23",
+            "ts_event": 1719996614,
+            "ts": 1719996614,
+            "reason": "sent",
+            "ts_epoch": 1719996614000,
+            "sender_email": "sales@bulkbox.co.ke"
+          },
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook/730b4433-4805-42be-bdfd-59a13ae1919d",
+          "executionMode": "production"
+        }
+      }
+    ],
+    "Get Order from website": [
+      {
+        "json": {
+          "order_id": "32875",
+          "is_parent_order": "N",
+          "parent_order_id": "0",
+          "company_id": "79",
+          "issuer_id": null,
+          "user_id": "2305",
+          "total": "14139.00",
+          "subtotal": 13939,
+          "discount": 0,
+          "subtotal_discount": 0,
+          "payment_surcharge": 0,
+          "shipping_ids": "17",
+          "shipping_cost": "200.00",
+          "timestamp": "1722960715",
+          "status": "O",
+          "notes": null,
+          "details": null,
+          "promotions": [],
+          "promotion_ids": "",
+          "firstname": "Juliet",
+          "lastname": "Mbatia",
+          "company": "",
+          "b_firstname": "Juliet",
+          "b_lastname": "Mbatia",
+          "b_address": "Ring Road, Kileleshwa",
+          "b_address_2": "",
+          "b_city": "Nairobi",
+          "b_county": "",
+          "b_state": "KILE",
+          "b_country": "KE",
+          "b_zipcode": "",
+          "b_phone": "+254707679746",
+          "s_firstname": "",
+          "s_lastname": "",
+          "s_address": "Ring Road, Kileleshwa",
+          "s_address_2": "A4 Ringsview Apartments",
+          "s_city": "Nairobi",
+          "s_county": "",
+          "s_state": "KILE",
+          "s_country": "KE",
+          "s_zipcode": "",
+          "s_phone": "",
+          "s_address_type": "",
+          "phone": "+254707679746",
+          "fax": "",
+          "url": "",
+          "email": "Juliet_99@hotmail.co.uk",
+          "payment_id": "16",
+          "tax_exempt": "N",
+          "lang_code": "en",
+          "ip_address": "105.163.157.108",
+          "repaid": "0",
+          "validation_code": "",
+          "localization_id": "0",
+          "profile_id": "2306",
+          "storefront_id": "1",
+          "wallet_refunded_amount": "0.00",
+          "pay_by_wallet_amount": "0.00",
+          "delivery_date": "0",
+          "delivery_time_period": "",
+          "payment_method": {
+            "payment_id": "16",
+            "company_id": "0",
+            "usergroup_ids": "0",
+            "position": "2",
+            "status": "A",
+            "template": "views/orders/components/payments/empty.tpl",
+            "processor_id": "0",
+            "a_surcharge": "0.000",
+            "p_surcharge": "0.000",
+            "tax_ids": [],
+            "localization": "",
+            "payment_category": "tab1",
+            "payment": "M-PESA On Delivery",
+            "description": "",
+            "instructions": "<h4 class=\"text-center\" style=\"margin-top: 24px;\">Applies Only Within Nairobi</h4>\r\n<p><br></p><p>If you select M-PESA On Delivery, you can pay for your package \r\nwhen our delivery associates bring it to your door step.<br></p>\r\n<h4 class=\"text-center\"></h4>",
+            "surcharge_title": "",
+            "lang_code": "en",
+            "processor": null,
+            "processor_type": null,
+            "processor_status": null,
+            "image": {
+              "pair_id": "2524",
+              "image_id": "3346",
+              "detailed_id": "0",
+              "position": "0",
+              "object_id": "16",
+              "object_type": "payment",
+              "icon": {
+                "image_path": "https://bulkbox.co.ke/images/payment/3/Mpesa.png",
+                "alt": "m-pesa",
+                "image_x": "130",
+                "image_y": "53",
+                "http_image_path": "http://bulkbox.co.ke/images/payment/3/Mpesa.png",
+                "https_image_path": "https://bulkbox.co.ke/images/payment/3/Mpesa.png",
+                "absolute_path": "/mnt/volume-fsn1-2/store.bulkbox.co.ke/images/payment/3/Mpesa.png",
+                "relative_path": "payment/3/Mpesa.png",
+                "is_high_res": false
+              }
+            },
+            "storefront_ids": ""
+          },
+          "fields": [],
+          "products": {
+            "66519957": {
+              "item_id": "66519957",
+              "order_id": "32875",
+              "product_id": "7152",
+              "product_code": "RDD087",
+              "price": "830.00",
+              "amount": "2",
+              "extra": {
+                "product_options": [],
+                "unlimited_download": "N",
+                "group_key": 0,
+                "product": "Haribo Goldbears 12x30g",
+                "company_id": "79",
+                "is_edp": "N",
+                "edp_shipping": "N",
+                "discount": 0,
+                "base_price": 830.25,
+                "stored_price": "N"
+              },
+              "product": "Haribo Goldbears 12x30g",
+              "product_status": "A",
+              "product_url": "https://bulkbox.co.ke/haribo-goldbears-12x30g/",
+              "deleted_product": false,
+              "discount": 0,
+              "company_id": "79",
+              "base_price": 830.25,
+              "original_price": 830.25,
+              "cart_id": "66519957",
+              "tax_value": 0,
+              "subtotal": 1660,
+              "display_subtotal": 1660,
+              "shipped_amount": 0,
+              "shipment_amount": "2",
+              "is_accessible": true,
+              "cp_goog_brand_feat_compl": "",
+              "cp_goog_category_name": "Chocolate & Candy",
+              "variation_features": []
+            },
+            "314996757": {
+              "item_id": "314996757",
+              "order_id": "32875",
+              "product_id": "4352",
+              "product_code": "GPL165",
+              "price": "2908.00",
+              "amount": "1",
+              "extra": {
+                "product_options": [],
+                "unlimited_download": "N",
+                "group_key": 0,
+                "product": "Nestle Kitkat 2 Fingers Chocolate 36x20.7g",
+                "company_id": "79",
+                "is_edp": "N",
+                "edp_shipping": "N",
+                "discount": 0,
+                "base_price": 2907.5,
+                "stored_price": "N"
+              },
+              "product": "Nestle Kitkat 2 Fingers Chocolate 36x20.7g",
+              "product_status": "A",
+              "product_url": "https://bulkbox.co.ke/nestle-kitkat-2-fingers-chocolate-36x20.7g/",
+              "deleted_product": false,
+              "discount": 0,
+              "company_id": "79",
+              "base_price": 2907.5,
+              "original_price": 2907.5,
+              "cart_id": "314996757",
+              "tax_value": 0,
+              "subtotal": 2908,
+              "display_subtotal": 2908,
+              "shipped_amount": 0,
+              "shipment_amount": "1",
+              "is_accessible": true,
+              "cp_goog_brand_feat_compl": "",
+              "cp_goog_category_name": "Chocolate & Candy",
+              "variation_features": []
+            },
+            "336693941": {
+              "item_id": "336693941",
+              "order_id": "32875",
+              "product_id": "7713",
+              "product_code": "NBD061",
+              "price": "1525.00",
+              "amount": "1",
+              "extra": {
+                "product_options": [],
+                "unlimited_download": "N",
+                "group_key": 0,
+                "product": "Fanta Orange Soda 24x500ml",
+                "company_id": "79",
+                "is_edp": "N",
+                "edp_shipping": "N",
+                "discount": 0,
+                "base_price": 1524.79,
+                "stored_price": "N"
+              },
+              "product": "Fanta Orange Soda 24x500ml",
+              "product_status": "A",
+              "product_url": "https://bulkbox.co.ke/fanta-orange-soda-24x500ml/",
+              "deleted_product": false,
+              "discount": 0,
+              "company_id": "79",
+              "base_price": 1524.79,
+              "original_price": 1524.79,
+              "cart_id": "336693941",
+              "tax_value": 0,
+              "subtotal": 1525,
+              "display_subtotal": 1525,
+              "shipped_amount": 0,
+              "shipment_amount": "1",
+              "is_accessible": true,
+              "cp_goog_brand_feat_compl": "",
+              "cp_goog_category_name": "Soft Drinks",
+              "variation_features": []
+            },
+            "525043102": {
+              "item_id": "525043102",
+              "order_id": "32875",
+              "product_id": "6620",
+              "product_code": "WOB0153",
+              "price": "1038.00",
+              "amount": "1",
+              "extra": {
+                "product_options": [],
+                "unlimited_download": "N",
+                "group_key": 0,
+                "product": "Chupa Chups Lollipops The Best Of Original Lollipop 60x12g",
+                "company_id": "79",
+                "is_edp": "N",
+                "edp_shipping": "N",
+                "discount": 0,
+                "base_price": 1037.84,
+                "stored_price": "N"
+              },
+              "product": "Chupa Chups Lollipops The Best Of Original Lollipop 60x12g",
+              "product_status": "A",
+              "product_url": "https://bulkbox.co.ke/chupa-chups-lollipops-the-best-of-original-lollipop-60x12g/",
+              "deleted_product": false,
+              "discount": 0,
+              "company_id": "79",
+              "base_price": 1037.84,
+              "original_price": 1037.84,
+              "cart_id": "525043102",
+              "tax_value": 0,
+              "subtotal": 1038,
+              "display_subtotal": 1038,
+              "shipped_amount": 0,
+              "shipment_amount": "1",
+              "is_accessible": true,
+              "cp_goog_brand_feat_compl": "",
+              "cp_goog_category_name": "Chocolate & Candy",
+              "variation_features": []
+            },
+            "2834170110": {
+              "item_id": "2834170110",
+              "order_id": "32875",
+              "product_id": "7728",
+              "product_code": "KKD004",
+              "price": "819.00",
+              "amount": "2",
+              "extra": {
+                "product_options": [],
+                "unlimited_download": "N",
+                "group_key": 0,
+                "product": "Pick N Peel Pure Fruit Juice Tetra Apple 12x250ml",
+                "company_id": "79",
+                "is_edp": "N",
+                "edp_shipping": "N",
+                "discount": 0,
+                "base_price": 819.15,
+                "stored_price": "N"
+              },
+              "product": "Pick N Peel Pure Fruit Juice Tetra Apple 12x250ml",
+              "product_status": "A",
+              "product_url": "https://bulkbox.co.ke/pick-n-peel-pure-fruit-juice-tetra-apple-12x250ml/",
+              "deleted_product": false,
+              "discount": 0,
+              "company_id": "79",
+              "base_price": 819.15,
+              "original_price": 819.15,
+              "cart_id": "2834170110",
+              "tax_value": 0,
+              "subtotal": 1638,
+              "display_subtotal": 1638,
+              "shipped_amount": 0,
+              "shipment_amount": "2",
+              "is_accessible": true,
+              "cp_goog_brand_feat_compl": "",
+              "cp_goog_category_name": "Long Life Juices & Smoothies",
+              "variation_features": []
+            },
+            "3756601448": {
+              "item_id": "3756601448",
+              "order_id": "32875",
+              "product_id": "7729",
+              "product_code": "HKD381",
+              "price": "596.00",
+              "amount": "2",
+              "extra": {
+                "product_options": [],
+                "unlimited_download": "N",
+                "group_key": 0,
+                "product": "Oreo Original Biscuit 12x36.8g",
+                "company_id": "79",
+                "is_edp": "N",
+                "edp_shipping": "N",
+                "discount": 0,
+                "base_price": 595.7,
+                "stored_price": "N"
+              },
+              "product": "Oreo Original Biscuit 12x36.8g",
+              "product_status": "A",
+              "product_url": "https://bulkbox.co.ke/oreo-original-biscuit-12x36.8g/",
+              "deleted_product": false,
+              "discount": 0,
+              "company_id": "79",
+              "base_price": 595.7,
+              "original_price": 595.7,
+              "cart_id": "3756601448",
+              "tax_value": 0,
+              "subtotal": 1192,
+              "display_subtotal": 1192,
+              "shipped_amount": 0,
+              "shipment_amount": "2",
+              "is_accessible": true,
+              "cp_goog_brand_feat_compl": "",
+              "cp_goog_category_name": "Biscuits & Cookies",
+              "variation_features": []
+            },
+            "4224186867": {
+              "item_id": "4224186867",
+              "order_id": "32875",
+              "product_id": "5963",
+              "product_code": "PPK007",
+              "price": "2424.00",
+              "amount": "1",
+              "extra": {
+                "product_options": [],
+                "unlimited_download": "N",
+                "group_key": 0,
+                "product": "Krackles Potato Crisps Assorted 48x30g (48x30g)",
+                "company_id": "79",
+                "is_edp": "N",
+                "edp_shipping": "N",
+                "discount": 0,
+                "base_price": 2424.43,
+                "stored_price": "N"
+              },
+              "product": "Krackles Potato Crisps Assorted 48x30g (48x30g)",
+              "product_status": "A",
+              "product_url": "https://bulkbox.co.ke/krackles-potato-crisps-assorted-en/",
+              "deleted_product": false,
+              "discount": 0,
+              "company_id": "79",
+              "base_price": 2424.43,
+              "original_price": 2424.43,
+              "cart_id": "4224186867",
+              "tax_value": 0,
+              "subtotal": 2424,
+              "display_subtotal": 2424,
+              "shipped_amount": 0,
+              "shipment_amount": "1",
+              "is_accessible": true,
+              "cp_goog_brand_feat_compl": "",
+              "cp_goog_category_name": "Chips & Crisps",
+              "variation_feature_ids": {
+                "552": "552",
+                "572": "572"
+              },
+              "variation_feature_collection": {
+                "552": {
+                  "feature_id": "552",
+                  "purpose": "group_variation_catalog_item"
+                },
+                "572": {
+                  "feature_id": "572",
+                  "purpose": "group_catalog_item"
+                }
+              },
+              "variation_group_id": 134,
+              "variation_group_code": "PV-C20ED0E43",
+              "variation_parent_product_id": 0,
+              "variation_sub_group_id": "134_5963",
+              "variation_features": {
+                "552": {
+                  "feature_id": "552",
+                  "feature_style": "dropdown",
+                  "position": "1",
+                  "purpose": "group_variation_catalog_item",
+                  "display_on_catalog": "Y",
+                  "description": "Pack Size",
+                  "prefix": "",
+                  "suffix": "",
+                  "purpose_position": "0",
+                  "variant": "48x30g",
+                  "variant_id": "7913",
+                  "variant_position": "0"
+                },
+                "572": {
+                  "feature_id": "572",
+                  "feature_style": "dropdown",
+                  "position": "100",
+                  "purpose": "group_catalog_item",
+                  "display_on_catalog": "Y",
+                  "description": "Flavour",
+                  "prefix": "",
+                  "suffix": "",
+                  "purpose_position": "0",
+                  "variant": "Assorted",
+                  "variant_id": "8201",
+                  "variant_position": "0"
+                }
+              }
+            },
+            "4239410615": {
+              "item_id": "4239410615",
+              "order_id": "32875",
+              "product_id": "7615",
+              "product_code": "NBD014",
+              "price": "1554.00",
+              "amount": "1",
+              "extra": {
+                "product_options": [],
+                "unlimited_download": "N",
+                "group_key": 0,
+                "product": "Fanta Blackcurrant Soda 24x500ml",
+                "company_id": "79",
+                "is_edp": "N",
+                "edp_shipping": "N",
+                "discount": 0,
+                "base_price": 1553.5,
+                "stored_price": "N"
+              },
+              "product": "Fanta Blackcurrant Soda 24x500ml",
+              "product_status": "A",
+              "product_url": "https://bulkbox.co.ke/fanta-blackcurrant-soda-24x500ml/",
+              "deleted_product": false,
+              "discount": 0,
+              "company_id": "79",
+              "base_price": 1553.5,
+              "original_price": 1553.5,
+              "cart_id": "4239410615",
+              "tax_value": 0,
+              "subtotal": 1554,
+              "display_subtotal": 1554,
+              "shipped_amount": 0,
+              "shipment_amount": "1",
+              "is_accessible": true,
+              "cp_goog_brand_feat_compl": "",
+              "cp_goog_category_name": "Soft Drinks",
+              "variation_features": []
+            }
+          },
+          "taxes": [],
+          "tax_subtotal": 0,
+          "display_shipping_cost": "200.00",
+          "profile_update_timestamp": "",
+          "is_root": "",
+          "birthday": "",
+          "purchase_timestamp_from": "",
+          "purchase_timestamp_to": "",
+          "responsible_email": "",
+          "last_passwords": "",
+          "password_change_timestamp": "",
+          "api_key": "",
+          "janrain_identifier": "",
+          "specific_user_type": "",
+          "am_subscribe": "",
+          "staff_notes": "",
+          "b_country_descr": "Kenya",
+          "s_country_descr": "Kenya",
+          "b_state_descr": "Kileleshwa",
+          "s_state_descr": "Kileleshwa",
+          "need_shipping": true,
+          "shipping": [
+            {
+              "shipping_id": "17",
+              "shipping": "Next Day Delivery",
+              "delivery_time": "8am - 5pm",
+              "description": "<h5>We deliver next day for any orders placed before 4pm. Orders after 4pm will be delivered on the next working day.&nbsp;</h5>",
+              "rate_calculation": "M",
+              "service_params": [],
+              "destination": "I",
+              "min_weight": "0.000",
+              "max_weight": "0.000",
+              "service_id": "0",
+              "free_shipping": false,
+              "module": null,
+              "service_code": null,
+              "is_address_required": "Y",
+              "rate_info": {
+                "rate_id": "1265",
+                "shipping_id": "17",
+                "rate_value": {
+                  "C": [
+                    {
+                      "amount": "0",
+                      "value": 200,
+                      "type": "F",
+                      "per_unit": "N"
+                    }
+                  ]
+                },
+                "destination_id": "27"
+              },
+              "image": {
+                "pair_id": "5987",
+                "image_id": "6800",
+                "detailed_id": "0",
+                "position": "0",
+                "object_id": "17",
+                "object_type": "shipping",
+                "icon": {
+                  "image_path": "https://bulkbox.co.ke/images/shipping/6/truck2.png",
+                  "alt": "",
+                  "image_x": "512",
+                  "image_y": "512",
+                  "http_image_path": "http://bulkbox.co.ke/images/shipping/6/truck2.png",
+                  "https_image_path": "https://bulkbox.co.ke/images/shipping/6/truck2.png",
+                  "absolute_path": "/mnt/volume-fsn1-2/store.bulkbox.co.ke/images/shipping/6/truck2.png",
+                  "relative_path": "shipping/6/truck2.png",
+                  "is_high_res": false
+                }
+              },
+              "group_key": 0,
+              "rate": 200,
+              "group_name": "Bulkbox",
+              "need_shipment": true
+            }
+          ],
+          "shipment_ids": [],
+          "secondary_currency": "KES",
+          "display_subtotal": 13939,
+          "payment_info": [],
+          "product_groups": [
+            {
+              "name": "Bulkbox",
+              "company_id": 79,
+              "products": {
+                "66519957": {
+                  "product_id": 7152,
+                  "product_code": "RDD087",
+                  "product": "Haribo Goldbears 12x30g",
+                  "amount": 2,
+                  "product_options": [],
+                  "price": 830,
+                  "stored_price": "N",
+                  "main_pair": {
+                    "pair_id": "14163",
+                    "image_id": "0",
+                    "detailed_id": "14976",
+                    "position": "0",
+                    "object_id": "7152",
+                    "object_type": "product",
+                    "detailed": {
+                      "object_id": "7152",
+                      "object_type": "product",
+                      "type": "M",
+                      "image_path": "https://bulkbox.co.ke/images/detailed/14/seWCdwKLQ9z4vasL4YgjOFb--QKsv_z51812gcU2KXQ.jpg",
+                      "alt": "",
+                      "image_x": "1169",
+                      "image_y": "1500",
+                      "http_image_path": "http://bulkbox.co.ke/images/detailed/14/seWCdwKLQ9z4vasL4YgjOFb--QKsv_z51812gcU2KXQ.jpg",
+                      "https_image_path": "https://bulkbox.co.ke/images/detailed/14/seWCdwKLQ9z4vasL4YgjOFb--QKsv_z51812gcU2KXQ.jpg",
+                      "absolute_path": "/mnt/volume-fsn1-2/store.bulkbox.co.ke/images/detailed/14/seWCdwKLQ9z4vasL4YgjOFb--QKsv_z51812gcU2KXQ.jpg",
+                      "relative_path": "detailed/14/seWCdwKLQ9z4vasL4YgjOFb--QKsv_z51812gcU2KXQ.jpg",
+                      "is_high_res": false
+                    }
+                  },
+                  "extra": {
+                    "product_options": [],
+                    "unlimited_download": "N",
+                    "group_key": 0
+                  },
+                  "stored_discount": "N",
+                  "company_id": "79",
+                  "cp_cat_main_name": "Chocolate & Candy",
+                  "cp_goog_brand_feat": "",
+                  "amount_total": 2,
+                  "options_type": "P",
+                  "exceptions_type": "F",
+                  "modifiers_price": 0,
+                  "is_edp": "N",
+                  "edp_shipping": "N",
+                  "discount": 0,
+                  "promotions": [],
+                  "tax_summary": {
+                    "included": 0,
+                    "added": 0,
+                    "total": 0
+                  },
+                  "taxes": {
+                    "6": {
+                      "rate_type": "P",
+                      "rate_value": "16.000",
+                      "price_includes_tax": "Y",
+                      "regnumber": "P051799702S",
+                      "priority": 0,
+                      "tax_subtotal": 228,
+                      "description": "VAT"
+                    }
+                  },
+                  "base_price": 830.25,
+                  "category_ids": [
+                    566
+                  ],
+                  "display_price": 830,
+                  "main_category": 566
+                },
+                "314996757": {
+                  "product_id": 4352,
+                  "product_code": "WOB0025",
+                  "product": "Nestle Kitkat 2 Fingers Chocolate 36x20.7g",
+                  "amount": 1,
+                  "product_options": [],
+                  "price": 2908,
+                  "stored_price": "N",
+                  "main_pair": {
+                    "pair_id": "8551",
+                    "image_id": "0",
+                    "detailed_id": "9364",
+                    "position": "0",
+                    "object_id": "4352",
+                    "object_type": "product",
+                    "detailed": {
+                      "object_id": "4352",
+                      "object_type": "product",
+                      "type": "M",
+                      "image_path": "https://bulkbox.co.ke/images/detailed/9/kitkat_20.7.jpg",
+                      "alt": "",
+                      "image_x": "480",
+                      "image_y": "480",
+                      "http_image_path": "http://bulkbox.co.ke/images/detailed/9/kitkat_20.7.jpg",
+                      "https_image_path": "https://bulkbox.co.ke/images/detailed/9/kitkat_20.7.jpg",
+                      "absolute_path": "/mnt/volume-fsn1-2/store.bulkbox.co.ke/images/detailed/9/kitkat_20.7.jpg",
+                      "relative_path": "detailed/9/kitkat_20.7.jpg",
+                      "is_high_res": false
+                    }
+                  },
+                  "extra": {
+                    "product_options": [],
+                    "unlimited_download": "N",
+                    "group_key": 0
+                  },
+                  "stored_discount": "N",
+                  "company_id": "79",
+                  "cp_cat_main_name": "Chocolate & Candy",
+                  "cp_goog_brand_feat": "",
+                  "amount_total": 1,
+                  "options_type": "P",
+                  "exceptions_type": "F",
+                  "modifiers_price": 0,
+                  "is_edp": "N",
+                  "edp_shipping": "N",
+                  "discount": 0,
+                  "promotions": [],
+                  "tax_summary": {
+                    "included": 0,
+                    "added": 0,
+                    "total": 0
+                  },
+                  "taxes": {
+                    "6": {
+                      "rate_type": "P",
+                      "rate_value": "16.000",
+                      "price_includes_tax": "Y",
+                      "regnumber": "P051799702S",
+                      "priority": 0,
+                      "tax_subtotal": 401,
+                      "description": "VAT"
+                    }
+                  },
+                  "base_price": 2907.5,
+                  "category_ids": [
+                    566
+                  ],
+                  "display_price": 2908,
+                  "main_category": 566
+                },
+                "336693941": {
+                  "product_id": 7713,
+                  "product_code": "NBD061",
+                  "product": "Fanta Orange Soda 24x500ml",
+                  "amount": 1,
+                  "product_options": [],
+                  "price": 1525,
+                  "stored_price": "N",
+                  "main_pair": {
+                    "pair_id": "16496",
+                    "image_id": "0",
+                    "detailed_id": "17309",
+                    "position": "0",
+                    "object_id": "7713",
+                    "object_type": "product",
+                    "detailed": {
+                      "object_id": "7713",
+                      "object_type": "product",
+                      "type": "M",
+                      "image_path": "https://bulkbox.co.ke/images/detailed/17/8fDd5JQs6USQ5XK35qcVMFkCqnF2fQEblYCdztOWxMg.jpg",
+                      "alt": "",
+                      "image_x": "1035",
+                      "image_y": "1463",
+                      "http_image_path": "http://bulkbox.co.ke/images/detailed/17/8fDd5JQs6USQ5XK35qcVMFkCqnF2fQEblYCdztOWxMg.jpg",
+                      "https_image_path": "https://bulkbox.co.ke/images/detailed/17/8fDd5JQs6USQ5XK35qcVMFkCqnF2fQEblYCdztOWxMg.jpg",
+                      "absolute_path": "/mnt/volume-fsn1-2/store.bulkbox.co.ke/images/detailed/17/8fDd5JQs6USQ5XK35qcVMFkCqnF2fQEblYCdztOWxMg.jpg",
+                      "relative_path": "detailed/17/8fDd5JQs6USQ5XK35qcVMFkCqnF2fQEblYCdztOWxMg.jpg",
+                      "is_high_res": false
+                    }
+                  },
+                  "extra": {
+                    "product_options": [],
+                    "unlimited_download": "N",
+                    "group_key": 0
+                  },
+                  "stored_discount": "N",
+                  "company_id": "79",
+                  "cp_cat_main_name": "Soft Drinks",
+                  "cp_goog_brand_feat": "",
+                  "amount_total": 1,
+                  "options_type": "P",
+                  "exceptions_type": "F",
+                  "modifiers_price": 0,
+                  "is_edp": "N",
+                  "edp_shipping": "N",
+                  "discount": 0,
+                  "promotions": [],
+                  "base_price": 1524.79,
+                  "category_ids": [
+                    702
+                  ],
+                  "display_price": 1525,
+                  "main_category": 702
+                },
+                "525043102": {
+                  "product_id": 6620,
+                  "product_code": "WBD088",
+                  "product": "Chupa Chups Lollipops The Best Of Original Lollipop 60x12g",
+                  "amount": 1,
+                  "product_options": [],
+                  "price": 1038,
+                  "stored_price": "N",
+                  "main_pair": {
+                    "pair_id": "16831",
+                    "image_id": "0",
+                    "detailed_id": "17644",
+                    "position": "0",
+                    "object_id": "6620",
+                    "object_type": "product",
+                    "detailed": {
+                      "object_id": "6620",
+                      "object_type": "product",
+                      "type": "M",
+                      "image_path": "https://bulkbox.co.ke/images/detailed/17/hW1iSiQ0ajA1tOhxq25MbTfvWAkdCW6SPuqKkHdFeHU_4rqr-ey.jpg",
+                      "alt": "",
+                      "image_x": "1834",
+                      "image_y": "1500",
+                      "http_image_path": "http://bulkbox.co.ke/images/detailed/17/hW1iSiQ0ajA1tOhxq25MbTfvWAkdCW6SPuqKkHdFeHU_4rqr-ey.jpg",
+                      "https_image_path": "https://bulkbox.co.ke/images/detailed/17/hW1iSiQ0ajA1tOhxq25MbTfvWAkdCW6SPuqKkHdFeHU_4rqr-ey.jpg",
+                      "absolute_path": "/mnt/volume-fsn1-2/store.bulkbox.co.ke/images/detailed/17/hW1iSiQ0ajA1tOhxq25MbTfvWAkdCW6SPuqKkHdFeHU_4rqr-ey.jpg",
+                      "relative_path": "detailed/17/hW1iSiQ0ajA1tOhxq25MbTfvWAkdCW6SPuqKkHdFeHU_4rqr-ey.jpg",
+                      "is_high_res": false
+                    }
+                  },
+                  "extra": {
+                    "product_options": [],
+                    "unlimited_download": "N",
+                    "group_key": 0
+                  },
+                  "stored_discount": "N",
+                  "company_id": "79",
+                  "cp_cat_main_name": "Chocolate & Candy",
+                  "cp_goog_brand_feat": "",
+                  "amount_total": 1,
+                  "options_type": "P",
+                  "exceptions_type": "F",
+                  "modifiers_price": 0,
+                  "is_edp": "N",
+                  "edp_shipping": "N",
+                  "discount": 0,
+                  "promotions": [],
+                  "tax_summary": {
+                    "included": 0,
+                    "added": 0,
+                    "total": 0
+                  },
+                  "taxes": {
+                    "6": {
+                      "rate_type": "P",
+                      "rate_value": "16.000",
+                      "price_includes_tax": "Y",
+                      "regnumber": "P051799702S",
+                      "priority": 0,
+                      "tax_subtotal": 143,
+                      "description": "VAT"
+                    }
+                  },
+                  "base_price": 1037.84,
+                  "category_ids": [
+                    566
+                  ],
+                  "display_price": 1038,
+                  "main_category": 566
+                },
+                "2834170110": {
+                  "product_id": 7728,
+                  "product_code": "KKD004",
+                  "product": "Pick N Peel Pure Fruit Juice Tetra Apple 12x250ml",
+                  "amount": 2,
+                  "product_options": [],
+                  "price": 819,
+                  "stored_price": "N",
+                  "main_pair": {
+                    "pair_id": "16791",
+                    "image_id": "0",
+                    "detailed_id": "17604",
+                    "position": "0",
+                    "object_id": "7728",
+                    "object_type": "product",
+                    "detailed": {
+                      "object_id": "7728",
+                      "object_type": "product",
+                      "type": "M",
+                      "image_path": "https://bulkbox.co.ke/images/detailed/17/Msn7GD1S0p3qg--yzkz8-CgQSJWV5F4au70jqPMji10.jpg",
+                      "alt": "",
+                      "image_x": "480",
+                      "image_y": "480",
+                      "http_image_path": "http://bulkbox.co.ke/images/detailed/17/Msn7GD1S0p3qg--yzkz8-CgQSJWV5F4au70jqPMji10.jpg",
+                      "https_image_path": "https://bulkbox.co.ke/images/detailed/17/Msn7GD1S0p3qg--yzkz8-CgQSJWV5F4au70jqPMji10.jpg",
+                      "absolute_path": "/mnt/volume-fsn1-2/store.bulkbox.co.ke/images/detailed/17/Msn7GD1S0p3qg--yzkz8-CgQSJWV5F4au70jqPMji10.jpg",
+                      "relative_path": "detailed/17/Msn7GD1S0p3qg--yzkz8-CgQSJWV5F4au70jqPMji10.jpg",
+                      "is_high_res": false
+                    }
+                  },
+                  "extra": {
+                    "product_options": [],
+                    "unlimited_download": "N",
+                    "group_key": 0
+                  },
+                  "stored_discount": "N",
+                  "company_id": "79",
+                  "cp_cat_main_name": "Long Life Juices & Smoothies",
+                  "cp_goog_brand_feat": "",
+                  "amount_total": 2,
+                  "options_type": "P",
+                  "exceptions_type": "F",
+                  "modifiers_price": 0,
+                  "is_edp": "N",
+                  "edp_shipping": "N",
+                  "discount": 0,
+                  "promotions": [],
+                  "base_price": 819.15,
+                  "category_ids": [
+                    876
+                  ],
+                  "display_price": 819,
+                  "main_category": 876
+                },
+                "3756601448": {
+                  "product_id": 7729,
+                  "product_code": "HKD381",
+                  "product": "Oreo Original Biscuit 12x36.8g",
+                  "amount": 2,
+                  "product_options": [],
+                  "price": 596,
+                  "stored_price": "N",
+                  "main_pair": {
+                    "pair_id": "16798",
+                    "image_id": "0",
+                    "detailed_id": "17611",
+                    "position": "0",
+                    "object_id": "7729",
+                    "object_type": "product",
+                    "detailed": {
+                      "object_id": "7729",
+                      "object_type": "product",
+                      "type": "M",
+                      "image_path": "https://bulkbox.co.ke/images/detailed/17/sGwNu0iDMLP5Ig8vqpx8q79t-5UiEfsitgx4sPta1K8.png",
+                      "alt": "",
+                      "image_x": "477",
+                      "image_y": "239",
+                      "http_image_path": "http://bulkbox.co.ke/images/detailed/17/sGwNu0iDMLP5Ig8vqpx8q79t-5UiEfsitgx4sPta1K8.png",
+                      "https_image_path": "https://bulkbox.co.ke/images/detailed/17/sGwNu0iDMLP5Ig8vqpx8q79t-5UiEfsitgx4sPta1K8.png",
+                      "absolute_path": "/mnt/volume-fsn1-2/store.bulkbox.co.ke/images/detailed/17/sGwNu0iDMLP5Ig8vqpx8q79t-5UiEfsitgx4sPta1K8.png",
+                      "relative_path": "detailed/17/sGwNu0iDMLP5Ig8vqpx8q79t-5UiEfsitgx4sPta1K8.png",
+                      "is_high_res": false
+                    }
+                  },
+                  "extra": {
+                    "product_options": [],
+                    "unlimited_download": "N",
+                    "group_key": 0
+                  },
+                  "stored_discount": "N",
+                  "company_id": "79",
+                  "cp_cat_main_name": "Biscuits & Cookies",
+                  "cp_goog_brand_feat": "",
+                  "amount_total": 2,
+                  "options_type": "P",
+                  "exceptions_type": "F",
+                  "modifiers_price": 0,
+                  "is_edp": "N",
+                  "edp_shipping": "N",
+                  "discount": 0,
+                  "promotions": [],
+                  "base_price": 595.7,
+                  "category_ids": [
+                    640
+                  ],
+                  "display_price": 596,
+                  "main_category": 640
+                },
+                "4224186867": {
+                  "product_id": 5963,
+                  "product_code": "PPK007",
+                  "product": "Krackles Potato Crisps Assorted 48x30g (48x30g)",
+                  "amount": 1,
+                  "product_options": [],
+                  "price": 2424,
+                  "stored_price": "N",
+                  "main_pair": {
+                    "pair_id": "16458",
+                    "image_id": "0",
+                    "detailed_id": "17271",
+                    "position": "0",
+                    "object_id": "5963",
+                    "object_type": "product",
+                    "detailed": {
+                      "object_id": "5963",
+                      "object_type": "product",
+                      "type": "M",
+                      "image_path": "https://bulkbox.co.ke/images/detailed/17/4oti6KlZHiRZucaycSyTEffux9K_Jo6EdRRnNjU4LCs.jpg",
+                      "alt": "",
+                      "image_x": "1000",
+                      "image_y": "1000",
+                      "http_image_path": "http://bulkbox.co.ke/images/detailed/17/4oti6KlZHiRZucaycSyTEffux9K_Jo6EdRRnNjU4LCs.jpg",
+                      "https_image_path": "https://bulkbox.co.ke/images/detailed/17/4oti6KlZHiRZucaycSyTEffux9K_Jo6EdRRnNjU4LCs.jpg",
+                      "absolute_path": "/mnt/volume-fsn1-2/store.bulkbox.co.ke/images/detailed/17/4oti6KlZHiRZucaycSyTEffux9K_Jo6EdRRnNjU4LCs.jpg",
+                      "relative_path": "detailed/17/4oti6KlZHiRZucaycSyTEffux9K_Jo6EdRRnNjU4LCs.jpg",
+                      "is_high_res": false
+                    }
+                  },
+                  "extra": {
+                    "product_options": [],
+                    "unlimited_download": "N",
+                    "group_key": 0
+                  },
+                  "stored_discount": "N",
+                  "company_id": "79",
+                  "cp_cat_main_name": "Chips & Crisps",
+                  "cp_goog_brand_feat": "",
+                  "amount_total": 1,
+                  "options_type": "P",
+                  "exceptions_type": "F",
+                  "modifiers_price": 0,
+                  "is_edp": "N",
+                  "edp_shipping": "N",
+                  "discount": 0,
+                  "promotions": [],
+                  "tax_summary": {
+                    "included": 0,
+                    "added": 0,
+                    "total": 0
+                  },
+                  "taxes": {
+                    "6": {
+                      "rate_type": "P",
+                      "rate_value": "16.000",
+                      "price_includes_tax": "Y",
+                      "regnumber": "P051799702S",
+                      "priority": 0,
+                      "tax_subtotal": 334,
+                      "description": "VAT"
+                    }
+                  },
+                  "base_price": 2424.43,
+                  "category_ids": [
+                    564
+                  ],
+                  "display_price": 2424,
+                  "main_category": 564
+                },
+                "4239410615": {
+                  "product_id": 7615,
+                  "product_code": "NBD014",
+                  "product": "Fanta Blackcurrant Soda 24x500ml",
+                  "amount": 1,
+                  "product_options": [],
+                  "price": 1554,
+                  "stored_price": "N",
+                  "main_pair": {
+                    "pair_id": "16293",
+                    "image_id": "0",
+                    "detailed_id": "17106",
+                    "position": "0",
+                    "object_id": "7615",
+                    "object_type": "product",
+                    "detailed": {
+                      "object_id": "7615",
+                      "object_type": "product",
+                      "type": "M",
+                      "image_path": "https://bulkbox.co.ke/images/detailed/17/wODy_uBE6RKGf5i45tCx-bsR2VFIZ37UQ3zXkcmHCdE.jpg",
+                      "alt": "",
+                      "image_x": "1231",
+                      "image_y": "1231",
+                      "http_image_path": "http://bulkbox.co.ke/images/detailed/17/wODy_uBE6RKGf5i45tCx-bsR2VFIZ37UQ3zXkcmHCdE.jpg",
+                      "https_image_path": "https://bulkbox.co.ke/images/detailed/17/wODy_uBE6RKGf5i45tCx-bsR2VFIZ37UQ3zXkcmHCdE.jpg",
+                      "absolute_path": "/mnt/volume-fsn1-2/store.bulkbox.co.ke/images/detailed/17/wODy_uBE6RKGf5i45tCx-bsR2VFIZ37UQ3zXkcmHCdE.jpg",
+                      "relative_path": "detailed/17/wODy_uBE6RKGf5i45tCx-bsR2VFIZ37UQ3zXkcmHCdE.jpg",
+                      "is_high_res": false
+                    }
+                  },
+                  "extra": {
+                    "product_options": [],
+                    "unlimited_download": "N",
+                    "group_key": 0
+                  },
+                  "stored_discount": "N",
+                  "company_id": "79",
+                  "cp_cat_main_name": "Soft Drinks",
+                  "cp_goog_brand_feat": "",
+                  "amount_total": 1,
+                  "options_type": "P",
+                  "exceptions_type": "F",
+                  "modifiers_price": 0,
+                  "is_edp": "N",
+                  "edp_shipping": "N",
+                  "discount": 0,
+                  "promotions": [],
+                  "base_price": 1553.5,
+                  "category_ids": [
+                    702
+                  ],
+                  "display_price": 1554,
+                  "main_category": 702
+                }
+              },
+              "package_info": {
+                "C": 13939,
+                "W": "0.001",
+                "I": 11,
+                "shipping_freight": 0,
+                "packages": [
+                  {
+                    "products": {
+                      "66519957": 2,
+                      "314996757": 1,
+                      "336693941": 1,
+                      "525043102": 1,
+                      "2834170110": 2,
+                      "3756601448": 2,
+                      "4224186867": 1,
+                      "4239410615": 1
+                    },
+                    "amount": 11,
+                    "weight": 0.1,
+                    "cost": 13939
+                  }
+                ],
+                "origination": {
+                  "name": "Bulkbox",
+                  "address": "",
+                  "city": "",
+                  "country": "",
+                  "state": "",
+                  "zipcode": "",
+                  "phone": ""
+                },
+                "location": {
+                  "address": "Ring Road, Kileleshwa",
+                  "address_2": "A4 Ringsview Apartments",
+                  "city": "Nairobi",
+                  "state": "KILE",
+                  "country": "KE",
+                  "address_type": "residential",
+                  "firstname": "Juliet",
+                  "lastname": "Mbatia"
+                }
+              },
+              "package_info_full": {
+                "C": 13939,
+                "W": "0.001",
+                "I": 11,
+                "shipping_freight": 0,
+                "packages": [
+                  {
+                    "products": {
+                      "66519957": 2,
+                      "314996757": 1,
+                      "336693941": 1,
+                      "525043102": 1,
+                      "2834170110": 2,
+                      "3756601448": 2,
+                      "4224186867": 1,
+                      "4239410615": 1
+                    },
+                    "amount": 11,
+                    "weight": 0.1,
+                    "cost": 13939
+                  }
+                ],
+                "origination": {
+                  "name": "Bulkbox",
+                  "address": "",
+                  "city": "",
+                  "country": "",
+                  "state": "",
+                  "zipcode": "",
+                  "phone": ""
+                },
+                "location": {
+                  "address": "Ring Road, Kileleshwa",
+                  "address_2": "A4 Ringsview Apartments",
+                  "city": "Nairobi",
+                  "state": "KILE",
+                  "country": "KE",
+                  "address_type": "residential",
+                  "firstname": "Juliet",
+                  "lastname": "Mbatia"
+                }
+              },
+              "all_edp_free_shipping": false,
+              "all_free_shipping": false,
+              "free_shipping": false,
+              "shipping_no_required": false,
+              "shippings": {
+                "17": {
+                  "shipping_id": "17",
+                  "shipping": "Next Day Delivery",
+                  "delivery_time": "8am - 5pm",
+                  "description": "<h5>We deliver next day for any orders placed before 4pm. Orders after 4pm will be delivered on the next working day.&nbsp;</h5>",
+                  "rate_calculation": "M",
+                  "service_params": [],
+                  "destination": "I",
+                  "min_weight": "0.000",
+                  "max_weight": "0.000",
+                  "service_id": "0",
+                  "free_shipping": false,
+                  "module": null,
+                  "service_code": null,
+                  "is_address_required": "Y",
+                  "rate_info": {
+                    "rate_id": "1265",
+                    "shipping_id": "17",
+                    "rate_value": {
+                      "C": [
+                        {
+                          "amount": "0",
+                          "value": 200,
+                          "type": "F",
+                          "per_unit": "N"
+                        }
+                      ]
+                    },
+                    "destination_id": "27"
+                  },
+                  "image": {
+                    "pair_id": "5987",
+                    "image_id": "6800",
+                    "detailed_id": "0",
+                    "position": "0",
+                    "object_id": "17",
+                    "object_type": "shipping",
+                    "icon": {
+                      "image_path": "https://bulkbox.co.ke/images/shipping/6/truck2.png",
+                      "alt": "",
+                      "image_x": "512",
+                      "image_y": "512",
+                      "http_image_path": "http://bulkbox.co.ke/images/shipping/6/truck2.png",
+                      "https_image_path": "https://bulkbox.co.ke/images/shipping/6/truck2.png",
+                      "absolute_path": "/mnt/volume-fsn1-2/store.bulkbox.co.ke/images/shipping/6/truck2.png",
+                      "relative_path": "shipping/6/truck2.png",
+                      "is_high_res": false
+                    }
+                  },
+                  "group_key": 0,
+                  "rate": 200,
+                  "group_name": "Bulkbox"
+                }
+              },
+              "chosen_shippings": [
+                {
+                  "shipping_id": "17",
+                  "shipping": "Next Day Delivery",
+                  "delivery_time": "8am - 5pm",
+                  "description": "<h5>We deliver next day for any orders placed before 4pm. Orders after 4pm will be delivered on the next working day.&nbsp;</h5>",
+                  "rate_calculation": "M",
+                  "service_params": [],
+                  "destination": "I",
+                  "min_weight": "0.000",
+                  "max_weight": "0.000",
+                  "service_id": "0",
+                  "free_shipping": false,
+                  "module": null,
+                  "service_code": null,
+                  "is_address_required": "Y",
+                  "rate_info": {
+                    "rate_id": "1265",
+                    "shipping_id": "17",
+                    "rate_value": {
+                      "C": [
+                        {
+                          "amount": "0",
+                          "value": 200,
+                          "type": "F",
+                          "per_unit": "N"
+                        }
+                      ]
+                    },
+                    "destination_id": "27"
+                  },
+                  "image": {
+                    "pair_id": "5987",
+                    "image_id": "6800",
+                    "detailed_id": "0",
+                    "position": "0",
+                    "object_id": "17",
+                    "object_type": "shipping",
+                    "icon": {
+                      "image_path": "https://bulkbox.co.ke/images/shipping/6/truck2.png",
+                      "alt": "",
+                      "image_x": "512",
+                      "image_y": "512",
+                      "http_image_path": "http://bulkbox.co.ke/images/shipping/6/truck2.png",
+                      "https_image_path": "https://bulkbox.co.ke/images/shipping/6/truck2.png",
+                      "absolute_path": "/mnt/volume-fsn1-2/store.bulkbox.co.ke/images/shipping/6/truck2.png",
+                      "relative_path": "shipping/6/truck2.png",
+                      "is_high_res": false
+                    }
+                  },
+                  "group_key": 0,
+                  "rate": 200,
+                  "group_name": "Bulkbox"
+                }
+              ]
+            }
+          ],
+          "doc_ids": [],
+          "have_suppliers": false
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-08-13T07:09:13.000Z",
+  "versionId": "9ebc1c7a-bae4-4bf4-9402-ca882da5e46b"
+}
