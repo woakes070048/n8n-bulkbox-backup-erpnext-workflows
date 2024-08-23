@@ -1,0 +1,1176 @@
+{
+  "active": true,
+  "connections": {
+    "Encode Customer Name": {
+      "main": [
+        [
+          {
+            "node": "Remove 3rd Party Financial Services",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Customer",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove 3rd Party Financial Services": {
+      "main": [
+        [
+          {
+            "node": "Received Mpesa Payments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Received Mpesa Payments": {
+      "main": [
+        [
+          {
+            "node": "Get Payer Name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Payer Name": {
+      "main": [
+        [
+          {
+            "node": "Payer Name Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Payer Name Exists?": {
+      "main": [
+        [
+          {
+            "node": "Update Payer Name if empty",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Payer Name 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Payer Name 2": {
+      "main": [
+        [
+          {
+            "node": "Payer name 2 Empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Payer name 2 Empty": {
+      "main": [
+        [
+          {
+            "node": "Update Payer Name 2 if empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Customer": {
+      "main": [
+        [
+          {
+            "node": "Frozen with no outstanding",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Frozen with less than credit limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Frozen with no outstanding": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Frozen with less than credit limit": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Unfreeze": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get email": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Payment Received Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
+        [
+          {
+            "node": "Encode Customer Name",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Payment Entry Booked": {
+      "main": [
+        [
+          {
+            "node": "Filter1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Unfreeze",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-03-15T09:14:50.005Z",
+  "id": "hAGLUk7tp0tzMqW5",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Payer Name Update & Update Record on AR Payment Entry",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "// Accessing the first item in the body array\nconst jsonData = items[0].json.body;\n\n// Accessing the party name from the JSON data\nconst partyName = jsonData.party_name;\n\n// Encoding the party name\nconst encodedPartyName = encodeURIComponent(partyName);\n\n// Returning the encoded party name\nreturn [{ json: { encodedName: encodedPartyName } }];\n"
+      },
+      "id": "c2ec7db6-5276-474a-8590-72b270485ec2",
+      "name": "Encode Customer Name",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1180,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "de1805e6-1c8b-460d-a1f1-8731deea4d06",
+              "leftValue": "={{ $('Payment Entry Booked').item.json.body.payee_name_ipay }}",
+              "rightValue": "PERSONAL DETAILS",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "52443550-3cab-45c3-bac6-9fd02580ae4b",
+      "name": "Remove 3rd Party Financial Services",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1580,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "1f252edd-1ba1-4924-b7ba-1f01e76ad85b",
+              "leftValue": "={{ $('Payment Entry Booked').item.json.body.mode_of_payment }}",
+              "rightValue": "MPESA",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "b1e8f4cd-2a22-475e-a681-a56ec83e6aee",
+              "leftValue": "={{ $('Payment Entry Booked').item.json.body.payment_type }}",
+              "rightValue": "Receive",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "fa124518-6e5c-42ec-8b5d-18148ab3bbab",
+      "name": "Received Mpesa Payments",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        1820,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer?fields=[\"payer_name\"]&filters=[[\"customer_name\", \"=\", \"{{ $json[\"encodedName\"] }}\"]]",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "cb0b85a5-bd34-49f3-870c-965288b45258",
+      "name": "Get Payer Name",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        2100,
+        400
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "85b61dd7-f152-4dc1-8461-a725a9ba6b99",
+              "leftValue": "={{ $json.body.data[0].payer_name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "2b2f5af7-dba0-40b4-b11e-131131b2bfb0",
+              "leftValue": "={{ $json.body.data[0].payer_name }}",
+              "rightValue": "={{ $('Payment Entry Booked').item.json.body.payee_phone_number }}",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "d33ed153-223f-4932-a599-40acc20478a5",
+      "name": "Payer Name Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2380,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer/{{ $('Encode Customer Name').item.json[\"encodedName\"] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "payer_name",
+              "value": "={{ $('Payment Entry Booked').item.json.body.payee_name_ipay }}"
+            },
+            {
+              "name": "payee_phone_number",
+              "value": "={{ $('Payment Entry Booked').item.json.body.payee_phone_number }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {}
+          }
+        }
+      },
+      "id": "33d6fcdb-ead8-4e51-ac78-4882e79b70b6",
+      "name": "Update Payer Name if empty",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        2660,
+        300
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer?fields=[\"payer_name_2\"]&filters=[[\"customer_name\", \"=\", \"{{ $('Encode Customer Name').item.json[\"encodedName\"] }}\"]]",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "8b733fbe-662e-4923-977d-ce87641397d9",
+      "name": "Get Payer Name 2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        2660,
+        580
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "4917a84e-920a-4ecb-a7eb-cd0952995565",
+              "leftValue": "={{ $json.body.data[0].payer_name_2 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "50be9e89-ba47-41b7-80f7-10cb4c023479",
+              "leftValue": "={{ $('Get Payer Name').item.json.body.data[0].payer_name }}",
+              "rightValue": "={{ $('Payment Entry Booked').item.json.body.payee_phone_number }}",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "060d8a55-5956-40d2-90fb-d89c4933d7e2",
+      "name": "Payer name 2 Empty",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        2860,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer/{{ $('Encode Customer Name').item.json[\"encodedName\"] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "payer_name_2",
+              "value": "={{ $('Payment Entry Booked').item.json.body.payee_name_ipay }}"
+            },
+            {
+              "name": "payee_phone_number",
+              "value": "={{ $('Payment Entry Booked').item.json.body.payee_phone_number }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {}
+          }
+        }
+      },
+      "id": "d16c7702-cf95-421a-8e14-5a6e93c917e5",
+      "name": "Update Payer Name 2 if empty",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        3060,
+        580
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer?fields=[\"email_id\"]&filters=[[\"name\", \"=\", \"{{ $json[\"encodedName\"] }}\"]]",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "7cc54af6-d81f-4f3c-8df0-a971f53d2ccd",
+      "name": "Get email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1580,
+        680
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer/{{ $json[\"encodedName\"] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "c16aacc3-fc85-4e8e-b008-ffc5e0b0c8d9",
+      "name": "Get Customer",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1580,
+        960
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "32ac1043-1da1-4939-bc8b-4bde6ea306f9",
+              "leftValue": "={{ $('Payment Entry Booked').item.json.body.outstanding_balance }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "lte"
+              }
+            },
+            {
+              "id": "d204b5f9-956d-4f46-9fc2-beecebb969eb",
+              "leftValue": "={{ $json.body.data.is_frozen }}",
+              "rightValue": 1,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "0a54b5fd-98fc-4d89-a7d0-a451338ef9d3",
+      "name": "Frozen with no outstanding",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        1800,
+        880
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "32ac1043-1da1-4939-bc8b-4bde6ea306f9",
+              "leftValue": "={{ $('Payment Entry Booked').item.json.body.outstanding_balance }}",
+              "rightValue": "={{ $json.body.data.credit_limits[0].credit_limit }}",
+              "operator": {
+                "type": "number",
+                "operation": "lte"
+              }
+            },
+            {
+              "id": "d204b5f9-956d-4f46-9fc2-beecebb969eb",
+              "leftValue": "={{ $json.body.data.is_frozen }}",
+              "rightValue": 1,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d0df1f36-bbc4-4067-8ab9-e612dbe3fa4a",
+      "name": "Frozen with less than credit limit",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        1800,
+        1080
+      ]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#account_management",
+          "mode": "name"
+        },
+        "messageType": "block",
+        "blocksUi": "={\n   \"blocks\":[\n      {\n         \"type\":\"section\",\n         \"text\":{\n            \"type\":\"mrkdwn\",\n            \"text\":\"ALERT:\\n{{ $('Payment Entry Booked').item.json[\"body\"][\"party\"] }} has been unfrozen after payment made.\"\n         },\n         \"accessory\":{\n            \"type\":\"button\",\n            \"text\":{\n               \"type\":\"plain_text\",\n               \"text\":\"Go To Customer\",\n               \"emoji\":true\n            },\n            \"value\":\"click_me_123\",\n            \"url\":\"https://portal.bulkbox.cloud/app/customer/{{ $('Encode Customer Name').item.json[\"encodedName\"] }}\",\n            \"action_id\":\"button-action\"\n         }\n      }\n   ]\n} ",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "id": "e949be11-4aaf-40db-b056-1d87225f8b06",
+      "name": "Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        2380,
+        1000
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer/{{ $('Encode Customer Name').item.json[\"encodedName\"] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "is_frozen",
+              "value": "0"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "dcbec44f-6f92-4917-a7b4-2e9441fd9577",
+      "name": "Unfreeze",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        2220,
+        1000
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "5f2423e2-4b5f-4d82-a391-7b1bf1df1b25",
+              "leftValue": "={{ $json.body.data[0].email_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b5c857b8-7b0e-4427-afe6-45fb065cc739",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        1800,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "sendHTML": true,
+        "subject": "Payment Received",
+        "htmlContent": "= <p>Dear {{ $('Payment Entry Booked').item.json[\"body\"][\"party\"] }},</p>\n   \n<p> <p>\n\n\n   <p>This is to acknowledge payment received of <strong>Ksh {{ $('Payment Entry Booked').item.json[\"body\"][\"paid_amount\"] }}</strong> on date {{ $('Payment Entry Booked').item.json[\"body\"][\"reference_date\"] }} of reference no. <strong>{{ $('Payment Entry Booked').item.json[\"body\"][\"reference_no\"] }}</strong><p>\n\n   \n   <p>The payment has been booked and the account reconciled appropriately.</p>\n\n   \n   <p>Your outstanding account balance is <strong>Ksh {{ $('Payment Entry Booked').item.json[\"body\"][\"outstanding_balance\"] }}</strong><P>\n\n   \n   <p>In case of any issues or concerns, please reach out to our accounts department.<p>\n<p> <p>\n\n   \n   </ul>\n   \n   <p>We appreciate your business.</p>\n   \n   <p>Warm Regards,\n   \n   <div><style>.sh-src a{text-decoration:none!important;}</style></div> <br> <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"sh-src\" style=\"margin: 0px; border-collapse: collapse;\"><tr><td style=\"padding: 0px 1px 0px 0px;\"><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse: separate; margin: 0px;\"><tr><td align=\"center\" style=\"padding: 0px 14px 0px 0px; vertical-align: top;\"><!----> <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin: 0px; border-collapse: collapse;\"><tr><td style=\"padding: 0px 1px 0px 0px;\"><p style=\"margin: 1px;\"><a href=\"http://www.bulkbox.co.ke\" target=\"_blank\"><img src=\"https://signaturehound.com/api/v1/file/1ynl8mwcgay\" alt=\"\" title=\"Logo\" width=\"120\" height=\"120\" style=\"display: block; border: 0px; max-width: 120px;\"></a></p></td></tr></table></td> <td style=\"padding: 1px 0px 0px;\"></td> <td style=\"padding: 0px 1px 0px 0px; vertical-align: top;\"><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin: 0px; border-collapse: collapse;\"><tr><td style=\"padding: 0px 1px 8px 0px; font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap;\"><p style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; font-weight: 700; color: rgb(33,82,132); white-space: nowrap; margin: 1px;\">Bulkbox </p> <p style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,136); margin: 1px;\">Accounts, Finance</p> <!----> <!----></td></tr> <tr><td style=\"padding: 0px 1px 0px 0px;\"><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin: 0px; border-collapse: collapse;\"><tr><!----> <td style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,135) !important; padding: 0px 1px 0px 0px;\"><p style=\"margin: 1px;\"><a href=\"mailto:accounts@bulkbox.co.ke\" target=\"_blank\" style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,136); text-decoration: none !important;\"><span style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,136); text-decoration: none !important;\">accounts@bulkbox.co.ke</span></a></p></td></tr> <tr><!----> <td style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,135) !important; padding: 0px 1px 0px 0px;\"><p style=\"margin: 1px;\"><a href=\"tel:+254789853235\" target=\"_blank\" style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,136); text-decoration: none !important;\"><span style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,136); text-decoration: none !important;\">+254 789853235</span></a></p></td></tr> <tr><!----> <td style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,135) !important; padding: 0px 1px 0px 0px;\"><p style=\"margin: 1px;\"><span style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,136); text-decoration: none !important;\">Unga House, Westlands</span></p></td></tr> <tr><!----> <td style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(33,82,131) !important; font-weight: 700; padding: 0px 1px 0px 0px;\"><p style=\"margin: 1px;\"><a href=\"http://www.bulkbox.co.ke\" target=\"_blank\" style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(33,82,132); font-weight: 700; text-decoration: none !important;\"><span style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(33,82,132); font-weight: 700; text-decoration: none !important;\">bulkbox.co.ke</span></a></p></td></tr></table></td></tr> <!----></table></td></tr></table></td></tr> <!----> <tr><td style=\"padding: 0px 1px 0px 0px;\"><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"max-width: 600px; margin: 0px; border-collapse: collapse;\"><tr><td style=\"padding: 12px 1px 0px 0px; font-family: Arial, sans-serif; font-size: 10px; line-height: 13px; color: rgb(136,136,136);\"><p style=\"font-family: Arial, sans-serif; font-size: 10px; line-height: 13px; color: rgb(136,136,136); margin: 1px;\">The content of this email is confidential and intended for the recipient specified in message only. It is strictly forbidden to share any part of this message with any third party, without a written consent of the sender. If you received this message by mistake, please reply to this message and follow with its deletion, so that we can ensure such a mistake does not occur in the future.</p></td></tr></table></td></tr> <!----> <!----></table>",
+        "sender": "=accounts@bulkbox.co.ke",
+        "receipients": "={{ $('Get email').item.json[\"body\"][\"data\"][0][\"email_id\"] }}",
+        "additionalFields": {
+          "receipientsBCC": {
+            "receipientBcc": {
+              "bcc": "gatura@bulkbox.co.ke"
+            }
+          }
+        }
+      },
+      "id": "16edbb03-fa6d-4702-aa71-772c68e30c02",
+      "name": "Payment Received Email",
+      "type": "n8n-nodes-base.sendInBlue",
+      "typeVersion": 1,
+      "position": [
+        2020,
+        680
+      ],
+      "credentials": {
+        "sendInBlueApi": {
+          "id": "88mn4vQDZrcUEZV7",
+          "name": "Brevo Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app7c9cfju1wCcghr",
+          "mode": "list",
+          "cachedResultName": "AR Management Tool",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblhG1syrqypDo7CP",
+          "mode": "list",
+          "cachedResultName": "Payment Entry",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr/tblhG1syrqypDo7CP"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Cheque/Reference No": "={{ $json.body.reference_no }}",
+            "Party Name": "={{ $json.body.party_name }}",
+            "Mode of Payment": "={{ $json.body.mode_of_payment }}",
+            "Amount": "={{ $json.body.paid_amount }}",
+            "Account Paid To": "={{ $json.body.paid_to }}",
+            "Vendor ID": "={{ $json.body.vendor_id }}",
+            "Payee Name IPay": "={{ $json.body.payee_name_ipay }}",
+            "Phone Number": "={{ $json.body.payee_phone_number }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Cheque/Reference No",
+              "displayName": "Cheque/Reference No",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Party Name",
+              "displayName": "Party Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Mode of Payment",
+              "displayName": "Mode of Payment",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Posting Date",
+              "displayName": "Posting Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Time",
+              "displayName": "Time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Amount",
+              "displayName": "Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Account Paid To",
+              "displayName": "Account Paid To",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Vendor ID",
+              "displayName": "Vendor ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Payee Name IPay",
+              "displayName": "Payee Name IPay",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Assignee",
+              "displayName": "Assignee",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Todo",
+                  "value": "Todo"
+                },
+                {
+                  "name": "In progress",
+                  "value": "In progress"
+                },
+                {
+                  "name": "Done",
+                  "value": "Done"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "iPay Table 4",
+              "displayName": "iPay Table 4",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "387eef49-e554-41e2-a7dd-e87d2fb2f616",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1180,
+        300
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "dbdcb118-d11b-41fd-a682-09d07da0697d",
+              "leftValue": "={{ $json.body.party_type }}",
+              "rightValue": "Supplier",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "c385bae8-cc40-4229-98a3-eed4119a49a8",
+              "leftValue": "={{ $json.body.payment_type }}",
+              "rightValue": "Internal Transfer",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "10a9f3a1-2f1a-4346-868d-2157eb5131a5",
+      "name": "Filter1",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        800,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "payment-booked",
+        "options": {}
+      },
+      "id": "c8603f8f-cccd-488f-9435-10c8068ebd9f",
+      "name": "Payment Entry Booked",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        580,
+        480
+      ],
+      "webhookId": "b517e6c7-72c6-4561-a552-618ee6c0ede5"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "6f1f3fb1-584e-4fe4-a1d1-de9823d68621",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2040,
+        1000
+      ]
+    }
+  ],
+  "pinData": {
+    "Get email": [
+      {
+        "json": {
+          "body": {
+            "data": [
+              {
+                "email_id": "gaturanjenga@gmail.com"
+              }
+            ]
+          },
+          "headers": {
+            "date": "Thu, 04 Apr 2024 14:28:09 GMT",
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "connection": "close",
+            "set-cookie": [
+              "sid=Guest; Expires=Sun, 07-Apr-2024 14:28:09 GMT; HttpOnly; Path=/; SameSite=Lax",
+              "system_user=no; Path=/; SameSite=Lax",
+              "full_name=Guest; Path=/; SameSite=Lax",
+              "user_id=Guest; Path=/; SameSite=Lax",
+              "user_image=; Path=/; SameSite=Lax"
+            ],
+            "x-frame-options": "SAMEORIGIN",
+            "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "referrer-policy": "same-origin, strict-origin-when-cross-origin",
+            "cf-cache-status": "DYNAMIC",
+            "report-to": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=JcTFbswFAsmfsqBY6yKOSFKNfSr9kcDVT3gnn3YLPSgEY3rYBBEd8tnhrlef4Af6Xtw%2FHDcrwwwg8FTWdi40ZFVB0wEcF5O7vUyn4zv7OsZj7SeRcKyDRUUyq%2FWTaP37sH2hXGv6aw%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+            "nel": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+            "server": "cloudflare",
+            "cf-ray": "86f1fbb49a811e57-FRA",
+            "alt-svc": "h3=\":443\"; ma=86400"
+          },
+          "statusCode": 200,
+          "statusMessage": "OK"
+        }
+      }
+    ],
+    "Payment Entry Booked": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "python-requests/2.31.0",
+            "content-length": "459",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "x-forwarded-for": "167.235.206.20",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "167.235.206.20"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "payee_name_ipay": "MUTHURI MUTHURI",
+            "party": "Favour  Muthuri",
+            "party_type": "Customer",
+            "mode_of_payment": "MPESA",
+            "payment_type": "Receive",
+            "party_name": "Favour  Muthuri",
+            "paid_amount": 18775,
+            "paid_to": "Cash - TSL",
+            "reference_no": "SF53IDDC3J",
+            "vendor_id": "bulkbox",
+            "payee_phone_number": "7fd51ffab9640",
+            "name": "ACC-PAY-2024-02735",
+            "contact_person": null,
+            "outstanding_balance": 0,
+            "reference_date": "2024/06/05",
+            "contact_email": null
+          },
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook/payment-booked",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-07-18T19:50:38.000Z",
+  "versionId": "05bc3a5b-79db-47a3-9239-63ffe989faba"
+}
