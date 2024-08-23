@@ -1,0 +1,4560 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Airtable1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-04-08T07:51:51.883Z",
+  "id": "m1oKY20nm4P9DWIh",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Bolt Stock Trigger -> Airtable",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "95a1358c-1b91-4d13-99d0-89a0558b8b6b",
+        "options": {}
+      },
+      "id": "93ae9506-8f67-412b-aa20-0e54cb02b340",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        740,
+        460
+      ],
+      "webhookId": "95a1358c-1b91-4d13-99d0-89a0558b8b6b"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "body[0].items",
+        "options": {}
+      },
+      "id": "3884ee37-9b4c-4529-8a06-46c77cd6dac8",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        960,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "apph2KFJZk3S0ASkk",
+          "mode": "list",
+          "cachedResultName": "evry.day",
+          "cachedResultUrl": "https://airtable.com/apph2KFJZk3S0ASkk"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblM3kejHaw6isVQZ",
+          "mode": "list",
+          "cachedResultName": "BBX Master",
+          "cachedResultUrl": "https://airtable.com/apph2KFJZk3S0ASkk/tblM3kejHaw6isVQZ"
+        },
+        "filterByFormula": "=({Item Code} = \"{{ $json[\"item_code\"] }}\")",
+        "options": {}
+      },
+      "id": "1d08596d-bc00-4792-8767-34ebc2d5ca3d",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1180,
+        460
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "apph2KFJZk3S0ASkk",
+          "mode": "list",
+          "cachedResultName": "evry.day",
+          "cachedResultUrl": "https://airtable.com/apph2KFJZk3S0ASkk"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblM3kejHaw6isVQZ",
+          "mode": "list",
+          "cachedResultName": "BBX Master",
+          "cachedResultUrl": "https://airtable.com/apph2KFJZk3S0ASkk/tblM3kejHaw6isVQZ"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.id }}",
+            "Store Stock Summary": "={{ $ifEmpty(('Split Out').item.json[\"actual_qty\"],0) }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Item Code",
+              "displayName": "Item Code",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Level 1 Group",
+              "displayName": "Level 1 Group",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Level 2 Group",
+              "displayName": "Level 2 Group",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "item_group",
+              "displayName": "item_group",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Air Freshener",
+                  "value": "Air Freshener"
+                },
+                {
+                  "name": "Baby Food & Formula",
+                  "value": "Baby Food & Formula"
+                },
+                {
+                  "name": "Baby Wipes",
+                  "value": "Baby Wipes"
+                },
+                {
+                  "name": "Baking Mixes",
+                  "value": "Baking Mixes"
+                },
+                {
+                  "name": "Baking Soda & Yeast",
+                  "value": "Baking Soda & Yeast"
+                },
+                {
+                  "name": "Bar Soaps",
+                  "value": "Bar Soaps"
+                },
+                {
+                  "name": "Biscuits & Cookies",
+                  "value": "Biscuits & Cookies"
+                },
+                {
+                  "name": "Bleach",
+                  "value": "Bleach"
+                },
+                {
+                  "name": "Bread & Pastries",
+                  "value": "Bread & Pastries"
+                },
+                {
+                  "name": "Breakfast Cereals",
+                  "value": "Breakfast Cereals"
+                },
+                {
+                  "name": "Canned Fruit",
+                  "value": "Canned Fruit"
+                },
+                {
+                  "name": "Canned Meats",
+                  "value": "Canned Meats"
+                },
+                {
+                  "name": "Canned Vegetables",
+                  "value": "Canned Vegetables"
+                },
+                {
+                  "name": "Cereal & Energy Bars",
+                  "value": "Cereal & Energy Bars"
+                },
+                {
+                  "name": "Cheese",
+                  "value": "Cheese"
+                },
+                {
+                  "name": "Chewing Gum",
+                  "value": "Chewing Gum"
+                },
+                {
+                  "name": "Chilli Sauces",
+                  "value": "Chilli Sauces"
+                },
+                {
+                  "name": "Chips & Crisps",
+                  "value": "Chips & Crisps"
+                },
+                {
+                  "name": "Chocolate & Candy",
+                  "value": "Chocolate & Candy"
+                },
+                {
+                  "name": "Cling Film & Foils",
+                  "value": "Cling Film & Foils"
+                },
+                {
+                  "name": "Coffee",
+                  "value": "Coffee"
+                },
+                {
+                  "name": "Coffee, Tea & Cocoa",
+                  "value": "Coffee, Tea & Cocoa"
+                },
+                {
+                  "name": "Condiments",
+                  "value": "Condiments"
+                },
+                {
+                  "name": "Consumer, Retail, Food Service",
+                  "value": "Consumer, Retail, Food Service"
+                },
+                {
+                  "name": "Cooking Chocolate",
+                  "value": "Cooking Chocolate"
+                },
+                {
+                  "name": "Cooking Fats",
+                  "value": "Cooking Fats"
+                },
+                {
+                  "name": "Vegetable Oils",
+                  "value": "Vegetable Oils"
+                },
+                {
+                  "name": "Cooking Tools",
+                  "value": "Cooking Tools"
+                },
+                {
+                  "name": "Cotton Products",
+                  "value": "Cotton Products"
+                },
+                {
+                  "name": "Diapers",
+                  "value": "Diapers"
+                },
+                {
+                  "name": "Dips",
+                  "value": "Dips"
+                },
+                {
+                  "name": "Dishwashing",
+                  "value": "Dishwashing"
+                },
+                {
+                  "name": "Dried Fruits, Nuts & Seeds",
+                  "value": "Dried Fruits, Nuts & Seeds"
+                },
+                {
+                  "name": "Fabric Softener",
+                  "value": "Fabric Softener"
+                },
+                {
+                  "name": "Feminine Products",
+                  "value": "Feminine Products"
+                },
+                {
+                  "name": "Food Colouring",
+                  "value": "Food Colouring"
+                },
+                {
+                  "name": "Food Flavours",
+                  "value": "Food Flavours"
+                },
+                {
+                  "name": "Furniture Polish",
+                  "value": "Furniture Polish"
+                },
+                {
+                  "name": "Hand Towels",
+                  "value": "Hand Towels"
+                },
+                {
+                  "name": "Hand Wash",
+                  "value": "Hand Wash"
+                },
+                {
+                  "name": "Health &Wellness",
+                  "value": "Health &Wellness"
+                },
+                {
+                  "name": "Health Supplements",
+                  "value": "Health Supplements"
+                },
+                {
+                  "name": "Healthy Snacks",
+                  "value": "Healthy Snacks"
+                },
+                {
+                  "name": "Honey",
+                  "value": "Honey"
+                },
+                {
+                  "name": "Jams",
+                  "value": "Jams"
+                },
+                {
+                  "name": "Japanese Cuisine",
+                  "value": "Japanese Cuisine"
+                },
+                {
+                  "name": "Juices",
+                  "value": "Juices"
+                },
+                {
+                  "name": "Ketchup",
+                  "value": "Ketchup"
+                },
+                {
+                  "name": "Laundry Powders",
+                  "value": "Laundry Powders"
+                },
+                {
+                  "name": "Liquid Detergents",
+                  "value": "Liquid Detergents"
+                },
+                {
+                  "name": "Mayonnaise",
+                  "value": "Mayonnaise"
+                },
+                {
+                  "name": "Milk & Cream",
+                  "value": "Milk & Cream"
+                },
+                {
+                  "name": "Muesli",
+                  "value": "Muesli"
+                },
+                {
+                  "name": "Multipurpose Detergents",
+                  "value": "Multipurpose Detergents"
+                },
+                {
+                  "name": "Mustard",
+                  "value": "Mustard"
+                },
+                {
+                  "name": "Noodles",
+                  "value": "Noodles"
+                },
+                {
+                  "name": "Nut & Seed Butters",
+                  "value": "Nut & Seed Butters"
+                },
+                {
+                  "name": "Nuts",
+                  "value": "Nuts"
+                },
+                {
+                  "name": "Olives",
+                  "value": "Olives"
+                },
+                {
+                  "name": "Other Baking Ingredients",
+                  "value": "Other Baking Ingredients"
+                },
+                {
+                  "name": "Other Sauces",
+                  "value": "Other Sauces"
+                },
+                {
+                  "name": "Pasta",
+                  "value": "Pasta"
+                },
+                {
+                  "name": "PCS",
+                  "value": "PCS"
+                },
+                {
+                  "name": "Personal Care",
+                  "value": "Personal Care"
+                },
+                {
+                  "name": "Pesto",
+                  "value": "Pesto"
+                },
+                {
+                  "name": "Pickles",
+                  "value": "Pickles"
+                },
+                {
+                  "name": "Plant Based & Lactose Free",
+                  "value": "Plant Based & Lactose Free"
+                },
+                {
+                  "name": "Printing Paper",
+                  "value": "Printing Paper"
+                },
+                {
+                  "name": "Puffed Snacks",
+                  "value": "Puffed Snacks"
+                },
+                {
+                  "name": "Salad Dressing",
+                  "value": "Salad Dressing"
+                },
+                {
+                  "name": "Salt, Spices & Seasoning",
+                  "value": "Salt, Spices & Seasoning"
+                },
+                {
+                  "name": "Sanitary Pads",
+                  "value": "Sanitary Pads"
+                },
+                {
+                  "name": "Sanitizers",
+                  "value": "Sanitizers"
+                },
+                {
+                  "name": "Scouring Pads & Sponges",
+                  "value": "Scouring Pads & Sponges"
+                },
+                {
+                  "name": "Serviettes",
+                  "value": "Serviettes"
+                },
+                {
+                  "name": "Skin Care",
+                  "value": "Skin Care"
+                },
+                {
+                  "name": "Soft Drinks",
+                  "value": "Soft Drinks"
+                },
+                {
+                  "name": "Soups",
+                  "value": "Soups"
+                },
+                {
+                  "name": "Soy Sauce",
+                  "value": "Soy Sauce"
+                },
+                {
+                  "name": "Sports & Energy Drinks",
+                  "value": "Sports & Energy Drinks"
+                },
+                {
+                  "name": "Sugars",
+                  "value": "Sugars"
+                },
+                {
+                  "name": "Sugars & Sweeteners",
+                  "value": "Sugars & Sweeteners"
+                },
+                {
+                  "name": "Sweet Chilli Sauce",
+                  "value": "Sweet Chilli Sauce"
+                },
+                {
+                  "name": "Taco Shells & Wraps",
+                  "value": "Taco Shells & Wraps"
+                },
+                {
+                  "name": "Tea",
+                  "value": "Tea"
+                },
+                {
+                  "name": "Thai Products",
+                  "value": "Thai Products"
+                },
+                {
+                  "name": "Tissue Rolls",
+                  "value": "Tissue Rolls"
+                },
+                {
+                  "name": "Toilet Cleaners",
+                  "value": "Toilet Cleaners"
+                },
+                {
+                  "name": "Tomato Paste & Sauces",
+                  "value": "Tomato Paste & Sauces"
+                },
+                {
+                  "name": "Tomato Sauces",
+                  "value": "Tomato Sauces"
+                },
+                {
+                  "name": "Vinegars",
+                  "value": "Vinegars"
+                },
+                {
+                  "name": "Water & Sparkling",
+                  "value": "Water & Sparkling"
+                },
+                {
+                  "name": "Yoghurt & Pudding",
+                  "value": "Yoghurt & Pudding"
+                },
+                {
+                  "name": "Butter",
+                  "value": "Butter"
+                },
+                {
+                  "name": "Antiseptics",
+                  "value": "Antiseptics"
+                },
+                {
+                  "name": "Syrups",
+                  "value": "Syrups"
+                },
+                {
+                  "name": "Topping Sauces",
+                  "value": "Topping Sauces"
+                },
+                {
+                  "name": "Olive Oils",
+                  "value": "Olive Oils"
+                },
+                {
+                  "name": "Flours",
+                  "value": "Flours"
+                },
+                {
+                  "name": "Rice",
+                  "value": "Rice"
+                },
+                {
+                  "name": "Grains",
+                  "value": "Grains"
+                },
+                {
+                  "name": "Cocoa",
+                  "value": "Cocoa"
+                },
+                {
+                  "name": "Chocolate Spreads",
+                  "value": "Chocolate Spreads"
+                },
+                {
+                  "name": "Batteries",
+                  "value": "Batteries"
+                },
+                {
+                  "name": "Matches",
+                  "value": "Matches"
+                },
+                {
+                  "name": "Window Cleaner",
+                  "value": "Window Cleaner"
+                },
+                {
+                  "name": "Desserts & Ice Cream",
+                  "value": "Desserts & Ice Cream"
+                },
+                {
+                  "name": "BBQ Sauces",
+                  "value": "BBQ Sauces"
+                },
+                {
+                  "name": "Kitchen Rolls",
+                  "value": "Kitchen Rolls"
+                },
+                {
+                  "name": "Mixers & Tonics",
+                  "value": "Mixers & Tonics"
+                },
+                {
+                  "name": "Oyster Sauce",
+                  "value": "Oyster Sauce"
+                },
+                {
+                  "name": "Sugar Sachets",
+                  "value": "Sugar Sachets"
+                },
+                {
+                  "name": "Sweeteners",
+                  "value": "Sweeteners"
+                },
+                {
+                  "name": "Margarines",
+                  "value": "Margarines"
+                },
+                {
+                  "name": "Pulses",
+                  "value": "Pulses"
+                },
+                {
+                  "name": "Cleaning Wipes",
+                  "value": "Cleaning Wipes"
+                },
+                {
+                  "name": "Mircofibre Cloths",
+                  "value": "Mircofibre Cloths"
+                },
+                {
+                  "name": "Cleaning Pads",
+                  "value": "Cleaning Pads"
+                },
+                {
+                  "name": "Kitchen Cloths and Sponges",
+                  "value": "Kitchen Cloths and Sponges"
+                },
+                {
+                  "name": "Cleaning Gloves",
+                  "value": "Cleaning Gloves"
+                },
+                {
+                  "name": "Beers",
+                  "value": "Beers"
+                },
+                {
+                  "name": "Ciders",
+                  "value": "Ciders"
+                },
+                {
+                  "name": "Eggs",
+                  "value": "Eggs"
+                },
+                {
+                  "name": "Fruits",
+                  "value": "Fruits"
+                },
+                {
+                  "name": "Vegetables",
+                  "value": "Vegetables"
+                },
+                {
+                  "name": "Pre-Packed Vegetables",
+                  "value": "Pre-Packed Vegetables"
+                },
+                {
+                  "name": "Fresh Herbs & Spices",
+                  "value": "Fresh Herbs & Spices"
+                },
+                {
+                  "name": "Disposables",
+                  "value": "Disposables"
+                },
+                {
+                  "name": "Coffee Syrups",
+                  "value": "Coffee Syrups"
+                },
+                {
+                  "name": "Instant Coffee",
+                  "value": "Instant Coffee"
+                },
+                {
+                  "name": "Ground Coffee & Beans",
+                  "value": "Ground Coffee & Beans"
+                },
+                {
+                  "name": "Coffee Sticks & Sachets",
+                  "value": "Coffee Sticks & Sachets"
+                },
+                {
+                  "name": "Sugar Sticks & Sachets",
+                  "value": "Sugar Sticks & Sachets"
+                },
+                {
+                  "name": "Salt",
+                  "value": "Salt"
+                },
+                {
+                  "name": "Cooking Fat",
+                  "value": "Cooking Fat"
+                },
+                {
+                  "name": "Corn & Maize Flour",
+                  "value": "Corn & Maize Flour"
+                },
+                {
+                  "name": "Wheat Flour",
+                  "value": "Wheat Flour"
+                },
+                {
+                  "name": "Seasonings",
+                  "value": "Seasonings"
+                },
+                {
+                  "name": "Baking & Catering Butter",
+                  "value": "Baking & Catering Butter"
+                },
+                {
+                  "name": "Biscuit & Cookies",
+                  "value": "Biscuit & Cookies"
+                },
+                {
+                  "name": "Breakfast Portion Packs",
+                  "value": "Breakfast Portion Packs"
+                },
+                {
+                  "name": "Butter & Margarine Spreads",
+                  "value": "Butter & Margarine Spreads"
+                },
+                {
+                  "name": "Canister & Puffed Snacks",
+                  "value": "Canister & Puffed Snacks"
+                },
+                {
+                  "name": "Capsules & Pods",
+                  "value": "Capsules & Pods"
+                },
+                {
+                  "name": "Caster & Icing Sugars",
+                  "value": "Caster & Icing Sugars"
+                },
+                {
+                  "name": "Coconut Cream",
+                  "value": "Coconut Cream"
+                },
+                {
+                  "name": "Coconut Milk",
+                  "value": "Coconut Milk"
+                },
+                {
+                  "name": "Coconut Water",
+                  "value": "Coconut Water"
+                },
+                {
+                  "name": "Corn & Sunflower Oil",
+                  "value": "Corn & Sunflower Oil"
+                },
+                {
+                  "name": "Dairy & Lactose Free",
+                  "value": "Dairy & Lactose Free"
+                },
+                {
+                  "name": "Dairy Free Yoghurt",
+                  "value": "Dairy Free Yoghurt"
+                },
+                {
+                  "name": "Dilutes & Cordials",
+                  "value": "Dilutes & Cordials"
+                },
+                {
+                  "name": "Dried Fruit Snacks",
+                  "value": "Dried Fruit Snacks"
+                },
+                {
+                  "name": "Dried Fruits",
+                  "value": "Dried Fruits"
+                },
+                {
+                  "name": "Drinking Chocolate & Cocoa",
+                  "value": "Drinking Chocolate & Cocoa"
+                },
+                {
+                  "name": "Drinking Yoghurt",
+                  "value": "Drinking Yoghurt"
+                },
+                {
+                  "name": "Flavoured Sauces",
+                  "value": "Flavoured Sauces"
+                },
+                {
+                  "name": "Flavoured Yoghurt",
+                  "value": "Flavoured Yoghurt"
+                },
+                {
+                  "name": "Fresh Cream",
+                  "value": "Fresh Cream"
+                },
+                {
+                  "name": "Fresh Milk",
+                  "value": "Fresh Milk"
+                },
+                {
+                  "name": "Fruit Yoghurt",
+                  "value": "Fruit Yoghurt"
+                },
+                {
+                  "name": "Greek Yoghurt",
+                  "value": "Greek Yoghurt"
+                },
+                {
+                  "name": "Health Snacks",
+                  "value": "Health Snacks"
+                },
+                {
+                  "name": "Herbs & Spices",
+                  "value": "Herbs & Spices"
+                },
+                {
+                  "name": "Hot & Chilly Sauces",
+                  "value": "Hot & Chilly Sauces"
+                },
+                {
+                  "name": "Ice Cream Lollies",
+                  "value": "Ice Cream Lollies"
+                },
+                {
+                  "name": "Ice Cream Tubs & Cups",
+                  "value": "Ice Cream Tubs & Cups"
+                },
+                {
+                  "name": "Instant Noodles",
+                  "value": "Instant Noodles"
+                },
+                {
+                  "name": "Jaggery & Brown Sugar",
+                  "value": "Jaggery & Brown Sugar"
+                },
+                {
+                  "name": "Jelly, Custard & Puddings",
+                  "value": "Jelly, Custard & Puddings"
+                },
+                {
+                  "name": "Juice Drinks",
+                  "value": "Juice Drinks"
+                },
+                {
+                  "name": "Lentils & Pulses",
+                  "value": "Lentils & Pulses"
+                },
+                {
+                  "name": "Long Life Juices & Smoothies",
+                  "value": "Long Life Juices & Smoothies"
+                },
+                {
+                  "name": "Long Life Milk & Cream",
+                  "value": "Long Life Milk & Cream"
+                },
+                {
+                  "name": "Muesli & Granola",
+                  "value": "Muesli & Granola"
+                },
+                {
+                  "name": "Napkins",
+                  "value": "Napkins"
+                },
+                {
+                  "name": "Nut Snacks",
+                  "value": "Nut Snacks"
+                },
+                {
+                  "name": "Nut, Seed & Coconut Oil",
+                  "value": "Nut, Seed & Coconut Oil"
+                },
+                {
+                  "name": "Nuts & Seeds",
+                  "value": "Nuts & Seeds"
+                },
+                {
+                  "name": "Oats & Porridge",
+                  "value": "Oats & Porridge"
+                },
+                {
+                  "name": "Olive Oil",
+                  "value": "Olive Oil"
+                },
+                {
+                  "name": "Pasta & Spaghetti",
+                  "value": "Pasta & Spaghetti"
+                },
+                {
+                  "name": "Plain Yoghurt",
+                  "value": "Plain Yoghurt"
+                },
+                {
+                  "name": "Raising Agents",
+                  "value": "Raising Agents"
+                },
+                {
+                  "name": "Salad Dressings",
+                  "value": "Salad Dressings"
+                },
+                {
+                  "name": "Sauces Portion Packs",
+                  "value": "Sauces Portion Packs"
+                },
+                {
+                  "name": "Seafood Sauces",
+                  "value": "Seafood Sauces"
+                },
+                {
+                  "name": "Sparkling Water",
+                  "value": "Sparkling Water"
+                },
+                {
+                  "name": "Specialty Tea",
+                  "value": "Specialty Tea"
+                },
+                {
+                  "name": "Spreads Portions Packs",
+                  "value": "Spreads Portions Packs"
+                },
+                {
+                  "name": "Still Water",
+                  "value": "Still Water"
+                },
+                {
+                  "name": "Tortilla & Nachos",
+                  "value": "Tortilla & Nachos"
+                },
+                {
+                  "name": "Vegetable Oil",
+                  "value": "Vegetable Oil"
+                },
+                {
+                  "name": "Coffee Creamer",
+                  "value": "Coffee Creamer"
+                },
+                {
+                  "name": "Loose Tea",
+                  "value": "Loose Tea"
+                },
+                {
+                  "name": "Tea Bags",
+                  "value": "Tea Bags"
+                },
+                {
+                  "name": "Facial Tissues",
+                  "value": "Facial Tissues"
+                },
+                {
+                  "name": "Unrinal Balls",
+                  "value": "Unrinal Balls"
+                },
+                {
+                  "name": "Urinal cle",
+                  "value": "Urinal cle"
+                },
+                {
+                  "name": "Urinal Balls",
+                  "value": "Urinal Balls"
+                },
+                {
+                  "name": "Urinal Balls & Mats",
+                  "value": "Urinal Balls & Mats"
+                },
+                {
+                  "name": "Toothpaste & Toothbrush",
+                  "value": "Toothpaste & Toothbrush"
+                },
+                {
+                  "name": "Other Flour",
+                  "value": "Other Flour"
+                },
+                {
+                  "name": "Insecticides",
+                  "value": "Insecticides"
+                },
+                {
+                  "name": "Sausage, Bacon & Cold Cuts",
+                  "value": "Sausage, Bacon & Cold Cuts"
+                },
+                {
+                  "name": "Beef",
+                  "value": "Beef"
+                },
+                {
+                  "name": "Chicken",
+                  "value": "Chicken"
+                },
+                {
+                  "name": "Popcorn",
+                  "value": "Popcorn"
+                },
+                {
+                  "name": "Vapes",
+                  "value": "Vapes"
+                },
+                {
+                  "name": "Face Creams",
+                  "value": "Face Creams"
+                },
+                {
+                  "name": "Body Lotion",
+                  "value": "Body Lotion"
+                },
+                {
+                  "name": "Deodorant",
+                  "value": "Deodorant"
+                },
+                {
+                  "name": "Shower Gel",
+                  "value": "Shower Gel"
+                },
+                {
+                  "name": "Sun Screen",
+                  "value": "Sun Screen"
+                },
+                {
+                  "name": "Breads",
+                  "value": "Breads"
+                },
+                {
+                  "name": "Rolls",
+                  "value": "Rolls"
+                },
+                {
+                  "name": "Buns",
+                  "value": "Buns"
+                },
+                {
+                  "name": "Buns & Rols",
+                  "value": "Buns & Rols"
+                },
+                {
+                  "name": "Buns & Rolls",
+                  "value": "Buns & Rolls"
+                },
+                {
+                  "name": "Ready Meals & Appetizers",
+                  "value": "Ready Meals & Appetizers"
+                },
+                {
+                  "name": "Body Bar Soaps",
+                  "value": "Body Bar Soaps"
+                },
+                {
+                  "name": "Shower Gel, Sham",
+                  "value": "Shower Gel, Sham"
+                },
+                {
+                  "name": "Shower Gel, Shampoo",
+                  "value": "Shower Gel, Shampoo"
+                },
+                {
+                  "name": "Shower Gel, Shampoo, Conditioner",
+                  "value": "Shower Gel, Shampoo, Conditioner"
+                },
+                {
+                  "name": "Conditioner",
+                  "value": "Conditioner"
+                },
+                {
+                  "name": "Shampoo",
+                  "value": "Shampoo"
+                },
+                {
+                  "name": "Hand Sanitizers",
+                  "value": "Hand Sanitizers"
+                },
+                {
+                  "name": "Roasted Coffee",
+                  "value": "Roasted Coffee"
+                },
+                {
+                  "name": "Bakery",
+                  "value": "Bakery"
+                },
+                {
+                  "name": "Flavoured Water",
+                  "value": "Flavoured Water"
+                },
+                {
+                  "name": "Baby Bath & Lotion",
+                  "value": "Baby Bath & Lotion"
+                },
+                {
+                  "name": "Pain Relief & First Aid",
+                  "value": "Pain Relief & First Aid"
+                },
+                {
+                  "name": "Services",
+                  "value": "Services"
+                },
+                {
+                  "name": "Flavoured Milk",
+                  "value": "Flavoured Milk"
+                },
+                {
+                  "name": "Dairy Free Ice Cream",
+                  "value": "Dairy Free Ice Cream"
+                },
+                {
+                  "name": "Frozen Meat & Poultry",
+                  "value": "Frozen Meat & Poultry"
+                },
+                {
+                  "name": "Beans, Lentils & Pulses",
+                  "value": "Beans, Lentils & Pulses"
+                },
+                {
+                  "name": "Beans,Lentils & Pulses",
+                  "value": "Beans,Lentils & Pulses"
+                },
+                {
+                  "name": "Glass Bottles & Crates",
+                  "value": "Glass Bottles & Crates"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Bolt Tags",
+              "displayName": "Bolt Tags",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Main Category 3",
+              "displayName": "Main Category 3",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "item_name",
+              "displayName": "item_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Units Per Case",
+              "displayName": "Units Per Case",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Retail Price",
+              "displayName": "Retail Price",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Created Time",
+              "displayName": "Created Time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Stock Summary",
+              "displayName": "Stock Summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Update Price?",
+              "displayName": "Update Price?",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Bolt:ID",
+              "displayName": "Bolt:ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Bolt Functions",
+              "displayName": "Bolt Functions",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Create Product",
+                  "value": "Create Product"
+                },
+                {
+                  "name": "Update Product",
+                  "value": "Update Product"
+                },
+                {
+                  "name": "Disable Product",
+                  "value": "Disable Product"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Bolt Price ID (from BT Price)",
+              "displayName": "Bolt Price ID (from BT Price)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Create Product Timeline",
+              "displayName": "Create Product Timeline",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Supplier",
+              "displayName": "Supplier",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Product Name (Excl Case, Size)",
+              "displayName": "Product Name (Excl Case, Size)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Brand",
+              "displayName": "Brand",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Barcode",
+              "displayName": "Barcode",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Size",
+              "displayName": "Size",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Product Name Final",
+              "displayName": "Product Name Final",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Supplier Discount",
+              "displayName": "Supplier Discount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CP Case Price Incl VAT",
+              "displayName": "CP Case Price Incl VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CP Unit Price Excl VAT",
+              "displayName": "CP Unit Price Excl VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CP Case Price Excl VAT",
+              "displayName": "CP Case Price Excl VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "VAT",
+              "displayName": "VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "RP Unit Price Inc VAT",
+              "displayName": "RP Unit Price Inc VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "RP Unit Excl VAT",
+              "displayName": "RP Unit Excl VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "RP Case Price Excl VAT",
+              "displayName": "RP Case Price Excl VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "RP Case Price Incl VAT",
+              "displayName": "RP Case Price Incl VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ECOM Discount",
+              "displayName": "ECOM Discount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ECOM SP/Case Excl VAT",
+              "displayName": "ECOM SP/Case Excl VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ECOM SP/Case Inc VAT",
+              "displayName": "ECOM SP/Case Inc VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "GT DISCOUNT",
+              "displayName": "GT DISCOUNT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "GT SP/Case",
+              "displayName": "GT SP/Case",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "GT SP/Case Excl VAT",
+              "displayName": "GT SP/Case Excl VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Pack Size",
+              "displayName": "Pack Size",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "List Price",
+              "displayName": "List Price",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Price",
+              "displayName": "Price",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Taxes",
+              "displayName": "Taxes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "description",
+              "displayName": "description",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "default_material_request_type",
+              "displayName": "default_material_request_type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "stock_uom",
+              "displayName": "stock_uom",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "item_defaults.company",
+              "displayName": "item_defaults.company",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Detailed Image URL",
+              "displayName": "Detailed Image URL",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Available Mark Up",
+              "displayName": "Available Mark Up",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "BBX Mark Up",
+              "displayName": "BBX Mark Up",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "BBX Margin",
+              "displayName": "BBX Margin",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ECOM Unit Price Excl VAT",
+              "displayName": "ECOM Unit Price Excl VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Full Description",
+              "displayName": "Full Description",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Customer Tags",
+              "displayName": "Customer Tags",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "options": [
+                {
+                  "name": "Retail",
+                  "value": "Retail"
+                },
+                {
+                  "name": "Food Service",
+                  "value": "Food Service"
+                },
+                {
+                  "name": "Corporate",
+                  "value": "Corporate"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Search Words",
+              "displayName": "Search Words",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Quantity",
+              "displayName": "Quantity",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Flavour",
+              "displayName": "Flavour",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Real Milk",
+                  "value": "Real Milk"
+                },
+                {
+                  "name": "Mint Crunch",
+                  "value": "Mint Crunch"
+                },
+                {
+                  "name": "Orange Crunch",
+                  "value": "Orange Crunch"
+                },
+                {
+                  "name": "Milk with Cookies",
+                  "value": "Milk with Cookies"
+                },
+                {
+                  "name": "Almond & Raisin",
+                  "value": "Almond & Raisin"
+                },
+                {
+                  "name": "White With Cookies",
+                  "value": "White With Cookies"
+                },
+                {
+                  "name": "Hazelnut",
+                  "value": "Hazelnut"
+                },
+                {
+                  "name": "Mocha Bean",
+                  "value": "Mocha Bean"
+                },
+                {
+                  "name": "Salted Caramel",
+                  "value": "Salted Caramel"
+                },
+                {
+                  "name": "Dark",
+                  "value": "Dark"
+                },
+                {
+                  "name": "Milk",
+                  "value": "Milk"
+                },
+                {
+                  "name": "White",
+                  "value": "White"
+                },
+                {
+                  "name": "Chocolate",
+                  "value": "Chocolate"
+                },
+                {
+                  "name": "Fudge",
+                  "value": "Fudge"
+                },
+                {
+                  "name": "Strawberry",
+                  "value": "Strawberry"
+                },
+                {
+                  "name": "Blueberry",
+                  "value": "Blueberry"
+                },
+                {
+                  "name": "Pinacolada",
+                  "value": "Pinacolada"
+                },
+                {
+                  "name": "Real White",
+                  "value": "Real White"
+                },
+                {
+                  "name": "Vanilla",
+                  "value": "Vanilla"
+                },
+                {
+                  "name": "Pineapple Coconut",
+                  "value": "Pineapple Coconut"
+                },
+                {
+                  "name": "Peach Mango",
+                  "value": "Peach Mango"
+                },
+                {
+                  "name": "Kiwi Apple",
+                  "value": "Kiwi Apple"
+                },
+                {
+                  "name": "Orange",
+                  "value": "Orange"
+                },
+                {
+                  "name": "Natural",
+                  "value": "Natural"
+                },
+                {
+                  "name": "Perfectly Salted",
+                  "value": "Perfectly Salted"
+                },
+                {
+                  "name": "Mediterranean Tomato",
+                  "value": "Mediterranean Tomato"
+                },
+                {
+                  "name": "Salsa Verde",
+                  "value": "Salsa Verde"
+                },
+                {
+                  "name": "Lemon & Black Pepper",
+                  "value": "Lemon & Black Pepper"
+                },
+                {
+                  "name": "Lemon & Chilli",
+                  "value": "Lemon & Chilli"
+                },
+                {
+                  "name": "Sour Cream & Chive",
+                  "value": "Sour Cream & Chive"
+                },
+                {
+                  "name": "Fruit Chutney",
+                  "value": "Fruit Chutney"
+                },
+                {
+                  "name": "Cheese & Onion",
+                  "value": "Cheese & Onion"
+                },
+                {
+                  "name": "Salt & Vinegar",
+                  "value": "Salt & Vinegar"
+                },
+                {
+                  "name": "Salted",
+                  "value": "Salted"
+                },
+                {
+                  "name": "Sweet Chilli",
+                  "value": "Sweet Chilli"
+                },
+                {
+                  "name": "Tomato",
+                  "value": "Tomato"
+                },
+                {
+                  "name": "Assorted",
+                  "value": "Assorted"
+                },
+                {
+                  "name": "Raspberry",
+                  "value": "Raspberry"
+                },
+                {
+                  "name": "Elderflower",
+                  "value": "Elderflower"
+                },
+                {
+                  "name": "Passion Baobab",
+                  "value": "Passion Baobab"
+                },
+                {
+                  "name": "Mango Chilli",
+                  "value": "Mango Chilli"
+                },
+                {
+                  "name": "Original",
+                  "value": "Original"
+                },
+                {
+                  "name": "Cranberry",
+                  "value": "Cranberry"
+                },
+                {
+                  "name": "Double Chocolate",
+                  "value": "Double Chocolate"
+                },
+                {
+                  "name": "Coconut",
+                  "value": "Coconut"
+                },
+                {
+                  "name": "Forest Fruit",
+                  "value": "Forest Fruit"
+                },
+                {
+                  "name": "Cola",
+                  "value": "Cola"
+                },
+                {
+                  "name": "Fruit",
+                  "value": "Fruit"
+                },
+                {
+                  "name": "Unsweetened",
+                  "value": "Unsweetened"
+                },
+                {
+                  "name": "Cream Of Vegetable",
+                  "value": "Cream Of Vegetable"
+                },
+                {
+                  "name": "Golden Vegetable",
+                  "value": "Golden Vegetable"
+                },
+                {
+                  "name": "Brocolli-Cauliflower",
+                  "value": "Brocolli-Cauliflower"
+                },
+                {
+                  "name": "Minestrone-Croutons",
+                  "value": "Minestrone-Croutons"
+                },
+                {
+                  "name": "Tomato-Basil",
+                  "value": "Tomato-Basil"
+                },
+                {
+                  "name": "Mushroom-Croutons",
+                  "value": "Mushroom-Croutons"
+                },
+                {
+                  "name": "Variety",
+                  "value": "Variety"
+                },
+                {
+                  "name": "Mango-Passion",
+                  "value": "Mango-Passion"
+                },
+                {
+                  "name": "Gojiberry",
+                  "value": "Gojiberry"
+                },
+                {
+                  "name": "Vanilla/Strawberry",
+                  "value": "Vanilla/Strawberry"
+                },
+                {
+                  "name": "Neopolitan",
+                  "value": "Neopolitan"
+                },
+                {
+                  "name": "Vanilla/Chocolate",
+                  "value": "Vanilla/Chocolate"
+                },
+                {
+                  "name": "Blueberry Swirl",
+                  "value": "Blueberry Swirl"
+                },
+                {
+                  "name": "Chocolate Ripple",
+                  "value": "Chocolate Ripple"
+                },
+                {
+                  "name": "Strawberry Ripple",
+                  "value": "Strawberry Ripple"
+                },
+                {
+                  "name": "Peach Melba",
+                  "value": "Peach Melba"
+                },
+                {
+                  "name": "Caramel/Nuts",
+                  "value": "Caramel/Nuts"
+                },
+                {
+                  "name": "Vanilla Choc Flakes",
+                  "value": "Vanilla Choc Flakes"
+                },
+                {
+                  "name": "Kesar Badam",
+                  "value": "Kesar Badam"
+                },
+                {
+                  "name": "Kulfi",
+                  "value": "Kulfi"
+                },
+                {
+                  "name": "Cookies & Cream",
+                  "value": "Cookies & Cream"
+                },
+                {
+                  "name": "Biscotti",
+                  "value": "Biscotti"
+                },
+                {
+                  "name": "Go Nuts",
+                  "value": "Go Nuts"
+                },
+                {
+                  "name": "Blackberry Delight",
+                  "value": "Blackberry Delight"
+                },
+                {
+                  "name": "Caffe Mocha",
+                  "value": "Caffe Mocha"
+                },
+                {
+                  "name": "Dark N Darker",
+                  "value": "Dark N Darker"
+                },
+                {
+                  "name": "Classic",
+                  "value": "Classic"
+                },
+                {
+                  "name": "Chocobar",
+                  "value": "Chocobar"
+                },
+                {
+                  "name": "Caramel-O",
+                  "value": "Caramel-O"
+                },
+                {
+                  "name": "Berry Blast",
+                  "value": "Berry Blast"
+                },
+                {
+                  "name": "Chocobomb",
+                  "value": "Chocobomb"
+                },
+                {
+                  "name": "Choconut",
+                  "value": "Choconut"
+                },
+                {
+                  "name": "Mega Cone",
+                  "value": "Mega Cone"
+                },
+                {
+                  "name": "Mocha",
+                  "value": "Mocha"
+                },
+                {
+                  "name": "Pineapple",
+                  "value": "Pineapple"
+                },
+                {
+                  "name": "Mango",
+                  "value": "Mango"
+                },
+                {
+                  "name": "Mixed Berries",
+                  "value": "Mixed Berries"
+                },
+                {
+                  "name": "Blue Ice",
+                  "value": "Blue Ice"
+                },
+                {
+                  "name": "Red Ice",
+                  "value": "Red Ice"
+                },
+                {
+                  "name": "Black Ice",
+                  "value": "Black Ice"
+                },
+                {
+                  "name": "Rose",
+                  "value": "Rose"
+                },
+                {
+                  "name": "Watermelon",
+                  "value": "Watermelon"
+                },
+                {
+                  "name": "Pear",
+                  "value": "Pear"
+                },
+                {
+                  "name": "Virgin G & T",
+                  "value": "Virgin G & T"
+                },
+                {
+                  "name": "Lemonade",
+                  "value": "Lemonade"
+                },
+                {
+                  "name": "Ginger Ale",
+                  "value": "Ginger Ale"
+                },
+                {
+                  "name": "Chicken",
+                  "value": "Chicken"
+                },
+                {
+                  "name": "Cream of Mushroom",
+                  "value": "Cream of Mushroom"
+                },
+                {
+                  "name": "Chicken Noodle",
+                  "value": "Chicken Noodle"
+                },
+                {
+                  "name": "Tomato Noodle",
+                  "value": "Tomato Noodle"
+                },
+                {
+                  "name": "Beef",
+                  "value": "Beef"
+                },
+                {
+                  "name": "Vegetable",
+                  "value": "Vegetable"
+                },
+                {
+                  "name": "Cherry",
+                  "value": "Cherry"
+                },
+                {
+                  "name": "Cocoa",
+                  "value": "Cocoa"
+                },
+                {
+                  "name": "Banana",
+                  "value": "Banana"
+                },
+                {
+                  "name": "Lemon",
+                  "value": "Lemon"
+                },
+                {
+                  "name": "Extra Chocolate",
+                  "value": "Extra Chocolate"
+                },
+                {
+                  "name": "Mix Blueberry",
+                  "value": "Mix Blueberry"
+                },
+                {
+                  "name": "Caramel",
+                  "value": "Caramel"
+                },
+                {
+                  "name": "Luxury",
+                  "value": "Luxury"
+                },
+                {
+                  "name": "Grenadine",
+                  "value": "Grenadine"
+                },
+                {
+                  "name": "Pineapple-Passion",
+                  "value": "Pineapple-Passion"
+                },
+                {
+                  "name": "Banana-Strawberry",
+                  "value": "Banana-Strawberry"
+                },
+                {
+                  "name": "Sweetened",
+                  "value": "Sweetened"
+                },
+                {
+                  "name": "Still",
+                  "value": "Still"
+                },
+                {
+                  "name": "Sparkling",
+                  "value": "Sparkling"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "standard_rate",
+              "displayName": "standard_rate",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "website_image",
+              "displayName": "website_image",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "item_defaults.default_supplier",
+              "displayName": "item_defaults.default_supplier",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "barcode_type",
+              "displayName": "barcode_type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "UPC-A",
+                  "value": "UPC-A"
+                },
+                {
+                  "name": "EAN",
+                  "value": "EAN"
+                },
+                {
+                  "name": "Laki Laki LTD",
+                  "value": "Laki Laki LTD"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "selling_price_list",
+              "displayName": "selling_price_list",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "selling_price_list_rate",
+              "displayName": "selling_price_list_rate",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "buying_price_list",
+              "displayName": "buying_price_list",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "buying_price_list_rate",
+              "displayName": "buying_price_list_rate",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Flagged",
+              "displayName": "Flagged",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "taxes.item_tax_template",
+              "displayName": "taxes.item_tax_template",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ECOM Unit Price Incl VAT",
+              "displayName": "ECOM Unit Price Incl VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Product Image URL",
+              "displayName": "Product Image URL",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "EVR Unit Cost",
+              "displayName": "EVR Unit Cost",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Product Status",
+              "displayName": "Product Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Live",
+                  "value": "Live"
+                },
+                {
+                  "name": "In Review",
+                  "value": "In Review"
+                },
+                {
+                  "name": "Delist",
+                  "value": "Delist"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ECOM Margin Share %",
+              "displayName": "ECOM Margin Share %",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "GT Margin Share %",
+              "displayName": "GT Margin Share %",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CP Unit Incl VAT",
+              "displayName": "CP Unit Incl VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CP Unit Incl Disc Incl VAT",
+              "displayName": "CP Unit Incl Disc Incl VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Product Image",
+              "displayName": "Product Image",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Update Website Stock?",
+              "displayName": "Update Website Stock?",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CS-CART Status",
+              "displayName": "CS-CART Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Product Created",
+                  "value": "Product Created"
+                },
+                {
+                  "name": "Product Updated",
+                  "value": "Product Updated"
+                },
+                {
+                  "name": "Product Disabled",
+                  "value": "Product Disabled"
+                },
+                {
+                  "name": "Price Promotion Updated",
+                  "value": "Price Promotion Updated"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Out Of Stock Actions",
+              "displayName": "Out Of Stock Actions",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "GT_Price_List",
+              "displayName": "GT_Price_List",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "GT Unit Price Excl VAT",
+              "displayName": "GT Unit Price Excl VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ERPNEXT Status",
+              "displayName": "ERPNEXT Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Live",
+                  "value": "Live"
+                },
+                {
+                  "name": "Disabled",
+                  "value": "Disabled"
+                },
+                {
+                  "name": "Error",
+                  "value": "Error"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Core/Extended",
+              "displayName": "Core/Extended",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Core",
+                  "value": "Core"
+                },
+                {
+                  "name": "Slow Moving",
+                  "value": "Slow Moving"
+                },
+                {
+                  "name": "Non Performing",
+                  "value": "Non Performing"
+                },
+                {
+                  "name": "New Products",
+                  "value": "New Products"
+                },
+                {
+                  "name": "Dormant",
+                  "value": "Dormant"
+                },
+                {
+                  "name": "Discontinued",
+                  "value": "Discontinued"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Maintain Stock",
+              "displayName": "Maintain Stock",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Standard Buying",
+              "displayName": "Standard Buying",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Standard Buying ID",
+              "displayName": "Standard Buying ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Standard Selling",
+              "displayName": "Standard Selling",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Standard Selling ID",
+              "displayName": "Standard Selling ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "GT Selling",
+              "displayName": "GT Selling",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "GT Selling ID",
+              "displayName": "GT Selling ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Create Product?",
+              "displayName": "Create Product?",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Modified",
+              "displayName": "Last Modified",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Price Validation",
+              "displayName": "Price Validation",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Imported table",
+              "displayName": "Imported table",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CS Cart Product ID",
+              "displayName": "CS Cart Product ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CS-Cart List Status",
+              "displayName": "CS-Cart List Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ERPNEXT List Status",
+              "displayName": "ERPNEXT List Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Modified By",
+              "displayName": "Last Modified By",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Record ID",
+              "displayName": "Record ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Detailed Image URL 2",
+              "displayName": "Detailed Image URL 2",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Category",
+              "displayName": "Category",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Parent Group copy",
+              "displayName": "Parent Group copy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "disabled",
+              "displayName": "disabled",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Level 1 (from Category)",
+              "displayName": "Level 1 (from Category)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Adjusted Units",
+              "displayName": "Adjusted Units",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Brand Status",
+              "displayName": "Brand Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Min.T. Value",
+              "displayName": "Min.T. Value",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Test",
+              "displayName": "Test",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Stock Test",
+              "displayName": "Stock Test",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Price Update Date",
+              "displayName": "Price Update Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CSCART Category ID",
+              "displayName": "CSCART Category ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Website Function",
+              "displayName": "Website Function",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Create Product",
+                  "value": "Create Product"
+                },
+                {
+                  "name": "Update Product",
+                  "value": "Update Product"
+                },
+                {
+                  "name": "Disable Product",
+                  "value": "Disable Product"
+                },
+                {
+                  "name": "Promo Update",
+                  "value": "Promo Update"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Selected",
+              "displayName": "Selected",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Records (Nested)",
+              "displayName": "Records (Nested)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Bolt",
+              "displayName": "Bolt",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Shelf",
+              "displayName": "Shelf",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "A1",
+                  "value": "A1"
+                },
+                {
+                  "name": "A2",
+                  "value": "A2"
+                },
+                {
+                  "name": "A3",
+                  "value": "A3"
+                },
+                {
+                  "name": "A4",
+                  "value": "A4"
+                },
+                {
+                  "name": "A5",
+                  "value": "A5"
+                },
+                {
+                  "name": "B1",
+                  "value": "B1"
+                },
+                {
+                  "name": "B2",
+                  "value": "B2"
+                },
+                {
+                  "name": "B3",
+                  "value": "B3"
+                },
+                {
+                  "name": "B4",
+                  "value": "B4"
+                },
+                {
+                  "name": "B5",
+                  "value": "B5"
+                },
+                {
+                  "name": "C1",
+                  "value": "C1"
+                },
+                {
+                  "name": "C2",
+                  "value": "C2"
+                },
+                {
+                  "name": "C3",
+                  "value": "C3"
+                },
+                {
+                  "name": "C4",
+                  "value": "C4"
+                },
+                {
+                  "name": "C5",
+                  "value": "C5"
+                },
+                {
+                  "name": "D1",
+                  "value": "D1"
+                },
+                {
+                  "name": "D2",
+                  "value": "D2"
+                },
+                {
+                  "name": "D3",
+                  "value": "D3"
+                },
+                {
+                  "name": "D4",
+                  "value": "D4"
+                },
+                {
+                  "name": "D5",
+                  "value": "D5"
+                },
+                {
+                  "name": "E1",
+                  "value": "E1"
+                },
+                {
+                  "name": "E2",
+                  "value": "E2"
+                },
+                {
+                  "name": "E3",
+                  "value": "E3"
+                },
+                {
+                  "name": "E4",
+                  "value": "E4"
+                },
+                {
+                  "name": "E5",
+                  "value": "E5"
+                },
+                {
+                  "name": "F1",
+                  "value": "F1"
+                },
+                {
+                  "name": "F2",
+                  "value": "F2"
+                },
+                {
+                  "name": "F3",
+                  "value": "F3"
+                },
+                {
+                  "name": "F4",
+                  "value": "F4"
+                },
+                {
+                  "name": "F5",
+                  "value": "F5"
+                },
+                {
+                  "name": "G1",
+                  "value": "G1"
+                },
+                {
+                  "name": "G2",
+                  "value": "G2"
+                },
+                {
+                  "name": "G3",
+                  "value": "G3"
+                },
+                {
+                  "name": "G4",
+                  "value": "G4"
+                },
+                {
+                  "name": "G5",
+                  "value": "G5"
+                },
+                {
+                  "name": "H1",
+                  "value": "H1"
+                },
+                {
+                  "name": "H2",
+                  "value": "H2"
+                },
+                {
+                  "name": "H3",
+                  "value": "H3"
+                },
+                {
+                  "name": "H4",
+                  "value": "H4"
+                },
+                {
+                  "name": "H5",
+                  "value": "H5"
+                },
+                {
+                  "name": "I1",
+                  "value": "I1"
+                },
+                {
+                  "name": "I2",
+                  "value": "I2"
+                },
+                {
+                  "name": "I3",
+                  "value": "I3"
+                },
+                {
+                  "name": "I4",
+                  "value": "I4"
+                },
+                {
+                  "name": "I5",
+                  "value": "I5"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Section",
+              "displayName": "Section",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "A",
+                  "value": "A"
+                },
+                {
+                  "name": "B",
+                  "value": "B"
+                },
+                {
+                  "name": "C",
+                  "value": "C"
+                },
+                {
+                  "name": "D",
+                  "value": "D"
+                },
+                {
+                  "name": "E",
+                  "value": "E"
+                },
+                {
+                  "name": "F",
+                  "value": "F"
+                },
+                {
+                  "name": "G",
+                  "value": "G"
+                },
+                {
+                  "name": "H",
+                  "value": "H"
+                },
+                {
+                  "name": "I",
+                  "value": "I"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Bolt Select",
+              "displayName": "Bolt Select",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Duplicate ID(Delete After Use)",
+              "displayName": "Duplicate ID(Delete After Use)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Duplicated ID Check(Delete After Use)",
+              "displayName": "Duplicated ID Check(Delete After Use)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ERP Function",
+              "displayName": "ERP Function",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Create Product",
+                  "value": "Create Product"
+                },
+                {
+                  "name": "Update Product",
+                  "value": "Update Product"
+                },
+                {
+                  "name": "Disable Product",
+                  "value": "Disable Product"
+                },
+                {
+                  "name": "Enable Product",
+                  "value": "Enable Product"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Price List",
+              "displayName": "Price List",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Evryday Price List",
+              "displayName": "Evryday Price List",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Bolt Price List",
+              "displayName": "Bolt Price List",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Duplicate Buying ID",
+              "displayName": "Duplicate Buying ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "EVR Base Margin",
+              "displayName": "EVR Base Margin",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Margin Table",
+              "displayName": "Margin Table",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Tags copy",
+              "displayName": "Tags copy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Main Category",
+              "displayName": "Main Category",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "EVR Final Mark Up (from Bolt Tags)",
+              "displayName": "EVR Final Mark Up (from Bolt Tags)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "EVR Final Price",
+              "displayName": "EVR Final Price",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "EVR Margin",
+              "displayName": "EVR Margin",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "EVR_Margin",
+              "displayName": "EVR_Margin",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "RECOM-RRP",
+              "displayName": "RECOM-RRP",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Bolt Margin",
+              "displayName": "Bolt Margin",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Proposed Price",
+              "displayName": "Proposed Price",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Recom Price",
+              "displayName": "Recom Price",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "EVR Base Mark Up",
+              "displayName": "EVR Base Mark Up",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Bolt Data",
+              "displayName": "Bolt Data",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Recom Price Net VAT",
+              "displayName": "Recom Price Net VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Stock Level",
+              "displayName": "Stock Level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Stock Level 2",
+              "displayName": "Stock Level 2",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Stock Level 3",
+              "displayName": "Stock Level 3",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Bolt Category ID (from Main Category 2)",
+              "displayName": "Bolt Category ID (from Main Category 2)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "BT Price",
+              "displayName": "BT Price",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Store Stock Summary",
+              "displayName": "Store Stock Summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Category 2",
+              "displayName": "Category 2",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Bolt Category ID 2",
+              "displayName": "Bolt Category ID 2",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Bolt Created Date",
+              "displayName": "Bolt Created Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Mini Category",
+              "displayName": "Mini Category",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New Item",
+                  "value": "New Item"
+                },
+                {
+                  "name": "Old Item",
+                  "value": "Old Item"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Modified Bolt",
+              "displayName": "Last Modified Bolt",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Bolt Discounts",
+              "displayName": "Bolt Discounts",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "5%",
+                  "value": "5%"
+                },
+                {
+                  "name": "10%",
+                  "value": "10%"
+                },
+                {
+                  "name": "15%",
+                  "value": "15%"
+                },
+                {
+                  "name": "20%",
+                  "value": "20%"
+                },
+                {
+                  "name": "25%",
+                  "value": "25%"
+                },
+                {
+                  "name": "30%",
+                  "value": "30%"
+                },
+                {
+                  "name": "20",
+                  "value": "20"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Bio Standard Price",
+              "displayName": "Bio Standard Price",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Active Promotions",
+              "displayName": "Active Promotions",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "IP: Promo Unit Price (from Active Promotions)",
+              "displayName": "IP: Promo Unit Price (from Active Promotions)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Week (from Active Promotions)",
+              "displayName": "Week (from Active Promotions)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "options": [
+                {
+                  "name": "Week 1",
+                  "value": "Week 1"
+                },
+                {
+                  "name": "Week 2",
+                  "value": "Week 2"
+                },
+                {
+                  "name": "Week 3",
+                  "value": "Week 3"
+                },
+                {
+                  "name": "Week 4",
+                  "value": "Week 4"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Promotion Month (from Active Promotions)",
+              "displayName": "Promotion Month (from Active Promotions)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "options": [
+                {
+                  "name": "December Promotions",
+                  "value": "December Promotions"
+                },
+                {
+                  "name": "January Promotions",
+                  "value": "January Promotions"
+                },
+                {
+                  "name": "February Promotions",
+                  "value": "February Promotions"
+                },
+                {
+                  "name": "March Promotions",
+                  "value": "March Promotions"
+                },
+                {
+                  "name": "Aprill Promotions",
+                  "value": "Aprill Promotions"
+                },
+                {
+                  "name": "May Promotions",
+                  "value": "May Promotions"
+                },
+                {
+                  "name": "June Promotions",
+                  "value": "June Promotions"
+                },
+                {
+                  "name": "July Promotions",
+                  "value": "July Promotions"
+                },
+                {
+                  "name": "August Promotions",
+                  "value": "August Promotions"
+                },
+                {
+                  "name": "September Promotions",
+                  "value": "September Promotions"
+                },
+                {
+                  "name": "October Promotions",
+                  "value": "October Promotions"
+                },
+                {
+                  "name": "November Prmotions",
+                  "value": "November Prmotions"
+                },
+                {
+                  "name": "December",
+                  "value": "December"
+                },
+                {
+                  "name": "January",
+                  "value": "January"
+                },
+                {
+                  "name": "February",
+                  "value": "February"
+                },
+                {
+                  "name": "March",
+                  "value": "March"
+                },
+                {
+                  "name": "Aprill",
+                  "value": "Aprill"
+                },
+                {
+                  "name": "May",
+                  "value": "May"
+                },
+                {
+                  "name": "June",
+                  "value": "June"
+                },
+                {
+                  "name": "July",
+                  "value": "July"
+                },
+                {
+                  "name": "August",
+                  "value": "August"
+                },
+                {
+                  "name": "September",
+                  "value": "September"
+                },
+                {
+                  "name": "October",
+                  "value": "October"
+                },
+                {
+                  "name": "November",
+                  "value": "November"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Avaiability ID",
+              "displayName": "Avaiability ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Differential Price",
+              "displayName": "Differential Price",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "EVR Final Margin (from Bolt Tags)",
+              "displayName": "EVR Final Margin (from Bolt Tags)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Check",
+              "displayName": "Check",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "BBX Check",
+              "displayName": "BBX Check",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Jumia Data",
+              "displayName": "Jumia Data",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Listing Status",
+              "displayName": "Listing Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New",
+                  "value": "New"
+                },
+                {
+                  "name": "Live",
+                  "value": "Live"
+                },
+                {
+                  "name": "Disabled",
+                  "value": "Disabled"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Product Life Cycle",
+              "displayName": "Product Life Cycle",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Core Check (from Product Life Cycle)",
+              "displayName": "Core Check (from Product Life Cycle)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Purchase Receipt Code",
+              "displayName": "Purchase Receipt Code",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Batch No (from Valuation Rate)",
+              "displayName": "Batch No (from Valuation Rate)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "GT Selling copy",
+              "displayName": "GT Selling copy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Inventory Table",
+              "displayName": "Inventory Table",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Inventory Table 2",
+              "displayName": "Inventory Table 2",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Promotion Month (from Active Promotions) 2",
+              "displayName": "Promotion Month (from Active Promotions) 2",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "options": [
+                {
+                  "name": "December Promotions",
+                  "value": "December Promotions"
+                },
+                {
+                  "name": "January Promotions",
+                  "value": "January Promotions"
+                },
+                {
+                  "name": "February Promotions",
+                  "value": "February Promotions"
+                },
+                {
+                  "name": "March Promotions",
+                  "value": "March Promotions"
+                },
+                {
+                  "name": "Aprill Promotions",
+                  "value": "Aprill Promotions"
+                },
+                {
+                  "name": "May Promotions",
+                  "value": "May Promotions"
+                },
+                {
+                  "name": "June Promotions",
+                  "value": "June Promotions"
+                },
+                {
+                  "name": "July Promotions",
+                  "value": "July Promotions"
+                },
+                {
+                  "name": "August Promotions",
+                  "value": "August Promotions"
+                },
+                {
+                  "name": "September Promotions",
+                  "value": "September Promotions"
+                },
+                {
+                  "name": "October Promotions",
+                  "value": "October Promotions"
+                },
+                {
+                  "name": "November Prmotions",
+                  "value": "November Prmotions"
+                },
+                {
+                  "name": "December",
+                  "value": "December"
+                },
+                {
+                  "name": "January",
+                  "value": "January"
+                },
+                {
+                  "name": "February",
+                  "value": "February"
+                },
+                {
+                  "name": "March",
+                  "value": "March"
+                },
+                {
+                  "name": "Aprill",
+                  "value": "Aprill"
+                },
+                {
+                  "name": "May",
+                  "value": "May"
+                },
+                {
+                  "name": "June",
+                  "value": "June"
+                },
+                {
+                  "name": "July",
+                  "value": "July"
+                },
+                {
+                  "name": "August",
+                  "value": "August"
+                },
+                {
+                  "name": "September",
+                  "value": "September"
+                },
+                {
+                  "name": "October",
+                  "value": "October"
+                },
+                {
+                  "name": "November",
+                  "value": "November"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Loss Leader Discount %",
+              "displayName": "Loss Leader Discount %",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Loss Leader Margin Discount %",
+              "displayName": "Loss Leader Margin Discount %",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Expense Account (from Category) 2",
+              "displayName": "Expense Account (from Category) 2",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Income Account (from Category) 2",
+              "displayName": "Income Account (from Category) 2",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Loss Leader Price",
+              "displayName": "Loss Leader Price",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Income Account (from Category) 3",
+              "displayName": "Income Account (from Category) 3",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Expense Account (from Category) 3",
+              "displayName": "Expense Account (from Category) 3",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Evryday Check",
+              "displayName": "Evryday Check",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Bolt Select (from Evryday Check)",
+              "displayName": "Bolt Select (from Evryday Check)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "GT Margin",
+              "displayName": "GT Margin",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "GT - RRP Margin",
+              "displayName": "GT - RRP Margin",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Retail Margin",
+              "displayName": "Retail Margin",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "website-stock",
+              "displayName": "website-stock",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d4c354bf-b9d7-4b83-a946-b713392d94d0",
+      "name": "Airtable1",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1400,
+        460
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "PostmanRuntime/7.37.3",
+            "content-length": "11968",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate, br",
+            "cache-control": "no-cache",
+            "content-type": "application/json",
+            "postman-token": "07afe391-7739-4cc8-ab18-c68728514f1b",
+            "x-forwarded-for": "41.215.134.207",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "41.215.134.207"
+          },
+          "params": {},
+          "query": {},
+          "body": [
+            {
+              "name": "IV04240251",
+              "customer": "Bolt Retail",
+              "customer_name": "Bolt Retail",
+              "items": [
+                {
+                  "name": "c6c2398e51",
+                  "owner": "innocent@bulkbox.co.ke",
+                  "creation": "2024-04-07 14:33:04.911822",
+                  "modified": "2024-04-07 14:33:15.191886",
+                  "modified_by": "innocent@bulkbox.co.ke",
+                  "parent": "IV04240251",
+                  "parentfield": "items",
+                  "parenttype": "Sales Invoice",
+                  "idx": 1,
+                  "docstatus": 1,
+                  "barcode": "710535837186",
+                  "item_code": "JTD014",
+                  "posa_notes": "",
+                  "item_name": "Celine Premium Toilet Tissue 10s",
+                  "posa_row_id": "ci4fgpv3wpre2qc85493",
+                  "posa_delivery_date": null,
+                  "customer_item_code": null,
+                  "description": "Celine Premium Toilet Tissue 10s",
+                  "item_group": "Tissue Rolls",
+                  "brand": "Celine",
+                  "image": "https://v5.airtableusercontent.com/v3/u/26/26/1711044000000/Vt_uvuSpXTbVjWgA6mvlMA/DjRhNz2VMsbvUbHh3cZEn1_DhI99wukYDTiUfKTh6lWlyX5iFTqMc6XPbw8-YxmW_m-Ds4AY6iTOiGhjCP4Z3BNweGMEYDZxQOcYN6ikkQw1xpe4vOAN8_M3Ryo12IpbIUuTzkUmIUX_5nJgP3ZflnIwCilQRplvYSSyae1P-Gg/LFk1-9Tqdqe9tArd8tsiydNmx_irypUYWjTYYnwg49U",
+                  "qty": 1,
+                  "case_size": "4",
+                  "stock_uom": "PCS",
+                  "uom": "PCS",
+                  "conversion_factor": 1,
+                  "stock_qty": 1,
+                  "price_list_rate": 421.55,
+                  "base_price_list_rate": 421.55,
+                  "margin_type": "",
+                  "margin_rate_or_amount": 0,
+                  "rate_with_margin": 0,
+                  "discount_percentage": 0,
+                  "discount_amount": 0,
+                  "base_rate_with_margin": 0,
+                  "rate": 421.55,
+                  "amount": 421.55,
+                  "item_tax_template": "16% - EML",
+                  "base_rate": 421.55,
+                  "base_amount": 421.55,
+                  "pricing_rules": null,
+                  "posa_offers": "[]",
+                  "posa_offer_applied": 0,
+                  "posa_is_offer": 0,
+                  "posa_is_replace": null,
+                  "stock_uom_rate": 421.55,
+                  "is_free_item": 0,
+                  "grant_commission": 1,
+                  "net_rate": 421.55,
+                  "net_amount": 421.55,
+                  "base_net_rate": 421.55,
+                  "base_net_amount": 421.55,
+                  "delivered_by_supplier": 0,
+                  "income_account": "Cleaning & Hygiene Sales - EML",
+                  "is_fixed_asset": 0,
+                  "asset": null,
+                  "finance_book": null,
+                  "expense_account": "Cleaning & Hygiene COGS - EML",
+                  "discount_account": null,
+                  "deferred_revenue_account": null,
+                  "service_stop_date": null,
+                  "enable_deferred_revenue": 0,
+                  "service_start_date": null,
+                  "service_end_date": null,
+                  "weight_per_unit": 0,
+                  "total_weight": 0,
+                  "weight_uom": null,
+                  "warehouse": "Bolt Warehouse  - EML",
+                  "target_warehouse": null,
+                  "quality_inspection": null,
+                  "batch_no": "JTD01400015",
+                  "incoming_rate": 414.87,
+                  "allow_zero_valuation_rate": 0,
+                  "serial_no": null,
+                  "item_tax_rate": "{\"VAT - EML\": 16.0}",
+                  "actual_batch_qty": 0,
+                  "actual_qty": 4,
+                  "sales_order": null,
+                  "so_detail": null,
+                  "sales_invoice_item": null,
+                  "delivery_note": null,
+                  "dn_detail": null,
+                  "delivered_qty": 0,
+                  "cost_center": "Evryday - EML",
+                  "project": null,
+                  "page_break": 0,
+                  "doctype": "Sales Invoice Item"
+                },
+                {
+                  "name": "0bbae3f91b",
+                  "owner": "innocent@bulkbox.co.ke",
+                  "creation": "2024-04-07 14:33:04.911822",
+                  "modified": "2024-04-07 14:33:15.191886",
+                  "modified_by": "innocent@bulkbox.co.ke",
+                  "parent": "IV04240251",
+                  "parentfield": "items",
+                  "parenttype": "Sales Invoice",
+                  "idx": 2,
+                  "docstatus": 1,
+                  "barcode": "6161103373324",
+                  "item_code": "GPL115",
+                  "posa_notes": "",
+                  "item_name": "Dairyland Fiesta Salted Caramel Ice Cream 100 ml",
+                  "posa_row_id": "1ox08xedhc079bt2g9es",
+                  "posa_delivery_date": null,
+                  "customer_item_code": null,
+                  "description": "Dairyland Fiesta Salted Caramel Ice Cream 100 ml",
+                  "item_group": "Ice Cream Lollies",
+                  "brand": "Dairyland",
+                  "image": "https://v5.airtableusercontent.com/v3/u/24/24/1705068000000/GsPvyEDtnVbh_ovEnEmW_Q/-s4PAyIYvrz57TOP0fUBg57BBtummQtCKMU92HHCom6zRKXpEYw6vMeZdHzZ_JwL2V2QR-T_bWxmg1o85t_PowoUVudadoyXg97592NoGUjlgGTcvxxmsnLr-fPILMy2je9QKA5uZwCtz-FkhVX8PVUPvIgXB95E6SET7gwEApI/2qxMuz3UuDnD8MnAA4aE8Qxk7yq_Ahc6u64gjCzHA_U",
+                  "qty": 2,
+                  "case_size": "12",
+                  "stock_uom": "PCS",
+                  "uom": "PCS",
+                  "conversion_factor": 1,
+                  "stock_qty": 2,
+                  "price_list_rate": 94.83,
+                  "base_price_list_rate": 94.83,
+                  "margin_type": "",
+                  "margin_rate_or_amount": 0,
+                  "rate_with_margin": 0,
+                  "discount_percentage": 0,
+                  "discount_amount": 0,
+                  "base_rate_with_margin": 0,
+                  "rate": 94.83,
+                  "amount": 189.66,
+                  "item_tax_template": "16% - EML",
+                  "base_rate": 94.83,
+                  "base_amount": 189.66,
+                  "pricing_rules": null,
+                  "posa_offers": "[]",
+                  "posa_offer_applied": 0,
+                  "posa_is_offer": 0,
+                  "posa_is_replace": null,
+                  "stock_uom_rate": 94.83,
+                  "is_free_item": 0,
+                  "grant_commission": 1,
+                  "net_rate": 94.83,
+                  "net_amount": 189.66,
+                  "base_net_rate": 94.83,
+                  "base_net_amount": 189.66,
+                  "delivered_by_supplier": 0,
+                  "income_account": "Frozen Food Sales - EML",
+                  "is_fixed_asset": 0,
+                  "asset": null,
+                  "finance_book": null,
+                  "expense_account": "Frozen Food COGS - EML",
+                  "discount_account": null,
+                  "deferred_revenue_account": null,
+                  "service_stop_date": null,
+                  "enable_deferred_revenue": 0,
+                  "service_start_date": null,
+                  "service_end_date": null,
+                  "weight_per_unit": 0,
+                  "total_weight": 0,
+                  "weight_uom": null,
+                  "warehouse": "Bolt Warehouse  - EML",
+                  "target_warehouse": null,
+                  "quality_inspection": null,
+                  "batch_no": "GPL11500003",
+                  "incoming_rate": 75.26,
+                  "allow_zero_valuation_rate": 0,
+                  "serial_no": null,
+                  "item_tax_rate": "{\"VAT - EML\": 16.0}",
+                  "actual_batch_qty": 0,
+                  "actual_qty": 22,
+                  "sales_order": null,
+                  "so_detail": null,
+                  "sales_invoice_item": null,
+                  "delivery_note": null,
+                  "dn_detail": null,
+                  "delivered_qty": 0,
+                  "cost_center": "Evryday - EML",
+                  "project": null,
+                  "page_break": 0,
+                  "doctype": "Sales Invoice Item"
+                },
+                {
+                  "name": "849cbdf8c7",
+                  "owner": "innocent@bulkbox.co.ke",
+                  "creation": "2024-04-07 14:33:04.911822",
+                  "modified": "2024-04-07 14:33:15.191886",
+                  "modified_by": "innocent@bulkbox.co.ke",
+                  "parent": "IV04240251",
+                  "parentfield": "items",
+                  "parenttype": "Sales Invoice",
+                  "idx": 3,
+                  "docstatus": 1,
+                  "barcode": "54491069",
+                  "item_code": "NBD005",
+                  "posa_notes": "",
+                  "item_name": "Sprite Soda 500ml",
+                  "posa_row_id": "wfy3n3v3jilc42v3e05u",
+                  "posa_delivery_date": null,
+                  "customer_item_code": null,
+                  "description": "Sprite Soda 500ml",
+                  "item_group": "Soft Drinks",
+                  "brand": "Sprite",
+                  "image": "https://v5.airtableusercontent.com/v3/u/26/26/1711044000000/-vx2z9fRZNJom_AcnhODmg/qptBVJmew5Ufv6h2hwg8PCHkZJMtU1LKhAFbw8zesT3SibyRHQ7Bzq1X9vlNpVJuQXjm-nwFtDDO0IO6nj1h4Z026MKquarxFZ8BLbr2jOYpgn1Tfkr46cNrez3j2CFwCZKV7HgkmCSMN356sgcV5Btnmr5zvJAGQ6fdVeddbfo/vhW8Rgw9czfJh6EQarOqbX2JFu65fPQ1RhNTUwrO878",
+                  "qty": 3,
+                  "case_size": "24",
+                  "stock_uom": "PCS",
+                  "uom": "PCS",
+                  "conversion_factor": 1,
+                  "stock_qty": 3,
+                  "price_list_rate": 60.34,
+                  "base_price_list_rate": 60.34,
+                  "margin_type": "",
+                  "margin_rate_or_amount": 0,
+                  "rate_with_margin": 0,
+                  "discount_percentage": 0,
+                  "discount_amount": 0,
+                  "base_rate_with_margin": 0,
+                  "rate": 60.34,
+                  "amount": 181.02,
+                  "item_tax_template": "16% - EML",
+                  "base_rate": 60.34,
+                  "base_amount": 181.02,
+                  "pricing_rules": null,
+                  "posa_offers": "[]",
+                  "posa_offer_applied": 0,
+                  "posa_is_offer": 0,
+                  "posa_is_replace": null,
+                  "stock_uom_rate": 60.34,
+                  "is_free_item": 0,
+                  "grant_commission": 1,
+                  "net_rate": 60.34,
+                  "net_amount": 181.02,
+                  "base_net_rate": 60.34,
+                  "base_net_amount": 181.02,
+                  "delivered_by_supplier": 0,
+                  "income_account": "Beverage Sales - EML",
+                  "is_fixed_asset": 0,
+                  "asset": null,
+                  "finance_book": null,
+                  "expense_account": "Beverages COGS - EML",
+                  "discount_account": null,
+                  "deferred_revenue_account": null,
+                  "service_stop_date": null,
+                  "enable_deferred_revenue": 0,
+                  "service_start_date": null,
+                  "service_end_date": null,
+                  "weight_per_unit": 0,
+                  "total_weight": 0,
+                  "weight_uom": null,
+                  "warehouse": "Bolt Warehouse  - EML",
+                  "target_warehouse": null,
+                  "quality_inspection": null,
+                  "batch_no": "NBD00500015",
+                  "incoming_rate": 50.14,
+                  "allow_zero_valuation_rate": 0,
+                  "serial_no": null,
+                  "item_tax_rate": "{\"VAT - EML\": 16.0}",
+                  "actual_batch_qty": 0,
+                  "actual_qty": 11,
+                  "sales_order": null,
+                  "so_detail": null,
+                  "sales_invoice_item": null,
+                  "delivery_note": null,
+                  "dn_detail": null,
+                  "delivered_qty": 0,
+                  "cost_center": "Evryday - EML",
+                  "project": null,
+                  "page_break": 0,
+                  "doctype": "Sales Invoice Item"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-05-21T11:33:28.000Z",
+  "versionId": "8b9fc342-c174-4c0a-983b-af63003ae29c"
+}
