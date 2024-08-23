@@ -1,0 +1,838 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Test workflow\"": {
+      "main": [
+        [
+          {
+            "node": "ERPNext",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ERPNext": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "ERPNext1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ERPNext1": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Airtable1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Airtable2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable2": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-07-06T09:16:56.299Z",
+  "id": "MnEnVnKgL3EbRwiI",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "create shipping asitems",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "b478b380-1c5e-4d0c-8675-dafaadce10fd",
+      "name": "When clicking \"Test workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        760,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "docType": "Shipping%20Rule",
+        "returnAll": true,
+        "options": {}
+      },
+      "id": "9821b4dd-5124-4fbb-8adb-44450c6014e9",
+      "name": "ERPNext",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        980,
+        340
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "2c543378-00b7-4ebf-8cae-1b9cf7bbfeab",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1200,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appSCi0a1zPuJizxg",
+          "mode": "list",
+          "cachedResultName": "Bulkbox Final Master",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHwkMVbotHdnwON",
+          "mode": "list",
+          "cachedResultName": "Shipping Rule",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tblHwkMVbotHdnwON"
+        },
+        "filterByFormula": "=FIND(\"{{ $json.name }}\", {Shipping Name - ERP}) > 0",
+        "options": {}
+      },
+      "id": "5e2a9e78-b1b7-44b6-ba2b-8e5b37f18ffe",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1640,
+        480
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Shipping%20Rule",
+        "documentName": "={{ $('ERPNext').item.json.name }}"
+      },
+      "id": "882c5a03-316a-4d1d-a3db-1533d78365f8",
+      "name": "ERPNext1",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        440
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appSCi0a1zPuJizxg",
+          "mode": "list",
+          "cachedResultName": "Bulkbox Final Master",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHwkMVbotHdnwON",
+          "mode": "list",
+          "cachedResultName": "Shipping Rule",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tblHwkMVbotHdnwON"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.id }}",
+            "Rate w VAT": "={{ $('ERPNext1').item.json.shipping_amount }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Shipping CS Code",
+              "displayName": "Shipping CS Code",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "A",
+                  "value": "A"
+                },
+                {
+                  "name": "D",
+                  "value": "D"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Shipping CS Name",
+              "displayName": "Shipping CS Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Shipping Group",
+              "displayName": "Shipping Group",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Shipping Rate",
+              "displayName": "Shipping Rate",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Item Code",
+              "displayName": "Item Code",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Taxes",
+              "displayName": "Taxes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Quantity",
+              "displayName": "Quantity",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "VAT",
+              "displayName": "VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Standard Selling ID",
+              "displayName": "Standard Selling ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Delivery Rate",
+              "displayName": "Delivery Rate",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Functions",
+              "displayName": "Functions",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Create Shipping as Item",
+                  "value": "Create Shipping as Item"
+                },
+                {
+                  "name": "Update Price",
+                  "value": "Update Price"
+                },
+                {
+                  "name": "Disable Shipping as Item",
+                  "value": "Disable Shipping as Item"
+                },
+                {
+                  "name": "Enable Shipping Item",
+                  "value": "Enable Shipping Item"
+                },
+                {
+                  "name": "Update Shipping Item",
+                  "value": "Update Shipping Item"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Rate w VAT",
+              "displayName": "Rate w VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Shipping Name - ERP",
+              "displayName": "Shipping Name - ERP",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Zone",
+              "displayName": "Zone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1d1db8a3-eea2-415c-bacb-0f170b3c1127",
+      "name": "Airtable1",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        2060,
+        520
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cae98624-0172-4a6d-8976-3669774fcbcf",
+              "leftValue": "={{ $json['Standard Selling ID'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notExists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "f88025cd-ecab-4a8f-8dc2-e28bb51ca818",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f1479fc5-55c9-4dbc-a6d4-539721fd37ed",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1840,
+        480
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "a16976ea-65f8-416d-9a48-92bc0a458b5c",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2240,
+        640
+      ],
+      "webhookId": "c5626910-01df-4661-809a-2dd9f0f0ecad"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appSCi0a1zPuJizxg",
+          "mode": "list",
+          "cachedResultName": "Bulkbox Final Master",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHwkMVbotHdnwON",
+          "mode": "list",
+          "cachedResultName": "Shipping Rule",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tblHwkMVbotHdnwON"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.id }}",
+            "Functions": "Create Shipping as Item"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Shipping CS Code",
+              "displayName": "Shipping CS Code",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "A",
+                  "value": "A"
+                },
+                {
+                  "name": "D",
+                  "value": "D"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Shipping CS Name",
+              "displayName": "Shipping CS Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Shipping Group",
+              "displayName": "Shipping Group",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Shipping Rate",
+              "displayName": "Shipping Rate",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Item Code",
+              "displayName": "Item Code",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Taxes",
+              "displayName": "Taxes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Quantity",
+              "displayName": "Quantity",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "VAT",
+              "displayName": "VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Standard Selling ID",
+              "displayName": "Standard Selling ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Delivery Rate",
+              "displayName": "Delivery Rate",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Functions",
+              "displayName": "Functions",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Create Shipping as Item",
+                  "value": "Create Shipping as Item"
+                },
+                {
+                  "name": "Update Price",
+                  "value": "Update Price"
+                },
+                {
+                  "name": "Disable Shipping as Item",
+                  "value": "Disable Shipping as Item"
+                },
+                {
+                  "name": "Enable Shipping Item",
+                  "value": "Enable Shipping Item"
+                },
+                {
+                  "name": "Update Shipping Item",
+                  "value": "Update Shipping Item"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Rate w VAT",
+              "displayName": "Rate w VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Shipping Name - ERP",
+              "displayName": "Shipping Name - ERP",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Zone",
+              "displayName": "Zone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c050b0d4-32ee-472e-b4c0-8a98b93a286c",
+      "name": "Airtable2",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        2460,
+        680
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "64bdee7c-337d-41cd-9cfb-7aa9b76cd84e",
+      "name": "Wait1",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2680,
+        740
+      ],
+      "webhookId": "efc34f5c-92fc-436d-96ce-67e38c6ed556"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-07-06T09:53:40.000Z",
+  "versionId": "383baa00-1428-4487-9e05-32b24d301a8f"
+}
