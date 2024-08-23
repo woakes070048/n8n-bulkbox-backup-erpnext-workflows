@@ -1,0 +1,44 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2024-04-26T07:24:27.285Z",
+  "id": "WCgpgl0Fa23GxegL",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Update Customer Name in AR",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "55e73139-773a-4342-b3ec-3faff0fb19d4",
+        "options": {}
+      },
+      "id": "40450e73-2829-46d3-9d0f-f4616ef826a9",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        840,
+        400
+      ],
+      "webhookId": "55e73139-773a-4342-b3ec-3faff0fb19d4"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-04-13T07:17:56.132Z",
+      "updatedAt": "2024-04-13T07:17:56.132Z",
+      "id": "BREwPdgeEC5njFaD",
+      "name": "In Development"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2024-04-26T07:32:04.000Z",
+  "versionId": "63a8497e-7069-4b9f-bdbd-3848ed8bc180"
+}
