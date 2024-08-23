@@ -1,0 +1,906 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Conservative Discount",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Conservative Discount Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conservative Discount": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [
+          {
+            "node": "Moderate Discount Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conservative Discount Items": {
+      "main": [
+        [
+          {
+            "node": "Moderate Discount",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Moderate Discount": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items2": {
+      "main": [
+        [
+          {
+            "node": "Aggressive Discount Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Moderate Discount Items": {
+      "main": [
+        [
+          {
+            "node": "Aggressive Discount",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggressive Discount": {
+      "main": [
+        [
+          {
+            "node": "Split Out2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items3": {
+      "main": [
+        [
+          {
+            "node": "Extreme Discount Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggressive Discount Items": {
+      "main": [
+        [
+          {
+            "node": "Extreme Discount",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extreme Discount": {
+      "main": [
+        [
+          {
+            "node": "Split Out3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extreme Discount Items": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-07-09T11:05:30.242Z",
+  "id": "v8CHPy427rcotGyG",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Promotions -> Pricing Rule",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "b6f26ecd-c5eb-43ae-9d8d-b263a4955aa3",
+        "options": {}
+      },
+      "id": "bb491198-2c89-4bd7-9ae9-1ed4379b7449",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        900,
+        300
+      ],
+      "webhookId": "b6f26ecd-c5eb-43ae-9d8d-b263a4955aa3"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "items",
+        "options": {}
+      },
+      "id": "87c9f4ac-adc0-42b1-ac8e-dcf4bfb2d15d",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        300
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "d203f8b7-f89d-4c02-accf-97d857d0a27f",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1620,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "8f6eb94f-c1e3-4ae6-9800-62d6d10978c7",
+              "leftValue": "={{ $('Split Out').item.json.item_code }}",
+              "rightValue": "={{ $('Webhook').item.json.query.item_code }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "272f1c93-7e1a-4baf-9908-893495397027",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1840,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "39a96cd1-b250-4966-acf4-33ca244c90c1",
+              "name": "item_code",
+              "value": "={{ $json.item_code }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0e160d4a-036f-4aaf-8a1c-5e971f0c18cb",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        2080,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Pricing Rule",
+        "documentName": "PRLE-0027"
+      },
+      "id": "7d61226e-1e5d-4584-84c0-b2f4ec0529c8",
+      "name": "Conservative Discount",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        300
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "dd5dccf9-35de-479e-b39c-25a832d05ad1",
+      "name": "Conservative Discount Items",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "items",
+        "options": {}
+      },
+      "id": "d80c9191-087a-4959-b052-bce0d32be0a3",
+      "name": "Split Out1",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        2380,
+        240
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "dc9ebe2f-19dc-483e-82e6-5b296c627440",
+      "name": "Loop Over Items1",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2600,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "8f6eb94f-c1e3-4ae6-9800-62d6d10978c7",
+              "leftValue": "={{ $('Split Out1').item.json.item_code }}",
+              "rightValue": "={{ $('Webhook').item.json.query.item_code }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "44b8bc89-04d6-4b4a-8761-0d7b5f28ff6d",
+      "name": "If1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2840,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "39a96cd1-b250-4966-acf4-33ca244c90c1",
+              "name": "item_code",
+              "value": "={{ $json.item_code }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0fbaf817-e5a4-434e-b7d9-b4eb86bb9537",
+      "name": "Edit Fields1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        3080,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Pricing Rule",
+        "documentName": "PRLE-0028"
+      },
+      "id": "b4a4e56f-897a-438c-8982-c7d644ccd852",
+      "name": "Moderate Discount",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        2140,
+        240
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "a2d3d766-21c2-4315-855d-1ca0aa0fb0b2",
+      "name": "Moderate Discount Items",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2840,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "items",
+        "options": {}
+      },
+      "id": "d0b7e281-5e63-4298-b80b-3ad4cf56ea38",
+      "name": "Split Out2",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        3340,
+        200
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "16a827e5-b63c-433f-a025-bccb3bbf0a59",
+      "name": "Loop Over Items2",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        3560,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "8f6eb94f-c1e3-4ae6-9800-62d6d10978c7",
+              "leftValue": "={{ $('Split Out2').item.json.item_code }}",
+              "rightValue": "={{ $('Webhook').item.json.query.item_code }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7bdefaaf-dfbf-42cf-b645-5f48922d6bc2",
+      "name": "If2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        3920,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "39a96cd1-b250-4966-acf4-33ca244c90c1",
+              "name": "item_code",
+              "value": "={{ $json.item_code }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "89fe3556-260f-4e0b-acc9-818baa77cfd4",
+      "name": "Edit Fields2",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        4180,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Pricing Rule",
+        "documentName": "PRLE-0029"
+      },
+      "id": "5f3a016a-d3f9-4679-a100-da83eed94562",
+      "name": "Aggressive Discount",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        3080,
+        200
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "9b959436-3e01-46d9-97e3-f10e080059c0",
+      "name": "Aggressive Discount Items",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        3800,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "items",
+        "options": {}
+      },
+      "id": "6027bc1a-d66c-441a-91d4-8f836e240c34",
+      "name": "Split Out3",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        4280,
+        180
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "7d8660b9-11e0-4cbc-9d57-046e7e0c7751",
+      "name": "Loop Over Items3",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        4540,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "8f6eb94f-c1e3-4ae6-9800-62d6d10978c7",
+              "leftValue": "={{ $('Split Out3').item.json.item_code }}",
+              "rightValue": "={{ $('Webhook').item.json.query.item_code }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ca1b4780-4d63-46c3-a96e-9803e6ffa74e",
+      "name": "If3",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        4900,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "39a96cd1-b250-4966-acf4-33ca244c90c1",
+              "name": "item_code",
+              "value": "={{ $json.item_code }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9240ab82-42a6-48cb-8d74-78bff65b49b7",
+      "name": "Edit Fields3",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        5160,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Pricing Rule",
+        "documentName": "PRLE-0030"
+      },
+      "id": "3c615d01-80f2-4a41-8e77-66d759e45599",
+      "name": "Extreme Discount",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        4060,
+        180
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "7edd2360-c19c-453d-a3cb-d00e63cba7ae",
+      "name": "Extreme Discount Items",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        4780,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "https://dev.bulkbox.cloud/api/resource/Pricing Rule/",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=[\n  {\n    \"title\": \"Extreme Tier\",\n    \"apply_on\": \"Item Code\",\n    \"price_or_product_discount\": \"Price\",\n    \"warehouse\": \"Storage - TSL\",\n    \"selling\": 1,\n    \"company\": \"Three Spears Limited\",\n    \"currency\": \"KES\",\n    \"rate_or_discount\": \"Discount Percentage\",\n    \"apply_discount_on\": \"Grand Total\",\n    \"discount_percentage\": 100,\n    \"for_price_list\": \"Standard Selling\"\n    \"doctype\": \"Pricing Rule\",\n    \"items\": [\n      {\n        \"name\": \"37378a612b\",\n        \"owner\": \"francnjenga99@gmail.com\",\n        \"creation\": \"2024-07-12 11:05:15.460309\",\n        \"modified\": \"2024-07-12 11:05:15.460309\",\n        \"modified_by\": \"francnjenga99@gmail.com\",\n        \"parent\": \"PRLE-0030\",\n        \"parentfield\": \"items\",\n        \"parenttype\": \"Pricing Rule\",\n        \"idx\": 1,\n        \"docstatus\": 0,\n        \"item_code\": \"TEST01\",\n        \"doctype\": \"Pricing Rule Item Code\"\n      },\n      {\n        \"name\": \"9f979abdac\",\n        \"owner\": \"francnjenga99@gmail.com\",\n        \"creation\": \"2024-07-12 11:05:15.460309\",\n        \"modified\": \"2024-07-12 11:05:15.460309\",\n        \"modified_by\": \"francnjenga99@gmail.com\",\n        \"parent\": \"PRLE-0030\",\n        \"parentfield\": \"items\",\n        \"parenttype\": \"Pricing Rule\",\n        \"idx\": 2,\n        \"docstatus\": 0,\n        \"item_code\": \"TEST002\",\n        \"doctype\": \"Pricing Rule Item Code\"\n      }\n    ],\n    \"item_groups\": [],\n    \"brands\": []\n  }\n]",
+        "options": {}
+      },
+      "id": "d676f2cd-e9ac-4cf9-9383-c3dfce3cb1ca",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5000,
+        160
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-airtable-source": "appUVT5lCG0OH5GUZ/wflCQNMxIEx8MDzKC",
+            "x-forwarded-for": "54.80.3.238",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "54.80.3.238"
+          },
+          "params": {},
+          "query": {
+            "recordID": "recRMfYIW29Bpnene",
+            "item_code": "TPH0117",
+            "tier": "Moderate"
+          },
+          "body": {},
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook/b6f26ecd-c5eb-43ae-9d8d-b263a4955aa3",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-04-13T07:17:56.132Z",
+      "updatedAt": "2024-04-13T07:17:56.132Z",
+      "id": "BREwPdgeEC5njFaD",
+      "name": "In Development"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-08-16T09:02:20.000Z",
+  "versionId": "d9806203-6b2c-4ca0-a2ce-c0e570516d4c"
+}
