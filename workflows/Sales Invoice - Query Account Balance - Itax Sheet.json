@@ -1,0 +1,1027 @@
+{
+  "active": true,
+  "connections": {
+    "Date & Time": {
+      "main": [
+        [
+          {
+            "node": "Get Balance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Balance": {
+      "main": [
+        [
+          {
+            "node": "Get Account",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Account": {
+      "main": [
+        [
+          {
+            "node": "Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Date & Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-06-27T09:27:11.434Z",
+  "id": "ukHzLVEBRZpOQOLj",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Sales Invoice - Query Account Balance - Itax Sheet",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $now }}",
+        "format": "yyyy-MM-dd",
+        "options": {}
+      },
+      "id": "3cac4def-e5bc-406e-a22e-c8edb5b3d872",
+      "name": "Date & Time",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        700,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/method/frappe.desk.query_report.run?report_name=Accounts+Receivable+Summary&filters={\"company\":\"Three+Spears+Limited\",\"ageing_based_on\":\"Posting+Date\",\"report_date\":\"{{ $json[\"formattedDate\"] }}\",\"range1\":7,\"range2\":15,\"range3\":30,\"range4\":45,\"range5\":\"60\",\"customer\":\"{{ encodeURIComponent($('Webhook').item.json[\"body\"][\"customer\"]) }}\"}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "05da5f99-4bdd-4723-aa21-88417f6be867",
+      "name": "Get Balance",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        920,
+        360
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app7c9cfju1wCcghr",
+          "mode": "list",
+          "cachedResultName": "AR Management Tool",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblzg5Zj11G3fiwyr",
+          "mode": "list",
+          "cachedResultName": "Main",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr/tblzg5Zj11G3fiwyr"
+        },
+        "filterByFormula": "=({Customer ID}=\"{{ $('Webhook').item.json.body.customer }}\")",
+        "options": {}
+      },
+      "id": "73fa39b4-8f17-4a9c-8104-d5ea12fbbcf0",
+      "name": "Get Account",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1140,
+        360
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "app7c9cfju1wCcghr",
+          "mode": "list",
+          "cachedResultName": "AR Management Tool",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblzg5Zj11G3fiwyr",
+          "mode": "list",
+          "cachedResultName": "Main",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr/tblzg5Zj11G3fiwyr"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.id }}",
+            "account-balance": "={{ $ifEmpty($('Get Balance').item.json.message.result[0].outstanding,0) }}",
+            "0 - 7": "={{ $ifEmpty($('Get Balance').item.json.message.result[0].range1,0) }}",
+            "8 - 15": "={{ $ifEmpty($('Get Balance').item.json.message.result[0].range2,0) }}",
+            "31 - 45": "={{ $ifEmpty($('Get Balance').item.json.message.result[0].range4,0) }}",
+            "16 - 30": "={{ $ifEmpty($('Get Balance').item.json.message.result[0].range3,0) }}",
+            "46+": "={{ $ifEmpty($('Get Balance').item.json.message.result[0].range5,0) }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Customer ID",
+              "displayName": "Customer ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Type",
+              "displayName": "Type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Company",
+                  "value": "Company"
+                },
+                {
+                  "name": "Individual",
+                  "value": "Individual"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Customer Group",
+              "displayName": "Customer Group",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Account Sales",
+                  "value": "Account Sales"
+                },
+                {
+                  "name": "Service Sales",
+                  "value": "Service Sales"
+                },
+                {
+                  "name": "Corporate",
+                  "value": "Corporate"
+                },
+                {
+                  "name": "Consumer",
+                  "value": "Consumer"
+                },
+                {
+                  "name": "Food Service",
+                  "value": "Food Service"
+                },
+                {
+                  "name": "Retail",
+                  "value": "Retail"
+                },
+                {
+                  "name": "Cash Sales",
+                  "value": "Cash Sales"
+                },
+                {
+                  "name": "All Customer Groups",
+                  "value": "All Customer Groups"
+                },
+                {
+                  "name": "Restaurant Sales",
+                  "value": "Restaurant Sales"
+                },
+                {
+                  "name": "Bolt Retail Shop",
+                  "value": "Bolt Retail Shop"
+                },
+                {
+                  "name": "B2C",
+                  "value": "B2C"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Territory",
+              "displayName": "Territory",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Kenya",
+                  "value": "Kenya"
+                },
+                {
+                  "name": "All Territories",
+                  "value": "All Territories"
+                },
+                {
+                  "name": "Rest Of The World",
+                  "value": "Rest Of The World"
+                },
+                {
+                  "name": "Nairobi",
+                  "value": "Nairobi"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Account Manager",
+              "displayName": "Account Manager",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "",
+                  "value": ""
+                },
+                {
+                  "name": "ahmed@bulkbox.co.ke",
+                  "value": "ahmed@bulkbox.co.ke"
+                },
+                {
+                  "name": "rashid@bulkbox.co.ke",
+                  "value": "rashid@bulkbox.co.ke"
+                },
+                {
+                  "name": "eugene@bulkbox.co.ke",
+                  "value": "eugene@bulkbox.co.ke"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Tax ID",
+              "displayName": "Tax ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Mobile No",
+              "displayName": "Mobile No",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email ID",
+              "displayName": "Email ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Sales Team Assignment",
+              "displayName": "Sales Team Assignment",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Brian Mong'are",
+                  "value": "Brian Mong'are"
+                },
+                {
+                  "name": "Sophia Khalid",
+                  "value": "Sophia Khalid"
+                },
+                {
+                  "name": "Emma Anagei",
+                  "value": "Emma Anagei"
+                },
+                {
+                  "name": "Assign Sales Member",
+                  "value": "Assign Sales Member"
+                },
+                {
+                  "name": "Eugene Aaron",
+                  "value": "Eugene Aaron"
+                },
+                {
+                  "name": "Elsie Watare",
+                  "value": "Elsie Watare"
+                },
+                {
+                  "name": "Rashid Salim",
+                  "value": "Rashid Salim"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Account Functions",
+              "displayName": "Account Functions",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Freeze Account",
+                  "value": "Freeze Account"
+                },
+                {
+                  "name": "Unfreeze Account",
+                  "value": "Unfreeze Account"
+                },
+                {
+                  "name": "Update Limit",
+                  "value": "Update Limit"
+                },
+                {
+                  "name": "Query Balance",
+                  "value": "Query Balance"
+                },
+                {
+                  "name": "Update Payment Terms",
+                  "value": "Update Payment Terms"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Credit Limit",
+              "displayName": "Credit Limit",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "account-balance",
+              "displayName": "account-balance",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Limit Notification",
+              "displayName": "Limit Notification",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Payment Terms",
+              "displayName": "Payment Terms",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Cash on Delivery",
+                  "value": "Cash on Delivery"
+                },
+                {
+                  "name": "End of Day",
+                  "value": "End of Day"
+                },
+                {
+                  "name": "NET 7",
+                  "value": "NET 7"
+                },
+                {
+                  "name": "NET 15",
+                  "value": "NET 15"
+                },
+                {
+                  "name": "NET 30",
+                  "value": "NET 30"
+                },
+                {
+                  "name": "Prepayment",
+                  "value": "Prepayment"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "0 - 7",
+              "displayName": "0 - 7",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "8 - 15",
+              "displayName": "8 - 15",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "16 - 30",
+              "displayName": "16 - 30",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "31 - 45",
+              "displayName": "31 - 45",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "46+",
+              "displayName": "46+",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Created Date",
+              "displayName": "Created Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Account Status",
+              "displayName": "Account Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Active",
+                  "value": "Active"
+                },
+                {
+                  "name": "Disabled",
+                  "value": "Disabled"
+                },
+                {
+                  "name": "Frozen",
+                  "value": "Frozen"
+                },
+                {
+                  "name": "Deleted",
+                  "value": "Deleted"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Collection Amount",
+              "displayName": "Collection Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Credit Utlization",
+              "displayName": "Credit Utlization",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Risk Level %",
+              "displayName": "Risk Level %",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Last Modified",
+              "displayName": "Last Modified",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Risk Level",
+              "displayName": "Risk Level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Low",
+                  "value": "Low"
+                },
+                {
+                  "name": "Medium",
+                  "value": "Medium"
+                },
+                {
+                  "name": "High",
+                  "value": "High"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Follow Up Date",
+              "displayName": "Follow Up Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Follow Up Status",
+              "displayName": "Follow Up Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Unresponsive",
+                  "value": "Unresponsive"
+                },
+                {
+                  "name": "Expecting Payment",
+                  "value": "Expecting Payment"
+                },
+                {
+                  "name": "ETR Invoices",
+                  "value": "ETR Invoices"
+                },
+                {
+                  "name": "Non commital",
+                  "value": "Non commital"
+                },
+                {
+                  "name": "SOA/AR Sent",
+                  "value": "SOA/AR Sent"
+                },
+                {
+                  "name": "Cheque Ready for Collection",
+                  "value": "Cheque Ready for Collection"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Risk Category",
+              "displayName": "Risk Category",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Disabled",
+              "displayName": "Disabled",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Default Price List",
+              "displayName": "Default Price List",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Customer Primary Contact",
+              "displayName": "Customer Primary Contact",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Is Frozen",
+              "displayName": "Is Frozen",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Bypass Credit Limit Check",
+              "displayName": "Bypass Credit Limit Check",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Credit Collection Tasks",
+              "displayName": "Credit Collection Tasks",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Customer Account",
+              "displayName": "Customer Account",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Credit Collection Tasks 2",
+              "displayName": "Credit Collection Tasks 2",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Collection Status",
+              "displayName": "Collection Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pending",
+                  "value": "Pending"
+                },
+                {
+                  "name": "In Progress",
+                  "value": "In Progress"
+                },
+                {
+                  "name": "Complete",
+                  "value": "Complete"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Expected Amount",
+              "displayName": "Expected Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Remarks",
+              "displayName": "Remarks",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Collection Priority",
+              "displayName": "Collection Priority",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Low",
+                  "value": "Low"
+                },
+                {
+                  "name": "Medium",
+                  "value": "Medium"
+                },
+                {
+                  "name": "High",
+                  "value": "High"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Cc'd Email ID",
+              "displayName": "Cc'd Email ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Credit Collection Tasks 3",
+              "displayName": "Credit Collection Tasks 3",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "64e4d69b-8be9-4894-b80d-b9b392dbc219",
+      "name": "Update",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1360,
+        360
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "6fda0e44-406b-44d2-a62d-861928a9bb9b",
+        "options": {}
+      },
+      "id": "92a66a25-b871-4408-b7ff-16761afcad5a",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        480,
+        360
+      ],
+      "webhookId": "6fda0e44-406b-44d2-a62d-861928a9bb9b"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "python-requests/2.31.0",
+            "content-length": "1072",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "x-forwarded-for": "49.13.52.40",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "49.13.52.40"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "name": "IV06240281",
+            "customer": "Test Company",
+            "customer_name": "Test Company",
+            "tax_id": "NILL",
+            "net_total": 324.16,
+            "tax_category": "",
+            "base_grand_total": 376.03,
+            "posting_date": "2024-06-27",
+            "total_taxes_and_charges": 51.87,
+            "taxes": [
+              {
+                "name": "7b548bc3ef",
+                "owner": "francnjenga99@gmail.com",
+                "creation": "2024-06-27 13:17:04.336516",
+                "modified": "2024-06-27 13:17:08.379857",
+                "modified_by": "francnjenga99@gmail.com",
+                "parent": "IV06240281",
+                "parentfield": "taxes",
+                "parenttype": "Sales Invoice",
+                "idx": 1,
+                "docstatus": 1,
+                "charge_type": "On Net Total",
+                "row_id": null,
+                "account_head": "VAT - 16% - TSL",
+                "description": "VAT - 16%",
+                "included_in_print_rate": 0,
+                "included_in_paid_amount": 0,
+                "cost_center": null,
+                "rate": 0,
+                "account_currency": "KES",
+                "tax_amount": 51.87,
+                "total": 376.03,
+                "tax_amount_after_discount_amount": 51.87,
+                "base_tax_amount": 51.87,
+                "base_total": 376.03,
+                "base_tax_amount_after_discount_amount": 51.87,
+                "item_wise_tax_detail": "{\"TEST002\":[16.0,51.86560000000001]}",
+                "dont_recompute_tax": 0,
+                "doctype": "Sales Taxes and Charges"
+              }
+            ]
+          },
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook-test/6fda0e44-406b-44d2-a62d-861928a9bb9b",
+          "executionMode": "test"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-06-27T10:18:49.000Z",
+  "versionId": "90c505f6-770b-479c-bdb8-fb218972cea1"
+}
