@@ -856,8 +856,15 @@
     "errorWorkflow": "pA3zEasbGp50knPq"
   },
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
+    }
+  ],
   "triggerCount": 1,
-  "updatedAt": "2024-07-06T09:11:38.000Z",
-  "versionId": "8d6f35ef-55fe-4f3f-95bb-f5a02442c32e"
+  "updatedAt": "2024-08-23T12:12:08.000Z",
+  "versionId": "5cdf5673-33f9-4612-a6f8-f8a2b5253be5"
 }
