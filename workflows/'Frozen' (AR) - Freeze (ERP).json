@@ -1,0 +1,424 @@
+{
+  "active": true,
+  "connections": {
+    "ERPNext": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Slack1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ERPNext1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "ERPNext1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "ERPNext",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-07-03T11:51:41.582Z",
+  "id": "BbktQtaW4NNqWEs4",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "'Frozen' (AR) - Freeze (ERP)",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "Customer",
+        "documentName": "={{ encodeURIComponent($json.query.customer) }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "is_frozen",
+              "value": "={{ $if($json.query.frozen == 1,1,0) }}"
+            }
+          ]
+        }
+      },
+      "id": "cb96a32c-f362-4424-990e-e0460323d8f4",
+      "name": "ERPNext",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        840,
+        280
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Webhook').item.json.query.frozen }}",
+                    "rightValue": "0",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEquals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Frozen"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "8664a368-ea12-4cfb-98cd-468f2ef06b59",
+                    "leftValue": "={{ $('Webhook').item.json.query.frozen }}",
+                    "rightValue": "0",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Unfreeze"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5c2006f5-a68e-481a-90e2-a9d44b7fa668",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        1060,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#account_management",
+          "mode": "name"
+        },
+        "text": "=The customer *{{ $('ERPNext').item.json.name }}* has been frozen due to an overdue balance of *{{ $('Webhook').item.json.query.overdue }}*",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "id": "00856575-effe-43d9-a6e8-ec228ae79178",
+      "name": "Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        1260,
+        160
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#account_management",
+          "mode": "name"
+        },
+        "text": "=The customer *{{ $('ERPNext').item.json.name }}* has been unfrozen afer clearing overdue balance.",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "id": "206aa54b-187b-4881-9e2c-cc8ab0e182a2",
+      "name": "Slack1",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        1260,
+        400
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app7c9cfju1wCcghr",
+          "mode": "list",
+          "cachedResultName": "AR Management Tool",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblzg5Zj11G3fiwyr",
+          "mode": "list",
+          "cachedResultName": "Main",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr/tblzg5Zj11G3fiwyr"
+        },
+        "filterByFormula": "({Frozen Status} = 1)",
+        "options": {}
+      },
+      "id": "c0874169-3d57-45a7-8031-f070b6146a60",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        860,
+        -120
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "56b5d404-1d92-4e38-94dc-c390c08e788b",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1080,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "Customer",
+        "documentName": "={{ $json['Customer ID'] }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "is_frozen",
+              "value": "=1"
+            }
+          ]
+        }
+      },
+      "id": "6c3fd58c-c70d-4fdb-aeba-89bae7261159",
+      "name": "ERPNext1",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        -180
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "254907e6-03ff-4b76-8b35-a8e4000bbba5",
+              "leftValue": "={{ $json['Customer ID'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d403a672-0df1-41ac-978c-ce9c54a1a0a0",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1320,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "path": "7eb12d07-c3b5-43ce-980a-7b499cdb493e",
+        "options": {}
+      },
+      "id": "e890390c-3d63-42c8-83b8-f9bb568e93cc",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        640,
+        280
+      ],
+      "webhookId": "7eb12d07-c3b5-43ce-980a-7b499cdb493e"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-airtable-source": "app7c9cfju1wCcghr/wflFi9JfpGPmw795S",
+            "x-forwarded-for": "44.221.50.76",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "44.221.50.76"
+          },
+          "params": {},
+          "query": {
+            "recordID": "rec8KHzaogS1cs6Iw",
+            "customer": "Rashid Salim",
+            "frozen": "0",
+            "overdue": "7683"
+          },
+          "body": {},
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook-test/7eb12d07-c3b5-43ce-980a-7b499cdb493e",
+          "executionMode": "test"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-07-26T21:54:38.000Z",
+  "versionId": "81fe93cb-1f65-4fff-a1a7-7512805f5782"
+}
