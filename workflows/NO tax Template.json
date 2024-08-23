@@ -1,0 +1,1153 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Test workflow\"": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Get Record From Master",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Item - ERP": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Record From Master": {
+      "main": [
+        [
+          {
+            "node": "If item is in Master",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Brand": {
+      "main": [
+        [
+          {
+            "node": "Check Brand ERP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Brand ERP": {
+      "main": [
+        [
+          {
+            "node": "If Brand is in ERP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Brand": {
+      "main": [
+        [
+          {
+            "node": "Update Item - ERP1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Item - ERP1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Create Brand",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If item is in Master": {
+      "main": [
+        [
+          {
+            "node": "If Item has Brand in Master",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Brand is in ERP": {
+      "main": [
+        [
+          {
+            "node": "Update Item - ERP",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Item has Brand in Master": {
+      "main": [
+        [
+          {
+            "node": "Get Brand",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Brand1": {
+      "main": [
+        [
+          {
+            "node": "Update Item - ERP2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Create Brand1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-04-08T10:53:35.650Z",
+  "id": "GTMIAPwVabrBeFGP",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "NO tax Template",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "15dff605-35dd-47fc-80e7-0b077f79a8e0",
+      "name": "When clicking \"Test workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://portal.bulkbox.cloud/api/resource/Item?limit_page_length=100000",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "6e094898-471d-4418-a0ab-a89b425c3fef",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1220,
+        460
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "id": "80a7479d-6c5a-4417-8d38-f1b859a979e8",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "80e4e47e-de5f-4669-9d2e-9a5c0262460e",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1880,
+        520
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item/{{ $('Split Out').item.json[\"name\"] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "5718538b-230f-4ce0-910c-03eb3a8c5981",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        2100,
+        620
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "267c7417-da77-45d9-8727-b165edbba6d2",
+              "leftValue": "={{ $json.data.taxes[0].item_tax_template }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notExists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "e913b68e-56f8-47a3-a287-ae22611943ee",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2320,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0e179670-037b-44b4-8465-e1999382c44c",
+              "name": "data.name",
+              "value": "={{ $json.data.name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9a175d4c-40a9-404a-b020-37d714fb0c6e",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        2560,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item/{{ $('Get Record From Master').item.json[\"Item Code\"] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\":{\n    \"item_name\":\"{{ $('Get Record From Master').item.json[\"item_name\"] }}\",\n    \"units_per_case\":{{ $('Get Record From Master').item.json[\"Units Per Case\"] }},\n    \"brand\":\"{{ $('Get Brand').item.json[\"Name\"] }}\",\n    \"company\":\"Three Spears Limited\",\n    \"default_material_request_type\":\"{{ $('Get Record From Master').item.json[\"default_material_request_type\"] }}\",\n    \"stock_uom\":\"{{ $('Get Record From Master').item.json[\"stock_uom\"] }}\",\n    \"taxes\":[\n      {\n        \"item_tax_template\":\"{{$('Get Record From Master').item.json[\"taxes.item_tax_template\"] * 100}}% - TSL\"\n      },\n      {\n        \"item_tax_template\":\"{{$('Get Record From Master').item.json[\"taxes.item_tax_template\"] * 100}}% - EML\"\n      }\n    ],\n    \"item_defaults\":[\n      {\n        \"default_supplier\":\"{{$('Get Record From Master').item.json[\"item_defaults.default_supplier\"]}}\",\n        \"company\":\"Three Spears Limited\",\n        \"default_warehouse\":\"Storage - TSL\",\n        \"expense_account\":\"{{$('Get Record From Master').item.json[\"Expense Account (from Category)\"][0]}} - TSL\",\n        \"income_account\":\"{{$('Get Record From Master').item.json[\"Income Account (from Category)\"][0]}} - TSL\"\n      },\n      {\n        \"company\":\"Evryday Mart Ltd\",\n        \"default_warehouse\":\"Bolt Warehouse  - EML\",\n        \"expense_account\":\"{{$('Get Record From Master').item.json[\"Expense Account (from Category)\"][0]}} - EML\",\n        \"income_account\":\"{{$('Get Record From Master').item.json[\"Income Account (from Category)\"][0]}} - EML\"\n      }\n    ],\n    \"description\":\"{{$('Get Record From Master').item.json[\"description\"]}}\",\n    \"item_group\":\"{{$('Get Record From Master').item.json[\"item_group\"]}}\",\n    \"thumbnail\":\"{{$('Get Record From Master').item.json[\"Product Image\"][0][\"url\"]}}\",\n    \"image\":\"{{$('Get Record From Master').item.json[\"Detailed Image URL\"]}}\"\n  }\n}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "7c669bed-011f-4ea3-a58a-15fc8c0ee789",
+      "name": "Update Item - ERP",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        4820,
+        1020
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appSCi0a1zPuJizxg",
+          "mode": "list",
+          "cachedResultName": "Bulkbox Final Master",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl2hGiQmpSg73Una",
+          "mode": "list",
+          "cachedResultName": "MASTER",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tbl2hGiQmpSg73Una"
+        },
+        "filterByFormula": "=({Item Code} = \"{{ $json[\"data\"][\"name\"] }}\")",
+        "options": {}
+      },
+      "id": "92e1c468-bda8-4899-b953-0035961d45cf",
+      "name": "Get Record From Master",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        2780,
+        760
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "base": {
+          "__rl": true,
+          "value": "appSCi0a1zPuJizxg",
+          "mode": "list",
+          "cachedResultName": "Bulkbox Final Master",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblhpx1Wic1RA75Er",
+          "mode": "list",
+          "cachedResultName": "All Brands",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tblhpx1Wic1RA75Er"
+        },
+        "id": "={{ $json.Brand[0] }}",
+        "options": {}
+      },
+      "id": "57f61e1a-0feb-4a81-857b-ad3a4040796a",
+      "name": "Get Brand",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        3480,
+        740
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Brand/{{ $json[\"Name\"] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "41104928-8663-4b6e-bfd3-a7aca08dd3b4",
+      "name": "Check Brand ERP",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        3660,
+        760
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.co.ke/api/resource/Brand",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n      \"name\":\"{{ $('Get Brand').item.json[\"Name\"] }}\",\n      \"brand\":\"{{ $('Get Brand').item.json[\"Name\"] }}\",\n      \"doctype\":\"Brand\"\n   }\n}",
+        "options": {}
+      },
+      "id": "bd50db59-154a-4e65-83c2-60efe6a86910",
+      "name": "Create Brand",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        4280,
+        960
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item/{{ $('Get Record From Master').item.json[\"Item Code\"] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\":{\n    \"item_name\":\"{{ $('Get Record From Master').item.json[\"item_name\"] }}\",\n    \"units_per_case\":{{ $('Get Record From Master').item.json[\"Units Per Case\"] }},\n    \"brand\":\"{{ $('Get Brand').item.json[\"Name\"] }}\",\n    \"company\":\"Three Spears Limited\",\n    \"default_material_request_type\":\"{{ $('Get Record From Master').item.json[\"default_material_request_type\"] }}\",\n    \"stock_uom\":\"{{ $('Get Record From Master').item.json[\"stock_uom\"] }}\",\n    \"taxes\":[\n      {\n        \"item_tax_template\":\"{{$('Get Record From Master').item.json[\"taxes.item_tax_template\"] * 100}}% - TSL\"\n      },\n      {\n        \"item_tax_template\":\"{{$('Get Record From Master').item.json[\"taxes.item_tax_template\"] * 100}}% - EML\"\n      }\n    ],\n    \"item_defaults\":[\n      {\n        \"default_supplier\":\"{{$('Get Record From Master').item.json[\"item_defaults.default_supplier\"]}}\",\n        \"company\":\"Three Spears Limited\",\n        \"default_warehouse\":\"Storage - TSL\",\n        \"expense_account\":\"{{$('Get Record From Master').item.json[\"Expense Account (from Category)\"][0]}} - TSL\",\n        \"income_account\":\"{{$('Get Record From Master').item.json[\"Income Account (from Category)\"][0]}} - TSL\"\n      },\n      {\n        \"company\":\"Evryday Mart Ltd\",\n        \"default_warehouse\":\"Bolt Warehouse  - EML\",\n        \"expense_account\":\"{{$('Get Record From Master').item.json[\"Expense Account (from Category)\"][0]}} - EML\",\n        \"income_account\":\"{{$('Get Record From Master').item.json[\"Income Account (from Category)\"][0]}} - EML\"\n      }\n    ],\n    \"description\":\"{{$('Get Record From Master').item.json[\"description\"]}}\",\n    \"item_group\":\"{{$('Get Record From Master').item.json[\"item_group\"]}}\",\n    \"thumbnail\":\"{{$('Get Record From Master').item.json[\"Product Image\"][0][\"url\"]}}\",\n    \"image\":\"{{$('Get Record From Master').item.json[\"Detailed Image URL\"]}}\"\n  }\n}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "80db31e2-2b66-4b9f-95a8-f70331e2dde9",
+      "name": "Update Item - ERP1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        4460,
+        1000
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "eda2bd56-9ef8-4a87-9f33-55e124105ef5",
+              "leftValue": "={{ $('Check Brand ERP').item.json[\"statusCode\"] }}",
+              "rightValue": 404,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "4556aa53-b982-49b0-9037-4af6cfbfc6cd",
+              "leftValue": "={{ $('Check Brand ERP').item.json[\"statusMessage\"] }}",
+              "rightValue": "Brand",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "5de92364-a3c3-4d27-bcda-34d86dc49849",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        4080,
+        860
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "# Steps\n## * Gets all items with no tax template in the system\n## * Gets the records from the Master\n## * Checks if brand exists in the system.\n## * If brand exists the item is updated.\n## * If brand does not exists, it is crated in the system then item details are updated.\n",
+        "height": 258.5384615384617,
+        "width": 542.6538461538462
+      },
+      "id": "2eafa7dc-d00b-47c1-b829-7c710f1aa1f8",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        940,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "115b9ea8-bbef-4870-a33a-da9e9e0f7fc2",
+              "name": "Name",
+              "value": "={{ $('HTTP Request1').item.json.data.name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "92610eef-6c23-4716-8a70-fe5f2015dc7b",
+      "name": "Edit Fields1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        3440,
+        920
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "30d568ad-a89e-4cd8-a05b-fe5f7e4fba4d",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "4da49a77-c2f5-4dae-b619-f4188f18c72e",
+      "name": "If item is in Master",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        3000,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "167b28d0-3bbf-435a-af48-4dcaeecd8245",
+              "leftValue": "={{ $json.statusCode }}",
+              "rightValue": 200,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ad880204-e313-4c3f-91c6-15a6695276ee",
+      "name": "If Brand is in ERP",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        3860,
+        760
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c2ddd254-c28c-44c3-87b5-bf928a327f76",
+              "leftValue": "={{ $('Get Record From Master').item.json.Brand[0] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "bd04cebd-93ec-43e0-8d68-e74a0023a7e1",
+      "name": "If Item has Brand in Master",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        3240,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dcaf4b70-e281-40c8-8434-c7d3c3cccee5",
+              "name": "Item",
+              "value": "={{ $('Get Record From Master').item.json['Item Code'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0987ec7b-60d2-42b9-af42-7effe2d8f939",
+      "name": "Edit Fields2",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        3720,
+        920
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Report\n## * 332 items have not tax information in the system. These include sellable items and non-sellable items.\n## * 311 items are present in the ERP and not in Master, although these might include non-sellable items such as pallets, and deposits.\n## * 5 items in the Master have not brands and would therefore cause an error when updating their information in the system.\n## * Out of the 332 items, only 16 items i are eligible to be updated correctly in the system as they contain all the necessary information in the master.\n\n# Suggested Course of Action\n## *  Update the 16 Items in the system.\n## * Update the brand of the items in the Master and update their informatin in the system\n## * Create records of the sellable items in the Master and update their information.\n\n\n# Major points of possible failure have been checked and corrected.",
+        "height": 859.4690265486726,
+        "width": 863.5398230088497
+      },
+      "id": "8fe0c4cb-efcb-4afb-b9a1-b8691c9fc979",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3880,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.co.ke/api/resource/Brand",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n      \"name\":\"{{ $('Get Brand').item.json[\"Name\"] }}\",\n      \"brand\":\"{{ $('Get Brand').item.json[\"Name\"] }}\",\n      \"doctype\":\"Brand\"\n   }\n}",
+        "options": {}
+      },
+      "id": "4e03ff50-505d-438f-9e41-481b812b8f7d",
+      "name": "Create Brand1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        5060,
+        1020
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item/{{ $('Get Record From Master').item.json[\"Item Code\"] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\":{\n    \"item_name\":\"{{ $('Get Record From Master').item.json[\"item_name\"] }}\",\n    \"units_per_case\":{{ $('Get Record From Master').item.json[\"Units Per Case\"] }},\n    \"brand\":\"{{ $('Get Brand').item.json[\"Name\"] }}\",\n    \"company\":\"Three Spears Limited\",\n    \"default_material_request_type\":\"{{ $('Get Record From Master').item.json[\"default_material_request_type\"] }}\",\n    \"stock_uom\":\"{{ $('Get Record From Master').item.json[\"stock_uom\"] }}\",\n    \"taxes\":[\n      {\n        \"item_tax_template\":\"{{$('Get Record From Master').item.json[\"taxes.item_tax_template\"] * 100}}% - TSL\"\n      },\n      {\n        \"item_tax_template\":\"{{$('Get Record From Master').item.json[\"taxes.item_tax_template\"] * 100}}% - EML\"\n      }\n    ],\n    \"item_defaults\":[\n      {\n        \"default_supplier\":\"{{$('Get Record From Master').item.json[\"item_defaults.default_supplier\"]}}\",\n        \"company\":\"Three Spears Limited\",\n        \"default_warehouse\":\"Storage - TSL\",\n        \"expense_account\":\"{{$('Get Record From Master').item.json[\"Expense Account (from Category)\"][0]}} - TSL\",\n        \"income_account\":\"{{$('Get Record From Master').item.json[\"Income Account (from Category)\"][0]}} - TSL\"\n      },\n      {\n        \"company\":\"Evryday Mart Ltd\",\n        \"default_warehouse\":\"Bolt Warehouse  - EML\",\n        \"expense_account\":\"{{$('Get Record From Master').item.json[\"Expense Account (from Category)\"][0]}} - EML\",\n        \"income_account\":\"{{$('Get Record From Master').item.json[\"Income Account (from Category)\"][0]}} - EML\"\n      }\n    ],\n    \"description\":\"{{$('Get Record From Master').item.json[\"description\"]}}\",\n    \"item_group\":\"{{$('Get Record From Master').item.json[\"item_group\"]}}\",\n    \"thumbnail\":\"{{$('Get Record From Master').item.json[\"Product Image\"][0][\"url\"]}}\",\n    \"image\":\"{{$('Get Record From Master').item.json[\"Detailed Image URL\"]}}\"\n  }\n}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "206e421a-4bea-4ffc-86d6-7b936a35fd0c",
+      "name": "Update Item - ERP2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        5300,
+        1020
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "0549abf6-e779-45ed-9ff1-8d526f403203",
+      "name": "If1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        4820,
+        1020
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "debfd75e-86c5-4e01-81a1-f2f04365890d",
+      "name": "Loop Over Items1",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1920,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "apppMcUAglwU1JD9u",
+          "mode": "list",
+          "cachedResultName": "Inventory Manager",
+          "cachedResultUrl": "https://airtable.com/apppMcUAglwU1JD9u"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblMyroVmgWWf2dzf",
+          "mode": "list",
+          "cachedResultName": "Analysis Table Test",
+          "cachedResultUrl": "https://airtable.com/apppMcUAglwU1JD9u/tblMyroVmgWWf2dzf"
+        },
+        "filterByFormula": "=({Product Name}=\"{{ $('Split Out').item.json[\"name\"] }}\")",
+        "options": {}
+      },
+      "id": "419881a0-9dd2-4139-ab79-cb15d807a659",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        2140,
+        -160
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "b524222e-f289-44fd-939a-570f53e9af9c",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "e8f8fe76-4040-4f5e-9335-bbfe03aaeeb1",
+      "name": "If2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2340,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item/{{ $('Split Out').item.json[\"name\"] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "502970a1-0f71-4461-bf6f-c8ea6ee61f0d",
+      "name": "HTTP Request2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        2560,
+        -180
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "9dab5395-5514-43f8-8df5-454c14419842",
+              "leftValue": "={{ $json.body.data.taxes[0].item_tax_template }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b7d948d9-874f-4345-b419-91917b2dc687",
+      "name": "If3",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2760,
+        -140
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b36ded1d-163c-4775-8a77-4ed05c42991a",
+              "name": "$('HTTP Request2').item.json.body.data.name",
+              "value": "={{ $('HTTP Request2').item.json.body.data.name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6be3668f-bd3c-42d3-a6b2-8ddb4e3cd7a9",
+      "name": "Edit Fields3",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        3020,
+        -100
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-04-23T11:54:04.000Z",
+  "versionId": "c4fb46e1-3562-4560-b53f-e61c5eac5e8a"
+}
