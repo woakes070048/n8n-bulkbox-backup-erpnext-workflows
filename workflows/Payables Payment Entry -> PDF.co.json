@@ -1,0 +1,54 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2024-03-07T08:01:28.558Z",
+  "id": "95k54o7ORe7fTSuU",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Payables Payment Entry -> PDF.co",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const attachments = items[0].json.attachments; // Access the attachments of the first email\n\nif (attachments && attachments.length > 0) {\n    // If there are attachments, prepare them for use in subsequent nodes\n    for (let attachment of attachments) {\n        // Check if the attachment content is a URL\n        if (attachment.url) {\n            // If the attachment content is a URL, prepare to download it\n            const newItem = {\n                json: {\n                    url: attachment.url,\n                    // Add any other relevant attachment properties you need\n                }\n            };\n            items.push(newItem);\n        } else if (attachment.content) {\n            // If the attachment content is directly available, convert it to binary data\n            const binaryData = Buffer.from(attachment.content, 'base64');\n            const newItem = {\n                binary: {\n                    data: binaryData,\n                    // Add any other relevant attachment properties you need\n                }\n            };\n            items.push(newItem);\n        }\n    }\n} else {\n    console.log('No attachments found.');\n}\n\nreturn items; // Return the items to continue the workflow\n"
+      },
+      "id": "d59a572e-9d93-48e0-9c35-d848945830e6",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        940,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "downloadAttachments": true,
+        "options": {}
+      },
+      "id": "ad960e02-384a-45f6-864b-288d9f4d7b87",
+      "name": "Email Trigger (IMAP)",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [
+        520,
+        740
+      ],
+      "credentials": {
+        "imap": {
+          "id": "kiAnMImJ0hCnR2u5",
+          "name": "IMAP account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-03-13T12:19:16.000Z",
+  "versionId": "ca9e7370-ce72-44e4-8cb7-071dd57bd2b7"
+}
