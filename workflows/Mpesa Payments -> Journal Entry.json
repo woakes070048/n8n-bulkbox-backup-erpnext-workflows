@@ -1,0 +1,27 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2024-07-19T08:16:21.282Z",
+  "id": "Z9j7cR1Yu4bRCQxg",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Mpesa Payments -> Journal Entry",
+  "nodes": [],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-04-13T07:17:56.132Z",
+      "updatedAt": "2024-04-13T07:17:56.132Z",
+      "id": "BREwPdgeEC5njFaD",
+      "name": "In Development"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2024-07-19T09:39:04.000Z",
+  "versionId": "eef3d878-60d7-4fa6-a037-bd7d8bc0a6be"
+}
