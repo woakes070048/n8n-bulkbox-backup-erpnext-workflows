@@ -1,0 +1,317 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Bolt Prices",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Standard Selling",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Buying Price",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "GT Selling",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "standard_selling_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "standard_selling_id": {
+      "main": [
+        [
+          {
+            "node": "price_change_doc",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "price_change_doc": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2024-08-19T07:52:39.848Z",
+  "id": "nEANXrjcQmvp3A0f",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Price Update ERP",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item%20Price/{{$node[\"Webhook\"].json[\"query\"][\"GT_sellingID\"]}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"price_list_rate\":\"{{$node[\"Webhook\"].json[\"query\"][\"GTPriceRate\"]}}\"}",
+        "options": {}
+      },
+      "id": "515f0304-a9d6-4b4d-aedd-60d88757b928",
+      "name": "GT Selling",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        460,
+        1080
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item%20Price/{{$node[\"Webhook\"].json[\"query\"][\"buyingID\"]}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"price_list_rate\":\"{{$node[\"Webhook\"].json[\"query\"][\"buyingPriceRate\"]}}\", \"supplier\":\"{{ $('Webhook').item.json.query.Supplier }}\"}",
+        "options": {}
+      },
+      "id": "572a2ec8-75b4-47bd-a004-1c6a1b04b832",
+      "name": "Buying Price",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        460,
+        860
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item%20Price/{{$node[\"Webhook\"].json[\"query\"][\"ST_sellingID\"]}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"price_list_rate\":\"{{$node[\"Webhook\"].json[\"query\"][\"STPriceRate\"]}}\"}",
+        "options": {}
+      },
+      "id": "f3795caf-6e29-4e31-95a1-7288fd8d9ded",
+      "name": "Standard Selling",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        460,
+        640
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item%20Price/{{ $('Webhook').item.json[\"query\"][\"BoltPriceID\"] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"price_list_rate\":\"{{ $('Webhook').item.json[\"query\"][\"BoltPriceExcl\"] }}\"}",
+        "options": {}
+      },
+      "id": "e4e53e04-2d83-41bb-8238-884d40a305db",
+      "name": "Bolt Prices",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        460,
+        460
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "path": "079cdbc3-2d44-452b-8b55-0e7cad24c73a",
+        "options": {}
+      },
+      "id": "07c2e327-fd20-4b1f-9b3e-cb166ebf0647",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        880
+      ],
+      "webhookId": "079cdbc3-2d44-452b-8b55-0e7cad24c73a"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Item%20Price",
+        "documentName": "={{ $json.query.ST_sellingID }}"
+      },
+      "id": "dca797e0-54d0-48e8-a981-2c04999e119b",
+      "name": "standard_selling_id",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        460,
+        1320
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "docType": "Price%20Changes",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "item",
+              "value": "={{ $json.item_code }}"
+            },
+            {
+              "field": "previous_price",
+              "value": "={{ $json.price_list_rate }}"
+            },
+            {
+              "field": "new_price",
+              "value": "={{ $('Webhook').item.json.query.STPriceRate }}"
+            },
+            {
+              "field": "selling_price_link",
+              "value": "={{ $json.name }}"
+            },
+            {
+              "field": "update_time",
+              "value": "={{ $now.format(\"hh:mm:ss\") }}"
+            },
+            {
+              "field": "updated_date",
+              "value": "={{ $now.format(\"dd-MM-yyyy\") }}"
+            },
+            {
+              "field": "action_by",
+              "value": "={{ $('Webhook').item.json.query.user }}"
+            }
+          ]
+        }
+      },
+      "id": "40cfc3e4-9afa-4c1c-9219-66602752dfc9",
+      "name": "price_change_doc",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        700,
+        1320
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      },
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-airtable-source": "appSCi0a1zPuJizxg/wfldpKF5CNBkzyxtm",
+            "x-forwarded-for": "44.214.138.241",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "44.214.138.241"
+          },
+          "params": {},
+          "query": {
+            "recordID": "reclU37B0btJM7XrO",
+            "itemCode": "TEST002",
+            "price": "9024.523160762943",
+            "listPrice": "9600",
+            "buyingPriceRate": "297.4137931034483",
+            "buyingID": "8047f8d27c",
+            "Supplier": "",
+            "ST_sellingID": "4c98ef5713",
+            "STPriceRate": "324.15672272855403",
+            "GTPriceRate": "319.3705160842398",
+            "GT_sellingID": "c1747675b2",
+            "productID": "",
+            "retailPrice": "400",
+            "BoltPriceID": "",
+            "BoltPriceExcl": "344.82758620689657",
+            "user": "gatura@bulkbox.co.ke"
+          },
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook/079cdbc3-2d44-452b-8b55-0e7cad24c73a",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Africa/Nairobi",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-08-19T12:47:43.000Z",
+  "versionId": "05a84f49-f336-49dd-81a0-36f7c1ccd9a0"
+}
