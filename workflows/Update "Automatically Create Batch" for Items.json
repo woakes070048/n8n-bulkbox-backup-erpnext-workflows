@@ -1,0 +1,164 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Test workflow\"": {
+      "main": [
+        [
+          {
+            "node": "ERPNext",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ERPNext": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "ERPNext1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ERPNext1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-06-14T16:57:48.376Z",
+  "id": "wMxFTJUPYtIJcRIY",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Update \"Automatically Create Batch\" for Items",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "3db941ed-b7d9-40f9-9a4b-c16d57a44a81",
+      "name": "When clicking \"Test workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        760,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "docType": "Item",
+        "returnAll": true,
+        "options": {
+          "filters": {
+            "customProperty": [
+              {
+                "field": "shelf_life_in_days",
+                "value": "0"
+              }
+            ]
+          }
+        }
+      },
+      "id": "26147c7e-7a25-4040-a51b-b18a913bc32a",
+      "name": "ERPNext",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        980,
+        340
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "94da3943-e922-4834-b013-786a4fc2580c",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1200,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "Item",
+        "documentName": "={{ $json.name }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "shelf_life_in_days",
+              "value": "180"
+            }
+          ]
+        }
+      },
+      "id": "0d79e16b-c2f0-4ea7-8788-2a397f731072",
+      "name": "ERPNext1",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        460
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## add shelf days - 180\n"
+      },
+      "id": "d5e9e2a8-5e96-4d97-9f4d-7985556d12ed",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        480,
+        300
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-07-03T07:27:31.000Z",
+  "versionId": "4f18a61e-31e1-4721-afa2-6179ab5f6c27"
+}
