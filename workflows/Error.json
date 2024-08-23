@@ -1,0 +1,187 @@
+{
+  "active": false,
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-05-20T13:12:54.723Z",
+  "id": "pA3zEasbGp50knPq",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Error",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "5b094fe3-34da-45fd-b31b-eadc18a34793",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        400,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#error-notifications",
+          "mode": "name"
+        },
+        "text": "=Error! \n{{ $json.workflow.name }} - {{ $json.execution.error.message }}. Last node executed - {{ $json.execution.lastNodeExecuted }}\n\n*Error Description:*\n{{ $('Error Trigger').item.json[\"execution\"][\"error\"][\"description\"] }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "id": "572d484e-70b5-4ea6-9b37-819a21d37fd9",
+      "name": "Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        620,
+        340
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Error Trigger": [
+      {
+        "json": {
+          "execution": {
+            "id": "42480",
+            "url": "https://n8n.bulkbox.cloud/workflow/JH96IF02M7y9dzdO/executions/42480",
+            "error": {
+              "level": "warning",
+              "tags": {},
+              "context": {
+                "itemIndex": 0,
+                "request": {
+                  "headers": {
+                    "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7",
+                    "Authorization": "token d029415646e8f50:07a715c51fa19c3"
+                  },
+                  "method": "PUT",
+                  "uri": "https://portal.bulkbox.cloud/api/resource/Customer/The%20Wine%20Box",
+                  "gzip": true,
+                  "rejectUnauthorized": true,
+                  "followRedirect": true,
+                  "resolveWithFullResponse": true,
+                  "followAllRedirects": true,
+                  "timeout": 300000,
+                  "body": {
+                    "data": {
+                      "credit_limits": [
+                        {
+                          "company": "Three Spears Limited",
+                          "credit_limit": 100000
+                        }
+                      ]
+                    }
+                  },
+                  "encoding": null,
+                  "json": false,
+                  "useStream": true
+                }
+              },
+              "functionality": "regular",
+              "name": "NodeApiError",
+              "timestamp": 1718714444271,
+              "errorResponse": {
+                "status": "rejected",
+                "reason": {
+                  "message": "Your request is invalid or could not be processed by the service",
+                  "timestamp": 1718714444268,
+                  "name": "NodeApiError",
+                  "description": "{\"exc_type\":\"ValidationError\",\"exception\":\"frappe.exceptions.ValidationError: New credit limit is less than current outstanding amount for the customer. Credit limit has to be atleast 107387.3\",\"exc\":\"[\\\"Traceback (most recent call last):\\\\n  File \\\\\\\"apps/frappe/frappe/app.py\\\\\\\", line 66, in application\\\\n    response = frappe.api.handle()\\\\n  File \\\\\\\"apps/frappe/frappe/api.py\\\\\\\", line 95, in handle\\\\n    doc.save()\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 312, in save\\\\n    return self._save(*args, **kwargs)\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 349, in _save\\\\n    self.run_before_save_methods()\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 1059, in run_before_save_methods\\\\n    self.run_method(\\\\\\\"validate\\\\\\\")\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 943, in run_method\\\\n    out = Document.hook(fn)(self, *args, **kwargs)\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 1267, in composer\\\\n    return composed(self, method, *args, **kwargs)\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 1249, in runner\\\\n    add_to_return_value(self, fn(self, *args, **kwargs))\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 940, in fn\\\\n    return method_object(*args, **kwargs)\\\\n  File \\\\\\\"apps/erpnext/erpnext/selling/doctype/customer/customer.py\\\\\\\", line 84, in validate\\\\n    self.validate_credit_limit_on_change()\\\\n  File \\\\\\\"apps/erpnext/erpnext/selling/doctype/customer/customer.py\\\\\\\", line 270, in validate_credit_limit_on_change\\\\n    frappe.throw(\\\\n  File \\\\\\\"apps/frappe/frappe/__init__.py\\\\\\\", line 505, in throw\\\\n    msgprint(\\\\n  File \\\\\\\"apps/frappe/frappe/__init__.py\\\\\\\", line 480, in msgprint\\\\n    _raise_exception()\\\\n  File \\\\\\\"apps/frappe/frappe/__init__.py\\\\\\\", line 435, in _raise_exception\\\\n    raise raise_exception(msg)\\\\nfrappe.exceptions.ValidationError: New credit limit is less than current outstanding amount for the customer. Credit limit has to be atleast 107387.3\\\\n\\\"]\",\"_server_messages\":\"[\\\"{\\\\\\\"message\\\\\\\": \\\\\\\"New credit limit is less than current outstanding amount for the customer. Credit limit has to be atleast 107387.3\\\\\\\", \\\\\\\"title\\\\\\\": \\\\\\\"Message\\\\\\\", \\\\\\\"indicator\\\\\\\": \\\\\\\"red\\\\\\\", \\\\\\\"raise_exception\\\\\\\": 1}\\\"]\"}",
+                  "context": {},
+                  "cause": {
+                    "message": "417 - \"{\\\"exc_type\\\":\\\"ValidationError\\\",\\\"exception\\\":\\\"frappe.exceptions.ValidationError: New credit limit is less than current outstanding amount for the customer. Credit limit has to be atleast 107387.3\\\",\\\"exc\\\":\\\"[\\\\\\\"Traceback (most recent call last):\\\\\\\\n  File \\\\\\\\\\\\\\\"apps/frappe/frappe/app.py\\\\\\\\\\\\\\\", line 66, in application\\\\\\\\n    response = frappe.api.handle()\\\\\\\\n  File \\\\\\\\\\\\\\\"apps/frappe/frappe/api.py\\\\\\\\\\\\\\\", line 95, in handle\\\\\\\\n    doc.save()\\\\\\\\n  File \\\\\\\\\\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\\\\\\\\\", line 312, in save\\\\\\\\n    return self._save(*args, **kwargs)\\\\\\\\n  File \\\\\\\\\\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\\\\\\\\\", line 349, in _save\\\\\\\\n    self.run_before_save_methods()\\\\\\\\n  File \\\\\\\\\\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\\\\\\\\\", line 1059, in run_before_save_methods\\\\\\\\n    self.run_method(\\\\\\\\\\\\\\\"validate\\\\\\\\\\\\\\\")\\\\\\\\n  File \\\\\\\\\\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\\\\\\\\\", line 943, in run_method\\\\\\\\n    out = Document.hook(fn)(self, *args, **kwargs)\\\\\\\\n  File \\\\\\\\\\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\\\\\\\\\", line 1267, in composer\\\\\\\\n    return composed(self, method, *args, **kwargs)\\\\\\\\n  File \\\\\\\\\\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\\\\\\\\\", line 1249, in runner\\\\\\\\n    add_to_return_value(self, fn(self, *args, **kwargs))\\\\\\\\n  File \\\\\\\\\\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\\\\\\\\\", line 940, in fn\\\\\\\\n    return method_object(*args, **kwargs)\\\\\\\\n  File \\\\\\\\\\\\\\\"apps/erpnext/erpnext/selling/doctype/customer/customer.py\\\\\\\\\\\\\\\", line 84, in validate\\\\\\\\n    self.validate_credit_limit_on_change()\\\\\\\\n  File \\\\\\\\\\\\\\\"apps/erpnext/erpnext/selling/doctype/customer/customer.py\\\\\\\\\\\\\\\", line 270, in validate_credit_limit_on_change\\\\\\\\n    frappe.throw(\\\\\\\\n  File \\\\\\\\\\\\\\\"apps/frappe/frappe/__init__.py\\\\\\\\\\\\\\\", line 505, in throw\\\\\\\\n    msgprint(\\\\\\\\n  File \\\\\\\\\\\\\\\"apps/frappe/frappe/__init__.py\\\\\\\\\\\\\\\", line 480, in msgprint\\\\\\\\n    _raise_exception()\\\\\\\\n  File \\\\\\\\\\\\\\\"apps/frappe/frappe/__init__.py\\\\\\\\\\\\\\\", line 435, in _raise_exception\\\\\\\\n    raise raise_exception(msg)\\\\\\\\nfrappe.exceptions.ValidationError: New credit limit is less than current outstanding amount for the customer. Credit limit has to be atleast 107387.3\\\\\\\\n\\\\\\\"]\\\",\\\"_server_messages\\\":\\\"[\\\\\\\"{\\\\\\\\\\\\\\\"message\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"New credit limit is less than current outstanding amount for the customer. Credit limit has to be atleast 107387.3\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\"title\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"Message\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\"indicator\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"red\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\"raise_exception\\\\\\\\\\\\\\\": 1}\\\\\\\"]\\\"}\"",
+                    "name": "AxiosError",
+                    "stack": "AxiosError: Request failed with status code 417\n    at settle (/usr/local/lib/node_modules/n8n/node_modules/axios/lib/core/settle.js:19:12)\n    at RedirectableRequest.handleResponse (/usr/local/lib/node_modules/n8n/node_modules/axios/lib/adapters/http.js:537:9)\n    at RedirectableRequest.emit (node:events:529:35)\n    at RedirectableRequest.emit (node:domain:489:12)\n    at RedirectableRequest._processResponse (/usr/local/lib/node_modules/n8n/node_modules/follow-redirects/index.js:398:10)\n    at ClientRequest.RedirectableRequest._onNativeResponse (/usr/local/lib/node_modules/n8n/node_modules/follow-redirects/index.js:91:12)\n    at Object.onceWrapper (node:events:632:26)\n    at ClientRequest.emit (node:events:517:28)\n    at ClientRequest.emit (node:domain:489:12)\n    at HTTPParser.parserOnIncomingClient [as onIncoming] (node:_http_client:700:27)\n    at Axios.request (/usr/local/lib/node_modules/n8n/node_modules/axios/lib/core/Axios.js:45:41)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at requestFn (/usr/local/lib/node_modules/n8n/node_modules/n8n-core/dist/NodeExecuteFunctions.js:567:33)\n    at proxyRequestToAxios (/usr/local/lib/node_modules/n8n/node_modules/n8n-core/dist/NodeExecuteFunctions.js:570:26)\n    at Object.requestWithAuthentication (/usr/local/lib/node_modules/n8n/node_modules/n8n-core/dist/NodeExecuteFunctions.js:1249:16)\n    at Object.requestWithAuthentication (/usr/local/lib/node_modules/n8n/node_modules/n8n-core/dist/NodeExecuteFunctions.js:1988:20)",
+                    "code": "ERR_BAD_REQUEST",
+                    "status": 417
+                  }
+                }
+              },
+              "node": {
+                "parameters": {
+                  "curlImport": "",
+                  "method": "PUT",
+                  "url": "=https://portal.bulkbox.cloud/api/resource/Customer/{{ $('Encode Customer Name').item.json[\"encodedName\"] }}",
+                  "authentication": "predefinedCredentialType",
+                  "nodeCredentialType": "erpNextApi",
+                  "sendQuery": false,
+                  "sendHeaders": false,
+                  "sendBody": true,
+                  "contentType": "json",
+                  "specifyBody": "json",
+                  "jsonBody": "={\"data\":{\"credit_limits\":[{\"company\":\"Three Spears Limited\",\"credit_limit\":{{ $('AR trigger').item.json.body[\"Credit Limit\"] }}}]}}",
+                  "options": {
+                    "response": {
+                      "response": {
+                        "fullResponse": true,
+                        "neverError": false,
+                        "responseFormat": "autodetect"
+                      }
+                    }
+                  },
+                  "infoMessage": ""
+                },
+                "id": "e3795677-69ab-4df0-992b-8f6faa75ccf3",
+                "name": "Update Limit ERP",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.1,
+                "position": [
+                  2140,
+                  580
+                ],
+                "credentials": {
+                  "erpNextApi": {
+                    "id": "OVfEC6rfwqA5vwcf",
+                    "name": "ERPNext account"
+                  }
+                }
+              },
+              "messages": [],
+              "description": "{\"exc_type\":\"ValidationError\",\"exception\":\"frappe.exceptions.ValidationError: New credit limit is less than current outstanding amount for the customer. Credit limit has to be atleast 107387.3\",\"exc\":\"[\\\"Traceback (most recent call last):\\\\n  File \\\\\\\"apps/frappe/frappe/app.py\\\\\\\", line 66, in application\\\\n    response = frappe.api.handle()\\\\n  File \\\\\\\"apps/frappe/frappe/api.py\\\\\\\", line 95, in handle\\\\n    doc.save()\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 312, in save\\\\n    return self._save(*args, **kwargs)\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 349, in _save\\\\n    self.run_before_save_methods()\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 1059, in run_before_save_methods\\\\n    self.run_method(\\\\\\\"validate\\\\\\\")\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 943, in run_method\\\\n    out = Document.hook(fn)(self, *args, **kwargs)\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 1267, in composer\\\\n    return composed(self, method, *args, **kwargs)\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 1249, in runner\\\\n    add_to_return_value(self, fn(self, *args, **kwargs))\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 940, in fn\\\\n    return method_object(*args, **kwargs)\\\\n  File \\\\\\\"apps/erpnext/erpnext/selling/doctype/customer/customer.py\\\\\\\", line 84, in validate\\\\n    self.validate_credit_limit_on_change()\\\\n  File \\\\\\\"apps/erpnext/erpnext/selling/doctype/customer/customer.py\\\\\\\", line 270, in validate_credit_limit_on_change\\\\n    frappe.throw(\\\\n  File \\\\\\\"apps/frappe/frappe/__init__.py\\\\\\\", line 505, in throw\\\\n    msgprint(\\\\n  File \\\\\\\"apps/frappe/frappe/__init__.py\\\\\\\", line 480, in msgprint\\\\n    _raise_exception()\\\\n  File \\\\\\\"apps/frappe/frappe/__init__.py\\\\\\\", line 435, in _raise_exception\\\\n    raise raise_exception(msg)\\\\nfrappe.exceptions.ValidationError: New credit limit is less than current outstanding amount for the customer. Credit limit has to be atleast 107387.3\\\\n\\\"]\",\"_server_messages\":\"[\\\"{\\\\\\\"message\\\\\\\": \\\\\\\"New credit limit is less than current outstanding amount for the customer. Credit limit has to be atleast 107387.3\\\\\\\", \\\\\\\"title\\\\\\\": \\\\\\\"Message\\\\\\\", \\\\\\\"indicator\\\\\\\": \\\\\\\"red\\\\\\\", \\\\\\\"raise_exception\\\\\\\": 1}\\\"]\"}",
+              "httpCode": "rejected",
+              "message": "Your request is invalid or could not be processed by the service",
+              "stack": "NodeApiError: Your request is invalid or could not be processed by the service\n    at Object.execute (/usr/local/lib/node_modules/n8n/node_modules/n8n-nodes-base/dist/nodes/HttpRequest/V3/HttpRequestV3.node.js:1571:35)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at Workflow.runNode (/usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/Workflow.js:728:19)\n    at /usr/local/lib/node_modules/n8n/node_modules/n8n-core/dist/WorkflowExecute.js:660:53\n    at /usr/local/lib/node_modules/n8n/node_modules/n8n-core/dist/WorkflowExecute.js:1062:20"
+            },
+            "lastNodeExecuted": "Update Limit ERP",
+            "mode": "webhook"
+          },
+          "workflow": {
+            "id": "JH96IF02M7y9dzdO",
+            "name": "AR Risk Account Functions, Airtable - ERP"
+          }
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-06-18T12:53:38.000Z",
+  "versionId": "9ea9e60f-bf00-440e-910a-aee6d872f688"
+}
