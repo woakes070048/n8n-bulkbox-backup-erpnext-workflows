@@ -1,0 +1,2311 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sales Invoice": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "sales_invoice_items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "sales_invoice_items": {
+      "main": [
+        [
+          {
+            "node": "sales_order_name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate2": {
+      "main": [
+        [
+          {
+            "node": "Code6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "sales_order_name": {
+      "main": [
+        [
+          {
+            "node": "Sales order_data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sales order_data": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Aggregate2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code6": {
+      "main": [
+        [
+          {
+            "node": "Slack1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Slack2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack1": {
+      "main": [
+        [
+          {
+            "node": "Slack3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Slack4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-03-07T07:35:34.938Z",
+  "id": "xY300gquX4cg24cC",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Partial Deliveries Notifications",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "53cd20cf-c01a-4e87-9364-398d52fb63e8",
+        "options": {}
+      },
+      "id": "84ec3da9-eaa7-4849-a87f-ecbdeaf6394b",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        940,
+        460
+      ],
+      "webhookId": "53cd20cf-c01a-4e87-9364-398d52fb63e8",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Sales%20Order/{{ $json.againstSalesOrder }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "d5ab256d-9232-402b-9ef5-e4df4880a6cc",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1380,
+        460
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C06M6EQ5UQM",
+          "mode": "list",
+          "cachedResultName": "partial-orders"
+        },
+        "text": "=The following S.O *{{ $('Code').item.json[\"againstSalesOrder\"] }}* for customer *{{ $('HTTP Request').item.json[\"body\"][\"data\"][\"customer_name\"] }}* is *Partial*.\n\nLiase with the customer for smooth operations.",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "id": "42d28280-fe6e-430d-805c-ec2dbce952a8",
+      "name": "Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        2120,
+        440
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const jsonData = items[0].json.body;\n\nconst againstSalesOrder = jsonData.items[0].against_sales_order;\n\nreturn [{json: { againstSalesOrder: againstSalesOrder }}];\n\n\n\n// const jsonData = items[0].json.body;\n\n// const againstSalesOrder = jsonData.items.map(item => item.against_sales_order);\n\n// return [{json: { againstSalesOrder: againstSalesOrder }}];\n"
+      },
+      "id": "dd7c2b87-dc3a-42d2-b0d7-b3201c06352b",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "cb1ae751-4896-4763-9ade-43bb5b43fc29",
+              "leftValue": "={{ $json.deliveryStatus }}",
+              "rightValue": "Partly Delivered",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "looseTypeValidation": true
+        }
+      },
+      "id": "836c06ca-6208-47e5-af46-a286758d6860",
+      "name": "If1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const jsonData = items[0].json.body;\n\nconst deliveryStatus = jsonData.data.delivery_status;\n\nreturn [{ json: { deliveryStatus: deliveryStatus } }];\n\n\n// const jsonData = items[0].json.body;\n\n// const deliveryStatus = jsonData.items[0].delivery_status;\n\n// return [{json: { againstSalesOrder: deliveryStatus }}];\n\n\n\n// const jsonData = items[0].json.body;\n\n// const deliveryStatus = jsonData.items.map(item => item.deliver_status);\n\n// return [{json: { againstSalesOrder: deliver_status }}];\n"
+      },
+      "id": "c71ba319-e228-4246-8a2c-796cf465ed9a",
+      "name": "Code1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1640,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Change webhook from DN to Sales Invoice\n\n"
+      },
+      "id": "c5689cc9-3f37-4585-a327-b2d94ee9c07f",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        560,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "partial-delivery",
+        "options": {}
+      },
+      "id": "96611741-0fee-42fa-8d77-3e922a120e91",
+      "name": "Sales Invoice",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        340,
+        1200
+      ],
+      "webhookId": "e0df2029-9c3a-4042-a711-55c42b68bab2"
+    },
+    {
+      "parameters": {
+        "jsCode": "const jsonData = items[0].json.body;\n\nconst SalesOrder = jsonData.items[0].sales_order;\n\nreturn [{json: { SalesOrder: SalesOrder }}];"
+      },
+      "id": "54545f75-b0bd-44df-a0f6-1d7bf8569135",
+      "name": "Code2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        2400
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "=body.items",
+        "options": {}
+      },
+      "id": "0ade0884-6ab7-43d9-a4c9-df159f18bfec",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        560,
+        1200
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "ebe7170c-aed2-4e94-a1d5-d8d6da996340",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        800,
+        1140
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1eedacf8-c827-4c1b-95fb-1c6656afe4bc",
+              "name": "item_code",
+              "value": "={{ $json.item_code }}",
+              "type": "string"
+            },
+            {
+              "id": "bb943d03-cb9a-4193-838a-63832ee7a787",
+              "name": "qty",
+              "value": "={{ $json.qty }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a6f3ce3b-b7c2-4277-be08-a6985a845844",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        960,
+        1320
+      ]
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "item_code",
+              "renameField": "="
+            },
+            {
+              "fieldToAggregate": "qty"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "27542415-9794-4773-bd6e-7e3065e1a794",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Sales%20Order/{{ $json[\"SalesOrder\"] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "32811a55-cff3-4033-bd0e-71998509a949",
+      "name": "Sales order",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        2460,
+        2400
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "=body.data.items",
+        "options": {}
+      },
+      "id": "f356336d-10ed-443e-9623-8688487ad43b",
+      "name": "Split Out1",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "8797e91f-6d27-49a0-ad36-da1056c95604",
+      "name": "Loop Over Items1",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2160,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7f7f1bc9-1217-43c8-80ac-5e2993a273f8",
+              "name": "item_code",
+              "value": "={{ $json.item_code }}",
+              "type": "string"
+            },
+            {
+              "id": "d00d3add-3c8c-478e-8ea9-60ab7389f361",
+              "name": "item_name",
+              "value": "={{ $json.item_name }}",
+              "type": "string"
+            },
+            {
+              "id": "7e5653a5-85ce-4df2-82f4-127d9ba555ed",
+              "name": "qty",
+              "value": "={{ $json.qty }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "98b12197-afaf-414e-8c7d-695fcb0e7b84",
+      "name": "Edit Fields1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        2380,
+        1180
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Input data containing items from sales invoice and sales order\nconst salesInvoiceItems = $('sales_invoice_items').items[0].json;\nconst salesOrderItems = items[0].json;\n\n// Function to find items present in sales order but not in sales invoice\nfunction findItemsNotInInvoice(salesInvoiceItems, salesOrderItems) {\n    const itemsNotInInvoice = {};\n\n    // Iterate over items in the sales order\n    for (const [itemCode, quantity] of Object.entries(salesOrderItems)) {\n        // If item code not present in sales invoice, add it to the result\n        if (!(itemCode in salesInvoiceItems)) {\n            itemsNotInInvoice[itemCode] = quantity;\n        }\n    }\n\n    return itemsNotInInvoice;\n}\n\n// Call the function and store the result\nconst result = findItemsNotInInvoice(salesInvoiceItems, salesOrderItems);\n\n// Output the result\nreturn [{ json: result }];\n"
+      },
+      "id": "b1083e2f-f991-4153-b2d1-d019e5fbc035",
+      "name": "Code5",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1620,
+        2400
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Input data containing item codes and quantities\nconst inputData = items[0].json;\n\n// Function to sum the quantity of similar items\nfunction sumItemQuantities(inputData) {\n    const itemQuantityMap = {};\n\n    // Iterate over each item code and quantity\n    for (let i = 0; i < inputData.item_code.length; i++) {\n        const itemCode = inputData.item_code[i];\n        const quantity = inputData.qty[i];\n\n        // If item code exists in the map, add the quantity\n        if (itemQuantityMap.hasOwnProperty(itemCode)) {\n            itemQuantityMap[itemCode] += quantity;\n        } else {\n            // If item code doesn't exist in the map, initialize with quantity\n            itemQuantityMap[itemCode] = quantity;\n        }\n    }\n\n    return itemQuantityMap;\n}\n\n// Call the function and store the result\nconst itemQuantities = sumItemQuantities(inputData);\n\n// Output the result\nreturn [{ json: itemQuantities }];\n"
+      },
+      "id": "ce58a499-e0cc-40a1-8881-65fb521bc529",
+      "name": "sales_invoice_items",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1280,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Input data containing item codes and quantities\nconst inputData = items[0].json;\n\n// Function to sum the quantity of similar items\nfunction sumItemQuantities(inputData) {\n    const itemQuantityMap = {};\n\n    // Iterate over each item code and quantity\n    for (let i = 0; i < inputData.item_code.length; i++) {\n        const itemCode = inputData.item_code[i];\n        const quantity = inputData.qty[i];\n\n        // If item code exists in the map, add the quantity\n        if (itemQuantityMap.hasOwnProperty(itemCode)) {\n            itemQuantityMap[itemCode] += quantity;\n        } else {\n            // If item code doesn't exist in the map, initialize with quantity\n            itemQuantityMap[itemCode] = quantity;\n        }\n    }\n\n    return itemQuantityMap;\n}\n\n// Call the function and store the result\nconst itemQuantities = sumItemQuantities(inputData);\n\n// Output the result\nreturn [{ json: itemQuantities }];\n"
+      },
+      "id": "928b475d-7232-44c7-b6b2-2bb8459719fb",
+      "name": "sales_order_items",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        2400
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "86fbf0fa-0065-4524-8dd3-f2590bec00a6",
+              "name": "item_code",
+              "value": "={{ $json.item_code }}",
+              "type": "string"
+            },
+            {
+              "id": "63e4759f-d8f6-4609-95d7-6550934ce8c8",
+              "name": "qty",
+              "value": "={{ $json.qty }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1160ac5a-1198-43c5-80be-026246e25dd0",
+      "name": "Edit Fields3",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        1840,
+        2400
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "item_code"
+            },
+            {
+              "fieldToAggregate": "item_name"
+            },
+            {
+              "fieldToAggregate": "qty"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "97dba9c9-de16-4f44-a2bd-eb2af4c872af",
+      "name": "Aggregate2",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2600,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#partial-orders",
+          "mode": "name"
+        },
+        "text": "=Sales Order:*{{ $('sales_order_name').item.json[\"$('Sales Invoice')\"][\"item\"][\"json\"][\"body\"][\"items\"][0][\"sales_order\"] }}*\nfor Customer: *{{ $('Sales order_data').item.json[\"body\"][\"data\"][\"customer_name\"] }}* \nto be delivered: *{{ $('Sales order_data').item.json[\"body\"][\"data\"][\"items\"][0][\"delivery_date\"] }}* \n*Items that will not be delivered:*\n{{ $json[\"listText\"] }} ",
+        "otherOptions": {
+          "includeLinkToWorkflow": false,
+          "sendAsUser": "=PARTIAL DELIVERY"
+        }
+      },
+      "id": "91d2da9b-ae4e-42ed-a2da-8a61ee5c52d6",
+      "name": "Slack1",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        3000,
+        1000
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e2e16cba-5cbd-45eb-b8b1-1eb008339731",
+              "name": "$('Sales Invoice').item.json.body.items[0].sales_order",
+              "value": "={{ $('Sales Invoice').item.json.body.items[0].sales_order }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a941a983-e310-4379-abb6-ab87ee7321d0",
+      "name": "sales_order_name",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        1500,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "item_code"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b5d8762d-f3ba-4794-b7e6-48f4eb1ec211",
+      "name": "Aggregate3",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2260,
+        2400
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Initialize an empty list\nlet itemList = [];\n\n// Loop over items\nfor (const item of items) {\n    // Access the item code and quantity from the current item\n    let newItemCode = item.json.item_code;\n    let quantity = item.json.qty;\n\n    // Check if the item already exists in the list\n    let existingItem = itemList.find(entry => entry.itemCode === newItemCode);\n\n    // If the item exists, update its quantity\n    if (existingItem) {\n        existingItem.quantity += quantity;\n    } else {\n        // If the item does not exist, append it to the list\n        itemList.push({ itemCode: newItemCode, quantity: quantity });\n    }\n}\n\n// Output the list\nreturn [{ json: { itemList: itemList } }];\n"
+      },
+      "id": "7cdf0411-7305-42b6-8350-ff19034405fe",
+      "name": "Code3",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2060,
+        2400
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Initialize an empty list\nlet itemList = [];\n\n// Loop over items\nfor (const item of items) {\n    // Access the item code and quantity from the current item\n    let newItemCode = item.json.item_code;\n    let quantity = item.json.qty;\n\n    // Check if the item already exists in the list\n    let existingItem = itemList.find(entry => entry.itemCode === newItemCode);\n\n    // If the item exists, update its quantity\n    if (existingItem) {\n        existingItem.quantity += quantity;\n    } else {\n        // If the item does not exist, append it to the list\n        itemList.push({ itemCode: newItemCode, quantity: quantity });\n    }\n}\n\n// Output the list\nreturn [{ json: { itemList: itemList } }];\n"
+      },
+      "id": "c5364867-cd84-4d3c-8195-5152ebc542a0",
+      "name": "Code4",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1420,
+        2400
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "86fbf0fa-0065-4524-8dd3-f2590bec00a6",
+              "name": "item_code",
+              "value": "={{ $json.item_code }}",
+              "type": "string"
+            },
+            {
+              "id": "63e4759f-d8f6-4609-95d7-6550934ce8c8",
+              "name": "qty",
+              "value": "={{ $json.qty }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "211f525c-826f-40fd-926e-9a581533d36d",
+      "name": "Edit Fields4",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        3800,
+        1800
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "59121e78-bdab-4aa8-8956-fab85ddd9a96",
+              "leftValue": "={{ $('Aggregate').item.json.item_code }}",
+              "rightValue": "={{ $json.item_code }}",
+              "operator": {
+                "type": "array",
+                "operation": "contains",
+                "rightType": "any"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "25b3a82c-1a92-4030-837e-92309835db76",
+      "name": "If2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        780,
+        2400
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Sales%20Order/{{ $json[\"$('Sales Invoice')\"][\"item\"][\"json\"][\"body\"][\"items\"][0][\"sales_order\"] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "6e47d1d7-0ee1-49ba-bd55-934096f5eebb",
+      "name": "Sales order_data",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1700,
+        1040
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "6df891ab-697c-41fa-a2dc-591155d413d3",
+              "leftValue": "={{ $('Aggregate').item.json.item_code }}",
+              "rightValue": "={{ $json.item_code }}",
+              "operator": {
+                "type": "array",
+                "operation": "notContains",
+                "rightType": "any"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "8ffa0ede-aa11-4b85-beaf-331b8bab828f",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        2380,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Initialize an empty array to store the list items\nconst itemList = [];\n\n// Iterate over the item_code array\nfor (let i = 0; i < items[0].json.item_code.length; i++) {\n    const itemCode = items[0].json.item_code[i];\n    const itemName = items[0].json.item_name[i];\n    const quantity = items[0].json.qty[i];\n    \n    // Construct the list item\n    const listItem = `${i + 1}. ${itemCode} (${itemName}) - ${quantity}`;\n    \n    // Add the list item to the array\n    itemList.push(listItem);\n}\n\n// Join the list items with newline character to form a single string\nconst listText = itemList.join(\"\\n\");\n\n// Output the list text\nreturn [{ json: { listText } }];\n"
+      },
+      "id": "98ede857-8b25-4b46-9fba-dbc227159379",
+      "name": "Code6",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2800,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## TO DO\n\n### Add Button in Slack to send notification tocustomer. \n### The button will trigger another workflow\n### In the workflow, set filter for 80% delivery.\n",
+        "height": 202.9459004002262,
+        "width": 469.66720648816596
+      },
+      "id": "7508204f-1880-4e3e-a471-df91ebfed299",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2780,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#partial-orders",
+          "mode": "name"
+        },
+        "messageType": "block",
+        "blocksUi": "={\n\t\"blocks\": [\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"Sales Order: *{{  $('sales_order_name').item.json[\"$('Sales Invoice')\"][\"item\"][\"json\"][\"body\"][\"items\"][0][\"sales_order\"] }}*\\nfor Customer: *{{ $('Sales order_data').item.json[\"body\"][\"data\"][\"customer_name\"] }}*\\nto be delivered: *{{ $('Sales order_data').item.json[\"body\"][\"data\"][\"items\"][0][\"delivery_date\"] }}*\\n*Items that will not be delivered*:\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"fields\": [\n\t\t\t\t{\n\t\t\t\t\t\"type\": \"plain_text\",\n\t\t\t\t\t\"text\": \"{{ $('Code6').item.json[\"listText\"] }}\",\n\t\t\t\t\t\"emoji\": true\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"type\": \"actions\",\n\t\t\t\"elements\": [\n\t\t\t\t{\n\t\t\t\t\t\"type\": \"button\",\n\t\t\t\t\t\"text\": {\n\t\t\t\t\t\t\"type\": \"plain_text\",\n\t\t\t\t\t\t\"text\": \"Notify Customer\",\n\t\t\t\t\t\t\"emoji\": true\n\t\t\t\t\t},\n\t\t\t\t\t\"value\": \"click_me_123\",\n\t\t\t\t\t\"url\": \"https://n8n.bulkbox.cloud/webhook-test/send-customer-notification\",\n\t\t\t\t\t\"action_id\": \"actionId-0\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}",
+        "text": "=Sales Order:*{{ $('sales_order_name').item.json[\"$('Sales Invoice')\"][\"item\"][\"json\"][\"body\"][\"items\"][0][\"sales_order\"] }}*\nfor Customer: *{{ $('Sales order_data').item.json[\"body\"][\"data\"][\"customer_name\"] }}* \nto be delivered: *{{ $('Sales order_data').item.json[\"body\"][\"data\"][\"items\"][0][\"delivery_date\"] }}* \n*Items that will not be delivered:*\n{{ $json[\"listText\"] }} ",
+        "otherOptions": {
+          "includeLinkToWorkflow": false,
+          "sendAsUser": "=PARTIAL DELIVERY"
+        }
+      },
+      "id": "a929a25c-4bea-4de9-8e9b-6591b5eca319",
+      "name": "Slack2",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        3020,
+        1220
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#partial-orders",
+          "mode": "name"
+        },
+        "messageType": "block",
+        "blocksUi": "={\n\t\"blocks\": [\n\t\t{\n\t\t\t\"type\": \"actions\",\n\t\t\t\"elements\": [\n\t\t\t\t{\n\t\t\t\t\t\"type\": \"button\",\n\t\t\t\t\t\"text\": {\n\t\t\t\t\t\t\"type\": \"plain_text\",\n\t\t\t\t\t\t\"text\": \"Notify {{ $('Sales order_data').item.json[\"body\"][\"data\"][\"customer\"] }}\",\n\t\t\t\t\t\t\"emoji\": true\n\t\t\t\t\t},\n\t\t\t\t\t\"value\": \"click_me_123\",\n\t\t\t\t\t\"url\": \"https://n8n.bulkbox.cloud/webhook-test/send-customer-notification?customer={{ $('Sales order_data').item.json[\"body\"][\"data\"][\"customer\"] }}&sales_order={{ $('Sales order_data').item.json[\"body\"][\"data\"][\"name\"] }}&sales_invoice={{ $('Sales Invoice').item.json[\"body\"][\"name\"] }}&delivery_date={{ $('Sales order_data').item.json[\"body\"][\"data\"][\"delivery_date\"] }}\",\n\t\t\t\t\t\"action_id\": \"actionId-0\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}",
+        "text": "=Sales Order:*{{ $('sales_order_name').item.json[\"$('Sales Invoice')\"][\"item\"][\"json\"][\"body\"][\"items\"][0][\"sales_order\"] }}*\nfor Customer: *{{ $('Sales order_data').item.json[\"body\"][\"data\"][\"customer_name\"] }}* \nto be delivered: *{{ $('Sales order_data').item.json[\"body\"][\"data\"][\"items\"][0][\"delivery_date\"] }}* \n*Items that will not be delivered:*\n{{ $json[\"listText\"] }} ",
+        "otherOptions": {
+          "includeLinkToWorkflow": false,
+          "sendAsUser": "=PARTIAL DELIVERY"
+        }
+      },
+      "id": "1ebcc61d-7d39-46cf-879d-e37325492dbc",
+      "name": "Slack3",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        3180,
+        920
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#partial-orders",
+          "mode": "name"
+        },
+        "messageType": "block",
+        "blocksUi": "={\n\t\"blocks\": [\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"Notify {{ $('Sales order_data').item.json[\"body\"][\"data\"][\"customer\"] }}.\"\n\t\t\t},\n\t\t\t\"accessory\": {\n\t\t\t\t\"type\": \"button\",\n\t\t\t\t\"text\": {\n\t\t\t\t\t\"type\": \"plain_text\",\n\t\t\t\t\t\"text\": \"Send Email\",\n\t\t\t\t\t\"emoji\": true\n\t\t\t\t},\n\t\t\t\t\"value\": \"click_me_123\",\n\t\t\t\t\"url\": \"https://n8n.bulkbox.cloud/webhook-test/send-customer-notification?customer={{ $('Sales order_data').item.json[\"body\"][\"data\"][\"customer\"] }}&sales_order={{ $('Sales order_data').item.json[\"body\"][\"data\"][\"name\"] }}&sales_invoice={{ $('Sales Invoice').item.json[\"body\"][\"name\"] }}&delivery_date={{ $('Sales order_data').item.json[\"body\"][\"data\"][\"delivery_date\"] }}\",\n\t\t\t\t\"action_id\": \"button-action\"\n\t\t\t}\n\t\t}\n\t]\n}",
+        "text": "=Sales Order:*{{ $('sales_order_name').item.json[\"$('Sales Invoice')\"][\"item\"][\"json\"][\"body\"][\"items\"][0][\"sales_order\"] }}*\nfor Customer: *{{ $('Sales order_data').item.json[\"body\"][\"data\"][\"customer_name\"] }}* \nto be delivered: *{{ $('Sales order_data').item.json[\"body\"][\"data\"][\"items\"][0][\"delivery_date\"] }}* \n*Items that will not be delivered:*\n{{ $json[\"listText\"] }} ",
+        "otherOptions": {
+          "includeLinkToWorkflow": false,
+          "sendAsUser": "=PARTIAL DELIVERY"
+        }
+      },
+      "id": "c72aa864-4e5d-40ef-87fb-48c6e366e6fc",
+      "name": "Slack4",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        3200,
+        1100
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "python-requests/2.31.0",
+            "content-length": "4315",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "x-forwarded-for": "167.235.206.20",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "167.235.206.20"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "name": "MAT-DN-2024-01583",
+            "posting_date": "2024-03-08",
+            "customer_name": "Virginia Cameron",
+            "mode_of_payment": null,
+            "shipping_address": null,
+            "address_display": "14a Lone Tree Estate Road,<br>Rosslyn<br>Nairobi<br>\nKenya<br>\n",
+            "driver_name": "Geoffrey Omwenga // KDA223A",
+            "items": [
+              {
+                "name": "20abc91b16",
+                "owner": "eugene@bulkbox.co.ke",
+                "creation": "2024-03-08 15:21:53.446080",
+                "modified": "2024-03-08 15:22:33.661092",
+                "modified_by": "eugene@bulkbox.co.ke",
+                "parent": "MAT-DN-2024-01583",
+                "parentfield": "items",
+                "parenttype": "Delivery Note",
+                "idx": 1,
+                "docstatus": 1,
+                "barcode": null,
+                "item_code": "MAL010",
+                "item_name": "Mayers Natural Spring Water Still Glass 750ml",
+                "customer_item_code": null,
+                "description": "Mayers Natural Spring Water Still Glass 750ml",
+                "brand": "Mayers",
+                "item_group": "Still Water",
+                "image": "",
+                "qty": 48,
+                "case_size": "12",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 48,
+                "returned_qty": 0,
+                "price_list_rate": 54.98,
+                "base_price_list_rate": 54.98,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 54.98,
+                "amount": 2639.04,
+                "base_rate": 54.98,
+                "base_amount": 2639.04,
+                "pricing_rules": null,
+                "stock_uom_rate": 54.98,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 54.98,
+                "net_amount": 2639.04,
+                "item_tax_template": "16% - TSL",
+                "base_net_rate": 54.98,
+                "base_net_amount": 2639.04,
+                "billed_amt": 0,
+                "incoming_rate": 40,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "weight_uom": null,
+                "warehouse": "Storage - TSL",
+                "target_warehouse": null,
+                "quality_inspection": null,
+                "against_sales_order": "SAL-ORD-2024-01358",
+                "so_detail": "4b7cdadf2a",
+                "against_sales_invoice": null,
+                "si_detail": null,
+                "dn_detail": null,
+                "pick_list_item": "4ccdafc5fd",
+                "batch_no": "MAL01000011",
+                "serial_no": null,
+                "actual_batch_qty": 0,
+                "actual_qty": 60,
+                "installed_qty": 0,
+                "item_tax_rate": "{\"VAT - 16% - TSL\": 16.0}",
+                "expense_account": "Beverages COGS - TSL",
+                "allow_zero_valuation_rate": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "project": null,
+                "page_break": 0,
+                "doctype": "Delivery Note Item"
+              },
+              {
+                "name": "a848ea6a66",
+                "owner": "eugene@bulkbox.co.ke",
+                "creation": "2024-03-08 15:21:53.446080",
+                "modified": "2024-03-08 15:22:33.666680",
+                "modified_by": "eugene@bulkbox.co.ke",
+                "parent": "MAT-DN-2024-01583",
+                "parentfield": "items",
+                "parenttype": "Delivery Note",
+                "idx": 2,
+                "docstatus": 1,
+                "barcode": null,
+                "item_code": "MAL010-1",
+                "item_name": "DEPOSIT Mayers Crate and Bottle 12x750ml",
+                "customer_item_code": null,
+                "description": "<div>DEPOSIT Mayers Crate and Bottle 12x750ml</div>",
+                "brand": null,
+                "item_group": "Glass Bottles & Crates",
+                "image": "",
+                "qty": 4,
+                "case_size": "12",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 4,
+                "returned_qty": 0,
+                "price_list_rate": 1563.44,
+                "base_price_list_rate": 1563.44,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 1563.44,
+                "amount": 6253.76,
+                "base_rate": 1563.44,
+                "base_amount": 6253.76,
+                "pricing_rules": null,
+                "stock_uom_rate": 1563.44,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 1563.44,
+                "net_amount": 6253.76,
+                "item_tax_template": "16% - TSL",
+                "base_net_rate": 1563.44,
+                "base_net_amount": 6253.76,
+                "billed_amt": 0,
+                "incoming_rate": 1563.44,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "weight_uom": null,
+                "warehouse": "Storage - TSL",
+                "target_warehouse": null,
+                "quality_inspection": null,
+                "against_sales_order": "SAL-ORD-2024-01358",
+                "so_detail": "b5da3e0a64",
+                "against_sales_invoice": null,
+                "si_detail": null,
+                "dn_detail": null,
+                "pick_list_item": "6593030792",
+                "batch_no": "MAL010-100004",
+                "serial_no": null,
+                "actual_batch_qty": 0,
+                "actual_qty": 170,
+                "installed_qty": 0,
+                "item_tax_rate": "{\"VAT - 16% - TSL\": 16.0}",
+                "expense_account": "Beverages COGS - TSL",
+                "allow_zero_valuation_rate": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "project": null,
+                "page_break": 0,
+                "doctype": "Delivery Note Item"
+              }
+            ],
+            "base_rounded_total": 10616,
+            "contact_mobile": "",
+            "contact_email": "v.cameron@ifad.org",
+            "grand_total": 10615.65,
+            "payment_method": "M-PESA",
+            "driver": "HR-DRI-2023-00001",
+            "delivery_date": "2024-03-09"
+          }
+        }
+      }
+    ],
+    "Sales Invoice": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "python-requests/2.31.0",
+            "content-length": "5131",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "x-forwarded-for": "167.235.206.20",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "167.235.206.20"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "name": "IV03240775",
+            "items": [
+              {
+                "name": "219903a4b9",
+                "owner": "samwel@bulkbox.co.ke",
+                "creation": "2024-03-23 09:56:37.342940",
+                "modified": "2024-03-23 09:56:45.768162",
+                "modified_by": "samwel@bulkbox.co.ke",
+                "parent": "IV03240775",
+                "parentfield": "items",
+                "parenttype": "Sales Invoice",
+                "idx": 1,
+                "docstatus": 1,
+                "barcode": "96197370",
+                "item_code": "GPL165",
+                "item_name": "Nestle Kitkat 2 Fingers Chocolate 20.7g",
+                "description": "Nestle Kitkat 2 Fingers Chocolate 20.7g",
+                "item_group": "Chocolate & Candy",
+                "brand": "Kitkat",
+                "image": "https://v5.airtableusercontent.com/v3/u/24/24/1705068000000/szJaOIJPjRGdn9BvNZsr5Q/MbavKRi2ttbPa4dGsXO59PWePDsSSzeGcOlznELh42gP6ObCMirGkf6VF2e-_ODieFsAz80rlOMSXhE5Cywi0kdM3TNanpn5QcFtURPpMOLS-YQzF8rOa7Xmua52_gcsrschRNqHERvmt8n1DOXfH06Z_dMezsHaVeluBZTjMfjwVyv_gEQpdZE1OUNUoXlK/x59Mnqliti0Klb1P1AvcNr-xuhYmLemgJNedFovlXvE",
+                "qty": 36,
+                "case_size": "36",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 36,
+                "price_list_rate": 68.66,
+                "base_price_list_rate": 68.66,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 68.66,
+                "amount": 2471.76,
+                "item_tax_template": "16% - TSL",
+                "base_rate": 68.66,
+                "base_amount": 2471.76,
+                "posa_offer_applied": 0,
+                "posa_is_offer": 0,
+                "stock_uom_rate": 68.66,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 68.66,
+                "net_amount": 2471.76,
+                "base_net_rate": 68.66,
+                "base_net_amount": 2471.76,
+                "delivered_by_supplier": 0,
+                "income_account": "Snacks & Confectionary Sales - TSL",
+                "is_fixed_asset": 0,
+                "expense_account": "Snacks & Confectionary COGS - TSL",
+                "enable_deferred_revenue": 0,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "warehouse": "Storage - TSL",
+                "batch_no": "WOB002500005",
+                "incoming_rate": 60.34,
+                "allow_zero_valuation_rate": 0,
+                "item_tax_rate": "{\"VAT - 16% - TSL\": 16.0}",
+                "actual_batch_qty": 0,
+                "actual_qty": 216,
+                "sales_order": "SAL-ORD-2024-01621",
+                "so_detail": "59eee35772",
+                "delivery_note": "MAT-DN-2024-01922",
+                "dn_detail": "a82a1eccf4",
+                "delivered_qty": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "page_break": 0,
+                "doctype": "Sales Invoice Item"
+              },
+              {
+                "name": "953e9fbd32",
+                "owner": "samwel@bulkbox.co.ke",
+                "creation": "2024-03-23 09:56:37.342940",
+                "modified": "2024-03-23 09:56:45.768162",
+                "modified_by": "samwel@bulkbox.co.ke",
+                "parent": "IV03240775",
+                "parentfield": "items",
+                "parenttype": "Sales Invoice",
+                "idx": 2,
+                "docstatus": 1,
+                "item_code": "BAL099",
+                "item_name": "Ufuta Cooking Oil  Tray 1L",
+                "description": "Ufuta Cooking Oil  Tray 1L",
+                "item_group": "Vegetable Oil",
+                "brand": "Ufuta",
+                "image": "https://v5.airtableusercontent.com/v2/23/23/1701943200000/pqW4jo_iTcpXWWAt_Ha9NA/GS_zzl8l8EsJVWCMHYBzo4q7EnutkKxf01M3esvCX2EZ81QoFnEQT9FMNBzA--xjvsTII6dfPdLjSXb9MUnKpkHCza8DSVRhNfhohF5sQNCo566XU3j3czFv5oE-2a0IH5ScWHHLonX3XiyAs70T7ZfJkf8ukn68bda3lF_KCmk/LKSDBShG7WlaZYTXOnoLEe74Cq67rKsfyVG3nyFm0rQ",
+                "qty": 12,
+                "case_size": "12",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 12,
+                "price_list_rate": 257.12,
+                "base_price_list_rate": 257.12,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 257.12,
+                "amount": 3085.44,
+                "item_tax_template": "16% - TSL",
+                "base_rate": 257.12,
+                "base_amount": 3085.44,
+                "posa_offer_applied": 0,
+                "posa_is_offer": 0,
+                "stock_uom_rate": 257.12,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 257.12,
+                "net_amount": 3085.44,
+                "base_net_rate": 257.12,
+                "base_net_amount": 3085.44,
+                "delivered_by_supplier": 0,
+                "income_account": "Ambient Staples Sales - TSL",
+                "is_fixed_asset": 0,
+                "expense_account": "Ambient Staples COGS - TSL",
+                "enable_deferred_revenue": 0,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "warehouse": "Storage - TSL",
+                "batch_no": "BAL09900011",
+                "incoming_rate": 224.74,
+                "allow_zero_valuation_rate": 0,
+                "item_tax_rate": "{\"VAT - 16% - TSL\": 16.0}",
+                "actual_batch_qty": 0,
+                "actual_qty": 0,
+                "sales_order": "SAL-ORD-2024-01621",
+                "so_detail": "56b65d8e89",
+                "delivery_note": "MAT-DN-2024-01922",
+                "dn_detail": "fc85e1e9fc",
+                "delivered_qty": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "page_break": 0,
+                "doctype": "Sales Invoice Item"
+              },
+              {
+                "name": "258f264818",
+                "owner": "samwel@bulkbox.co.ke",
+                "creation": "2024-03-23 09:56:37.342940",
+                "modified": "2024-03-23 09:56:45.768162",
+                "modified_by": "samwel@bulkbox.co.ke",
+                "parent": "IV03240775",
+                "parentfield": "items",
+                "parenttype": "Sales Invoice",
+                "idx": 3,
+                "docstatus": 1,
+                "item_code": "DFL188",
+                "item_name": "Borges Extra Virgin Olive Oil 1L",
+                "description": "Borges Extra Virgin Olive Oil 1L",
+                "item_group": "Olive Oil",
+                "brand": "Borges",
+                "image": "https://v5.airtableusercontent.com/v3/u/27/27/1711044000000/58SFOqer4TfkoOysj6eIgQ/bpDmwFn-wcFYnGGj0onSDoeT-fPRw8_WLOwqrI8A80TrDWW_YfMEiBS8G_-maQrFJXQgypnlENqKw-kDru_oHGJ36NiSwr3BHm9L5tJnFNMyiYwcb7NxvSN3QcgwVZ-Qj1hCGsynH23fX5Q-hpMooQX_Q0ffzk1wPJABVtp1Cyge2hlw3amnez9xTSzwZVN1/J-KNFtRtlRfuizO045DSFONsSWrW_iqMs5WUhN-lAdg",
+                "qty": 6,
+                "case_size": "6",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 6,
+                "price_list_rate": 2314.1,
+                "base_price_list_rate": 2314.1,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 2314.1,
+                "amount": 13884.6,
+                "item_tax_template": "16% - TSL",
+                "base_rate": 2314.1,
+                "base_amount": 13884.6,
+                "posa_offer_applied": 0,
+                "posa_is_offer": 0,
+                "stock_uom_rate": 2314.1,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 2314.1,
+                "net_amount": 13884.6,
+                "base_net_rate": 2314.1,
+                "base_net_amount": 13884.6,
+                "delivered_by_supplier": 0,
+                "income_account": "Ambient Staples Sales - TSL",
+                "is_fixed_asset": 0,
+                "expense_account": "Ambient Staples COGS - TSL",
+                "enable_deferred_revenue": 0,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "warehouse": "Storage - TSL",
+                "batch_no": "DFL18800004",
+                "incoming_rate": 2092.89,
+                "allow_zero_valuation_rate": 0,
+                "item_tax_rate": "{\"VAT - 16% - TSL\": 16.0}",
+                "actual_batch_qty": 0,
+                "actual_qty": 12,
+                "sales_order": "SAL-ORD-2024-01621",
+                "so_detail": "07c20de4a4",
+                "delivery_note": "MAT-DN-2024-01922",
+                "dn_detail": "9c422b48fb",
+                "delivered_qty": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "page_break": 0,
+                "doctype": "Sales Invoice Item"
+              },
+              {
+                "name": "28e146bf93",
+                "owner": "samwel@bulkbox.co.ke",
+                "creation": "2024-03-23 09:56:37.342940",
+                "modified": "2024-03-23 09:56:45.768162",
+                "modified_by": "samwel@bulkbox.co.ke",
+                "parent": "IV03240775",
+                "parentfield": "items",
+                "parenttype": "Sales Invoice",
+                "idx": 4,
+                "docstatus": 1,
+                "barcode": "8691216098565",
+                "item_code": "RDD093",
+                "item_name": "Haribo Starmix 160g",
+                "description": "Haribo Starmix 160g",
+                "item_group": "Chocolate & Candy",
+                "brand": "Haribo",
+                "image": "https://v5.airtableusercontent.com/v3/u/24/24/1705068000000/r43aoEoJItCbQ9DlhrQENw/j38xcui-EP9Q2BSmkaV3UnTmsDh-i7ky89TdlY-bk_stF1AWZFUcow-DVklZfhkUHoxEt-YNvD2wFJeyfOZaXuscUI-4WWZu6nZXNbmXrZwjCHgXzA2a0-BYHLdm4TSNrna-le2FDnbnRPmyKpZaHw/BAaWxYCqPwB4BXzDE0sfBqRcWngtHBC-Gv-z8p2djSE",
+                "qty": 12,
+                "case_size": "12",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 12,
+                "price_list_rate": 280.86,
+                "base_price_list_rate": 280.86,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 280.86,
+                "amount": 3370.32,
+                "item_tax_template": "16% - TSL",
+                "base_rate": 280.86,
+                "base_amount": 3370.32,
+                "posa_offer_applied": 0,
+                "posa_is_offer": 0,
+                "stock_uom_rate": 280.86,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 280.86,
+                "net_amount": 3370.32,
+                "base_net_rate": 280.86,
+                "base_net_amount": 3370.32,
+                "delivered_by_supplier": 0,
+                "income_account": "Snacks & Confectionary Sales - TSL",
+                "is_fixed_asset": 0,
+                "expense_account": "Snacks & Confectionary COGS - TSL",
+                "enable_deferred_revenue": 0,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "warehouse": "Storage - TSL",
+                "batch_no": "RDD09300007",
+                "incoming_rate": 253.92,
+                "allow_zero_valuation_rate": 0,
+                "item_tax_rate": "{\"VAT - 16% - TSL\": 16.0}",
+                "actual_batch_qty": 0,
+                "actual_qty": 12,
+                "sales_order": "SAL-ORD-2024-01621",
+                "so_detail": "b59777ae17",
+                "delivery_note": "MAT-DN-2024-01922",
+                "dn_detail": "ba54352466",
+                "delivered_qty": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "page_break": 0,
+                "doctype": "Sales Invoice Item"
+              },
+              {
+                "name": "d139173a12",
+                "owner": "samwel@bulkbox.co.ke",
+                "creation": "2024-03-23 09:56:37.342940",
+                "modified": "2024-03-23 09:56:45.768162",
+                "modified_by": "samwel@bulkbox.co.ke",
+                "parent": "IV03240775",
+                "parentfield": "items",
+                "parenttype": "Sales Invoice",
+                "idx": 5,
+                "docstatus": 1,
+                "item_code": "BFK163",
+                "item_name": "Bio Fresh Semi-Skimmed Milk 2L",
+                "description": "Bio Fresh Semi-Skimmed Milk 2L",
+                "item_group": "Fresh Milk",
+                "brand": "Bio Food",
+                "image": "https://v5.airtableusercontent.com/v3/u/24/24/1705068000000/ixRGVr2BBSv5blM-lNUArQ/CAyoTXULLlHBMS72XkzVWW5Oibh1E9kB3eIsWWwspxmbhy502q32X4lfeXFC13gpabNll3K9ksfEe9qvQ02S40Q1Dx_id9L6C5VJPvcTFKTX7AuYKnNx72ApNXTmas8GECmpKgz7GBAZEdW8yvrBrhYkb1P-Tnlx9b_Rx9RI3io/Ccu-WD_D2aerhJ9esq81h2MU9ory_kgHMa-Y9AwuSEs",
+                "qty": 18,
+                "case_size": "6",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 18,
+                "price_list_rate": 289.34,
+                "base_price_list_rate": 289.34,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 289.34,
+                "amount": 5208.12,
+                "item_tax_template": "0% - TSL",
+                "base_rate": 289.34,
+                "base_amount": 5208.12,
+                "posa_offer_applied": 0,
+                "posa_is_offer": 0,
+                "stock_uom_rate": 289.34,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 289.34,
+                "net_amount": 5208.12,
+                "base_net_rate": 289.34,
+                "base_net_amount": 5208.12,
+                "delivered_by_supplier": 0,
+                "income_account": "Dairy Sales - TSL",
+                "is_fixed_asset": 0,
+                "expense_account": "Dairy COGS - TSL",
+                "enable_deferred_revenue": 0,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "warehouse": "Storage - TSL",
+                "batch_no": "BFK16300069",
+                "incoming_rate": 224,
+                "allow_zero_valuation_rate": 0,
+                "item_tax_rate": "{\"Zero Rated Tax - TSL\": 0.0}",
+                "actual_batch_qty": 0,
+                "actual_qty": 0,
+                "sales_order": "SAL-ORD-2024-01621",
+                "so_detail": "18ad23095c",
+                "delivery_note": "MAT-DN-2024-01922",
+                "dn_detail": "c41cdc5849",
+                "delivered_qty": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "page_break": 0,
+                "doctype": "Sales Invoice Item"
+              },
+              {
+                "name": "6c85b803e0",
+                "owner": "samwel@bulkbox.co.ke",
+                "creation": "2024-03-23 09:56:37.342940",
+                "modified": "2024-03-23 09:56:45.768162",
+                "modified_by": "samwel@bulkbox.co.ke",
+                "parent": "IV03240775",
+                "parentfield": "items",
+                "parenttype": "Sales Invoice",
+                "idx": 6,
+                "docstatus": 1,
+                "barcode": "6161108006012",
+                "item_code": "BFK159",
+                "item_name": "Bio Fresh Whole Milk 1L",
+                "description": "Bio Fresh Whole Milk 1L",
+                "item_group": "Fresh Milk",
+                "brand": "Bio Food",
+                "image": "https://v5.airtableusercontent.com/v3/u/26/26/1710518400000/pf4LDzXYowSGpyqJ5Tk5ag/3xMFxRYe2GfF6zDHbXCHKbx-Biv60i5ud6k3UPxBKwP2_AL3_xU3QY8m5Lr-48eAtwhbyHeNhVeAzvPC2qzsTkayrRvdULIOKPEEX4PSS-wLL0Br4cYtI5VAf1S9oSHumsQFJy-tUxl7Ek83Omn3e0PIjtfLjtslCWgpoETLKM8/eqPQOL6G5lcKS_A4mX3YVYDii6AnGFX4Ij_MRsMNOSo",
+                "qty": 12,
+                "case_size": "12",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 12,
+                "price_list_rate": 150.22,
+                "base_price_list_rate": 150.22,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 150.22,
+                "amount": 1802.64,
+                "item_tax_template": "0% - TSL",
+                "base_rate": 150.22,
+                "base_amount": 1802.64,
+                "posa_offer_applied": 0,
+                "posa_is_offer": 0,
+                "stock_uom_rate": 150.22,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 150.22,
+                "net_amount": 1802.64,
+                "base_net_rate": 150.22,
+                "base_net_amount": 1802.64,
+                "delivered_by_supplier": 0,
+                "income_account": "Dairy Sales - TSL",
+                "is_fixed_asset": 0,
+                "expense_account": "Dairy COGS - TSL",
+                "enable_deferred_revenue": 0,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "warehouse": "Storage - TSL",
+                "batch_no": "BFK15900149",
+                "incoming_rate": 121,
+                "allow_zero_valuation_rate": 0,
+                "item_tax_rate": "{\"Zero Rated Tax - TSL\": 0.0}",
+                "actual_batch_qty": 0,
+                "actual_qty": 0,
+                "sales_order": "SAL-ORD-2024-01621",
+                "so_detail": "88bf991d36",
+                "delivery_note": "MAT-DN-2024-01922",
+                "dn_detail": "9b0c197aba",
+                "delivered_qty": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "page_break": 0,
+                "doctype": "Sales Invoice Item"
+              },
+              {
+                "name": "5a56d49889",
+                "owner": "samwel@bulkbox.co.ke",
+                "creation": "2024-03-23 09:56:37.342940",
+                "modified": "2024-03-23 09:56:45.768162",
+                "modified_by": "samwel@bulkbox.co.ke",
+                "parent": "IV03240775",
+                "parentfield": "items",
+                "parenttype": "Sales Invoice",
+                "idx": 7,
+                "docstatus": 1,
+                "barcode": "6161108006012",
+                "item_code": "BFK159",
+                "item_name": "Bio Fresh Whole Milk 1L",
+                "description": "Bio Fresh Whole Milk 1L",
+                "item_group": "Fresh Milk",
+                "brand": "Bio Food",
+                "image": "https://v5.airtableusercontent.com/v3/u/26/26/1710518400000/pf4LDzXYowSGpyqJ5Tk5ag/3xMFxRYe2GfF6zDHbXCHKbx-Biv60i5ud6k3UPxBKwP2_AL3_xU3QY8m5Lr-48eAtwhbyHeNhVeAzvPC2qzsTkayrRvdULIOKPEEX4PSS-wLL0Br4cYtI5VAf1S9oSHumsQFJy-tUxl7Ek83Omn3e0PIjtfLjtslCWgpoETLKM8/eqPQOL6G5lcKS_A4mX3YVYDii6AnGFX4Ij_MRsMNOSo",
+                "qty": 25,
+                "case_size": "12",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 25,
+                "price_list_rate": 150.22,
+                "base_price_list_rate": 150.22,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 150.22,
+                "amount": 3755.5,
+                "item_tax_template": "0% - TSL",
+                "base_rate": 150.22,
+                "base_amount": 3755.5,
+                "posa_offer_applied": 0,
+                "posa_is_offer": 0,
+                "stock_uom_rate": 150.22,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 150.22,
+                "net_amount": 3755.5,
+                "base_net_rate": 150.22,
+                "base_net_amount": 3755.5,
+                "delivered_by_supplier": 0,
+                "income_account": "Dairy Sales - TSL",
+                "is_fixed_asset": 0,
+                "expense_account": "Dairy COGS - TSL",
+                "enable_deferred_revenue": 0,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "warehouse": "Storage - TSL",
+                "batch_no": "BFK15900150",
+                "incoming_rate": 121,
+                "allow_zero_valuation_rate": 0,
+                "item_tax_rate": "{\"Zero Rated Tax - TSL\": 0.0}",
+                "actual_batch_qty": 0,
+                "actual_qty": 0,
+                "sales_order": "SAL-ORD-2024-01621",
+                "so_detail": "88bf991d36",
+                "delivery_note": "MAT-DN-2024-01922",
+                "dn_detail": "dca0906120",
+                "delivered_qty": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "page_break": 0,
+                "doctype": "Sales Invoice Item"
+              },
+              {
+                "name": "7b0aa250d0",
+                "owner": "samwel@bulkbox.co.ke",
+                "creation": "2024-03-23 09:56:37.342940",
+                "modified": "2024-03-23 09:56:45.768162",
+                "modified_by": "samwel@bulkbox.co.ke",
+                "parent": "IV03240775",
+                "parentfield": "items",
+                "parenttype": "Sales Invoice",
+                "idx": 8,
+                "docstatus": 1,
+                "barcode": "6161108006029",
+                "item_code": "BFK162",
+                "item_name": "Bio Fresh Whole Milk 2L",
+                "description": "Bio Fresh Whole Milk 2L",
+                "item_group": "Fresh Milk",
+                "brand": "Bio Food",
+                "image": "https://v5.airtableusercontent.com/v3/u/24/24/1705068000000/0yJl9Psv6L-ITIEnOq6Xpg/6rbvRg2SEAjsXdW04jmIBcPGVBICyjzO78ITMv5INvRZBcnAJi3UIl4m6S_sMYCNvS7-7QgdrvdCAD99XhawuVhNZX4M19_q7wJr-h-q3ss5X_s8Dd-qV_EmMqXDRNKTxt6fr6A4kJ1AbfnkUB8EPU_uo8UtebKkVtNTVeTAWlc/4YR5Ek0hOcbtgV1c9-8JHEPqzm92RBQGpC7sKfMIRjs",
+                "qty": 24,
+                "case_size": "6",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 24,
+                "price_list_rate": 290.86,
+                "base_price_list_rate": 290.86,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 290.86,
+                "amount": 6980.64,
+                "item_tax_template": "0% - TSL",
+                "base_rate": 290.86,
+                "base_amount": 6980.64,
+                "posa_offer_applied": 0,
+                "posa_is_offer": 0,
+                "stock_uom_rate": 290.86,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 290.86,
+                "net_amount": 6980.64,
+                "base_net_rate": 290.86,
+                "base_net_amount": 6980.64,
+                "delivered_by_supplier": 0,
+                "income_account": "Dairy Sales - TSL",
+                "is_fixed_asset": 0,
+                "expense_account": "Dairy COGS - TSL",
+                "enable_deferred_revenue": 0,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "warehouse": "Storage - TSL",
+                "batch_no": "BFK16200191",
+                "incoming_rate": 233.33,
+                "allow_zero_valuation_rate": 0,
+                "item_tax_rate": "{\"Zero Rated Tax - TSL\": 0.0}",
+                "actual_batch_qty": 0,
+                "actual_qty": 69,
+                "sales_order": "SAL-ORD-2024-01621",
+                "so_detail": "8d236e1841",
+                "delivery_note": "MAT-DN-2024-01922",
+                "dn_detail": "d0d4a3e0fd",
+                "delivered_qty": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "page_break": 0,
+                "doctype": "Sales Invoice Item"
+              },
+              {
+                "name": "f97b64bdfb",
+                "owner": "samwel@bulkbox.co.ke",
+                "creation": "2024-03-23 09:56:37.342940",
+                "modified": "2024-03-23 09:56:45.768162",
+                "modified_by": "samwel@bulkbox.co.ke",
+                "parent": "IV03240775",
+                "parentfield": "items",
+                "parenttype": "Sales Invoice",
+                "idx": 9,
+                "docstatus": 1,
+                "item_code": "RDD026",
+                "item_name": "Chain Kwo Light Superior Soy Sauce 623ml",
+                "description": "Chain Kwo Light Superior Soy Sauce 623ml",
+                "item_group": "Soy Sauce",
+                "brand": "Chain Kwo",
+                "image": "https://v5.airtableusercontent.com/v3/u/24/24/1705068000000/p2zYVo5gXvpcJCGAPCdP2w/q_EmmZv4H5uuj6FE2kkp3rSEO7ZYnMBtGdszpHU9G60gJQuU_e2AyQdJSdXQeRTIreDvuon7U27lW4VGiA9UkpLEn5WkcTXGYwm7TSsgKac9Yt5sKT8Id73WoCmtUK-hl-0CMLhP-dt73WUMCV7RZw/1ELRE4gLfI4_H4ZBuIOoMPXHM2SRlpjHz0TWIJZD2bM",
+                "qty": 18,
+                "case_size": "12",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 18,
+                "price_list_rate": 256.85,
+                "base_price_list_rate": 256.85,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 256.85,
+                "amount": 4623.3,
+                "item_tax_template": "16% - TSL",
+                "base_rate": 256.85,
+                "base_amount": 4623.3,
+                "posa_offer_applied": 0,
+                "posa_is_offer": 0,
+                "stock_uom_rate": 256.85,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 256.85,
+                "net_amount": 4623.3,
+                "base_net_rate": 256.85,
+                "base_net_amount": 4623.3,
+                "delivered_by_supplier": 0,
+                "income_account": "Ambient Staples Sales - TSL",
+                "is_fixed_asset": 0,
+                "expense_account": "Ambient Staples COGS - TSL",
+                "enable_deferred_revenue": 0,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "warehouse": "Storage - TSL",
+                "batch_no": "RDD02600007",
+                "incoming_rate": 243.03,
+                "allow_zero_valuation_rate": 0,
+                "item_tax_rate": "{\"VAT - 16% - TSL\": 16.0}",
+                "actual_batch_qty": 0,
+                "actual_qty": 0,
+                "sales_order": "SAL-ORD-2024-01621",
+                "so_detail": "c32ffea85a",
+                "delivery_note": "MAT-DN-2024-01922",
+                "dn_detail": "dc4b7556dd",
+                "delivered_qty": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "page_break": 0,
+                "doctype": "Sales Invoice Item"
+              },
+              {
+                "name": "f4d55f9bd9",
+                "owner": "samwel@bulkbox.co.ke",
+                "creation": "2024-03-23 09:56:37.342940",
+                "modified": "2024-03-23 09:56:45.768162",
+                "modified_by": "samwel@bulkbox.co.ke",
+                "parent": "IV03240775",
+                "parentfield": "items",
+                "parenttype": "Sales Invoice",
+                "idx": 10,
+                "docstatus": 1,
+                "barcode": "72417180705",
+                "item_code": "WBD002",
+                "item_name": "Maryland Choc Chip Cookies 136g",
+                "description": "Maryland Choc Chip Cookies 136g",
+                "item_group": "Biscuit & Cookies",
+                "brand": "Maryland",
+                "image": "https://v5.airtableusercontent.com/v3/u/24/24/1705068000000/d3W5FwYfrtjGLY6Q2UepUA/8pKYN7ed2Zm2RhfZdfOaKUucNOKj1HXzfHLqXHkVc1iqUngPdpVVVnJBjxNq9DcbSuf4j15roHgVh9FtQpCk_BLrBerzYfUfUlx6ukRHLriwZTgshrTmUVMp9NaaukGt5bGZUM6D7SVPWEhnbtdF0y35vhIvOQ4Whod87Yd3tvo/8Nk5w0yvFcQLCkF2ea7pVE1JWY4k-nG9ZHIrMl-gXrw",
+                "qty": 20,
+                "case_size": "20",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 20,
+                "price_list_rate": 242.31,
+                "base_price_list_rate": 242.31,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 242.31,
+                "amount": 4846.2,
+                "item_tax_template": "16% - TSL",
+                "base_rate": 242.31,
+                "base_amount": 4846.2,
+                "posa_offer_applied": 0,
+                "posa_is_offer": 0,
+                "stock_uom_rate": 242.31,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 242.31,
+                "net_amount": 4846.2,
+                "base_net_rate": 242.31,
+                "base_net_amount": 4846.2,
+                "delivered_by_supplier": 0,
+                "income_account": "Snacks & Confectionary Sales - TSL",
+                "is_fixed_asset": 0,
+                "expense_account": "Snacks & Confectionary COGS - TSL",
+                "enable_deferred_revenue": 0,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "warehouse": "Storage - TSL",
+                "batch_no": "WBD00200008",
+                "incoming_rate": 212.93,
+                "allow_zero_valuation_rate": 0,
+                "item_tax_rate": "{\"VAT - 16% - TSL\": 16.0}",
+                "actual_batch_qty": 0,
+                "actual_qty": 100,
+                "sales_order": "SAL-ORD-2024-01621",
+                "so_detail": "b328cc8c0d",
+                "delivery_note": "MAT-DN-2024-01922",
+                "dn_detail": "1840a7584b",
+                "delivered_qty": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "page_break": 0,
+                "doctype": "Sales Invoice Item"
+              },
+              {
+                "name": "69bc743443",
+                "owner": "samwel@bulkbox.co.ke",
+                "creation": "2024-03-23 09:56:37.342940",
+                "modified": "2024-03-23 09:56:45.768162",
+                "modified_by": "samwel@bulkbox.co.ke",
+                "parent": "IV03240775",
+                "parentfield": "items",
+                "parenttype": "Sales Invoice",
+                "idx": 11,
+                "docstatus": 1,
+                "barcode": "6161108000119",
+                "item_code": "BFK017",
+                "item_name": "Bio Yoghurt Vanilla 150ml",
+                "description": "Bio Yoghurt Vanilla 150ml",
+                "item_group": "Fruit Yoghurt",
+                "brand": "Bio Food",
+                "image": "https://v5.airtableusercontent.com/v3/u/24/24/1705068000000/myfxpn8S3UfRw2y_vQP3OQ/iO6Ktnet-tkCXSV5YbT34azeOjdkRifmmZix9S5946xa6j2yBCAGnXKXE_ue3RwKiM__Tzsc0kEM0T3_fAWYQcq2qBJSmc6eNJ5nzaPv00hOmysWszPt3vmFhtBqn2AgdYwouRpGlrI6tnBkQagNSa0vcCjPrPCANLt_o3YEJldFp0PWW80AtjINOdEOm3vC/U0RuSSEWDMCVHlCgy9Gi8wLJEokMC8IuSbmeso4gxz8",
+                "qty": 12,
+                "case_size": "12",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 12,
+                "price_list_rate": 85.71,
+                "base_price_list_rate": 85.71,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 85.71,
+                "amount": 1028.52,
+                "item_tax_template": "16% - TSL",
+                "base_rate": 85.71,
+                "base_amount": 1028.52,
+                "posa_offer_applied": 0,
+                "posa_is_offer": 0,
+                "stock_uom_rate": 85.71,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 85.71,
+                "net_amount": 1028.52,
+                "base_net_rate": 85.71,
+                "base_net_amount": 1028.52,
+                "delivered_by_supplier": 0,
+                "income_account": "Dairy Sales - TSL",
+                "is_fixed_asset": 0,
+                "expense_account": "Dairy COGS - TSL",
+                "enable_deferred_revenue": 0,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "warehouse": "Storage - TSL",
+                "batch_no": "BFK01700070",
+                "incoming_rate": 71.04,
+                "allow_zero_valuation_rate": 0,
+                "item_tax_rate": "{\"VAT - 16% - TSL\": 16.0}",
+                "actual_batch_qty": 0,
+                "actual_qty": 0,
+                "sales_order": "SAL-ORD-2024-01621",
+                "so_detail": "164845d91d",
+                "delivery_note": "MAT-DN-2024-01922",
+                "dn_detail": "91d6236c3e",
+                "delivered_qty": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "page_break": 0,
+                "doctype": "Sales Invoice Item"
+              },
+              {
+                "name": "ac0a0cd060",
+                "owner": "samwel@bulkbox.co.ke",
+                "creation": "2024-03-23 09:56:37.342940",
+                "modified": "2024-03-23 09:56:45.768162",
+                "modified_by": "samwel@bulkbox.co.ke",
+                "parent": "IV03240775",
+                "parentfield": "items",
+                "parenttype": "Sales Invoice",
+                "idx": 12,
+                "docstatus": 1,
+                "barcode": "6161108005039",
+                "item_code": "BFK021",
+                "item_name": "Bio Yoghurt Nature plain 450ml",
+                "description": "Bio Yoghurt Nature plain 450ml",
+                "item_group": "Fruit Yoghurt",
+                "brand": "Bio Food",
+                "image": "https://v5.airtableusercontent.com/v3/u/24/24/1705068000000/QtYRkLoFasHMrKVYAJwhWw/Wrj_2GBbOoqZh2eTSb6CH7xuXp-7XFJJz2zojPhN_gn9C_WTBHF15WKkOut-Nv3oN4l1p_U4v5B0eNCXMMF4tNr2sWCUilgO_Huo9yz9iSLgbMpDjzLo4lRugJ_ToxNE3oPH95S4XU8p1APkRxYf4xVIr3TQpIKHfxNoNQBD6se4T7LcwyD0T5ypQxvn36rE/nByZ1F1DepC5H5lZa9QKi1eeDMXGHkpg3jb_Mk97iQk",
+                "qty": 1,
+                "case_size": "1",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 1,
+                "price_list_rate": 235.79,
+                "base_price_list_rate": 235.79,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 235.79,
+                "amount": 235.79,
+                "item_tax_template": "16% - TSL",
+                "base_rate": 235.79,
+                "base_amount": 235.79,
+                "posa_offer_applied": 0,
+                "posa_is_offer": 0,
+                "stock_uom_rate": 235.79,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 235.79,
+                "net_amount": 235.79,
+                "base_net_rate": 235.79,
+                "base_net_amount": 235.79,
+                "delivered_by_supplier": 0,
+                "income_account": "Dairy Sales - TSL",
+                "is_fixed_asset": 0,
+                "expense_account": "Dairy COGS - TSL",
+                "enable_deferred_revenue": 0,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "warehouse": "Storage - TSL",
+                "batch_no": "BFK02100073",
+                "incoming_rate": 216.56,
+                "allow_zero_valuation_rate": 0,
+                "item_tax_rate": "{\"VAT - 16% - TSL\": 16.0}",
+                "actual_batch_qty": 0,
+                "actual_qty": 0,
+                "sales_order": "SAL-ORD-2024-01621",
+                "so_detail": "1b75f3e5cc",
+                "delivery_note": "MAT-DN-2024-01922",
+                "dn_detail": "b1c722de3a",
+                "delivered_qty": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "page_break": 0,
+                "doctype": "Sales Invoice Item"
+              },
+              {
+                "name": "30763509d7",
+                "owner": "samwel@bulkbox.co.ke",
+                "creation": "2024-03-23 09:56:37.342940",
+                "modified": "2024-03-23 09:56:45.768162",
+                "modified_by": "samwel@bulkbox.co.ke",
+                "parent": "IV03240775",
+                "parentfield": "items",
+                "parenttype": "Sales Invoice",
+                "idx": 13,
+                "docstatus": 1,
+                "item_code": "BFK310",
+                "item_name": "Bio Yoghurt Vanilla 4Pack 90ml",
+                "description": "Bio Yoghurt Vanilla 4Pack 90ml",
+                "item_group": "Fruit Yoghurt",
+                "brand": "Bio Food",
+                "image": "https://v5.airtableusercontent.com/v3/u/26/26/1710849600000/kAmNYN_9r7ai0_36pQytHA/XGDD949BR5yVtMzwLi_Qpopqb2etkO5qNX4-Y26z7OvoiNRcA6Jc0munwNmE0t00D8DfCrF7MaG9TcKuL-esd58jLFfENAk3c8sW-hcz2ooI5LD1Kc9XYuj3lcvcWnQCV98HRQw9TawZioHH7r2h0A/yLIgFRBOsgA7tX_m--rzkWkNWZ-UoPUiAbU6-5d02R8",
+                "qty": 6,
+                "case_size": "3",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 6,
+                "price_list_rate": 223.8,
+                "base_price_list_rate": 223.8,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 223.8,
+                "amount": 1342.8,
+                "item_tax_template": "16% - TSL",
+                "base_rate": 223.8,
+                "base_amount": 1342.8,
+                "posa_offer_applied": 0,
+                "posa_is_offer": 0,
+                "stock_uom_rate": 223.8,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 223.8,
+                "net_amount": 1342.8,
+                "base_net_rate": 223.8,
+                "base_net_amount": 1342.8,
+                "delivered_by_supplier": 0,
+                "income_account": "Dairy Sales - TSL",
+                "is_fixed_asset": 0,
+                "expense_account": "Dairy COGS - TSL",
+                "enable_deferred_revenue": 0,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "warehouse": "Storage - TSL",
+                "batch_no": "BFK31000054",
+                "incoming_rate": 197.25,
+                "allow_zero_valuation_rate": 0,
+                "item_tax_rate": "{\"VAT - 16% - TSL\": 16.0}",
+                "actual_batch_qty": 0,
+                "actual_qty": 0,
+                "sales_order": "SAL-ORD-2024-01621",
+                "so_detail": "36a1ea37ce",
+                "delivery_note": "MAT-DN-2024-01922",
+                "dn_detail": "13dbb1e167",
+                "delivered_qty": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "page_break": 0,
+                "doctype": "Sales Invoice Item"
+              },
+              {
+                "name": "3f0a2749a1",
+                "owner": "samwel@bulkbox.co.ke",
+                "creation": "2024-03-23 09:56:37.342940",
+                "modified": "2024-03-23 09:56:45.768162",
+                "modified_by": "samwel@bulkbox.co.ke",
+                "parent": "IV03240775",
+                "parentfield": "items",
+                "parenttype": "Sales Invoice",
+                "idx": 14,
+                "docstatus": 1,
+                "barcode": "8901393020564",
+                "item_code": "WOB0148",
+                "item_name": "Chupa Chups Mini Sour Tubes 24.2g",
+                "description": "Chupa Chups Mini Sour Tubes 24.2g",
+                "item_group": "Chocolate & Candy",
+                "brand": "Chupa Chups",
+                "image": "https://v5.airtableusercontent.com/v3/u/24/24/1705068000000/QwwXxBrQ71ha6UKWyW509g/my5zuOVv2QDxUbCB1a3YveW4d0pHqlC2lBsAcNeH71f3-EBXr9I8YoLVjy-Ga0Mylfc4dS7K28uGOzeKMqkO56CVLf5XbAKhm8L4dD5fcmjLjW9Lb2dy8l8J4fm3lII6BKoRWTIixHTdDZ34qNJCyA/AQwRCRV77f99LCAwsw-YYN4uItdV-1Hu80c29CJyiBk",
+                "qty": 20,
+                "case_size": "100",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 20,
+                "price_list_rate": 74.56,
+                "base_price_list_rate": 74.56,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 74.56,
+                "amount": 1491.2,
+                "item_tax_template": "16% - TSL",
+                "base_rate": 74.56,
+                "base_amount": 1491.2,
+                "posa_offer_applied": 0,
+                "posa_is_offer": 0,
+                "stock_uom_rate": 74.56,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 74.56,
+                "net_amount": 1491.2,
+                "base_net_rate": 74.56,
+                "base_net_amount": 1491.2,
+                "delivered_by_supplier": 0,
+                "income_account": "Snacks & Confectionary Sales - TSL",
+                "is_fixed_asset": 0,
+                "expense_account": "Snacks & Confectionary COGS - TSL",
+                "enable_deferred_revenue": 0,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "warehouse": "Storage - TSL",
+                "batch_no": "WOB014800014",
+                "incoming_rate": 65.52,
+                "allow_zero_valuation_rate": 0,
+                "item_tax_rate": "{\"VAT - 16% - TSL\": 16.0}",
+                "actual_batch_qty": 0,
+                "actual_qty": 80,
+                "sales_order": "SAL-ORD-2024-01621",
+                "so_detail": "59df0c52ac",
+                "delivery_note": "MAT-DN-2024-01922",
+                "dn_detail": "2057aec445",
+                "delivered_qty": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "page_break": 0,
+                "doctype": "Sales Invoice Item"
+              },
+              {
+                "name": "459a8b7c39",
+                "owner": "samwel@bulkbox.co.ke",
+                "creation": "2024-03-23 09:56:37.342940",
+                "modified": "2024-03-23 09:56:45.768162",
+                "modified_by": "samwel@bulkbox.co.ke",
+                "parent": "IV03240775",
+                "parentfield": "items",
+                "parenttype": "Sales Invoice",
+                "idx": 15,
+                "docstatus": 1,
+                "barcode": "6294003539054",
+                "item_code": "GPL179",
+                "item_name": "Nestle Kitkat 4 Fingers Chocolate Original 36.5g",
+                "description": "Nestle Kitkat 4 Fingers Chocolate Original 36.5g",
+                "item_group": "Chocolate & Candy",
+                "brand": "Kitkat",
+                "image": "",
+                "qty": 24,
+                "case_size": "24",
+                "stock_uom": "PCS",
+                "uom": "PCS",
+                "conversion_factor": 1,
+                "stock_qty": 24,
+                "price_list_rate": 142.15,
+                "base_price_list_rate": 142.15,
+                "margin_type": "",
+                "margin_rate_or_amount": 0,
+                "rate_with_margin": 0,
+                "discount_percentage": 0,
+                "discount_amount": 0,
+                "base_rate_with_margin": 0,
+                "rate": 142.15,
+                "amount": 3411.6,
+                "item_tax_template": "16% - TSL",
+                "base_rate": 142.15,
+                "base_amount": 3411.6,
+                "posa_offer_applied": 0,
+                "posa_is_offer": 0,
+                "stock_uom_rate": 142.15,
+                "is_free_item": 0,
+                "grant_commission": 1,
+                "net_rate": 142.15,
+                "net_amount": 3411.6,
+                "base_net_rate": 142.15,
+                "base_net_amount": 3411.6,
+                "delivered_by_supplier": 0,
+                "income_account": "Snacks & Confectionary Sales - TSL",
+                "is_fixed_asset": 0,
+                "expense_account": "Snacks & Confectionary COGS - TSL",
+                "enable_deferred_revenue": 0,
+                "weight_per_unit": 0,
+                "total_weight": 0,
+                "warehouse": "Storage - TSL",
+                "incoming_rate": 129.31,
+                "allow_zero_valuation_rate": 0,
+                "item_tax_rate": "{\"VAT - 16% - TSL\": 16.0}",
+                "actual_batch_qty": 0,
+                "actual_qty": 48,
+                "sales_order": "SAL-ORD-2024-01621",
+                "so_detail": "68b56d6c40",
+                "delivery_note": "MAT-DN-2024-01922",
+                "dn_detail": "8fc7b4d928",
+                "delivered_qty": 0,
+                "cost_center": "B2B Unga House - TSL",
+                "page_break": 0,
+                "doctype": "Sales Invoice Item"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-06-06T07:04:59.000Z",
+  "versionId": "574647ff-d647-4838-9db1-f5c04fbf1286"
+}
