@@ -1,0 +1,863 @@
+{
+  "active": true,
+  "connections": {
+    "ERP Create Shipping Item": {
+      "main": [
+        [
+          {
+            "node": "Create Selling Rate",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create Purchase Receipt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Selling Rate": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Update Selling Rate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Selling Rate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Shiipping as Item": {
+      "main": [
+        [
+          {
+            "node": "ERP Create Shipping Item",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Price",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Price": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Disable Shipping as Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Disable Shipping as Item": {
+      "main": [
+        [
+          {
+            "node": "Disable",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enable Shipping Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enable Shipping Item": {
+      "main": [
+        [
+          {
+            "node": "Enable",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Shipping Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Create Shiipping as Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Purchase Receipt": {
+      "main": [
+        [
+          {
+            "node": "Submit Purchase Receipt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-05-29T08:04:33.816Z",
+  "id": "YhYBIuUqYUa1v594",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Shipping Rule as Items (ERP & Website)",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Item",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n         \"item_code\":\"{{ $json.query.itemCode }}\",\n         \"item_name\":\"{{ $json.query.itemName }}\",\n         \"company\":\"Three Spears Limited\",\n         \"stock_uom\":\"PCS\",\n         \"is_stock_item\":1,\n         \"has_batch_no\":1,\n         \"create_new_batch\":1,\n         \"batch_number_series\": \"{{ $json.query.itemCode }}\",\n         \"include_item_in_manufacturing\": 0,\n         \"opening_stock\": {{$('Webhook').item.json[\"query\"][\"stock\"]}},\n         \"taxes\":[\n            {\n               \"item_tax_template\": \"{{ $json.query.tax * 100 }}% - TSL\"\n            },\n\t\t\t{\n               \"item_tax_template\": \"{{ $json.query.tax * 100 }}% - EML\"\n            }\n         ],\n         \"item_defaults\":[{\n                \"company\":\"Three Spears Limited\",\n\t\t\t\t\"default_warehouse\":\"Stage Out - TSL\",\n\t\t\t\t\"expense_account\":\"Delivery Charges - TSL\",\n\t\t\t\t\"income_account\": \"Delivery Revenue - TSL\"\n            }\n\t\t\t],\n         \"item_group\":\"Delivery Charges\"\n      }\n   }    ",
+        "options": {}
+      },
+      "id": "1653fb28-269f-4613-9b31-e287178a00a7",
+      "name": "ERP Create Shipping Item",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1000,
+        180
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Item Price",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": [\n    {\n      \"item_code\": \"{{ $('Webhook').item.json[\"query\"][\"itemCode\"] }}\",\n      \"price_list\": \"Standard Selling\",\n      \"price_list_rate\": {{ $('Webhook').item.json.query.rate }}\n    }\n  ]\n}  ",
+        "options": {}
+      },
+      "id": "7d9bc1cb-da33-4bc7-ae0e-6d9ca9c3486a",
+      "name": "Create Selling Rate",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1220,
+        60
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "097d9c4f-261e-4d41-a2f7-20d015540a01",
+              "leftValue": "={{ $json.query.itemName }}",
+              "rightValue": "Pickup ",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            },
+            {
+              "id": "4fa37b56-0035-4319-8ec6-5553a593a144",
+              "leftValue": "={{ $json.query.itemName }}",
+              "rightValue": "select",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "6fe94a84-ed79-4673-81ea-893a80382e2c",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        560,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appSCi0a1zPuJizxg",
+          "mode": "list",
+          "cachedResultName": "Bulkbox Final Master",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHwkMVbotHdnwON",
+          "mode": "list",
+          "cachedResultName": "Shipping Rule",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tblHwkMVbotHdnwON"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Webhook').item.json.query.recordID }}",
+            "Standard Selling ID": "={{ $json.data.name }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Shipping CS Code",
+              "displayName": "Shipping CS Code",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "A",
+                  "value": "A"
+                },
+                {
+                  "name": "D",
+                  "value": "D"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Shipping CS Name",
+              "displayName": "Shipping CS Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Shipping Group",
+              "displayName": "Shipping Group",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Shipping Rate",
+              "displayName": "Shipping Rate",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Item Code",
+              "displayName": "Item Code",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Taxes",
+              "displayName": "Taxes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Quantity",
+              "displayName": "Quantity",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "VAT",
+              "displayName": "VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Standard Selling ID",
+              "displayName": "Standard Selling ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Delivery Rate",
+              "displayName": "Delivery Rate",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Functions",
+              "displayName": "Functions",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Create Shipping as Item",
+                  "value": "Create Shipping as Item"
+                },
+                {
+                  "name": "Update Price",
+                  "value": "Update Price"
+                },
+                {
+                  "name": "Delete Shipping as Item",
+                  "value": "Delete Shipping as Item"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1b193a2c-e0d6-4d26-83d5-4b5b0f132d6d",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1480,
+        60
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "b110be76-4474-455f-b328-3d7f062a3e8d",
+              "leftValue": "={{ $json.query.sellingID }}",
+              "rightValue": "null",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "e43fc392-2eac-4b9f-a0b8-0a771fe9ab28",
+      "name": "If2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1220,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item%20Price/{{ $('Webhook').item.json.query.sellingID }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": [\n    {\n      \"item_code\": \"{{ $('Webhook').item.json[\"query\"][\"itemCode\"] }}\",\n      \"price_list\": \"Standard Selling\",\n      \"price_list_rate\": {{ $('Webhook').item.json.query.rate }}\n    }\n  ]\n}  ",
+        "options": {}
+      },
+      "id": "c901ea23-b231-4d0f-94b9-c48bf80857ff",
+      "name": "Update Selling Rate",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1480,
+        420
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "3c15ab33-d86d-40fb-b43e-1a9697d5bd0e",
+              "leftValue": "={{ $json.query.ERPfn }}",
+              "rightValue": "Create Shipping as Item",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "17c39f41-65d1-49f6-85e7-59ed9e271a7e",
+      "name": "Create Shiipping as Item",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        780,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "0c6bf2e1-232d-4336-a8c1-acb78d652102",
+              "leftValue": "={{ $('Webhook').item.json.query.ERPfn }}",
+              "rightValue": "Update Price",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "e5bc825e-c939-4fa9-8a2b-a79eb08d1d9c",
+      "name": "Update Price",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "bdf66b99-f795-4e83-b7b0-f834fa95e5dd",
+              "leftValue": "={{ $('Webhook').item.json.query.ERPfn }}",
+              "rightValue": "Disable Shipping as Item",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "8bef3a85-f7e9-4ab9-b35f-27ac2fa46851",
+      "name": "Disable Shipping as Item",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1220,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item/{{ $('Webhook').item.json.query.itemCode }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"data\":{\"disabled\":1}}",
+        "options": {}
+      },
+      "id": "970d34f3-1424-437f-8a63-7790f756d169",
+      "name": "Disable",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1480,
+        600
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item/{{ $('Webhook').item.json.query.itemCode }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"data\":{\"disabled\":0}}",
+        "options": {}
+      },
+      "id": "e20f6da5-b096-4499-a4b8-3b8ebb7815d5",
+      "name": "Enable",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1700,
+        780
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "bdf66b99-f795-4e83-b7b0-f834fa95e5dd",
+              "leftValue": "={{ $('Webhook').item.json.query.ERPfn }}",
+              "rightValue": "Enable Shipping Item",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ec4f9345-3299-4436-a3c4-376ffd3a3c31",
+      "name": "Enable Shipping Item",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1480,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item/{{ $json.query.itemCode }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n         \"item_code\":\"{{ $json.query.itemCode }}\",\n         \"item_name\":\"{{ $json.query.itemName }}\",\n         \"company\":\"Three Spears Limited\",\n         \"stock_uom\":\"PCS\",\n         \"is_stock_item\":1,\n         \"has_batch_no\":1,\n         \"create_new_batch\":1,\n         \"batch_number_series\": \"{{ $json.query.itemCode }}\",\n         \"include_item_in_manufacturing\": 0,\n         \"opening_stock\": {{$('Webhook').item.json[\"query\"][\"stock\"]}},\n         \"taxes\":[\n            {\n               \"item_tax_template\": \"{{ $json.query.tax * 100 }}% - TSL\"\n            },\n\t\t\t{\n               \"item_tax_template\": \"{{ $json.query.tax * 100 }}% - EML\"\n            }\n         ],\n         \"item_defaults\":[{\n                \"company\":\"Three Spears Limited\",\n\t\t\t\t\"default_warehouse\":\"Stage Out - TSL\",\n\t\t\t\t\"expense_account\":\"Delivery Charges - TSL\",\n\t\t\t\t\"income_account\": \"Delivery Revenue - TSL\"\n            }\n\t\t\t],\n         \"item_group\":\"Delivery Charges\"\n      }\n   }    ",
+        "options": {}
+      },
+      "id": "56752369-9f93-4df0-8731-099c25f92ec3",
+      "name": "Update Shipping Item",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1720,
+        940
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "c070daa3-2ad7-4ef2-b7dd-569d6fece89a",
+        "authentication": "=none",
+        "options": {}
+      },
+      "id": "e9a20235-abc2-4ef0-9020-1c54280f96fd",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        340,
+        360
+      ],
+      "webhookId": "c070daa3-2ad7-4ef2-b7dd-569d6fece89a"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Purchase%20Receipt",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"data\": {\n        \"docstatus\": 0,\n        \"title\": \"Test Supplier\",\n        \"naming_series\": \"MAT-PRE-.YYYY.-\",\n        \"supplier\": \"Test Supplier\",\n        \"supplier_name\": \"Test Supplier\",\n        \"company\": \"Three Spears Limited\",\n        \"attach_invoice\": \"https://portal.bulkbox.cloud/app/purchase-order\",\n        \"currency\": \"KES\",\n        \"conversion_rate\": 1.0,\n        \"buying_price_list\": \"Standard Buying\",\n        \"price_list_currency\": \"KES\",\n        \"plc_conversion_rate\": 1.0,\n        \"ignore_pricing_rule\": 0,\n        \"set_warehouse\": \"Stage Out - TSL\",\n        \"is_subcontracted\": \"No\",\n        \"total_qty\": 1000.0,\n        \"base_total\": 0.0,\n        \"base_net_total\": 0.0,\n        \"total_net_weight\": 0.0,\n        \"total\": 0.0,\n        \"net_total\": 0.0,\n        \"tax_category\": \"\",\n        \"base_taxes_and_charges_added\": 0.0,\n        \"base_taxes_and_charges_deducted\": 0.0,\n        \"base_total_taxes_and_charges\": 0.0,\n        \"taxes_and_charges_added\": 0.0,\n        \"taxes_and_charges_deducted\": 0.0,\n        \"total_taxes_and_charges\": 0.0,\n        \"apply_discount_on\": \"Grand Total\",\n        \"base_discount_amount\": 0.0,\n        \"additional_discount_percentage\": 0.0,\n        \"discount_amount\": 0.0,\n        \"base_grand_total\": 0.0,\n        \"base_rounding_adjustment\": 0.0,\n        \"base_in_words\": \"KES Zero only.\",\n        \"base_rounded_total\": 0.0,\n        \"grand_total\": 0.0,\n        \"rounding_adjustment\": 0.0,\n        \"rounded_total\": 0.0,\n        \"in_words\": \"KES Zero only.\",\n        \"disable_rounded_total\": 0,\n        \"status\": \"To Bill\",\n        \"per_billed\": 0.0,\n        \"per_returned\": 0.0,\n        \"is_internal_supplier\": 0,\n        \"represents_company\": \"\",\n        \"letter_head\": \"Purchase_Order_Letterhead\",\n        \"language\": \"en\",\n        \"group_same_items\": 0,\n        \"doctype\": \"Purchase Receipt\",\n        \"items\": [\n            {\n                \"item_code\": \"{{ $('Webhook').item.json[\"query\"][\"itemCode\"] }}\",\n                \"item_name\": \"{{ $('Webhook').item.json[\"query\"][\"itemName\"] }}\",\n                \"description\": \"{{ $('Webhook').item.json[\"query\"][\"itemName\"] }}\",\n                \"item_group\": \"Delivery Charges\",\n                \"expiry_date\": \"2025-06-04\",\n                \"received_qty\": 1000.0,\n                \"qty\": 1000.0,\n                \"rejected_qty\": 0.0,\n                \"uom\": \"PCS\",\n                \"stock_uom\": \"PCS\",\n                \"conversion_factor\": 1.0,\n                \"retain_sample\": 0,\n                \"sample_quantity\": 0,\n                \"received_stock_qty\": 1000.0,\n                \"stock_qty\": 1000.0,\n                \"returned_qty\": 0.0,\n                \"price_list_rate\": 0.0,\n                \"base_price_list_rate\": 0.0,\n                \"margin_rate_or_amount\": 0.0,\n                \"rate_with_margin\": 0.0,\n                \"discount_percentage\": 0.0,\n                \"discount_amount\": 0.0,\n                \"base_rate_with_margin\": 0.0,\n                \"rate\": 0.0,\n                \"amount\": 0.0,\n                \"base_rate\": 0.0,\n                \"base_amount\": 0.0,\n                \"stock_uom_rate\": 0.0,\n                \"is_free_item\": 0,\n                \"net_rate\": 0.0,\n                \"net_amount\": 0.0,\n                \"item_tax_template\": \"16% - TSL\",\n                \"base_net_rate\": 0.0,\n                \"base_net_amount\": 0.0,\n                \"valuation_rate\": 0.0,\n                \"item_tax_amount\": 0.0,\n                \"rm_supp_cost\": 0.0,\n                \"landed_cost_voucher_amount\": 0.0,\n                \"billed_amt\": 0.0,\n                \"warehouse\": \"Stage Out - TSL\",\n                \"is_fixed_asset\": 0,\n                \"allow_zero_valuation_rate\": 0,\n                \"item_tax_rate\": \"{\\\"VAT - 16% - TSL\\\": 16.0}\",\n                \"weight_per_unit\": 0.0,\n                \"total_weight\": 0.0,\n                \"expense_account\": \"Delivery Charges - TSL\",\n                \"cost_center\": \"B2B Unga House - TSL\",\n                \"doctype\": \"Purchase Receipt Item\"\n            }\n        ],\n        \"pricing_rules\": [],\n        \"supplied_items\": [],\n        \"taxes\": [\n        ]\n    }\n}",
+        "options": {}
+      },
+      "id": "cc0fe6dd-8254-4fc5-ba74-ecfaf15e8a44",
+      "name": "Create Purchase Receipt",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1220,
+        220
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Purchase%20Receipt/{{ $json.data.name }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"data\": {\n        \"docstatus\": 1\n    }\n}",
+        "options": {}
+      },
+      "id": "9188cdca-adb0-4e5d-9f80-ebdcaa037b54",
+      "name": "Submit Purchase Receipt",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1480,
+        260
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-airtable-source": "appSCi0a1zPuJizxg/wflXSWDwihyLrxr4y",
+            "x-forwarded-for": "18.213.2.123",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "18.213.2.123"
+          },
+          "params": {},
+          "query": {
+            "recordID": "recVnoMpsVgQBy0rv",
+            "rate": "258.62068965517244",
+            "itemCode": "SH005",
+            "itemName": "Ngara Delivery: 300/=",
+            "tax": "0.16",
+            "ERPfn": "Update Shipping Item",
+            "sellingID": "bfee5edf80",
+            "stock": "1000"
+          },
+          "body": {},
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook/c070daa3-2ad7-4ef2-b7dd-569d6fece89a",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-07-06T09:11:38.000Z",
+  "versionId": "8d6f35ef-55fe-4f3f-95bb-f5a02442c32e"
+}
