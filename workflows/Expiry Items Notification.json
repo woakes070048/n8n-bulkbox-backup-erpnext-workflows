@@ -1,0 +1,406 @@
+{
+  "active": false,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Date & Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time": {
+      "main": [
+        [
+          {
+            "node": "Date & Time1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-03-06T06:12:08.820Z",
+  "id": "sknK1XVMy4iN93Qx",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Expiry Items Notification",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 19
+            }
+          ]
+        }
+      },
+      "id": "8562debf-7308-49ab-852b-f2af414b31a3",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -360,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "d100cb45-1a2a-4666-82be-63a128743c4a",
+              "leftValue": "={{ $json[\"Day of week\"] }}",
+              "rightValue": "=Monday",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "7baf4627-25cc-4711-8e98-7a07d47c38f4",
+              "leftValue": "={{ $json[\"Day of week\"] }}",
+              "rightValue": "Friday",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "b3cf8650-af7b-483b-8938-8213ca12df8b",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -140,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/method/frappe.core.doctype.report.report.download",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "report_name",
+              "value": "Batch-Expiry-Report"
+            },
+            {
+              "name": "format",
+              "value": "Excel"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "117c66ad-1295-49f5-a711-65641172a461",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1500,
+        1480
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addToDate",
+        "magnitude": "={{ $today }}",
+        "timeUnit": "months",
+        "duration": 2,
+        "outputFieldName": "=newDate",
+        "options": {}
+      },
+      "id": "35421a94-19a2-497c-a601-7d13b70b9003",
+      "name": "Date & Time",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        100,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C05JGC1C77E",
+          "mode": "list",
+          "cachedResultName": "test-channel"
+        },
+        "text": "=The following is the list of items expiring on or before {{ $('Date & Time1').item.json.formattedDate }}:\n\n\n{{ $json.Item }} ",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "id": "734768f9-e6f0-4a79-91e8-536daecb8552",
+      "name": "Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        1220,
+        760
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "PpWw9vY0tzepRrAr",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.newDate }}",
+        "format": "yyyy-MM-dd",
+        "options": {}
+      },
+      "id": "cfcfed67-57db-4c34-a9e2-4ede3d427030",
+      "name": "Date & Time1",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        320,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Batch?filters=[[\"batch_qty\",\">\",0],[\"expiry_date\",\"<=\",\"{{ $json[\"formattedDate\"] }}\"]]&limit_page_length=1000&fields=[\"name\",\"item\",\"item_name\",\"batch_qty\",\"expiry_date\"]",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "ef8db216-6ede-4645-bfbf-eacdbb2a0c39",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        560,
+        760
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "=Expiring_{{ $('Date & Time1').item.json[\"formattedDate\"] }}",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1XuzU8wqb5x580UKbRNr0HnmNP68pBU4S",
+          "mode": "list",
+          "cachedResultName": "Expiries",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1XuzU8wqb5x580UKbRNr0HnmNP68pBU4S"
+        },
+        "options": {}
+      },
+      "id": "87cd2e67-9ba7-4744-ba89-52f702fd3dee",
+      "name": "Google Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1260,
+        1500
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "TUXECHgz4g0kH04H",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const jsonData = items[0].json.data;\n\nconst itemList = jsonData.map((item, index) => {\n  return `${index + 1}. ${item.name} - ${item.item} - ${item.item_name} - ${item.batch_qty} - ${item.expiry_date}`;\n});\n\nreturn [{json: { itemList: itemList }}];\n"
+      },
+      "id": "8211e793-95b0-44d9-88ee-5353de069e01",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5ebc6984-7a7f-4dc5-b013-7174c9417739",
+              "name": "Item",
+              "value": "={{ $json.itemList.join(\"\\n\") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5bf070dc-f7f5-4fbe-a2d2-bebc11f98b8d",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        1000,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "itemList",
+        "options": {}
+      },
+      "id": "5c96f833-47c4-405c-98a7-15699e0becd6",
+      "name": "Convert to File",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1020,
+        1500
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-03-08T12:38:32.000Z",
+  "versionId": "f9033e44-720d-485a-a401-5d9d39518e99"
+}
