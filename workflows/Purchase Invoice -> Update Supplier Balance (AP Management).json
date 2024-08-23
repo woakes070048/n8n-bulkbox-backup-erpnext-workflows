@@ -1,0 +1,938 @@
+{
+  "active": true,
+  "connections": {
+    "Purchase invoice": {
+      "main": [
+        [
+          {
+            "node": "Today",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Today": {
+      "main": [
+        [
+          {
+            "node": "Query Balance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Balance": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Update Supplier Balance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Supplier Balance": {
+      "main": [
+        [
+          {
+            "node": "Today1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Today1": {
+      "main": [
+        [
+          {
+            "node": "Query Balance1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Balance1": {
+      "main": [
+        [
+          {
+            "node": "Update Supplier Balance1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-04-23T08:00:48.351Z",
+  "id": "WT6ZzS2Pz2mT0UnK",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Purchase Invoice -> Update Supplier Balance (AP Management)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "purchase-invoice-update-supplier-balance",
+        "options": {}
+      },
+      "id": "a06732e4-2ce7-4409-9135-a7ab1540244a",
+      "name": "Purchase invoice",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        180,
+        520
+      ],
+      "webhookId": "f7d8e5ff-8523-42b1-b350-a12d26cb57bc"
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/method/frappe.desk.query_report.run?report_name=Accounts+Payable+Summary&filters={\"company\":\"Three+Spears+Limited\",\"ageing_based_on\":\"Posting+Date\",\"report_date\":\"{{ $json[\"formattedDate\"] }}\",\"range1\":7,\"range2\":15,\"range3\":30,\"range4\":45,\"range5\":46,\"supplier\":\"{{ encodeURIComponent($('Purchase invoice').item.json[\"body\"][\"supplier_name\"]) }}\"}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "0464863e-ccf7-47e6-9443-2646525a8c4c",
+      "name": "Query Balance",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        600,
+        520
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $today }}",
+        "format": "yyyy-MM-dd",
+        "options": {}
+      },
+      "id": "83b19df4-73c7-4de9-a52d-d984fb4ebacd",
+      "name": "Today",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        380,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app7c9cfju1wCcghr",
+          "mode": "list",
+          "cachedResultName": "AR Management Tool",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblMiTmkqqkqJesn6",
+          "mode": "list",
+          "cachedResultName": "AP Management",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr/tblMiTmkqqkqJesn6"
+        },
+        "filterByFormula": "=({Supplier}=\"{{ $('Purchase invoice').item.json[\"body\"][\"supplier_name\"] }}\")",
+        "options": {}
+      },
+      "id": "1b1e0f23-e21b-45e3-abdd-75e01032856d",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        800,
+        520
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "app7c9cfju1wCcghr",
+          "mode": "list",
+          "cachedResultName": "AR Management Tool",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblMiTmkqqkqJesn6",
+          "mode": "list",
+          "cachedResultName": "AP Management",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr/tblMiTmkqqkqJesn6"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.id }}",
+            "Outstanding Amount": "={{ $ifEmpty($('Query Balance').item.json.message.result[0].outstanding,0) }}",
+            "0-15": "={{ $ifEmpty($('Query Balance').item.json.message.result[0].range1,0) }}",
+            "16-30": "={{ $ifEmpty($('Query Balance').item.json.message.result[0].range2,0) }}",
+            "31-45": "={{ $ifEmpty($('Query Balance').item.json.message.result[0].range3,0) }}",
+            "46-60": "={{ $ifEmpty($('Query Balance').item.json.message.result[0].range4,0) }}",
+            "Supplier Group": "={{ $('Query Balance').item.json.message.result[0].supplier_group }}",
+            "Advance Amount": "={{ $('Query Balance').item.json.message.result[0].advance }}",
+            "61-Above": "={{ $ifEmpty($('Query Balance').item.json.message.result[0].range5,0) }}",
+            "Total Amount Due": "={{ $ifEmpty($('Query Balance').item.json.message.result[0].total_due,0) }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Supplier",
+              "displayName": "Supplier",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Default Payment Terms Template",
+              "displayName": "Default Payment Terms Template",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "NET 30",
+                  "value": "NET 30"
+                },
+                {
+                  "name": "NET 15",
+                  "value": "NET 15"
+                },
+                {
+                  "name": "NET 7",
+                  "value": "NET 7"
+                },
+                {
+                  "name": "Cash on Delivery",
+                  "value": "Cash on Delivery"
+                },
+                {
+                  "name": "",
+                  "value": ""
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Outstanding Amount",
+              "displayName": "Outstanding Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "0-15",
+              "displayName": "0-15",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "16-30",
+              "displayName": "16-30",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "31-45",
+              "displayName": "31-45",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "46-60",
+              "displayName": "46-60",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "61-Above",
+              "displayName": "61-Above",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Total Amount Due",
+              "displayName": "Total Amount Due",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Supplier Group",
+              "displayName": "Supplier Group",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Credit Supplier",
+                  "value": "Credit Supplier"
+                },
+                {
+                  "name": "",
+                  "value": ""
+                },
+                {
+                  "name": "Cash Supplier",
+                  "value": "Cash Supplier"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Currency",
+              "displayName": "Currency",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "KES",
+                  "value": "KES"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Advance Amount",
+              "displayName": "Advance Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Invoiced Amount",
+              "displayName": "Invoiced Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Paid Amount",
+              "displayName": "Paid Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Debit Note",
+              "displayName": "Debit Note",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3f0171a1-601d-4c32-bf8b-de6b7a5f02c4",
+      "name": "Update Supplier Balance",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        980,
+        520
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Updating Supplier balances in AP Management\n### * Currently, thourgh make,supplier balances are only updated when payment entries for suppliers are made.\n### * To ensure data is similar in Airtable as in ERP, balances will be queried and updated when purchase invoices for suppliers are created. \n### * I will also include a 'Query Balance' button in airtable. (This has been added)",
+        "height": 255,
+        "width": 516
+      },
+      "id": "caf572c5-4731-4f03-aeb4-11c3d21eac61",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app7c9cfju1wCcghr",
+          "mode": "list",
+          "cachedResultName": "AR Management Tool",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblMiTmkqqkqJesn6",
+          "mode": "list",
+          "cachedResultName": "AP Management",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr/tblMiTmkqqkqJesn6"
+        },
+        "options": {}
+      },
+      "id": "53e64e54-858a-458d-a8f5-45952a63bd19",
+      "name": "Airtable1",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        120,
+        1140
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "42ee01ba-52d1-46b9-bcd0-8957b5426795",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        320,
+        1140
+      ]
+    },
+    {
+      "parameters": {
+        "path": "280a5fea-d7a2-4707-8adf-a94d93223853",
+        "options": {}
+      },
+      "id": "9df36819-409f-47d4-b754-caa52c2cfeb6",
+      "name": "Query Supplier Balance",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        180,
+        720
+      ],
+      "webhookId": "280a5fea-d7a2-4707-8adf-a94d93223853"
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $today }}",
+        "format": "yyyy-MM-dd",
+        "options": {}
+      },
+      "id": "47f6b474-6d2c-48a3-84f7-4c521ceab5a1",
+      "name": "Today1",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        380,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/method/frappe.desk.query_report.run?report_name=Accounts+Payable+Summary&filters={\"company\":\"Three+Spears+Limited\",\"ageing_based_on\":\"Posting+Date\",\"report_date\":\"{{ $json[\"formattedDate\"] }}\",\"range1\":7,\"range2\":15,\"range3\":30,\"range4\":45,\"range5\":46,\"supplier\":\"{{ encodeURIComponent($('Query Supplier Balance').item.json[\"query\"][\"supplierName\"]) }}\"}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "836a4271-6652-438f-9d07-44fdd6831522",
+      "name": "Query Balance1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        600,
+        720
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "app7c9cfju1wCcghr",
+          "mode": "list",
+          "cachedResultName": "AR Management Tool",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblMiTmkqqkqJesn6",
+          "mode": "list",
+          "cachedResultName": "AP Management",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr/tblMiTmkqqkqJesn6"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Query Supplier Balance').item.json.query.recordID }}",
+            "Outstanding Amount": "={{ $ifEmpty($json.message.result[0].outstanding,0) }}",
+            "0-15": "={{ $ifEmpty($json.message.result[0].range1,0) }}",
+            "16-30": "={{ $ifEmpty($json.message.result[0].range2,0) }}",
+            "31-45": "={{ $ifEmpty($json.message.result[0].range3,0) }}",
+            "46-60": "={{ $ifEmpty($json.message.result[0].range4,0) }}",
+            "61-Above": "={{ $ifEmpty($json.message.result[0].range5,0) }}",
+            "Total Amount Due": "={{ $ifEmpty($json.message.result[0].total_due,0) }}",
+            "Advance Amount": "={{ $ifEmpty($json.message.result[0].advance,0) }}",
+            "Supplier Group": "={{ $ifEmpty($json.message.result[0].supplier_group,0) }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Supplier",
+              "displayName": "Supplier",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ERP Function",
+              "displayName": "ERP Function",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Query Balance",
+                  "value": "Query Balance"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Default Payment Terms Template",
+              "displayName": "Default Payment Terms Template",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "NET 30",
+                  "value": "NET 30"
+                },
+                {
+                  "name": "NET 15",
+                  "value": "NET 15"
+                },
+                {
+                  "name": "NET 7",
+                  "value": "NET 7"
+                },
+                {
+                  "name": "Cash on Delivery",
+                  "value": "Cash on Delivery"
+                },
+                {
+                  "name": "",
+                  "value": ""
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Outstanding Amount",
+              "displayName": "Outstanding Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "0-15",
+              "displayName": "0-15",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "16-30",
+              "displayName": "16-30",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "31-45",
+              "displayName": "31-45",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "46-60",
+              "displayName": "46-60",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "61-Above",
+              "displayName": "61-Above",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Total Amount Due",
+              "displayName": "Total Amount Due",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Supplier Group",
+              "displayName": "Supplier Group",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Credit Supplier",
+                  "value": "Credit Supplier"
+                },
+                {
+                  "name": "",
+                  "value": ""
+                },
+                {
+                  "name": "Cash Supplier",
+                  "value": "Cash Supplier"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Currency",
+              "displayName": "Currency",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "KES",
+                  "value": "KES"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Advance Amount",
+              "displayName": "Advance Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Invoiced Amount",
+              "displayName": "Invoiced Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Paid Amount",
+              "displayName": "Paid Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Debit Note",
+              "displayName": "Debit Note",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a6570369-3585-47da-9f7d-7353c04cb43e",
+      "name": "Update Supplier Balance1",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        820,
+        720
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Purchase invoice": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "python-requests/2.31.0",
+            "content-length": "97",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "x-forwarded-for": "167.235.206.20",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "167.235.206.20"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "name": "ACC-PUINV-2024-00625",
+            "supplier_name": "Portcross LTD",
+            "outstanding_amount": 87317
+          }
+        }
+      }
+    ],
+    "Query Supplier Balance": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-airtable-source": "app7c9cfju1wCcghr/wfldb4P6soYnQS5pP",
+            "x-forwarded-for": "35.174.138.133",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "35.174.138.133"
+          },
+          "params": {},
+          "query": {
+            "recordID": "rectU8uFX2BUaBs7O",
+            "supplierName": "Bio Food Products LTD"
+          },
+          "body": {}
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
+    }
+  ],
+  "triggerCount": 2,
+  "updatedAt": "2024-05-21T11:33:03.000Z",
+  "versionId": "77395c1d-8436-4d3a-8f86-9c36fd5a73e4"
+}
