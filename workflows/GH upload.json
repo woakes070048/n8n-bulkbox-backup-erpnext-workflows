@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "n8n": {
       "main": [
@@ -83,17 +83,6 @@
         ]
       ]
     },
-    "isDiffOrNew": {
-      "main": [
-        [
-          {
-            "node": "github_status",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "GitHub Create": {
       "main": [
         [
@@ -127,6 +116,13 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "OneAtATime",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
@@ -146,6 +142,17 @@
         [
           {
             "node": "Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "isDiffOrNew": {
+      "main": [
+        [
+          {
+            "node": "github_status",
             "type": "main",
             "index": 0
           }
@@ -216,7 +223,8 @@
               "output": 2
             }
           ]
-        }
+        },
+        "fallbackOutput": 3
       },
       "id": "f15029a0-6ed3-424b-aee2-42c0245fed32",
       "name": "github_status",
@@ -415,6 +423,17 @@
       }
     },
     {
+      "parameters": {},
+      "id": "9ccca59c-ec56-4df5-b362-9449c3e46dac",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "position": [
+        80,
+        780
+      ],
+      "typeVersion": 2
+    },
+    {
       "parameters": {
         "jsCode": "// File Returned with Content\nif (Object.keys($input.all()[0].json).includes(\"content\")) {\n  // Get JSON Objects\n  var origWorkflow = JSON.parse(Buffer.from($input.all()[0].json.content, 'base64'));\n  var n8nWorkflow = $input.all()[1].json;\n  \n  // Order JSON Objects\n  var orderedOriginal = {}\n  var orderedActual = {}\n  \n  Object.keys(origWorkflow).sort().forEach(function(key) {\n    orderedOriginal[key] = origWorkflow[key];\n  });\n  \n  Object.keys(n8nWorkflow).sort().forEach(function(key) {\n    orderedActual[key] = n8nWorkflow[key];\n  });\n\n  // Determine Difference\n  if ( JSON.stringify(orderedOriginal) === JSON.stringify(orderedActual) ) {\n    $input.all()[0].json.github_status = \"same\";\n    $input.all()[0].json.content_decoded = orderedOriginal;\n  } else {\n    $input.all()[0].json.github_status = \"different\";\n    $input.all()[0].json.content_decoded = orderedOriginal;\n    $input.all()[0].json.n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n  }\n// No File Returned / New Workflow\n} else {\n  // Order JSON Object\n  var n8nWorkflow = ($input.all()[1].json);\n  var orderedActual = {}\n  Object.keys(n8nWorkflow).sort().forEach(function(key) {\n    orderedActual[key] = n8nWorkflow[key];\n  });\n  \n  // Proper Formatting\n  $input.all()[0].json.github_status = \"new\";\n  $input.all()[0].json.n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n}\n\n// Return Items\nreturn $input.all();"
       },
@@ -425,18 +444,9 @@
         260,
         780
       ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {},
-      "id": "9ccca59c-ec56-4df5-b362-9449c3e46dac",
-      "name": "Merge",
-      "type": "n8n-nodes-base.merge",
-      "position": [
-        80,
-        780
-      ],
-      "typeVersion": 2
+      "typeVersion": 1,
+      "alwaysOutputData": false,
+      "onError": "continueRegularOutput"
     }
   ],
   "pinData": {},
@@ -444,8 +454,15 @@
     "executionOrder": "v1"
   },
   "staticData": null,
-  "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2024-08-23T09:31:20.000Z",
-  "versionId": "9861ce39-01c0-4032-857b-525172b55747"
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-08-24T18:51:20.000Z",
+  "versionId": "f6a9688f-3c1d-4cc6-8d85-c33a71d40981"
 }
