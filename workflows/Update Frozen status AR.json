@@ -49,7 +49,14 @@
           "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr/tblzg5Zj11G3fiwyr"
         },
         "filterByFormula": "=({Customer ID} = \"{{ $json.body.customer_name }}\")",
-        "options": {}
+        "options": {},
+        "sort": {
+          "property": [
+            {
+              "field": "Customer ID"
+            }
+          ]
+        }
       },
       "id": "ead92046-de0d-4976-a428-3c4c422760ff",
       "name": "get_record_AR",
@@ -962,6 +969,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-08-23T12:13:04.000Z",
-  "versionId": "5e23b123-e9a6-44ed-b8b2-eefc2c40010f"
+  "updatedAt": "2024-08-27T08:02:18.000Z",
+  "versionId": "c64f2fab-a650-4fad-a401-6845287cf975"
 }
