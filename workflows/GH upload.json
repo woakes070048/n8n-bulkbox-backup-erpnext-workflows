@@ -138,14 +138,14 @@
         ],
         [
           {
-            "node": "GitHub Edit",
+            "node": "different",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "GitHub Create",
+            "node": "new",
             "type": "main",
             "index": 0
           }
@@ -153,6 +153,28 @@
         [
           {
             "node": "OneAtATime",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "new": {
+      "main": [
+        [
+          {
+            "node": "GitHub Create",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "different": {
+      "main": [
+        [
+          {
+            "node": "GitHub Edit",
             "type": "main",
             "index": 0
           }
@@ -230,7 +252,7 @@
       "name": "GitHub Edit",
       "type": "n8n-nodes-base.github",
       "position": [
-        800,
+        940,
         780
       ],
       "typeVersion": 1,
@@ -392,8 +414,8 @@
       "name": "GitHub Create",
       "type": "n8n-nodes-base.github",
       "position": [
-        800,
-        960
+        940,
+        1000
       ],
       "typeVersion": 1,
       "credentials": {
@@ -448,6 +470,28 @@
         780
       ],
       "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "7d091c19-37a9-4db6-8a34-04c505947e9d",
+      "name": "new",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        740,
+        1000
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "3090dcf4-4783-4f9e-9a9d-58461f972dcd",
+      "name": "different",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        740,
+        780
+      ],
+      "typeVersion": 1
     }
   ],
   "pinData": {},
@@ -464,6 +508,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-08-27T07:09:23.000Z",
-  "versionId": "95cf2c05-f5c6-412c-9431-f27e001f773f"
+  "updatedAt": "2024-08-28T16:17:12.000Z",
+  "versionId": "4e870149-7f06-4a6d-b74d-f39f164d47c6"
 }
