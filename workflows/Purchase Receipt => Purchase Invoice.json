@@ -1,0 +1,323 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "get_purchase_rec_data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_purchase_rec_data": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "items_list",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "set_fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_fields": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "items_list": {
+      "main": [
+        [
+          {
+            "node": "tax_template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tax_template": {
+      "main": [
+        [
+          {
+            "node": "ERPNext",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-08-28T08:11:54.775Z",
+  "id": "oPLMNkFQwHhs89i1",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Purchase Receipt => Purchase Invoice",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "0b5031d6-2ca5-4445-8e3b-4b6db92aff25",
+        "options": {}
+      },
+      "id": "aeff4956-e43c-45c6-841c-f038c715e585",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        880,
+        640
+      ],
+      "webhookId": "0b5031d6-2ca5-4445-8e3b-4b6db92aff25"
+    },
+    {
+      "parameters": {
+        "url": "=https://dev.bulkbox.cloud/api/resource/Purchase%20Receipt/{{ $json.body.name }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "da342df1-52c8-4b5f-ae11-902d27723bfd",
+      "name": "get_purchase_rec_data",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1100,
+        640
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data.items",
+        "options": {}
+      },
+      "id": "5c13fcaf-927a-4ee1-8c7d-01e0446e37d8",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1320,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "5a81f60c-e181-49ab-ac9d-218e9aa9218a",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1560,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "454f20bf-43c5-4134-90b2-16a4d4eba4dc",
+              "name": "item_name",
+              "value": "={{ $json.item_name }}",
+              "type": "string"
+            },
+            {
+              "id": "a562c562-02e8-4345-9728-36ecc32ef57e",
+              "name": "expense_account",
+              "value": "2210 - Stock Received But Not Billed - TSL",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "include": "selected",
+        "includeFields": "item_code, received_qty, expiry_date, rate, batch_no,qty",
+        "options": {}
+      },
+      "id": "38d237b4-c7b1-438c-abc9-101449a3df0d",
+      "name": "set_fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        1780,
+        860
+      ]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "14eaabcf-152f-490e-a6bd-3a8c7e608dca",
+      "name": "items_list",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "docType": "Purchase%20Invoice",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "items",
+              "value": "={{ $('items_list').item.json.data }}"
+            },
+            {
+              "field": "supplier",
+              "value": "={{ $('get_purchase_rec_data').item.json.data.supplier }}"
+            },
+            {
+              "field": "bill_no",
+              "value": "={{ $('get_purchase_rec_data').item.json.data.supplier_invoice_no }}"
+            },
+            {
+              "field": "bill_date",
+              "value": "={{ $('get_purchase_rec_data').item.json.data.supplier_invoice_date }}"
+            },
+            {
+              "field": "=attach",
+              "value": "={{ $('get_purchase_rec_data').item.json.data.attach }}"
+            },
+            {
+              "field": "posting_date",
+              "value": "={{ $now.format(\"dd-MM-yyyy\") }}"
+            },
+            {
+              "field": "cost_center",
+              "value": "={{ $('get_purchase_rec_data').item.json.data.cost_center }}"
+            },
+            {
+              "field": "taxes",
+              "value": "={{ $json.taxes[0] }}"
+            }
+          ]
+        }
+      },
+      "id": "dd061d84-4e62-4f8c-8782-21b255827d3f",
+      "name": "ERPNext",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        2320,
+        680
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\"taxes\": [\n            {\n                \"parentfield\": \"taxes\",\n                \"parenttype\": \"Purchase Invoice\",\n                \"idx\": 1,\n                \"docstatus\": 1,\n                \"category\": \"Total\",\n                \"add_deduct_tax\": \"Add\",\n                \"included_in_print_rate\": 0,\n                \"included_in_paid_amount\": 0,\n                \"account_head\": \"VAT - 16% - TSL\",\n                \"description\": \"VAT - 16%\",\n                \"rate\": 0.0,\n                \"cost_center\": \"B2B Unga House - TSL\",\n                \"account_currency\": \"KES\",\n                \"doctype\": \"Purchase Taxes and Charges\"\n            }\n]}",
+        "options": {}
+      },
+      "id": "698dc070-9971-43df-96da-56056555e100",
+      "name": "tax_template",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        2040,
+        680
+      ]
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "python-requests/2.31.0",
+            "content-length": "61",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "x-forwarded-for": "49.13.52.40",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "49.13.52.40"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "name": "MAT-PRE-2024-01072",
+            "title": "Dormans Coffee LTD"
+          },
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook/0b5031d6-2ca5-4445-8e3b-4b6db92aff25",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-04-13T07:17:56.132Z",
+      "updatedAt": "2024-04-13T07:17:56.132Z",
+      "id": "BREwPdgeEC5njFaD",
+      "name": "In Development"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-08-28T11:37:01.000Z",
+  "versionId": "f2edf4f8-ccb8-46c6-9500-d8f9a1afac97"
+}
