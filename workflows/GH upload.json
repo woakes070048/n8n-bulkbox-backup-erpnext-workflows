@@ -81,28 +81,6 @@
         ]
       ]
     },
-    "GitHub Edit": {
-      "main": [
-        [
-          {
-            "node": "OneAtATime",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "GitHub Create": {
-      "main": [
-        [
-          {
-            "node": "OneAtATime",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "OneAtATime": {
       "main": [
         [
@@ -168,6 +146,28 @@
         [
           {
             "node": "github_status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub Create": {
+      "main": [
+        [
+          {
+            "node": "OneAtATime",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub Edit": {
+      "main": [
+        [
+          {
+            "node": "OneAtATime",
             "type": "main",
             "index": 0
           }
@@ -281,55 +281,6 @@
         700
       ],
       "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "resource": "file",
-        "operation": "edit",
-        "owner": "={{$node[\"Globals\"].json[\"repo\"][\"owner\"]}}",
-        "repository": "={{$node[\"Globals\"].json[\"repo\"][\"name\"]}}",
-        "filePath": "={{$node[\"Globals\"].json[\"repo\"][\"path\"]}}{{$node[\"OneAtATime\"].json[\"name\"]}}.json",
-        "fileContent": "={{$node[\"isDiffOrNew\"].json[\"n8n_data_stringy\"]}}",
-        "commitMessage": "=[N8N Backup] {{$node[\"OneAtATime\"].json[\"name\"]}}.json ({{$json[\"github_status\"]}})"
-      },
-      "id": "4daea24a-10ef-40e4-b367-09812a1ef76d",
-      "name": "GitHub Edit",
-      "type": "n8n-nodes-base.github",
-      "position": [
-        -1080,
-        520
-      ],
-      "typeVersion": 1,
-      "credentials": {
-        "githubApi": {
-          "id": "4bCToCQwSKor9j9b",
-          "name": "GaturaN"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "file",
-        "owner": "={{$node[\"Globals\"].json[\"repo\"][\"owner\"]}}",
-        "repository": "={{$node[\"Globals\"].json[\"repo\"][\"name\"]}}",
-        "filePath": "={{$node[\"Globals\"].json[\"repo\"][\"path\"]}}{{$node[\"OneAtATime\"].json[\"name\"]}}.json",
-        "fileContent": "={{$node[\"isDiffOrNew\"].json[\"n8n_data_stringy\"]}}",
-        "commitMessage": "=[N8N Backup] {{$node[\"OneAtATime\"].json[\"name\"]}}.json ({{$json[\"github_status\"]}})"
-      },
-      "id": "76fba4fa-33f3-4da8-99e1-666937a78580",
-      "name": "GitHub Create",
-      "type": "n8n-nodes-base.github",
-      "position": [
-        -1080,
-        700
-      ],
-      "typeVersion": 1,
-      "credentials": {
-        "githubApi": {
-          "id": "4bCToCQwSKor9j9b",
-          "name": "GaturaN"
-        }
-      }
     },
     {
       "parameters": {
@@ -481,6 +432,55 @@
         520
       ],
       "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": "={{$node[\"Globals\"].json[\"repo\"][\"owner\"]}}",
+        "repository": "={{$node[\"Globals\"].json[\"repo\"][\"name\"]}}",
+        "filePath": "={{$node[\"Globals\"].json[\"repo\"][\"path\"]}}{{$node[\"OneAtATime\"].json[\"name\"]}}.json",
+        "fileContent": "={{$node[\"isDiffOrNew\"].json[\"n8n_data_stringy\"]}}",
+        "commitMessage": "=[N8N Backup] {{$node[\"OneAtATime\"].json[\"name\"]}}.json ({{$json[\"github_status\"]}})"
+      },
+      "id": "76fba4fa-33f3-4da8-99e1-666937a78580",
+      "name": "GitHub Create",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        -1080,
+        700
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "githubApi": {
+          "id": "4bCToCQwSKor9j9b",
+          "name": "GaturaN"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "edit",
+        "owner": "={{$node[\"Globals\"].json[\"repo\"][\"owner\"]}}",
+        "repository": "={{$node[\"Globals\"].json[\"repo\"][\"name\"]}}",
+        "filePath": "={{$node[\"Globals\"].json[\"repo\"][\"path\"]}}{{$node[\"OneAtATime\"].json[\"name\"]}}.json",
+        "fileContent": "={{$node[\"isDiffOrNew\"].json[\"n8n_data_stringy\"]}}",
+        "commitMessage": "=[N8N Backup] {{$node[\"OneAtATime\"].json[\"name\"]}}.json ({{$json[\"github_status\"]}})"
+      },
+      "id": "4daea24a-10ef-40e4-b367-09812a1ef76d",
+      "name": "GitHub Edit",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        -1080,
+        520
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "githubApi": {
+          "id": "4bCToCQwSKor9j9b",
+          "name": "GaturaN"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -497,6 +497,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-08-28T16:41:05.000Z",
-  "versionId": "c80f8301-dbef-47e6-881c-712c4edb7e5f"
+  "updatedAt": "2024-08-28T16:43:23.000Z",
+  "versionId": "492f5779-1cf2-487b-8624-dc779abe5358"
 }
