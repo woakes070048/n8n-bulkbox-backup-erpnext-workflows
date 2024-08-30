@@ -2221,7 +2221,7 @@
         "json": {
           "headers": {
             "host": "n8n.bulkbox.cloud",
-            "content-length": "253",
+            "content-length": "250",
             "accept": "application/json",
             "accept-encoding": "deflate, gzip",
             "cache-control": "no-cache",
@@ -2236,15 +2236,15 @@
           "params": {},
           "query": {},
           "body": {
-            "amount": "14678.00",
+            "amount": "1344.00",
             "channel": "MPESA",
-            "msisdn": "2547*****881",
-            "names": "ANGELICA ANGELICA",
-            "tstamp": "2024-07-12 12:28:00",
-            "txnid": "SGC7F5S5SB",
+            "msisdn": "2547*****323",
+            "names": "CECILIA CECILIA",
+            "tstamp": "2024-08-30 10:01:35",
+            "txnid": "SHU9S1THGD",
             "vendorid": "bulkbox",
             "courierid": "",
-            "hash": "97c2b3521d717ae09fcf38c5789acd8bf7473772b93937c330e4e0b8fe6988e2"
+            "hash": "5902bf3d83080033830db61026e9005df9676268d1af99c160b2d9fcff94947c"
           },
           "webhookUrl": "https://n8n.bulkbox.cloud/webhook/db470d2c-cc80-4668-977f-8a25c95e01c1",
           "executionMode": "production"
@@ -2269,6 +2269,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-07-28T04:11:27.000Z",
-  "versionId": "f5c6473f-03c6-4557-915a-071921de44ca"
+  "updatedAt": "2024-08-30T07:19:08.000Z",
+  "versionId": "e883ec99-1c69-4ca4-923d-332284bcdd14"
 }
