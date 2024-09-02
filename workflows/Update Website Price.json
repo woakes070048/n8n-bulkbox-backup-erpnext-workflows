@@ -3623,7 +3623,8 @@
           "id": "q5ICF2DzH8KpL3Ai",
           "name": "Airtable Personal Access Token account"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     }
   ],
   "pinData": {
@@ -3699,6 +3700,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-08-19T12:17:28.000Z",
-  "versionId": "c69ade97-8d93-4b9b-a05d-4cd3e4ec3c79"
+  "updatedAt": "2024-09-02T07:05:03.000Z",
+  "versionId": "4741b672-a113-452a-99cd-b78a0511f268"
 }
