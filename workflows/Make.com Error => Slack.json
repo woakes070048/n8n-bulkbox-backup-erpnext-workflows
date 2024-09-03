@@ -1,0 +1,178 @@
+{
+  "active": true,
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Error Emails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error Emails": {
+      "main": [
+        [
+          {
+            "node": "error_notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-03T09:53:55.753Z",
+  "id": "YH6sXwUxKbF8mTlP",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Make.com Error => Slack",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "id": "cc0e0af5-7dc4-4e01-a061-7effd33e3d62",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1,
+      "position": [
+        400,
+        340
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "e31BkYjFO2Wy5vIi",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "a98b1bd5-e23a-4b57-bd0b-4a32e83e2c60",
+              "leftValue": "={{ $json.From }}",
+              "rightValue": "noreply@eu1.make.com",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "8bdc3a9a-f77f-44de-98dd-579bc85afdf6",
+              "leftValue": "={{ $json.Subject }}",
+              "rightValue": "error",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "3610e375-ec23-40d6-b5fd-ba6a9ec4a354",
+      "name": "Error Emails",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        600,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C04EK0FPFAQ",
+          "mode": "id"
+        },
+        "text": "=An automation in make.com has an issue.\n\nRef:{{ $('Gmail Trigger').item.json[\"Subject\"] }}\n\nError: {{ $('Gmail Trigger').item.json[\"snippet\"] }}",
+        "otherOptions": {}
+      },
+      "id": "bb654b52-28ac-4cef-b497-d72c35165f66",
+      "name": "error_notification",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        820,
+        340
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Gmail Trigger": [
+      {
+        "json": {
+          "id": "191b749c385947ba",
+          "threadId": "191b735a3647df33",
+          "snippet": "Dear La Casa Commodities Ltd, This is to acknowledge payment received of Ksh 3349 on date 2024/09/03 of reference no. SI38A0B836 The payment has been booked and the account reconciled appropriately.",
+          "payload": {
+            "mimeType": "text/html"
+          },
+          "sizeEstimate": 12218,
+          "historyId": "402456",
+          "internalDate": "1725356948000",
+          "labels": [
+            {
+              "id": "INBOX",
+              "name": "INBOX"
+            },
+            {
+              "id": "CATEGORY_PERSONAL",
+              "name": "CATEGORY_PERSONAL"
+            },
+            {
+              "id": "UNREAD",
+              "name": "UNREAD"
+            }
+          ],
+          "To": "<nadeem.haji@live.com>",
+          "From": "<accounts@bulkbox.co.ke>",
+          "Subject": "Payment Received",
+          "Bcc": "gatura@bulkbox.co.ke"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Gmail Trigger": {
+      "lastTimeChecked": 1725375529,
+      "possibleDuplicates": [
+        "191b86547ec4a488"
+      ]
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-09-03T14:59:19.000Z",
+  "versionId": "e9e6b083-e4f5-421e-97a9-6b651ee0b2df"
+}
