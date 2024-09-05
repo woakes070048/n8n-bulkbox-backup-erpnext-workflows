@@ -77,7 +77,100 @@
     },
     "If1": {
       "main": [
-        [],
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
         [
           {
             "node": "Loop Over Items",
@@ -226,6 +319,15 @@
                 "type": "string",
                 "operation": "contains"
               }
+            },
+            {
+              "id": "8e845f61-5da8-417d-9d0d-62d3a2311a87",
+              "leftValue": "={{ $json.disabled }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
             }
           ],
           "combinator": "and"
@@ -240,6 +342,232 @@
         1420,
         760
       ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app7c9cfju1wCcghr",
+          "mode": "list",
+          "cachedResultName": "AR Management Tool",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblzg5Zj11G3fiwyr",
+          "mode": "list",
+          "cachedResultName": "Main",
+          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr/tblzg5Zj11G3fiwyr"
+        },
+        "filterByFormula": "=({Full Name} = \"{{ $json.name }}\")",
+        "returnAll": false,
+        "limit": 1,
+        "options": {}
+      },
+      "id": "ced2e912-311d-49b9-934c-9a561f07d796",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1640,
+        820
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "ef917676-0581-420e-94e3-d6241b993ce7",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7a045d98-f508-46a4-a2a6-06da3375b024",
+      "name": "If2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1860,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "9835e2b2-b6c3-4c9d-a80d-426cfe4e1943",
+              "leftValue": "={{ $('Airtable').item.json[\"Sales Team Assignment\"] }}",
+              "rightValue": "Assign Sales Member",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f9c9a379-0c1e-4ff3-9279-f7e8584f6775",
+      "name": "If3",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2080,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "Customer",
+        "documentName": "={{ $('Loop Over Items').item.json.name }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "sales_team_section",
+              "value": "=[]"
+            }
+          ]
+        }
+      },
+      "id": "25154cd8-7743-4959-9ee3-f0bbde215cfe",
+      "name": "ERPNext1",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        2160,
+        540
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer/{{ $('Loop Over Items').item.json.name }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"data\": {\n        \"sales_team\": [\n          \n        ]\n    }\n}",
+        "options": {}
+      },
+      "id": "d9ba1f68-19cf-4e2d-a7bb-e731a52a520d",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2860,
+        1180
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "2fbcea0f-c44a-4ac3-bf00-d5b369ab5ff8",
+              "leftValue": "={{ $json[\"Sales Team Assignment\"] }}",
+              "rightValue": "Sophia",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "f44135d4-cf25-4fe0-a718-1bd5dedceccb",
+              "leftValue": "={{ $json[\"Sales Team Assignment\"] }}",
+              "rightValue": "Emma",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "9f35aa17-4136-4db4-95b1-ccf91cc048fb",
+      "name": "If4",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2220,
+        1060
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer/{{ $('Loop Over Items').item.json.name }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"data\": {\n        \"sales_team\": [\n          {\n            \"sales_person\":\"{{ $('If3').item.json[\"Sales Team Assignment\"] }}\",\n            \"allocated_percentage\": 100.0\n          }\n        ]\n    }\n}",
+        "options": {}
+      },
+      "id": "aaedc631-c9f0-490d-b976-0a3cedeaf32d",
+      "name": "HTTP Request2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2400,
+        1160
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
     }
   ],
   "pinData": {
@@ -5025,6 +5353,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-09-04T13:34:01.000Z",
-  "versionId": "3ce51716-0f9b-4dc8-b619-f77fe526fce6"
+  "updatedAt": "2024-09-04T19:17:09.000Z",
+  "versionId": "3abdd32f-f254-4f34-ab25-59d4a01a804a"
 }
