@@ -107,7 +107,9 @@
           "mode": "id"
         },
         "text": "=An automation in make.com has an issue.\n\nRef:{{ $('Gmail Trigger').item.json[\"Subject\"] }}\n\nError: {{ $('Gmail Trigger').item.json[\"snippet\"] }}",
-        "otherOptions": {}
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
       },
       "id": "bb654b52-28ac-4cef-b497-d72c35165f66",
       "name": "error_notification",
@@ -165,14 +167,14 @@
   },
   "staticData": {
     "node:Gmail Trigger": {
-      "lastTimeChecked": 1725598800,
+      "lastTimeChecked": 1725638255,
       "possibleDuplicates": [
-        "191c5b4187f589cd"
+        "191c80e27d3c584f"
       ]
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-09-05T18:35:19.000Z",
-  "versionId": "e9e6b083-e4f5-421e-97a9-6b651ee0b2df"
+  "updatedAt": "2024-09-06T15:58:13.000Z",
+  "versionId": "fc1c37ac-11dc-4d20-9a30-f0319a40a5e5"
 }
