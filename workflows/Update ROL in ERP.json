@@ -1,0 +1,167 @@
+{
+  "active": true,
+  "connections": {
+    "Get data": {
+      "main": [
+        [
+          {
+            "node": "Update ROL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update ROL": {
+      "main": [
+        []
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-06T18:32:07.925Z",
+  "id": "HxgEZyjmCbMrFvvA",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Update ROL in ERP",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Update ROL\n- Once the ROl cell is changed in Airtable.\n- The change should be effected in the ERP."
+      },
+      "id": "317c92c1-6562-400d-a6be-744c30252343",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        120,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "base": {
+          "__rl": true,
+          "value": "apppMcUAglwU1JD9u",
+          "mode": "list",
+          "cachedResultName": "Inventory Manager",
+          "cachedResultUrl": "https://airtable.com/apppMcUAglwU1JD9u"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblVE8HiL2z8KbXVQ",
+          "mode": "list",
+          "cachedResultName": "Inventory Table",
+          "cachedResultUrl": "https://airtable.com/apppMcUAglwU1JD9u/tblVE8HiL2z8KbXVQ"
+        },
+        "id": "={{ $json.query.recordID }}",
+        "options": {}
+      },
+      "id": "0b605427-e4d0-4df3-ac28-50feea2c89b3",
+      "name": "Get data",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        780,
+        380
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item/{{ $json['Item Code'] }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n      \"min_order_qty\":{{ Math.ceil($json[\"MOQ Units Per Case\"]) }},\n      \"safety_stock\":{{ Math.ceil($json[\"Safety Stock\"]) }},\n      \"lead_time_days\":{{ Math.ceil($json[\"Lead Time\"][0]) }},\n      \"reorder_levels\":[\n         {\n            \"warehouse_group\":\"All Warehouses - TSL\",\n            \"warehouse\":\"Storage - TSL\",\n            \"warehouse_reorder_level\":{{ Math.ceil($json[\"ROL\"]) }},\n            \"warehouse_reorder_qty\":{{ Math.ceil($json[\"ROQ(higher of ROL & MOQ)\"]) }},\n            \"material_request_type\":\"Purchase\",\n            \"doctype\":\"Item Reorder\"\n         }\n      ]\n   }\n}",
+        "options": {}
+      },
+      "id": "2cbfd6ee-6375-4dc6-9802-f55d5589f700",
+      "name": "Update ROL",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        980,
+        380
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "path": "01e6a2d1-89f4-4b43-bf6a-ff31d9b53cf6",
+        "options": {}
+      },
+      "id": "2a6b84b2-7680-43bb-ae96-0a7220ee3607",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        580,
+        380
+      ],
+      "webhookId": "01e6a2d1-89f4-4b43-bf6a-ff31d9b53cf6"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-airtable-source": "apppMcUAglwU1JD9u/wflclmIgwB2QCI2qa",
+            "x-forwarded-for": "3.82.227.153",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "3.82.227.153"
+          },
+          "params": {},
+          "query": {
+            "recordID": "recgQrK8EKc1TEEUn"
+          },
+          "body": {},
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook/01e6a2d1-89f4-4b43-bf6a-ff31d9b53cf6",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-09-06T18:56:13.000Z",
+  "versionId": "b4b111f3-a4a2-4d63-a6eb-837959802785"
+}
