@@ -43,10 +43,8 @@
         },
         "table": {
           "__rl": true,
-          "value": "tblzg5Zj11G3fiwyr",
-          "mode": "list",
-          "cachedResultName": "Main",
-          "cachedResultUrl": "https://airtable.com/app7c9cfju1wCcghr/tblzg5Zj11G3fiwyr"
+          "value": "=tblzg5Zj11G3fiwyr",
+          "mode": "id"
         },
         "filterByFormula": "=({Customer ID} = \"{{ $json.body.customer_name }}\")",
         "options": {},
@@ -909,6 +907,7 @@
       "parameters": {
         "httpMethod": "POST",
         "path": "d6d6991a-8b9b-457b-84aa-f14148fbbbc0",
+        "authentication": "=none",
         "options": {}
       },
       "id": "d9dbfaa0-ed23-4522-a778-6aa8f628ea7a",
@@ -969,6 +968,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-08-27T08:02:18.000Z",
-  "versionId": "c64f2fab-a650-4fad-a401-6845287cf975"
+  "updatedAt": "2024-09-09T07:28:16.000Z",
+  "versionId": "2256cb29-00c2-43a8-a570-2a7508c21eff"
 }
