@@ -1,17 +1,6 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
-    "Formatted Date - now": {
-      "main": [
-        [
-          {
-            "node": "Financial Services",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "F.S Exact Amount Invoice": {
       "main": [
         [
@@ -23,29 +12,11 @@
         ]
       ]
     },
-    "Check Payer Name 1 (msisdn)": {
-      "main": [
-        [
-          {
-            "node": "Payer Name 1 Exists?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Payer Name 1 Exists?": {
       "main": [
         [
           {
-            "node": "More than One Account?",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Check Payer Name 2 (msisdn)",
+            "node": "Check Payer Name 2 (msisdn)1",
             "type": "main",
             "index": 0
           }
@@ -104,24 +75,6 @@
         [
           {
             "node": "If",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "More than One Account?": {
-      "main": [
-        [
-          {
-            "node": "Overdue",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "More than One A/C P.E",
             "type": "main",
             "index": 0
           }
@@ -398,21 +351,66 @@
         ]
       ]
     },
-    "Webhook": {
+    "Phone": {
       "main": [
         [
           {
             "node": "Formatted Date - now",
             "type": "main",
             "index": 0
-          },
+          }
+        ]
+      ]
+    },
+    "Formatted Date - now": {
+      "main": [
+        [
           {
-            "node": "Airtable",
+            "node": "Financial Services",
             "type": "main",
             "index": 0
-          },
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
           {
-            "node": "Send SLack Notifications Channel",
+            "node": "Phone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Payer Name 1 (msisdn)": {
+      "main": [
+        [
+          {
+            "node": "Payer Name 1 Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Payer Name 2 (msisdn)1": {
+      "main": [
+        [
+          {
+            "node": "More than One Account?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "More than One Account?": {
+      "main": [
+        [
+          {
+            "node": "If1",
             "type": "main",
             "index": 0
           }
@@ -445,8 +443,8 @@
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.1,
       "position": [
-        80,
-        20
+        -40,
+        -300
       ],
       "credentials": {
         "slackApi": {
@@ -455,22 +453,6 @@
         }
       },
       "disabled": true
-    },
-    {
-      "parameters": {
-        "operation": "formatDate",
-        "date": "={{ $now }}",
-        "format": "yyyy/MM/dd",
-        "options": {}
-      },
-      "id": "42b74026-b9f5-4e24-a7bd-a030a7d14a68",
-      "name": "Formatted Date - now",
-      "type": "n8n-nodes-base.dateTime",
-      "typeVersion": 2,
-      "position": [
-        80,
-        400
-      ]
     },
     {
       "parameters": {
@@ -484,8 +466,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        560,
-        260
+        -220,
+        0
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -512,30 +494,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        780,
-        260
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "url": "=https://dev.bulkbox.cloud/api/resource/Customer?filters=[[\"payer_name\", \"=\", \"{{encodeURIComponent($('Webhook').item.json[\"body\"][\"names\"])}}\"]]",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "options": {}
-      },
-      "id": "85e62255-b113-4c91-965f-bee0b3032c1b",
-      "name": "Check Payer Name 1 (msisdn)",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        560,
-        500
+        0,
+        0
       ],
       "credentials": {
         "erpNextApi": {
@@ -573,41 +533,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        780,
-        500
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "a0f75132-66b9-4f98-91b7-7b1f82e96297",
-              "leftValue": "={{ $json.data }}",
-              "rightValue": 1,
-              "operator": {
-                "type": "array",
-                "operation": "lengthEquals",
-                "rightType": "number"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "079deb08-0952-4d40-8c30-dc45db54a799",
-      "name": "More than One Account?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        980,
-        260
+        -40,
+        440
       ]
     },
     {
@@ -622,7 +549,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1020,
+        1000,
         620
       ],
       "credentials": {
@@ -1834,8 +1761,8 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2,
       "position": [
-        80,
-        220
+        -340,
+        -340
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -1936,8 +1863,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        300,
-        400
+        -400,
+        200
       ]
     },
     {
@@ -2202,8 +2129,47 @@
     },
     {
       "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "63d98c4f-f2a0-4ec5-b7e8-4649e8e60c3d",
+              "name": "phone_identifier",
+              "value": "={{ $json.body.msisdn.match(/\\d{3}$/)[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "61852501-c487-4b10-a93d-71d0c7aa3528",
+      "name": "Phone",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        -820,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $now }}",
+        "format": "yyyy/MM/dd",
+        "options": {}
+      },
+      "id": "42b74026-b9f5-4e24-a7bd-a030a7d14a68",
+      "name": "Formatted Date - now",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        -600,
+        200
+      ]
+    },
+    {
+      "parameters": {
         "httpMethod": "POST",
-        "path": "db470d2c-cc80-4668-977f-8a25c95e01c1",
+        "path": "ipay-test-workflow",
         "options": {}
       },
       "id": "271f1911-7686-44de-ae3a-2884ff50162c",
@@ -2211,26 +2177,112 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -160,
-        220
+        -1060,
+        200
       ],
       "webhookId": "fa42eb16-aef1-4e4c-b3ac-5189e548b77f"
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "db470d2c-cc80-4668-977f-8a25c95e01c1",
         "options": {}
       },
-      "id": "66ed7193-b9ec-4bf7-b2eb-ebb997171311",
-      "name": "Webhook1",
-      "type": "n8n-nodes-base.webhook",
+      "id": "f9bdb34e-60c9-4f25-bbda-d2875040a86e",
+      "name": "If1",
+      "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        2220,
-        -340
+        680,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://dev.bulkbox.cloud/api/resource/Customer?filters=[[\"payer_name\", \"=\", \"{{encodeURIComponent($('Webhook').item.json[\"body\"][\"names\"])}}\"]]",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "85e62255-b113-4c91-965f-bee0b3032c1b",
+      "name": "Check Payer Name 1 (msisdn)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -220,
+        440
       ],
-      "webhookId": "fa42eb16-aef1-4e4c-b3ac-5189e548b77f"
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://dev.bulkbox.cloud/api/resource/Customer?filters=[[\"payer_name_2\", \"=\", \"{{encodeURIComponent($('Webhook').item.json[\"body\"][\"names\"])}}\"]]",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "719db1da-887f-4052-b83b-e457d2a034b4",
+      "name": "Check Payer Name 2 (msisdn)1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        200,
+        320
+      ],
+      "notesInFlow": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      },
+      "notes": "Check if another account has same name in payer name 2."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "a0f75132-66b9-4f98-91b7-7b1f82e96297",
+              "leftValue": "={{ $('Payer Name 1 Exists?').item.json.data }}",
+              "rightValue": 1,
+              "operator": {
+                "type": "array",
+                "operation": "lengthEquals",
+                "rightType": "number"
+              }
+            },
+            {
+              "id": "76a9a595-8975-4e10-9d7b-7eed37fadd8b",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "079deb08-0952-4d40-8c30-dc45db54a799",
+      "name": "More than One Account?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        440,
+        180
+      ]
     }
   ],
   "pinData": {
@@ -2256,43 +2308,8 @@
           "body": {
             "amount": "1344.00",
             "channel": "MPESA",
-            "msisdn": "2547*****323",
-            "names": "CECILIA CECILIA",
-            "tstamp": "2024-08-30 10:01:35",
-            "txnid": "SHU9S1THGD",
-            "vendorid": "bulkbox",
-            "courierid": "",
-            "hash": "5902bf3d83080033830db61026e9005df9676268d1af99c160b2d9fcff94947c"
-          },
-          "webhookUrl": "https://n8n.bulkbox.cloud/webhook/db470d2c-cc80-4668-977f-8a25c95e01c1",
-          "executionMode": "Devuction"
-        }
-      }
-    ],
-    "Webhook1": [
-      {
-        "json": {
-          "headers": {
-            "host": "n8n.bulkbox.cloud",
-            "content-length": "250",
-            "accept": "application/json",
-            "accept-encoding": "deflate, gzip",
-            "cache-control": "no-cache",
-            "content-type": "application/json",
-            "x-forwarded-for": "46.101.245.171",
-            "x-forwarded-host": "n8n.bulkbox.cloud",
-            "x-forwarded-port": "443",
-            "x-forwarded-proto": "https",
-            "x-forwarded-server": "19ac6f0cdfeb",
-            "x-real-ip": "46.101.245.171"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "amount": "1344.00",
-            "channel": "MPESA",
-            "msisdn": "2547*****323",
-            "names": "CECILIA CECILIA",
+            "names": "FRANCIS FRANCIS",
+            "msisdn": "2547*****397",
             "tstamp": "2024-08-30 10:01:35",
             "txnid": "SHU9S1THGD",
             "vendorid": "bulkbox",
@@ -2322,6 +2339,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-09T12:56:21.000Z",
-  "versionId": "46fb73ca-e1bd-4751-8def-2760bd4b7690"
+  "updatedAt": "2024-09-10T13:32:05.000Z",
+  "versionId": "488dfb41-3a85-4896-a269-a3874cebc01f"
 }
