@@ -1,0 +1,284 @@
+{
+  "active": true,
+  "connections": {
+    "n8n Form Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Get User Information1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get User Information1": {
+      "main": [
+        [
+          {
+            "node": "Check for existing Customer - Email1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check for existing Customer - Email1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get User Information1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-09T12:10:18.045Z",
+  "id": "PxYn3OoVtrYV0oA5",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Find Associated Acc in ERP from Website",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "find-account",
+        "formTitle": "Find account in ERP",
+        "formDescription": "Using the website user ID, this form will help you find the associated account in the ERP.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Customer Website User ID",
+              "requiredField": true
+            }
+          ]
+        },
+        "responseMode": "responseNode"
+      },
+      "id": "e78b8007-c55b-4aa4-87e8-3e313c2b54cd",
+      "name": "n8n Form Trigger1",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2,
+      "position": [
+        260,
+        180
+      ],
+      "webhookId": "97397000-5c0b-4841-a471-74e63965fafe"
+    },
+    {
+      "parameters": {
+        "url": "=https://bulkbox.co.ke/api/users/{{ $json['Customer Website User ID'] }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "c70a4c0e-b7eb-4c34-9c61-51354f67e0c6",
+      "name": "Get User Information1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        180
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ttlwVRmZ1lkIHlXQ",
+          "name": "Website"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Access the usergroup_id from the incoming JSON\nconst userGroupId = parseInt(items[0].json.body.user_groups[0].usergroup_id, 10);\n\n// Log the usergroup_id to ensure it is captured correctly\nconsole.log('User Group ID:', userGroupId);\n\n// Switch statement to return different values based on usergroup_id\nlet result;\n\nswitch(userGroupId) {\n    case 7:\n        result = \"Consumer\";\n        break;\n    case 8:\n        result = \"Food Service\";\n        break;\n    case 10:\n        result = \"Retail\";\n        break;\n    case 11:\n        result = \"Other Business\";\n        break;\n    default:\n        result = \"Corporate\";\n}\n\n// Return the result in the required format\nreturn [{ value: result }];\n\n\n\n{\n  \"formSubmittedText \": \"Account in ERP is:  {{ $json.body.data[0].customer_name }}\"\n}"
+      },
+      "id": "c1edcb26-b20a-4efd-8308-8a3a3638658f",
+      "name": "Code1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1800,
+        20
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer?fields=[\"customer_name\",\"email_id\"]&filters=[[\"email_id\",\"=\",\"{{ $('Get User Information1').item.json.body.email }}\"]] ",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "2f4982b9-2d81-4b0f-b95a-4bf97d8aee38",
+      "name": "Check for existing Customer - Email1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        700,
+        180
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=Account in ERP is:  {{ $json.body.data[0].customer_name }}\n",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "185b37c2-a32b-462b-9860-b2d3122f8d33",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1160,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "45b03008-52ff-42cc-bdec-97ba37e018ae",
+              "leftValue": "={{ $json.body.data[0].customer_name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "1b9b33af-1414-4f6f-b168-945d0456602a",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        920,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "redirect",
+        "redirectURL": "https://n8n.bulkbox.cloud/form/create-customer-account",
+        "options": {}
+      },
+      "id": "60b04cb7-0ef7-458c-85e7-6a91c7480186",
+      "name": "Respond to Webhook1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1160,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "path": "87a9c9ab-88c7-4a22-8f6a-b1a9dee01efa",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "d73260d6-740b-4ec3-96be-395bbdc2ea3f",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        260,
+        380
+      ],
+      "webhookId": "87a9c9ab-88c7-4a22-8f6a-b1a9dee01efa"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
+    }
+  ],
+  "triggerCount": 3,
+  "updatedAt": "2024-09-10T06:58:29.000Z",
+  "versionId": "779473c1-c3da-481e-88f3-a553427ed62b"
+}
