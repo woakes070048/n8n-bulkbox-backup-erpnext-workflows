@@ -399,18 +399,190 @@
       "main": [
         [
           {
-            "node": "More than One Account?",
+            "node": "list_of_accounts",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "More than One Account?": {
+    "Loop Over Items": {
       "main": [
         [
           {
-            "node": "If1",
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "list_of_accounts": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Matching Numbers?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items2": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Exact person multiple accounts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Exact person multiple accounts": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items3": {
+      "main": [
+        [
+          {
+            "node": "Aggregate2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "If3",
             "type": "main",
             "index": 0
           }
@@ -533,7 +705,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        -40,
+        0,
         440
       ]
     },
@@ -549,8 +721,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1000,
-        620
+        5380,
+        680
       ],
       "credentials": {
         "erpNextApi": {
@@ -588,8 +760,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        1220,
-        620
+        5600,
+        680
       ]
     },
     {
@@ -621,8 +793,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        1460,
-        460
+        5840,
+        520
       ]
     },
     {
@@ -637,8 +809,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1460,
-        720
+        5840,
+        780
       ],
       "credentials": {
         "erpNextApi": {
@@ -685,8 +857,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        1680,
-        760
+        6060,
+        820
       ]
     },
     {
@@ -705,40 +877,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1880,
-        640
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "sendBody": true,
-        "contentType": "=json",
-        "specifyBody": "json",
-        "bodyParameters": {
-          "parameters": [
-            {}
-          ]
-        },
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"Ipay Unallocated\",\n      \"party_name\":\"Ipay Unallocated\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":0,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[\n         \n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
-        "options": {}
-      },
-      "id": "1bda8a1c-3239-4664-822d-4d6657fb8a83",
-      "name": "More than One A/C P.E",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        1220,
-        360
+        6260,
+        700
       ],
       "credentials": {
         "erpNextApi": {
@@ -759,8 +899,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1240,
-        60
+        5620,
+        120
       ],
       "credentials": {
         "erpNextApi": {
@@ -781,8 +921,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1680,
-        360
+        6060,
+        420
       ],
       "credentials": {
         "erpNextApi": {
@@ -807,8 +947,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1680,
-        540
+        6060,
+        600
       ],
       "credentials": {
         "erpNextApi": {
@@ -829,8 +969,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1680,
-        -220
+        6060,
+        -160
       ],
       "credentials": {
         "erpNextApi": {
@@ -867,8 +1007,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        1680,
-        0
+        6060,
+        60
       ]
     },
     {
@@ -893,8 +1033,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1680,
-        160
+        6060,
+        220
       ],
       "credentials": {
         "erpNextApi": {
@@ -925,8 +1065,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1900,
-        -100
+        6280,
+        -40
       ],
       "credentials": {
         "erpNextApi": {
@@ -957,8 +1097,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1900,
-        60
+        6280,
+        120
       ],
       "credentials": {
         "erpNextApi": {
@@ -989,8 +1129,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2140,
-        -420
+        6520,
+        -360
       ],
       "credentials": {
         "erpNextApi": {
@@ -1021,8 +1161,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2140,
-        -100
+        6520,
+        -40
       ],
       "credentials": {
         "erpNextApi": {
@@ -1059,8 +1199,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        2140,
-        -260
+        6520,
+        -200
       ]
     },
     {
@@ -1085,8 +1225,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2380,
-        -160
+        6760,
+        -100
       ],
       "credentials": {
         "erpNextApi": {
@@ -1117,8 +1257,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2380,
-        -340
+        6760,
+        -280
       ],
       "credentials": {
         "erpNextApi": {
@@ -1139,8 +1279,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2160,
-        180
+        6540,
+        240
       ],
       "credentials": {
         "erpNextApi": {
@@ -1177,8 +1317,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        2160,
-        360
+        6540,
+        420
       ]
     },
     {
@@ -1203,8 +1343,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2160,
-        540
+        6540,
+        600
       ],
       "credentials": {
         "erpNextApi": {
@@ -1235,8 +1375,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2400,
-        300
+        6780,
+        360
       ],
       "credentials": {
         "erpNextApi": {
@@ -1267,8 +1407,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2400,
-        460
+        6780,
+        520
       ],
       "credentials": {
         "erpNextApi": {
@@ -1299,8 +1439,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2640,
-        -40
+        7020,
+        20
       ],
       "credentials": {
         "erpNextApi": {
@@ -1331,8 +1471,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2640,
-        300
+        7020,
+        360
       ],
       "credentials": {
         "erpNextApi": {
@@ -1369,8 +1509,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        2640,
-        140
+        7020,
+        200
       ]
     },
     {
@@ -1395,8 +1535,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2880,
-        240
+        7260,
+        300
       ],
       "credentials": {
         "erpNextApi": {
@@ -1427,8 +1567,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2880,
-        60
+        7260,
+        120
       ],
       "credentials": {
         "erpNextApi": {
@@ -1521,8 +1661,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3,
       "position": [
-        2400,
-        140
+        6780,
+        200
       ]
     },
     {
@@ -1609,8 +1749,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3,
       "position": [
-        1920,
-        360
+        6300,
+        420
       ]
     },
     {
@@ -1950,8 +2090,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3,
       "position": [
-        1460,
-        60
+        5840,
+        120
       ]
     },
     {
@@ -2038,8 +2178,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3,
       "position": [
-        1900,
-        -260
+        6280,
+        -200
       ]
     },
     {
@@ -2071,8 +2211,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        1880,
-        880
+        6260,
+        940
       ]
     },
     {
@@ -2091,8 +2231,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2120,
-        780
+        6500,
+        840
       ],
       "credentials": {
         "erpNextApi": {
@@ -2117,8 +2257,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2120,
-        1000
+        6500,
+        1060
       ],
       "credentials": {
         "erpNextApi": {
@@ -2146,7 +2286,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.3,
       "position": [
-        -820,
+        -860,
         200
       ]
     },
@@ -2191,13 +2331,13 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        680,
-        120
+        560,
+        -100
       ]
     },
     {
       "parameters": {
-        "url": "=https://dev.bulkbox.cloud/api/resource/Customer?filters=[[\"payer_name\", \"=\", \"{{encodeURIComponent($('Webhook').item.json[\"body\"][\"names\"])}}\"]]",
+        "url": "=https://dev.bulkbox.cloud/api/resource/Customer?filters=[[\"payer_name\", \"=\", \"{{encodeURIComponent($('Webhook').item.json[\"body\"][\"names\"])}}\"]]&fields=[\"name\", \"payee_phone_number\"]",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "erpNextApi",
         "options": {}
@@ -2219,7 +2359,7 @@
     },
     {
       "parameters": {
-        "url": "=https://dev.bulkbox.cloud/api/resource/Customer?filters=[[\"payer_name_2\", \"=\", \"{{encodeURIComponent($('Webhook').item.json[\"body\"][\"names\"])}}\"]]",
+        "url": "=https://dev.bulkbox.cloud/api/resource/Customer?filters=[[\"payer_name_2\", \"=\", \"{{encodeURIComponent($('Webhook').item.json[\"body\"][\"names\"])}}\"]]&fields=[\"name\", \"payee_phone_number\"]",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "erpNextApi",
         "options": {}
@@ -2229,8 +2369,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        200,
-        320
+        360,
+        400
       ],
       "notesInFlow": true,
       "credentials": {
@@ -2259,16 +2399,6 @@
                 "operation": "lengthEquals",
                 "rightType": "number"
               }
-            },
-            {
-              "id": "76a9a595-8975-4e10-9d7b-7eed37fadd8b",
-              "leftValue": "={{ $json.data }}",
-              "rightValue": "",
-              "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
-              }
             }
           ],
           "combinator": "or"
@@ -2276,12 +2406,434 @@
         "options": {}
       },
       "id": "079deb08-0952-4d40-8c30-dc45db54a799",
-      "name": "More than One Account?",
+      "name": "More than One Account from payer_name_1?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
+        320,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## More than one account.\n- get any other account with same name in payer_name_2\n- Store them as a list.\n-Loope through the list checking if the payer number is as similar to the payee_phone_number.\n- If found, ensure only one, then book amount.\n- Else book as payment unallocated.",
+        "height": 249.39379275846312,
+        "width": 206.31538243883998
+      },
+      "id": "c56812ee-08f7-46db-85d0-a86eb049ec97",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ff57ea52-2b2c-4346-8483-9ba2ddbf25da",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e0b229df-475e-4f67-87f5-56464cb34623",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        880,
+        -440
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "id": "8646617c-8149-472e-b103-49afedfd7d86",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        660,
+        -500
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "id": "34f40f49-4452-4b75-b5d1-4d345f1aefe7",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
         440,
+        -500
+      ]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "33dc5519-2159-4a6d-8a61-e0428adc0883",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        880,
+        -580
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "c1780a29-d4b4-446f-b3d7-3c371156efd5",
+      "name": "Loop Over Items1",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2600,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "accounts",
+        "options": {}
+      },
+      "id": "cd507177-1ef5-4d3b-92f0-3975e0bcfc9b",
+      "name": "Split Out1",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        840,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "contentType": "=json",
+        "specifyBody": "json",
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"Ipay Unallocated\",\n      \"party_name\":\"Ipay Unallocated\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":0,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[\n         \n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
+        "options": {}
+      },
+      "id": "c78b792b-c4ec-47b1-9211-66867438a1ad",
+      "name": "More than One A/C P.E",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1720,
+        -120
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a129a9af-b88b-4d2a-8366-739033d8a091",
+              "name": "accounts",
+              "value": "={{ $json.data.concat( $('Payer Name 1 Exists?').item.json.data ) }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "47fe66c2-b45f-426a-aaf5-6cffe43bf69e",
+      "name": "list_of_accounts",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        600,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "59711157-42b3-4700-89a3-8879de23d766",
+              "leftValue": "={{ $json.payee_phone_number }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "5657497f-4601-4980-859a-de22fbb461b8",
+              "leftValue": "={{ $json.payee_phone_number.match(/\\d{3}$/)[0] }}",
+              "rightValue": "={{ $('Phone').item.json.phone_identifier }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ec9fcf0c-8bde-4b21-8e30-4478d84cd133",
+      "name": "Matching Numbers?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2820,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Matching Numbers\n- Check fro any invoice with same amount.\n- if found, book entry attaching invoice.\n- If not there, book entry to customer with no atachment.",
+        "width": 343.64497711126154
+      },
+      "id": "1e3ce974-b1c8-4520-bc35-8ec3961b86d2",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        -100
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "eb65482a-06ab-4f8f-addd-67e1e7948c0b",
+      "name": "Loop Over Items2",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1320,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6f07bcbf-21a8-484c-a582-810fad3d3610",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "5af6d527-6069-4c83-9ff1-7be871c988b3",
+      "name": "Exact person multiple accounts",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        1540,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "da670982-59a0-4ad2-b328-fabd84bc4bcc",
+              "leftValue": "={{ $json.payee_phone_number.match(/\\d{3}$/)[0] }}",
+              "rightValue": "={{ $('Phone').item.json.phone_identifier }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7611dd98-665f-49e4-b601-11317ea579ae",
+      "name": "If2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1080,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Input data from previous node\nconst inputData = [\n  {\n    \"name\": \"Test Customer\",\n    \"payee_phone_number\": \"2547*****397\"\n  },\n  {\n    \"name\": \"TEST ACCOUNT\",\n    \"payee_phone_number\": \"2547*****123\"\n  },\n  {\n    \"name\": \"Test Company\",\n    \"payee_phone_number\": \"2547*****397\"\n  }\n];\n\n// Phone number to be compared (you can set it via n8n expression)\nconst phoneToCompare = '2547*****397'; // Example phone number to compare\n\n// Filter matching records\nconst matchingRecords = inputData.filter(item => item.payee_phone_number === phoneToCompare);\n\n// Return the result as an array with a 'json' key\nreturn [{ json: { matchingRecords } }];\n"
+      },
+      "id": "e92e92e6-23e7-454c-b0df-08a4523c4e75",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        820,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7ca1e0a8-5493-4d7b-9207-f58c8fff96e1",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "d5d165ce-1dbb-49f5-9c11-cbaf26ab7c09",
+      "name": "Edit Fields1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        1560,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "1a514950-689b-40e8-ab9e-84da2cf0bb6c",
+      "name": "Loop Over Items3",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1320,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "109a0aaa-6a23-4b8c-a18d-f2b2a3eee146",
+      "name": "Aggregate1",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1540,
         180
+      ]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "5c8e76d1-5442-4320-b2ae-967f69893431",
+      "name": "Aggregate2",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1560,
+        540
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "87affdd2-03d1-4316-ae66-41f7ff59a2c5",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        1820,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "5f2d1ab0-d809-44e6-a8ef-20869b0ad1b4",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "empty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "2a28b865-b3e8-4a60-b797-d38d5a2aed0b",
+              "leftValue": "=",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b41da628-5dac-473b-be2d-283d68273bf8",
+      "name": "If3",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2040,
+        360
       ]
     }
   ],
@@ -2339,6 +2891,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-10T13:32:05.000Z",
-  "versionId": "488dfb41-3a85-4896-a269-a3874cebc01f"
+  "updatedAt": "2024-09-10T20:39:56.000Z",
+  "versionId": "9bb1c442-2723-4a3c-acde-cdf9f8e5ed70"
 }
