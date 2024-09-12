@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Brand Search",
+            "node": "ERPNext",
             "type": "main",
             "index": 0
           }
@@ -35,13 +35,7 @@
     },
     "Brand Search": {
       "main": [
-        [
-          {
-            "node": "Brand Exists?",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Brand Exists?": {
@@ -204,6 +198,17 @@
           }
         ]
       ]
+    },
+    "ERPNext": {
+      "main": [
+        [
+          {
+            "node": "Brand Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-04-08T12:08:57.436Z",
@@ -326,7 +331,7 @@
     },
     {
       "parameters": {
-        "url": "=https://portal.bulkbox.cloud/api/resource/Brand/?filters=[[\"Brand\",\"name\",\"like\",\"%{{ $('Webhook').item.json.query.brand }}%\"]] ",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Brand/?filters=[[\"name\",\"=\",\"%{{ $('Webhook').item.json.query.brand }}%\"]] ",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "erpNextApi",
         "options": {
@@ -342,8 +347,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1240,
-        60
+        880,
+        -60
       ],
       "alwaysOutputData": true,
       "notesInFlow": true,
@@ -366,7 +371,7 @@
           "conditions": [
             {
               "id": "72a60e8b-c6dc-4900-817d-83e4d18f5cb4",
-              "leftValue": "={{ $json.body.data[0].name }}",
+              "leftValue": "={{ $json.name }}",
               "rightValue": "",
               "operator": {
                 "type": "string",
@@ -376,6 +381,16 @@
             },
             {
               "id": "18da3ca5-1150-4a32-8d97-3150b3d2efd0",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "80303284-eede-4bb8-9b00-09f3d2d20de1",
               "leftValue": "",
               "rightValue": "",
               "operator": {
@@ -926,6 +941,28 @@
         280
       ],
       "webhookId": "67417016-5ee4-4390-891e-0541cf8c54a9"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Brand",
+        "documentName": "={{ encodeURIComponent($('Webhook').item.json.query.brand) }}"
+      },
+      "id": "224952c7-a267-4373-b5f8-1a0ddb77a219",
+      "name": "ERPNext",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        1240,
+        40
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
     }
   ],
   "pinData": {
@@ -938,41 +975,41 @@
             "accept": "*/*",
             "accept-encoding": "gzip,deflate",
             "x-airtable-source": "appSCi0a1zPuJizxg/wflpwj9KeGwqD7jkc",
-            "x-forwarded-for": "18.207.251.156",
+            "x-forwarded-for": "3.235.228.182",
             "x-forwarded-host": "n8n.bulkbox.cloud",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
             "x-forwarded-server": "19ac6f0cdfeb",
-            "x-real-ip": "18.207.251.156"
+            "x-real-ip": "3.235.228.182"
           },
           "params": {},
           "query": {
-            "recordID": "rec103zszlGG0lg08",
-            "itemCode": "TID079",
-            "units": "1",
-            "supplier": "Takdir Impex LTD",
-            "itemName": "Festiva Mayonnaise 3.78Kg",
-            "rate": "1406.687402799378",
-            "brand": "Festiva",
-            "description": "Festiva Mayonnaise 3.78Kg",
-            "itemGroup": "Mayonnaise",
+            "recordID": "recaARrcC2YaTRQLm",
+            "itemCode": "KSR037",
+            "units": "12",
+            "supplier": "Kapa Oil Refineries LTD",
+            "itemName": "Captain Cook Pure Corn Oil 1Kg",
+            "rate": "400.4303901860729",
+            "brand": "Captain Cook",
+            "description": "Captain Cook Pure Corn Oil 1Kg",
+            "itemGroup": "Corn & Sunflower Oil",
             "materialType": "Purchase",
             "uom": "PCS",
             "taxes": "0.16",
-            "buyingPrice": "1350",
-            "gtPrice": "1396.9111969111968",
-            "disabled": "0",
-            "productNameExcl": "Festiva Mayonnaise",
+            "buyingPrice": "324.71264367816093",
+            "gtPrice": "378.37278394700957",
+            "disabled": "1",
+            "productNameExcl": "Captain Cook Pure Corn Oil",
             "cscartStatus": "null",
             "Flavour": "null",
-            "RetailPrice": "1678.752",
+            "RetailPrice": "550",
             "FullDescription": "null",
             "imageURL": "",
             "Taxes": "VAT",
             "cscartCaseSize": "null",
-            "size": "3.78Kg",
-            "EcomRAteIncl": "1631.7573872472785",
-            "CategoryID": "625",
+            "size": "1Kg",
+            "EcomRAteIncl": "464.49925261584457",
+            "CategoryID": "941",
             "erpFunction": "Create Product",
             "expenseAccount": "Ambient Foods COGS",
             "incomeAccount": "Ambient Foods Sales"
@@ -1000,6 +1037,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-10T08:56:06.000Z",
-  "versionId": "158bd1a6-7591-4890-b962-49e66c8853fe"
+  "updatedAt": "2024-09-12T12:00:22.000Z",
+  "versionId": "f6006b6f-d94e-4aec-9897-7fd3f464e229"
 }
