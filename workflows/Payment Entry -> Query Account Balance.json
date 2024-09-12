@@ -211,7 +211,7 @@
       "credentials": {
         "erpNextApi": {
           "id": "OVfEC6rfwqA5vwcf",
-          "name": "ERPNext account"
+          "name": "ERPNext Prod"
         }
       }
     },
@@ -272,7 +272,7 @@
       "credentials": {
         "erpNextApi": {
           "id": "OVfEC6rfwqA5vwcf",
-          "name": "ERPNext account"
+          "name": "ERPNext Prod"
         }
       }
     },
@@ -2624,6 +2624,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-06-15T19:02:26.000Z",
-  "versionId": "8353c6cb-6ce8-4561-94d2-aeda47a7e8e8"
+  "updatedAt": "2024-09-12T09:49:57.000Z",
+  "versionId": "862ed8c6-7dcc-41a4-9589-6a670a491a9c"
 }
