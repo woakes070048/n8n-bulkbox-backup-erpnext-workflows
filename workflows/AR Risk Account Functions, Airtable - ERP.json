@@ -347,7 +347,7 @@
       "credentials": {
         "erpNextApi": {
           "id": "OVfEC6rfwqA5vwcf",
-          "name": "ERPNext account"
+          "name": "ERPNext Prod"
         }
       }
     },
@@ -385,7 +385,7 @@
       "credentials": {
         "erpNextApi": {
           "id": "OVfEC6rfwqA5vwcf",
-          "name": "ERPNext account"
+          "name": "ERPNext Prod"
         }
       }
     },
@@ -450,7 +450,7 @@
       "credentials": {
         "erpNextApi": {
           "id": "OVfEC6rfwqA5vwcf",
-          "name": "ERPNext account"
+          "name": "ERPNext Prod"
         }
       }
     },
@@ -521,7 +521,7 @@
       "credentials": {
         "erpNextApi": {
           "id": "OVfEC6rfwqA5vwcf",
-          "name": "ERPNext account"
+          "name": "ERPNext Prod"
         }
       }
     },
@@ -570,8 +570,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 2,
       "position": [
-        2700,
-        880
+        2680,
+        900
       ]
     },
     {
@@ -598,22 +598,9 @@
       "credentials": {
         "erpNextApi": {
           "id": "OVfEC6rfwqA5vwcf",
-          "name": "ERPNext account"
+          "name": "ERPNext Prod"
         }
       }
-    },
-    {
-      "parameters": {
-        "jsCode": "// Retrieve the input data from the previous node\nconst inputData = items[0].json;\n\n// Define a function to check if a value is empty and set it to zero if it is\nconst checkEmptyAndSetToZero = (value) => {\n    return value === undefined || value === null ? 0 : value;\n};\n\n// Iterate over each field in the input data\nfor (const fieldName in inputData) {\n    if (inputData.hasOwnProperty(fieldName)) {\n        // Check if the field value is empty and set it to zero if it is\n        inputData[fieldName] = checkEmptyAndSetToZero(inputData[fieldName]);\n    }\n}\n\n// Return the updated input data\nreturn [{ json: inputData }];\n"
-      },
-      "id": "b7da99e3-701d-4137-a3a5-5dec3431f92f",
-      "name": "if Empty 0",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        980,
-        1020
-      ]
     },
     {
       "parameters": {
@@ -2302,7 +2289,11 @@
     "callerPolicy": "workflowsFromSameOwner",
     "errorWorkflow": "pA3zEasbGp50knPq"
   },
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    }
+  },
   "tags": [
     {
       "createdAt": "2024-03-05T20:25:50.007Z",
@@ -2312,6 +2303,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-05-21T11:32:21.000Z",
-  "versionId": "c0a6e353-5785-4f20-9256-408887ea5b1e"
+  "updatedAt": "2024-09-12T10:10:50.000Z",
+  "versionId": "b7f32093-a161-4900-84b6-e33066836e52"
 }
