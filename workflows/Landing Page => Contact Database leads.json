@@ -1,6 +1,76 @@
 {
   "active": true,
-  "connections": {},
+  "connections": {
+    "If individual email": {
+      "main": [
+        [
+          {
+            "node": "company_exists",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "company_exists": {
+      "main": [
+        [
+          {
+            "node": "Airtable1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "client_details": {
+      "main": [
+        [
+          {
+            "node": "If individual email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable2": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "client_details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2024-09-12T12:21:49.822Z",
   "id": "mhsXyy5HPMWgy2tb",
   "meta": {
@@ -8,6 +78,2180 @@
   },
   "name": "Landing Page => Contact Database leads",
   "nodes": [
+    {
+      "parameters": {
+        "content": "## Logic\n- All emails containing individual emails e.g gmail, yahoo\n     - Don't auto assign\n     - Send slack to Betty to follow up.\n     - If valid lead, Betty will categorize it as \"lead\"\n- If email is valid, Create as Lead in stystem, and auto assign sales member\n\n\n",
+        "height": 213,
+        "width": 520,
+        "color": 5
+      },
+      "id": "743ff8da-aa10-4db0-9f6e-59c2e63406fe",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        360,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "4fedc930-14ce-4b95-9b24-b638bde20e75",
+              "leftValue": "={{ $json.email }}",
+              "rightValue": "gmail",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "76905478-f77d-4118-b06d-923b5448f18d",
+              "leftValue": "={{ $json.email }}",
+              "rightValue": "outlook",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "fac84514-3447-4e70-8f0b-1912b47f3bc2",
+              "leftValue": "={{ $json.email }}",
+              "rightValue": "yahoo",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "2860f5a6-9610-4d44-bec4-7440d546c0c4",
+      "name": "If individual email",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        840,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appqmFBvp9I9IB1YV",
+          "mode": "list",
+          "cachedResultName": "Contact Database",
+          "cachedResultUrl": "https://airtable.com/appqmFBvp9I9IB1YV"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblBkafwuK7H4aReA",
+          "mode": "list",
+          "cachedResultName": "Contacts",
+          "cachedResultUrl": "https://airtable.com/appqmFBvp9I9IB1YV/tblBkafwuK7H4aReA"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Assign Sales (Round Robin)": true,
+            "Company Name": "={{ $json.company }}",
+            "First Name": "={{ $json.first_name }}",
+            "Last Name": "={{ $json.last_name }}",
+            "Contact Status": "Lead",
+            "Contact Type": "={{ $ifEmpty($json.conutact_type.trim(), \"Other\") }}",
+            "Source": "Landing Page",
+            "Tel": "={{ $json.tel }}",
+            "Email": "={{ $json.email }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Company Name",
+              "displayName": "Company Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Job Role",
+              "displayName": "Job Role",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Owner",
+                  "value": "Owner"
+                },
+                {
+                  "name": "General Manager",
+                  "value": "General Manager"
+                },
+                {
+                  "name": "Procurement Manager",
+                  "value": "Procurement Manager"
+                },
+                {
+                  "name": "Procurement Officer",
+                  "value": "Procurement Officer"
+                },
+                {
+                  "name": "Office Adminstrator",
+                  "value": "Office Adminstrator"
+                },
+                {
+                  "name": "Undefined",
+                  "value": "Undefined"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Contact Status",
+              "displayName": "Contact Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Lead",
+                  "value": "Lead"
+                },
+                {
+                  "name": "One Time Customers",
+                  "value": "One Time Customers"
+                },
+                {
+                  "name": "Account",
+                  "value": "Account"
+                },
+                {
+                  "name": "Unassigned",
+                  "value": "Unassigned"
+                },
+                {
+                  "name": "Lost Customer",
+                  "value": "Lost Customer"
+                },
+                {
+                  "name": "Closed",
+                  "value": "Closed"
+                },
+                {
+                  "name": "Cash Customer",
+                  "value": "Cash Customer"
+                },
+                {
+                  "name": "Credit Customer",
+                  "value": "Credit Customer"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Contact Type",
+              "displayName": "Contact Type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Food Service",
+                  "value": "Food Service"
+                },
+                {
+                  "name": "Retail",
+                  "value": "Retail"
+                },
+                {
+                  "name": "Corporate",
+                  "value": "Corporate"
+                },
+                {
+                  "name": "Unassigned",
+                  "value": "Unassigned"
+                },
+                {
+                  "name": "Consumer",
+                  "value": "Consumer"
+                },
+                {
+                  "name": "Other Business",
+                  "value": "Other Business"
+                },
+                {
+                  "name": "Retailer",
+                  "value": "Retailer"
+                },
+                {
+                  "name": "Office",
+                  "value": "Office"
+                },
+                {
+                  "name": "NGO",
+                  "value": "NGO"
+                },
+                {
+                  "name": "Restaurant",
+                  "value": "Restaurant"
+                },
+                {
+                  "name": "Other",
+                  "value": "Other"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Website",
+                  "value": "Website"
+                },
+                {
+                  "name": "App",
+                  "value": "App"
+                },
+                {
+                  "name": "Landing Page",
+                  "value": "Landing Page"
+                },
+                {
+                  "name": "Other Forms",
+                  "value": "Other Forms"
+                },
+                {
+                  "name": "ERP",
+                  "value": "ERP"
+                },
+                {
+                  "name": "Whatsapp",
+                  "value": "Whatsapp"
+                },
+                {
+                  "name": "Email",
+                  "value": "Email"
+                },
+                {
+                  "name": "Call in",
+                  "value": "Call in"
+                },
+                {
+                  "name": "Supplier Referall",
+                  "value": "Supplier Referall"
+                },
+                {
+                  "name": "Customer Referall",
+                  "value": "Customer Referall"
+                },
+                {
+                  "name": "Outbound",
+                  "value": "Outbound"
+                },
+                {
+                  "name": "Live Chat",
+                  "value": "Live Chat"
+                },
+                {
+                  "name": "",
+                  "value": ""
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tel",
+              "displayName": "Tel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Created Date",
+              "displayName": "Created Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Last Modified",
+              "displayName": "Last Modified",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Send to CRM / Moosend",
+              "displayName": "Send to CRM / Moosend",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Send to CRM",
+                  "value": "Send to CRM"
+                },
+                {
+                  "name": "Moosend",
+                  "value": "Moosend"
+                },
+                {
+                  "name": "Send to CRM Sophia",
+                  "value": "Send to CRM Sophia"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Created By",
+              "displayName": "Created By",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "User Group ID",
+              "displayName": "User Group ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Assigned",
+              "displayName": "Assigned",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Month",
+              "displayName": "Month",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Send Sales Email",
+              "displayName": "Send Sales Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Send Intro Sequence",
+                  "value": "Send Intro Sequence"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "New Opportunity Stage",
+              "displayName": "New Opportunity Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New",
+                  "value": "New"
+                },
+                {
+                  "name": "Info Shared",
+                  "value": "Info Shared"
+                },
+                {
+                  "name": "Meeting Scheduled",
+                  "value": "Meeting Scheduled"
+                },
+                {
+                  "name": "Negotiation",
+                  "value": "Negotiation"
+                },
+                {
+                  "name": "Account Opening",
+                  "value": "Account Opening"
+                },
+                {
+                  "name": "Closed Won",
+                  "value": "Closed Won"
+                },
+                {
+                  "name": "Closed Lost",
+                  "value": "Closed Lost"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Upsell Stage",
+              "displayName": "Upsell Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Outreach Stage",
+                  "value": "Outreach Stage"
+                },
+                {
+                  "name": "Meeting Stage",
+                  "value": "Meeting Stage"
+                },
+                {
+                  "name": "Closed-Won",
+                  "value": "Closed-Won"
+                },
+                {
+                  "name": "Closed-Lost",
+                  "value": "Closed-Lost"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Expected MRR",
+              "displayName": "Expected MRR",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Expected Close Date",
+              "displayName": "Expected Close Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "New Deals",
+              "displayName": "New Deals",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "New Deals copy",
+              "displayName": "New Deals copy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Upsell Deals copy",
+              "displayName": "Upsell Deals copy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Interactions",
+              "displayName": "Interactions",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Assign Sales Member",
+              "displayName": "Assign Sales Member",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Ahmed Wurie",
+                  "value": "Ahmed Wurie"
+                },
+                {
+                  "name": "Assign Sales Member",
+                  "value": "Assign Sales Member"
+                },
+                {
+                  "name": "Brian Mong'are",
+                  "value": "Brian Mong'are"
+                },
+                {
+                  "name": "Elsie Watare",
+                  "value": "Elsie Watare"
+                },
+                {
+                  "name": "Emma Anagei Anagei",
+                  "value": "Emma Anagei Anagei"
+                },
+                {
+                  "name": "Eugene Aaron",
+                  "value": "Eugene Aaron"
+                },
+                {
+                  "name": "Rashid Salim",
+                  "value": "Rashid Salim"
+                },
+                {
+                  "name": "Sophia Khalid",
+                  "value": "Sophia Khalid"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Lead Allocation",
+              "displayName": "Lead Allocation",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Assign Sales (Round Robin)",
+              "displayName": "Assign Sales (Round Robin)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Calendar Week Check",
+              "displayName": "Last Calendar Week Check",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Last Calendar Month",
+              "displayName": "Last Calendar Month",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "58496553-901e-4113-bd06-4f13c2079fba",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1080,
+        620
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appqmFBvp9I9IB1YV",
+          "mode": "list",
+          "cachedResultName": "Contact Database",
+          "cachedResultUrl": "https://airtable.com/appqmFBvp9I9IB1YV"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblBkafwuK7H4aReA",
+          "mode": "list",
+          "cachedResultName": "Contacts",
+          "cachedResultUrl": "https://airtable.com/appqmFBvp9I9IB1YV/tblBkafwuK7H4aReA"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Company Name": "={{ $json.company }}",
+            "First Name": "={{ $json.first_name }}",
+            "Last Name": "={{ $json.last_name }}",
+            "Contact Status": "Lead",
+            "Contact Type": "={{ $ifEmpty($json.conutact_type.trim(), \"Other\") }}",
+            "Source": "Landing Page",
+            "Tel": "={{ $json.tel }}",
+            "Email": "={{ $json.email }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Company Name",
+              "displayName": "Company Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Job Role",
+              "displayName": "Job Role",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Owner",
+                  "value": "Owner"
+                },
+                {
+                  "name": "General Manager",
+                  "value": "General Manager"
+                },
+                {
+                  "name": "Procurement Manager",
+                  "value": "Procurement Manager"
+                },
+                {
+                  "name": "Procurement Officer",
+                  "value": "Procurement Officer"
+                },
+                {
+                  "name": "Office Adminstrator",
+                  "value": "Office Adminstrator"
+                },
+                {
+                  "name": "Undefined",
+                  "value": "Undefined"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Contact Status",
+              "displayName": "Contact Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Lead",
+                  "value": "Lead"
+                },
+                {
+                  "name": "One Time Customers",
+                  "value": "One Time Customers"
+                },
+                {
+                  "name": "Account",
+                  "value": "Account"
+                },
+                {
+                  "name": "Unassigned",
+                  "value": "Unassigned"
+                },
+                {
+                  "name": "Lost Customer",
+                  "value": "Lost Customer"
+                },
+                {
+                  "name": "Closed",
+                  "value": "Closed"
+                },
+                {
+                  "name": "Cash Customer",
+                  "value": "Cash Customer"
+                },
+                {
+                  "name": "Credit Customer",
+                  "value": "Credit Customer"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Contact Type",
+              "displayName": "Contact Type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Food Service",
+                  "value": "Food Service"
+                },
+                {
+                  "name": "Retail",
+                  "value": "Retail"
+                },
+                {
+                  "name": "Corporate",
+                  "value": "Corporate"
+                },
+                {
+                  "name": "Unassigned",
+                  "value": "Unassigned"
+                },
+                {
+                  "name": "Consumer",
+                  "value": "Consumer"
+                },
+                {
+                  "name": "Other Business",
+                  "value": "Other Business"
+                },
+                {
+                  "name": "Retailer",
+                  "value": "Retailer"
+                },
+                {
+                  "name": "Office",
+                  "value": "Office"
+                },
+                {
+                  "name": "NGO",
+                  "value": "NGO"
+                },
+                {
+                  "name": "Restaurant",
+                  "value": "Restaurant"
+                },
+                {
+                  "name": "Other",
+                  "value": "Other"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Website",
+                  "value": "Website"
+                },
+                {
+                  "name": "App",
+                  "value": "App"
+                },
+                {
+                  "name": "Landing Page",
+                  "value": "Landing Page"
+                },
+                {
+                  "name": "Other Forms",
+                  "value": "Other Forms"
+                },
+                {
+                  "name": "ERP",
+                  "value": "ERP"
+                },
+                {
+                  "name": "Whatsapp",
+                  "value": "Whatsapp"
+                },
+                {
+                  "name": "Email",
+                  "value": "Email"
+                },
+                {
+                  "name": "Call in",
+                  "value": "Call in"
+                },
+                {
+                  "name": "Supplier Referall",
+                  "value": "Supplier Referall"
+                },
+                {
+                  "name": "Customer Referall",
+                  "value": "Customer Referall"
+                },
+                {
+                  "name": "Outbound",
+                  "value": "Outbound"
+                },
+                {
+                  "name": "Live Chat",
+                  "value": "Live Chat"
+                },
+                {
+                  "name": "",
+                  "value": ""
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tel",
+              "displayName": "Tel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Created Date",
+              "displayName": "Created Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Last Modified",
+              "displayName": "Last Modified",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Send to CRM / Moosend",
+              "displayName": "Send to CRM / Moosend",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Send to CRM",
+                  "value": "Send to CRM"
+                },
+                {
+                  "name": "Moosend",
+                  "value": "Moosend"
+                },
+                {
+                  "name": "Send to CRM Sophia",
+                  "value": "Send to CRM Sophia"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Created By",
+              "displayName": "Created By",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "User Group ID",
+              "displayName": "User Group ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Assigned",
+              "displayName": "Assigned",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Month",
+              "displayName": "Month",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Send Sales Email",
+              "displayName": "Send Sales Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Send Intro Sequence",
+                  "value": "Send Intro Sequence"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "New Opportunity Stage",
+              "displayName": "New Opportunity Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New",
+                  "value": "New"
+                },
+                {
+                  "name": "Info Shared",
+                  "value": "Info Shared"
+                },
+                {
+                  "name": "Meeting Scheduled",
+                  "value": "Meeting Scheduled"
+                },
+                {
+                  "name": "Negotiation",
+                  "value": "Negotiation"
+                },
+                {
+                  "name": "Account Opening",
+                  "value": "Account Opening"
+                },
+                {
+                  "name": "Closed Won",
+                  "value": "Closed Won"
+                },
+                {
+                  "name": "Closed Lost",
+                  "value": "Closed Lost"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Upsell Stage",
+              "displayName": "Upsell Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Outreach Stage",
+                  "value": "Outreach Stage"
+                },
+                {
+                  "name": "Meeting Stage",
+                  "value": "Meeting Stage"
+                },
+                {
+                  "name": "Closed-Won",
+                  "value": "Closed-Won"
+                },
+                {
+                  "name": "Closed-Lost",
+                  "value": "Closed-Lost"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Expected MRR",
+              "displayName": "Expected MRR",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Expected Close Date",
+              "displayName": "Expected Close Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "New Deals",
+              "displayName": "New Deals",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "New Deals copy",
+              "displayName": "New Deals copy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Upsell Deals copy",
+              "displayName": "Upsell Deals copy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Interactions",
+              "displayName": "Interactions",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Assign Sales Member",
+              "displayName": "Assign Sales Member",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Ahmed Wurie",
+                  "value": "Ahmed Wurie"
+                },
+                {
+                  "name": "Assign Sales Member",
+                  "value": "Assign Sales Member"
+                },
+                {
+                  "name": "Brian Mong'are",
+                  "value": "Brian Mong'are"
+                },
+                {
+                  "name": "Elsie Watare",
+                  "value": "Elsie Watare"
+                },
+                {
+                  "name": "Emma Anagei Anagei",
+                  "value": "Emma Anagei Anagei"
+                },
+                {
+                  "name": "Eugene Aaron",
+                  "value": "Eugene Aaron"
+                },
+                {
+                  "name": "Rashid Salim",
+                  "value": "Rashid Salim"
+                },
+                {
+                  "name": "Sophia Khalid",
+                  "value": "Sophia Khalid"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Lead Allocation",
+              "displayName": "Lead Allocation",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Assign Sales (Round Robin)",
+              "displayName": "Assign Sales (Round Robin)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Calendar Week Check",
+              "displayName": "Last Calendar Week Check",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Last Calendar Month",
+              "displayName": "Last Calendar Month",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "04b5c55e-f002-4db6-a69c-656114be8366",
+      "name": "Airtable1",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1280,
+        360
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "49f1cebb-78e1-4174-a56f-c444fd30c6bf",
+              "leftValue": "={{ $json.company }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a8f0ca07-ab75-4a54-a68d-90807fc7a023",
+      "name": "company_exists",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1060,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "889a3641-b3ca-4088-97c0-78a12b6f002d",
+              "name": "conutact_type",
+              "value": "={{ \n  $if($json.body.data.fields[5].value[0] === $json.body.data.fields[5].options[0].id, $json.body.data.fields[5].options[0].text, \n  $if($json.body.data.fields[5].value[0] === $json.body.data.fields[5].options[1].id, $json.body.data.fields[5].options[1].text, \n  $if($json.body.data.fields[5].value[0] === $json.body.data.fields[5].options[2].id, $json.body.data.fields[5].options[2].text, \n  $if($json.body.data.fields[5].value[0] === $json.body.data.fields[5].options[3].id, $json.body.data.fields[5].options[3].text, \n  \"Other\"))))\n}}\n",
+              "type": "string"
+            },
+            {
+              "id": "4dec51e6-36cc-4f8a-b6cb-f99913d4242b",
+              "name": "email",
+              "value": "={{ $json.body.data.fields[2].value }}",
+              "type": "string"
+            },
+            {
+              "id": "f73276b2-24e2-4516-8c06-136d8e0ee553",
+              "name": "first_name",
+              "value": "={{ $json.body.data.fields[0].value }}",
+              "type": "string"
+            },
+            {
+              "id": "1fc252d6-f808-45e0-8d78-b3078e143d36",
+              "name": "last_name",
+              "value": "={{ $json.body.data.fields[1].value }}",
+              "type": "string"
+            },
+            {
+              "id": "39891b0e-3b4a-4d08-8836-a741b9a370b7",
+              "name": "tel",
+              "value": "={{ $json.body.data.fields[3].value }}",
+              "type": "string"
+            },
+            {
+              "id": "9fc1536c-5eb6-4f5b-ba38-5a8bee3cdce6",
+              "name": "company",
+              "value": "={{ $json.body.data.fields[4].value }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b04b27f9-7a4c-4884-a028-ed7b32dfe357",
+      "name": "client_details",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        640,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appqmFBvp9I9IB1YV",
+          "mode": "list",
+          "cachedResultName": "Contact Database",
+          "cachedResultUrl": "https://airtable.com/appqmFBvp9I9IB1YV"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblBkafwuK7H4aReA",
+          "mode": "list",
+          "cachedResultName": "Contacts",
+          "cachedResultUrl": "https://airtable.com/appqmFBvp9I9IB1YV/tblBkafwuK7H4aReA"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Company Name": "={{ $json.company }}",
+            "First Name": "={{ $json.first_name }}",
+            "Last Name": "={{ $json.last_name }}",
+            "Contact Status": "Unassigned",
+            "Contact Type": "={{ $ifEmpty($json.conutact_type.trim(), \"Other\") }}",
+            "Source": "Landing Page",
+            "Tel": "={{ $json.tel }}",
+            "Email": "={{ $json.email }}",
+            "Assign Sales Member": "Assign Sales Member"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Company Name",
+              "displayName": "Company Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Job Role",
+              "displayName": "Job Role",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Owner",
+                  "value": "Owner"
+                },
+                {
+                  "name": "General Manager",
+                  "value": "General Manager"
+                },
+                {
+                  "name": "Procurement Manager",
+                  "value": "Procurement Manager"
+                },
+                {
+                  "name": "Procurement Officer",
+                  "value": "Procurement Officer"
+                },
+                {
+                  "name": "Office Adminstrator",
+                  "value": "Office Adminstrator"
+                },
+                {
+                  "name": "Undefined",
+                  "value": "Undefined"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Contact Status",
+              "displayName": "Contact Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Lead",
+                  "value": "Lead"
+                },
+                {
+                  "name": "One Time Customers",
+                  "value": "One Time Customers"
+                },
+                {
+                  "name": "Account",
+                  "value": "Account"
+                },
+                {
+                  "name": "Unassigned",
+                  "value": "Unassigned"
+                },
+                {
+                  "name": "Lost Customer",
+                  "value": "Lost Customer"
+                },
+                {
+                  "name": "Closed",
+                  "value": "Closed"
+                },
+                {
+                  "name": "Cash Customer",
+                  "value": "Cash Customer"
+                },
+                {
+                  "name": "Credit Customer",
+                  "value": "Credit Customer"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Contact Type",
+              "displayName": "Contact Type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Food Service",
+                  "value": "Food Service"
+                },
+                {
+                  "name": "Retail",
+                  "value": "Retail"
+                },
+                {
+                  "name": "Corporate",
+                  "value": "Corporate"
+                },
+                {
+                  "name": "Unassigned",
+                  "value": "Unassigned"
+                },
+                {
+                  "name": "Consumer",
+                  "value": "Consumer"
+                },
+                {
+                  "name": "Other Business",
+                  "value": "Other Business"
+                },
+                {
+                  "name": "Retailer",
+                  "value": "Retailer"
+                },
+                {
+                  "name": "Office",
+                  "value": "Office"
+                },
+                {
+                  "name": "NGO",
+                  "value": "NGO"
+                },
+                {
+                  "name": "Restaurant",
+                  "value": "Restaurant"
+                },
+                {
+                  "name": "Other",
+                  "value": "Other"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Website",
+                  "value": "Website"
+                },
+                {
+                  "name": "App",
+                  "value": "App"
+                },
+                {
+                  "name": "Landing Page",
+                  "value": "Landing Page"
+                },
+                {
+                  "name": "Other Forms",
+                  "value": "Other Forms"
+                },
+                {
+                  "name": "ERP",
+                  "value": "ERP"
+                },
+                {
+                  "name": "Whatsapp",
+                  "value": "Whatsapp"
+                },
+                {
+                  "name": "Email",
+                  "value": "Email"
+                },
+                {
+                  "name": "Call in",
+                  "value": "Call in"
+                },
+                {
+                  "name": "Supplier Referall",
+                  "value": "Supplier Referall"
+                },
+                {
+                  "name": "Customer Referall",
+                  "value": "Customer Referall"
+                },
+                {
+                  "name": "Outbound",
+                  "value": "Outbound"
+                },
+                {
+                  "name": "Live Chat",
+                  "value": "Live Chat"
+                },
+                {
+                  "name": "",
+                  "value": ""
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tel",
+              "displayName": "Tel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Created Date",
+              "displayName": "Created Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Last Modified",
+              "displayName": "Last Modified",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Send to CRM / Moosend",
+              "displayName": "Send to CRM / Moosend",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Send to CRM",
+                  "value": "Send to CRM"
+                },
+                {
+                  "name": "Moosend",
+                  "value": "Moosend"
+                },
+                {
+                  "name": "Send to CRM Sophia",
+                  "value": "Send to CRM Sophia"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Created By",
+              "displayName": "Created By",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "User Group ID",
+              "displayName": "User Group ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Assigned",
+              "displayName": "Assigned",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Month",
+              "displayName": "Month",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Send Sales Email",
+              "displayName": "Send Sales Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Send Intro Sequence",
+                  "value": "Send Intro Sequence"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "New Opportunity Stage",
+              "displayName": "New Opportunity Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New",
+                  "value": "New"
+                },
+                {
+                  "name": "Info Shared",
+                  "value": "Info Shared"
+                },
+                {
+                  "name": "Meeting Scheduled",
+                  "value": "Meeting Scheduled"
+                },
+                {
+                  "name": "Negotiation",
+                  "value": "Negotiation"
+                },
+                {
+                  "name": "Account Opening",
+                  "value": "Account Opening"
+                },
+                {
+                  "name": "Closed Won",
+                  "value": "Closed Won"
+                },
+                {
+                  "name": "Closed Lost",
+                  "value": "Closed Lost"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Upsell Stage",
+              "displayName": "Upsell Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Outreach Stage",
+                  "value": "Outreach Stage"
+                },
+                {
+                  "name": "Meeting Stage",
+                  "value": "Meeting Stage"
+                },
+                {
+                  "name": "Closed-Won",
+                  "value": "Closed-Won"
+                },
+                {
+                  "name": "Closed-Lost",
+                  "value": "Closed-Lost"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Expected MRR",
+              "displayName": "Expected MRR",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Expected Close Date",
+              "displayName": "Expected Close Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "New Deals",
+              "displayName": "New Deals",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "New Deals copy",
+              "displayName": "New Deals copy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Upsell Deals copy",
+              "displayName": "Upsell Deals copy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Interactions",
+              "displayName": "Interactions",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Assign Sales Member",
+              "displayName": "Assign Sales Member",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Ahmed Wurie",
+                  "value": "Ahmed Wurie"
+                },
+                {
+                  "name": "Assign Sales Member",
+                  "value": "Assign Sales Member"
+                },
+                {
+                  "name": "Brian Mong'are",
+                  "value": "Brian Mong'are"
+                },
+                {
+                  "name": "Elsie Watare",
+                  "value": "Elsie Watare"
+                },
+                {
+                  "name": "Emma Anagei Anagei",
+                  "value": "Emma Anagei Anagei"
+                },
+                {
+                  "name": "Eugene Aaron",
+                  "value": "Eugene Aaron"
+                },
+                {
+                  "name": "Rashid Salim",
+                  "value": "Rashid Salim"
+                },
+                {
+                  "name": "Sophia Khalid",
+                  "value": "Sophia Khalid"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Lead Allocation",
+              "displayName": "Lead Allocation",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Assign Sales (Round Robin)",
+              "displayName": "Assign Sales (Round Robin)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Calendar Week Check",
+              "displayName": "Last Calendar Week Check",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Last Calendar Month",
+              "displayName": "Last Calendar Month",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "55dd8865-a8a4-4595-9fa6-05af46331d69",
+      "name": "Airtable2",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1280,
+        520
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "user",
+        "user": {
+          "__rl": true,
+          "value": "Betty",
+          "mode": "username"
+        },
+        "text": "=Hello,\n\nKindly reach out to this contact from the contact database:  {{ $('client_details').item.json.first_name +\" \"+$('client_details').item.json.last_name }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "id": "020135fb-547f-42a4-a77d-4bf3a153e9f0",
+      "name": "Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        1500,
+        520
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      }
+    },
     {
       "parameters": {
         "httpMethod": "POST",
@@ -19,13 +2263,129 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        1120,
-        520
+        420,
+        540
       ],
       "webhookId": "332ab095-db06-4d5e-a4da-76a796b0b515"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "Tally Webhooks",
+            "content-length": "1391",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "baggage": "sentry-environment=production,sentry-public_key=6af4b6673f1648edaa8fef3f2ca43405,sentry-trace_id=994f0d3871b94dfca2a0b712229bb91f",
+            "content-type": "application/json",
+            "sentry-trace": "994f0d3871b94dfca2a0b712229bb91f-8d57f8943bc84c11",
+            "x-forwarded-for": "34.96.41.115",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "34.96.41.115"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "eventId": "815871d2-8ddf-4959-97d3-04bfab1a9e71",
+            "eventType": "FORM_RESPONSE",
+            "createdAt": "2024-09-13T09:31:11.840Z",
+            "data": {
+              "responseId": "yR1gk6",
+              "submissionId": "yR1gk6",
+              "respondentId": "2O9NBb",
+              "formId": "mDkOjp",
+              "formName": "Speak To A Sales Representative",
+              "createdAt": "2024-09-13T09:31:11.000Z",
+              "fields": [
+                {
+                  "key": "question_xX9dEr",
+                  "label": "First name",
+                  "type": "INPUT_TEXT",
+                  "value": "Faith"
+                },
+                {
+                  "key": "question_ZjPdXo",
+                  "label": "Last name",
+                  "type": "INPUT_TEXT",
+                  "value": "Chepkemoi"
+                },
+                {
+                  "key": "question_Np8Avl",
+                  "label": "Email",
+                  "type": "INPUT_EMAIL",
+                  "value": "faith16chepkemoi@gmail.com"
+                },
+                {
+                  "key": "question_dWQYGq",
+                  "label": "Phone Number",
+                  "type": "INPUT_PHONE_NUMBER",
+                  "value": "+254784171288"
+                },
+                {
+                  "key": "question_q4jbXG",
+                  "label": "Company name",
+                  "type": "INPUT_TEXT",
+                  "value": "Any"
+                },
+                {
+                  "key": "question_Y5VZB5",
+                  "label": "Business Type",
+                  "type": "DROPDOWN",
+                  "value": [
+                    "882e5839-73e1-4e2d-8294-fa05beca1281"
+                  ],
+                  "options": [
+                    {
+                      "id": "7a3486ad-7989-4692-b359-9664c1dd70d7",
+                      "text": "Restaurant"
+                    },
+                    {
+                      "id": "882e5839-73e1-4e2d-8294-fa05beca1281",
+                      "text": "Retailer"
+                    },
+                    {
+                      "id": "e51aed64-5789-4401-93bb-2c052f9c8cb4",
+                      "text": "Office"
+                    },
+                    {
+                      "id": "04ee1ece-4a16-4bbe-9bd0-5060ab4e095a",
+                      "text": "NGO"
+                    },
+                    {
+                      "id": "9662ceca-836e-4b15-b912-9d8b61bc5c98",
+                      "text": "Other"
+                    }
+                  ]
+                },
+                {
+                  "key": "question_KpzbLg",
+                  "label": "Lead",
+                  "type": "DROPDOWN",
+                  "value": [
+                    "8c1a76e6-1024-4e2b-99c4-2000b32d1a53"
+                  ],
+                  "options": [
+                    {
+                      "id": "8c1a76e6-1024-4e2b-99c4-2000b32d1a53",
+                      "text": "Landing Page"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook/332ab095-db06-4d5e-a4da-76a796b0b515",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -39,6 +2399,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-12T12:22:54.000Z",
-  "versionId": "9a85a2ed-b0d1-4093-8232-1749b0613dff"
+  "updatedAt": "2024-09-13T11:14:42.000Z",
+  "versionId": "93351e97-d5c3-402b-842c-594671352a2b"
 }
