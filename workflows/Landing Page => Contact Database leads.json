@@ -80,9 +80,9 @@
   "nodes": [
     {
       "parameters": {
-        "content": "## Logic\n- All emails containing individual emails e.g gmail, yahoo\n     - Don't auto assign\n     - Send slack to Betty to follow up.\n     - If valid lead, Betty will categorize it as \"lead\"\n- If email is valid, Create as Lead in stystem, and auto assign sales member\n\n\n",
-        "height": 213,
-        "width": 520,
+        "content": "## Logic\n- All emails containing individual emails e.g gmail, yahoo\n     - Don't auto assign\n     - Send slack to Betty to follow up.\n     - If valid lead, Betty will categorize it as \"lead\"\n- If email is valid, Create as Lead in stystem, and auto assign sales member\n\n- If valid company, contact will be lead in system\n",
+        "height": 235,
+        "width": 510,
         "color": 5
       },
       "id": "743ff8da-aa10-4db0-9f6e-59c2e63406fe",
@@ -2392,13 +2392,13 @@
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2024-04-13T07:17:56.132Z",
-      "updatedAt": "2024-04-13T07:17:56.132Z",
-      "id": "BREwPdgeEC5njFaD",
-      "name": "In Development"
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-13T11:14:42.000Z",
-  "versionId": "93351e97-d5c3-402b-842c-594671352a2b"
+  "updatedAt": "2024-09-16T07:49:19.000Z",
+  "versionId": "0aa1602a-7462-4f1a-8772-8cf52f17a839"
 }
