@@ -333,12 +333,12 @@
           "mappingMode": "defineBelow",
           "value": {
             "id": "={{ $json.id }}",
-            "account-balance": "={{ $ifEmpty($('Query Balance').item.json.body.message.result[0].outstanding,0) }}",
-            "0 - 7": "={{ $ifEmpty($('Query Balance').item.json.body.message.result[0].range1,0) }}",
-            "8 - 15": "={{ $ifEmpty($('Query Balance').item.json.body.message.result[0].range2,0) }}",
-            "16 - 30": "={{ $ifEmpty($('Query Balance').item.json.body.message.result[0].range3,0) }}",
-            "31 - 45": "={{ $ifEmpty($('Query Balance').item.json.body.message.result[0].range4,0) }}",
-            "46+": "={{ $ifEmpty($('Query Balance').item.json.body.message.result[0].range5,0) }}"
+            "account-balance": "={{ $ifEmpty($('Query Balance').item.json.body.message.result.outstanding,0) }}",
+            "0 - 7": "={{ $ifEmpty($('Query Balance').item.json.body.message.result.range1,0) }}",
+            "8 - 15": "={{ $ifEmpty($('Query Balance').item.json.body.message.result.range2,0) }}",
+            "16 - 30": "={{ $ifEmpty($('Query Balance').item.json.body.message.result.range3,0) }}",
+            "31 - 45": "={{ $ifEmpty($('Query Balance').item.json.body.message.result.range4,0) }}",
+            "46+": "={{ $ifEmpty($('Query Balance').item.json.body.message.result.range5,0) }}"
           },
           "matchingColumns": [
             "id"
@@ -1171,15 +1171,15 @@
           "mappingMode": "defineBelow",
           "value": {
             "id": "={{ $json.id }}",
-            "Outstanding Amount": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].outstanding,0) }}",
-            "0-15": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].range1,0) }}",
-            "16-30": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].range2,0) }}",
-            "31-45": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].range3,0) }}",
-            "46-60": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].range4,0) }}",
-            "61-Above": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].range5,0) }}",
-            "Total Amount Due": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].total_due,0) }}",
-            "Advance Amount": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].advance,0) }}",
-            "Supplier Group": "={{ $('Query Balance1').item.json.body.message.result[0].supplier_group }}"
+            "Outstanding Amount": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.outstanding,0) }}",
+            "0-15": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.range1,0) }}",
+            "16-30": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.range2,0) }}",
+            "31-45": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.range3,0) }}",
+            "46-60": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.range4,0) }}",
+            "61-Above": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.range5,0) }}",
+            "Total Amount Due": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.total_due,0) }}",
+            "Advance Amount": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.advance,0) }}",
+            "Supplier Group": "={{ $('Query Balance1').item.json.body.message.result.supplier_group }}"
           },
           "matchingColumns": [
             "id"
@@ -1478,14 +1478,14 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "Outstanding Amount": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].outstanding,0) }}",
-            "0-15": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].range1,0) }}",
-            "16-30": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].range2,0) }}",
-            "31-45": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].range3,0) }}",
-            "46-60": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].range4,0) }}",
-            "61-Above": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].range5,0) }}",
-            "Total Amount Due": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].total_due,0) }}",
-            "Advance Amount": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result[0].advance,0) }}",
+            "Outstanding Amount": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.outstanding,0) }}",
+            "0-15": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.range1,0) }}",
+            "16-30": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.range2,0) }}",
+            "31-45": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.range3,0) }}",
+            "46-60": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.range4,0) }}",
+            "61-Above": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.range5,0) }}",
+            "Total Amount Due": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.total_due,0) }}",
+            "Advance Amount": "={{ $ifEmpty($('Query Balance1').item.json.body.message.result.advance,0) }}",
             "Supplier": "={{ $('Query Balance1').item.json.body.message.result[0].party }}"
           },
           "matchingColumns": [
@@ -1775,13 +1775,13 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "account-balance": "={{ $ifEmpty($('Query Balance').item.json.body.message.result[0].outstanding,0) }}",
-            "0 - 7": "={{ $ifEmpty($('Query Balance').item.json.body.message.result[0].range1,0) }}",
-            "8 - 15": "={{ $ifEmpty($('Query Balance').item.json.body.message.result[0].range2,0) }}",
-            "16 - 30": "={{ $ifEmpty($('Query Balance').item.json.body.message.result[0].range3,0) }}",
-            "31 - 45": "={{ $ifEmpty($('Query Balance').item.json.body.message.result[0].range4,0) }}",
-            "46+": "={{ $ifEmpty($('Query Balance').item.json.body.message.result[0].range5,0) }}",
-            "Customer ID": "={{ $('Query Balance').item.json.body.message.result[0].party }}"
+            "account-balance": "={{ $ifEmpty($('Query Balance').item.json.body.message.result.outstanding,0) }}",
+            "0 - 7": "={{ $ifEmpty($('Query Balance').item.json.body.message.result.range1,0) }}",
+            "8 - 15": "={{ $ifEmpty($('Query Balance').item.json.body.message.result.range2,0) }}",
+            "16 - 30": "={{ $ifEmpty($('Query Balance').item.json.body.message.result.range3,0) }}",
+            "31 - 45": "={{ $ifEmpty($('Query Balance').item.json.body.message.result.range4,0) }}",
+            "46+": "={{ $ifEmpty($('Query Balance').item.json.body.message.result.range5,0) }}",
+            "Customer ID": "={{ $('Query Balance').item.json.body.message.result.party }}"
           },
           "matchingColumns": [
             "id"
@@ -2581,7 +2581,7 @@
           "headers": {
             "host": "n8n.bulkbox.cloud",
             "user-agent": "python-requests/2.31.0",
-            "content-length": "166",
+            "content-length": "199",
             "accept": "*/*",
             "accept-encoding": "gzip, deflate",
             "content-type": "application/json",
@@ -2595,12 +2595,12 @@
           "params": {},
           "query": {},
           "body": {
-            "name": "ACC-PAY-2024-02943",
+            "name": "ACC-PAY-2024-04661",
             "payment_type": "Receive",
             "party_type": "Customer",
-            "party": "Cathy Otieno",
-            "party_name": "Cathy Otieno",
-            "base_paid_amount": 5817
+            "party": "Tsebo Facility Solutions Ltd",
+            "party_name": "Tsebo Facility Solutions Ltd",
+            "base_paid_amount": 18059
           },
           "webhookUrl": "https://n8n.bulkbox.cloud/webhook/paymententry-queryaccountbalance",
           "executionMode": "production"
@@ -2624,6 +2624,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-12T09:49:57.000Z",
-  "versionId": "862ed8c6-7dcc-41a4-9589-6a670a491a9c"
+  "updatedAt": "2024-09-16T08:11:55.000Z",
+  "versionId": "403f6034-7aa5-4117-9871-d4fb12606d5a"
 }
