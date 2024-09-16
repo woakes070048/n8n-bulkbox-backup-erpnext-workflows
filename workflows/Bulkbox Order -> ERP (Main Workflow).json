@@ -358,6 +358,11 @@
             "node": "Filter1",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Discrepancy in Order Amount",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -367,6 +372,11 @@
         [
           {
             "node": "Filter2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Discrepancy in Order Amount",
             "type": "main",
             "index": 0
           }
@@ -424,6 +434,11 @@
             "node": "Filter PICKUP",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Discrepancy in Order Amount",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -466,6 +481,31 @@
         [
           {
             "node": "Create Customer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Discrepancy in Order Amount": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Slack",
             "type": "main",
             "index": 0
           }
@@ -1522,8 +1562,8 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2,
       "position": [
-        6380,
-        80
+        6440,
+        100
       ]
     },
     {
@@ -1583,8 +1623,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        6620,
-        80
+        6680,
+        100
       ],
       "credentials": {
         "erpNextApi": {
@@ -2324,6 +2364,113 @@
         }
       },
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "select": "user",
+        "user": {
+          "__rl": true,
+          "value": "D04PWAFCX18",
+          "mode": "id"
+        },
+        "text": "=Hello,\nFollowing order has a difference in price with the website:\n{{$('Update Sales Order with items3').item.json.name}}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "id": "fb8c71a5-9f3a-4c87-b94c-f27936d6a846",
+      "name": "Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        6980,
+        360
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ Number($('Update Sales Order with items3').item.json.grand_total) - $('Get Order from website').item.json.total }}",
+                    "rightValue": "=50",
+                    "operator": {
+                      "type": "number",
+                      "operation": "gt"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "2826c86c-2d8c-4586-98bc-f491a58e9d26",
+                    "leftValue": "={{ Number($('Update Sales Order with items').item.json.grand_total) - $('Get Order from website').item.json.total }}",
+                    "rightValue": 50,
+                    "operator": {
+                      "type": "number",
+                      "operation": "gt"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "68ceb541-63f3-42c6-8c5b-9b60b2c3282a",
+                    "leftValue": "={{ Number($('Update Sales Order with items2').item.json.grand_total) - $('Get Order from website').item.json.total }}",
+                    "rightValue": 50,
+                    "operator": {
+                      "type": "number",
+                      "operation": "gt"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e2df5e5e-ef99-4721-b942-5eb67e33e807",
+      "name": "Discrepancy in Order Amount",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        6680,
+        360
+      ]
     }
   ],
   "pinData": {
@@ -3631,6 +3778,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-08-28T16:37:18.000Z",
-  "versionId": "3f8178b2-9a56-4b26-ab85-a8249edbe8f3"
+  "updatedAt": "2024-09-16T13:26:37.000Z",
+  "versionId": "2b835bfd-50bd-47da-8521-5cd6357c4afa"
 }
