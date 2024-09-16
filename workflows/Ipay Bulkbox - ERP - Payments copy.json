@@ -746,8 +746,8 @@
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.1,
       "position": [
-        -40,
-        -300
+        -720,
+        -1240
       ],
       "credentials": {
         "slackApi": {
@@ -2008,8 +2008,8 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2,
       "position": [
-        -340,
-        -340
+        -960,
+        -1180
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -3778,6 +3778,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-11T11:24:37.000Z",
-  "versionId": "3bf253bc-887c-438d-958b-ef8e23a94be1"
+  "updatedAt": "2024-09-16T07:47:56.000Z",
+  "versionId": "891cb8d4-6049-4547-a016-70771201f2a8"
 }
