@@ -737,6 +737,15 @@
                 "operation": "notEmpty",
                 "singleValue": true
               }
+            },
+            {
+              "id": "ef524412-5fda-445b-bcd0-eae5eb289821",
+              "leftValue": "={{ $json.body.data[0].email_id }}",
+              "rightValue": "casitalimited@gmail.com",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
             }
           ],
           "combinator": "and"
@@ -759,13 +768,7 @@
         "htmlContent": "= <p>Dear {{ $('Payment Entry Booked').item.json[\"body\"][\"party\"] }},</p>\n   \n<p> <p>\n\n\n   <p>This is to acknowledge payment received of <strong>Ksh {{ $('Payment Entry Booked').item.json[\"body\"][\"paid_amount\"] }}</strong> on date {{ $('Payment Entry Booked').item.json[\"body\"][\"reference_date\"] }} of reference no. <strong>{{ $('Payment Entry Booked').item.json[\"body\"][\"reference_no\"] }}</strong><p>\n\n   \n   <p>The payment has been booked and the account reconciled appropriately.</p>\n\n   \n   <p>Your outstanding account balance is <strong>Ksh {{ $('Payment Entry Booked').item.json[\"body\"][\"outstanding_balance\"] }}</strong><P>\n\n   \n   <p>In case of any issues or concerns, please reach out to our accounts department.<p>\n<p> <p>\n\n   \n   </ul>\n   \n   <p>We appreciate your business.</p>\n   \n   <p>Warm Regards,\n   \n   <div><style>.sh-src a{text-decoration:none!important;}</style></div> <br> <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"sh-src\" style=\"margin: 0px; border-collapse: collapse;\"><tr><td style=\"padding: 0px 1px 0px 0px;\"><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse: separate; margin: 0px;\"><tr><td align=\"center\" style=\"padding: 0px 14px 0px 0px; vertical-align: top;\"><!----> <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin: 0px; border-collapse: collapse;\"><tr><td style=\"padding: 0px 1px 0px 0px;\"><p style=\"margin: 1px;\"><a href=\"http://www.bulkbox.co.ke\" target=\"_blank\"><img src=\"https://signaturehound.com/api/v1/file/1ynl8mwcgay\" alt=\"\" title=\"Logo\" width=\"120\" height=\"120\" style=\"display: block; border: 0px; max-width: 120px;\"></a></p></td></tr></table></td> <td style=\"padding: 1px 0px 0px;\"></td> <td style=\"padding: 0px 1px 0px 0px; vertical-align: top;\"><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin: 0px; border-collapse: collapse;\"><tr><td style=\"padding: 0px 1px 8px 0px; font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap;\"><p style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; font-weight: 700; color: rgb(33,82,132); white-space: nowrap; margin: 1px;\">Bulkbox </p> <p style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,136); margin: 1px;\">Accounts, Finance</p> <!----> <!----></td></tr> <tr><td style=\"padding: 0px 1px 0px 0px;\"><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin: 0px; border-collapse: collapse;\"><tr><!----> <td style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,135) !important; padding: 0px 1px 0px 0px;\"><p style=\"margin: 1px;\"><a href=\"mailto:accounts@bulkbox.co.ke\" target=\"_blank\" style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,136); text-decoration: none !important;\"><span style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,136); text-decoration: none !important;\">accounts@bulkbox.co.ke</span></a></p></td></tr> <tr><!----> <td style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,135) !important; padding: 0px 1px 0px 0px;\"><p style=\"margin: 1px;\"><a href=\"tel:+254789853235\" target=\"_blank\" style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,136); text-decoration: none !important;\"><span style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,136); text-decoration: none !important;\">+254 789853235</span></a></p></td></tr> <tr><!----> <td style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,135) !important; padding: 0px 1px 0px 0px;\"><p style=\"margin: 1px;\"><span style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(136,136,136); text-decoration: none !important;\">Unga House, Westlands</span></p></td></tr> <tr><!----> <td style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(33,82,131) !important; font-weight: 700; padding: 0px 1px 0px 0px;\"><p style=\"margin: 1px;\"><a href=\"http://www.bulkbox.co.ke\" target=\"_blank\" style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(33,82,132); font-weight: 700; text-decoration: none !important;\"><span style=\"font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; white-space: nowrap; color: rgb(33,82,132); font-weight: 700; text-decoration: none !important;\">bulkbox.co.ke</span></a></p></td></tr></table></td></tr> <!----></table></td></tr></table></td></tr> <!----> <tr><td style=\"padding: 0px 1px 0px 0px;\"><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"max-width: 600px; margin: 0px; border-collapse: collapse;\"><tr><td style=\"padding: 12px 1px 0px 0px; font-family: Arial, sans-serif; font-size: 10px; line-height: 13px; color: rgb(136,136,136);\"><p style=\"font-family: Arial, sans-serif; font-size: 10px; line-height: 13px; color: rgb(136,136,136); margin: 1px;\">The content of this email is confidential and intended for the recipient specified in message only. It is strictly forbidden to share any part of this message with any third party, without a written consent of the sender. If you received this message by mistake, please reply to this message and follow with its deletion, so that we can ensure such a mistake does not occur in the future.</p></td></tr></table></td></tr> <!----> <!----></table>",
         "sender": "=accounts@bulkbox.co.ke",
         "receipients": "={{ $('Get email').item.json[\"body\"][\"data\"][0][\"email_id\"] }}",
-        "additionalFields": {
-          "receipientsBCC": {
-            "receipientBcc": {
-              "bcc": "gatura@bulkbox.co.ke"
-            }
-          }
-        }
+        "additionalFields": {}
       },
       "id": "16edbb03-fa6d-4702-aa71-772c68e30c02",
       "name": "Payment Received Email",
@@ -1070,6 +1073,22 @@
         2040,
         1000
       ]
+    },
+    {
+      "parameters": {
+        "content": "## Filtered out emails should be an array",
+        "height": 192.6079003158319,
+        "width": 272.60790031583184,
+        "color": 5
+      },
+      "id": "c66b1a00-e011-46b0-8630-8ab9e4601262",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        600
+      ]
     }
   ],
   "pinData": {
@@ -1171,6 +1190,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-07-18T19:50:38.000Z",
-  "versionId": "05bc3a5b-79db-47a3-9239-63ffe989faba"
+  "updatedAt": "2024-09-17T15:22:07.000Z",
+  "versionId": "24208044-3a80-407d-a2a9-a86ea07f880c"
 }
