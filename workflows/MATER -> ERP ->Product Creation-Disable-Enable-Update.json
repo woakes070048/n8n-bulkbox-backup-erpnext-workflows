@@ -33,11 +33,6 @@
         ]
       ]
     },
-    "Brand Search": {
-      "main": [
-        []
-      ]
-    },
     "Brand Exists?": {
       "main": [
         [
@@ -328,37 +323,6 @@
         960,
         280
       ]
-    },
-    {
-      "parameters": {
-        "url": "=https://portal.bulkbox.cloud/api/resource/Brand/?filters=[[\"name\",\"=\",\"%{{ $('Webhook').item.json.query.brand }}%\"]] ",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "options": {
-          "response": {
-            "response": {
-              "fullResponse": true
-            }
-          }
-        }
-      },
-      "id": "2a6192e8-d6ab-4bf4-803d-1e3859e99b68",
-      "name": "Brand Search",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        880,
-        -60
-      ],
-      "alwaysOutputData": true,
-      "notesInFlow": true,
-      "credentials": {
-        "erpNextApi": {
-          "id": "OVfEC6rfwqA5vwcf",
-          "name": "ERPNext Prod"
-        }
-      },
-      "notes": "Check if brand exists"
     },
     {
       "parameters": {
@@ -1037,6 +1001,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-12T12:00:22.000Z",
-  "versionId": "f6006b6f-d94e-4aec-9897-7fd3f464e229"
+  "updatedAt": "2024-09-17T04:10:54.000Z",
+  "versionId": "3f268c44-72e5-47fb-87fd-c7be63926227"
 }
