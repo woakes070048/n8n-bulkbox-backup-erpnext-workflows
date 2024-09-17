@@ -1,0 +1,1006 @@
+{
+  "active": false,
+  "connections": {
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "ERPNext",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Product",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Disable product",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enable product",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brand Exists?": {
+      "main": [
+        [
+          {
+            "node": "Create Item1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Brand",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Brand": {
+      "main": [
+        [
+          {
+            "node": "Create Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Item": {
+      "main": [
+        [
+          {
+            "node": "Create standard selling price",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create standard selling price": {
+      "main": [
+        [
+          {
+            "node": "Create buying price",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create buying price": {
+      "main": [
+        [
+          {
+            "node": "Create GT price",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create standard selling price1": {
+      "main": [
+        [
+          {
+            "node": "Create buying price1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create buying price1": {
+      "main": [
+        [
+          {
+            "node": "Create GT price1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create GT price1": {
+      "main": [
+        [
+          {
+            "node": "Post item price IDs1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create GT price": {
+      "main": [
+        [
+          {
+            "node": "Post item price IDs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brand does not exist": {
+      "main": [
+        [
+          {
+            "node": "Create Brand1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Brand1": {
+      "main": [
+        [
+          {
+            "node": "Update Product1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Product": {
+      "main": [
+        [
+          {
+            "node": "Brand does not exist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Item1": {
+      "main": [
+        [
+          {
+            "node": "Create standard selling price1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ERPNext": {
+      "main": [
+        [
+          {
+            "node": "Brand Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-17T04:11:58.522Z",
+  "id": "6kQZGBH991XxWArW",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Kwaju create-update-enable-disable products",
+  "nodes": [
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.query.erpFunction }}",
+                    "rightValue": "Create Product",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Create Product"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "048d6457-8307-4dca-b907-8b61c7108445",
+                    "leftValue": "={{ $json.query.erpFunction }}",
+                    "rightValue": "Update Product",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Update Product"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "209b4533-1563-4ec9-add3-497b4abcc908",
+                    "leftValue": "={{ $json.query.erpFunction }}",
+                    "rightValue": "Disable Product",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Disable Product"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "2c831e3a-73c0-424c-9289-15c52656aabd",
+                    "leftValue": "={{ $json.query.erpFunction }}",
+                    "rightValue": "Enable Product",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Enable Product"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fa7e52af-0fb3-487f-9ab2-3c781e65b160",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        960,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "72a60e8b-c6dc-4900-817d-83e4d18f5cb4",
+              "leftValue": "={{ $json.name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "18da3ca5-1150-4a32-8d97-3150b3d2efd0",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "80303284-eede-4bb8-9b00-09f3d2d20de1",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "718baf4f-ac4f-4c53-920b-979f3245a3b0",
+      "name": "Brand Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1460,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Brand",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "brand",
+              "value": "={{ $('Webhook').item.json.query.brand }}"
+            },
+            {
+              "name": "description",
+              "value": "={{ $('Webhook').item.json.query.brand }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "df98d4eb-ec81-4e27-bee4-31d335286e55",
+      "name": "Create Brand",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1680,
+        -20
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Item",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n         \"item_code\":\"{{ $('Webhook').item.json.query.itemCode }}\",\n         \"item_name\":\"{{ $('Webhook').item.json.query.itemName }}\",\n         \"units_per_case\": {{ $('Webhook').item.json.query.units }},\n         \"brand\":\"{{ $('Webhook').item.json.query.brand }}\",\n         \"company\":\"Three Spears Limited\",\n         \"default_material_request_type\":\"{{$('Webhook').item.json[\"query\"][\"materialType\"]}}\",\n         \"stock_uom\":\"{{$('Webhook').item.json[\"query\"][\"uom\"]}}\",\"has_batch_no\": 1,\"create_new_batch\": 1,\"batch_number_series\": \"{{ $('Webhook').item.json.query.itemCode }}\",\"has_expiry_date\":1,\"shelf_life_in_days\": 180,\n         \"taxes\":[\n            {\n               \"item_tax_template\": \"{{ $('Webhook').item.json.query.taxes * 100 }}% - TSL\"\n            },\n\t\t\t{\n               \"item_tax_template\": \"{{ $('Webhook').item.json.query.taxes * 100 }}% - EML\"\n            }\n         ],\n         \"item_defaults\":[{\n                \"default_supplier\":\"{{$('Webhook').item.json[\"query\"][\"supplier\"]}}\",\n                \"company\":\"Three Spears Limited\",\n\t\t\t\t\"default_warehouse\":\"Storage - TSL\",\n\t\t\t\t\"expense_account\":\"{{$('Webhook').item.json[\"query\"][\"expenseAccount\"]}} - TSL\",\n\t\t\t\t\"income_account\": \"{{$('Webhook').item.json[\"query\"][\"incomeAccount\"]}} - TSL\"\n            },\n\t\t\t{\n\t\t\t\"company\": \"Evryday Mart Ltd\",\n            \"default_warehouse\": \"Bolt Warehouse  - EML\",\n            \"expense_account\":\"{{$('Webhook').item.json[\"query\"][\"expenseAccount\"]}} - EML\",\n            \"income_account\": \"{{$('Webhook').item.json[\"query\"][\"incomeAccount\"]}} - EML\"\n\t\t\t}\n\t\t\t],\n         \"description\":\"{{$('Webhook').item.json[\"query\"][\"description\"]}}\",\n         \"item_group\":\"{{ $('Webhook').item.json.query.itemGroup }}\",\n         \"thumbnail\":\"{{$('Webhook').item.json[\"query\"][\"imageURL\"]}}\",\n         \"image\":\"{{$('Webhook').item.json[\"query\"][\"imageURL\"]}}\"\n      }\n   }      ",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "6754746d-4b82-4fd9-a863-022d81942d3d",
+      "name": "Create Item",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1900,
+        -20
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Item Price",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": [\n    {\n      \"item_code\": \"{{$('Webhook').item.json[\"query\"][\"itemCode\"]}}\",\n      \"Brand\": \"{{$('Webhook').item.json[\"query\"][\"brand\"]}}\",\n      \"price_list\": \"Standard Selling\",\n      \"price_list_rate\": {{$('Webhook').item.json[\"query\"][\"rate\"]}}\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "1bec1b76-9e52-4d73-8055-f86a39e60c42",
+      "name": "Create standard selling price",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2120,
+        -20
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Item Price",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": [\n    {\n      \"item_code\": \"{{$('Webhook').item.json[\"query\"][\"itemCode\"]}}\",\n      \"Brand\": \"{{$('Webhook').item.json[\"query\"][\"brand\"]}}\",\n      \"price_list\": \"Standard Buying\",\n      \"price_list_rate\": {{$('Webhook').item.json[\"query\"][\"buyingPrice\"]}}\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "f16b9754-4c81-4319-9ba4-bffb67b61626",
+      "name": "Create buying price",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2340,
+        -20
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Item Price",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": [\n    {\n      \"item_code\": \"{{$('Webhook').item.json[\"query\"][\"itemCode\"]}}\",\n      \"Brand\": \"{{$('Webhook').item.json[\"query\"][\"brand\"]}}\",\n      \"price_list\": \"GT Selling\",\n      \"price_list_rate\": {{$('Webhook').item.json[\"query\"][\"gtPrice\"]}}\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "540b268c-318a-4e18-9f2e-0898d312db4e",
+      "name": "Create GT price",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2560,
+        -20
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.airtable.com/workflows/v1/genericWebhook/appSCi0a1zPuJizxg/wflBRRzNqzWwVqkYr/wtrotwc9kznYwy6vZ",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"Standard Buying\": \"{{$('Create buying price').item.json[\"data\"][\"name\"]}}\", \"GT Selling\":\"{{$('Create GT price').item.json[\"data\"][\"name\"]}}\", \"Standard Selling\": \"{{$('Create standard selling price').item.json[\"data\"][\"name\"]}}\", \"Item Code\": \"{{ $('Webhook').item.json[\"query\"][\"itemCode\"] }}\", \"Status Code\":{{$('Create Item').item.json[\"statusCode\"]}}, \"recordID\": \"{{$('Webhook').item.json[\"query\"][\"recordID\"]}}\"}",
+        "options": {}
+      },
+      "id": "6580367d-9fba-4aa1-8415-69428b4738aa",
+      "name": "Post item price IDs",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2760,
+        -20
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Item Price",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": [\n    {\n      \"item_code\": \"{{$('Webhook').item.json[\"query\"][\"itemCode\"]}}\",\n      \"Brand\": \"{{$('Webhook').item.json[\"query\"][\"brand\"]}}\",\n      \"price_list\": \"Standard Selling\",\n      \"price_list_rate\": {{$('Webhook').item.json[\"query\"][\"rate\"]}}\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "2ed8a486-5861-4e63-81e4-dcf6356a10a2",
+      "name": "Create standard selling price1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1900,
+        -280
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Item Price",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": [\n    {\n      \"item_code\": \"{{$('Webhook').item.json[\"query\"][\"itemCode\"]}}\",\n      \"Brand\": \"{{$('Webhook').item.json[\"query\"][\"brand\"]}}\",\n      \"price_list\": \"Standard Buying\",\n      \"price_list_rate\": {{$('Webhook').item.json[\"query\"][\"buyingPrice\"]}}\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "70d887ca-176e-467b-a8da-860daea0c082",
+      "name": "Create buying price1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2120,
+        -280
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Item Price",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": [\n    {\n      \"item_code\": \"{{$('Webhook').item.json[\"query\"][\"itemCode\"]}}\",\n      \"Brand\": \"{{$('Webhook').item.json[\"query\"][\"brand\"]}}\",\n      \"price_list\": \"GT Selling\",\n      \"price_list_rate\": {{$('Webhook').item.json[\"query\"][\"gtPrice\"]}}\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "b61fcde9-d70f-4422-baa7-b6dbbac4f9d5",
+      "name": "Create GT price1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2340,
+        -280
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.airtable.com/workflows/v1/genericWebhook/appSCi0a1zPuJizxg/wflBRRzNqzWwVqkYr/wtrotwc9kznYwy6vZ",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"Standard Buying\": \"{{$('Create buying price1').item.json[\"data\"][\"name\"]}}\", \"GT Selling\":\"{{$('Create GT price1').item.json[\"data\"][\"name\"]}}\", \"Standard Selling\": \"{{$('Create standard selling price1').item.json[\"data\"][\"name\"]}}\", \"Item Code\": \"{{ $('Webhook').item.json[\"query\"][\"itemCode\"] }}\", \"Status Code\":{{$('Create Item1').item.json[\"statusCode\"]}}, \"recordID\": \"{{$('Webhook').item.json[\"query\"][\"recordID\"]}}\"}",
+        "options": {}
+      },
+      "id": "eb887b6d-2c27-4d14-aaca-208d75b501bf",
+      "name": "Post item price IDs1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2560,
+        -280
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "a5a44fd8-5092-43e4-ae60-a59d7c652f19",
+              "leftValue": "={{ $json.error.cause.status }}",
+              "rightValue": 200,
+              "operator": {
+                "type": "number",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "c6fdcfa2-1acb-4c2a-9964-44ab28678273",
+              "leftValue": "={{ $json.error.description }}",
+              "rightValue": "Could not find Brand",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f692256a-829b-4758-b3f0-254557250582",
+      "name": "Brand does not exist",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        1460,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item/{{$('Webhook').item.json[\"query\"][\"itemCode\"]}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n         \"item_name\":\"{{$('Webhook').item.json[\"query\"][\"itemName\"]}}\",\n         \"units_per_case\": {{$('Webhook').item.json[\"query\"][\"units\"]}},\n         \"brand\":\"{{$('Webhook').item.json[\"query\"][\"brand\"]}}\",\n         \"company\":\"Three Spears Limited\",\n         \"default_material_request_type\":\"{{$('Webhook').item.json[\"query\"][\"materialType\"]}}\",\n         \"stock_uom\":\"{{$('Webhook').item.json[\"query\"][\"uom\"]}}\",\n         \"taxes\":[\n            {\n               \"item_tax_template\": \"{{$('Webhook').item.json[\"query\"][\"taxes\"]*100}}% - TSL\"\n            },\n\t\t\t{\n               \"item_tax_template\": \"{{$('Webhook').item.json[\"query\"][\"taxes\"]*100}}% - EML\"\n            }\n         ],\n         \"item_defaults\":[{\n                \"default_supplier\":\"{{$('Webhook').item.json[\"query\"][\"supplier\"]}}\",\n                \"company\":\"Three Spears Limited\",\n\t\t\t\t\"default_warehouse\":\"Storage - TSL\",\n\t\t\t\t\"expense_account\":\"{{$('Webhook').item.json[\"query\"][\"expenseAccount\"]}} - TSL\",\n\t\t\t\t\"income_account\": \"{{$('Webhook').item.json[\"query\"][\"incomeAccount\"]}} - TSL\"\n            },\n\t\t\t{\n\t\t\t\"company\": \"Evryday Mart Ltd\",\n            \"default_warehouse\": \"Bolt Warehouse  - EML\",\n            \"expense_account\":\"{{$('Webhook').item.json[\"query\"][\"expenseAccount\"]}} - EML\",\n            \"income_account\": \"{{$('Webhook').item.json[\"query\"][\"incomeAccount\"]}} - EML\"\n\t\t\t}\n\t\t\t],\n         \"description\":\"{{$('Webhook').item.json[\"query\"][\"itemName\"]}}\",\n         \"item_group\":\"{{$('Webhook').item.json[\"query\"][\"itemGroup\"]}}\",\n         \"thumbnail\":\"{{$('Webhook').item.json[\"query\"][\"imageURL\"]}}\",\n         \"image\":\"{{$('Webhook').item.json[\"query\"][\"imageURL\"]}}\"\n      }\n   }",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "0cb9cc2a-ecf1-4152-ac01-b28860a3ec5c",
+      "name": "Update Product1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1900,
+        260
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Brand",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "brand",
+              "value": "={{ $('Webhook').item.json.query.brand }}"
+            },
+            {
+              "name": "description",
+              "value": "={{ $('Webhook').item.json.query.brand }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b2239f34-cc9b-4895-b277-b6a36cc01ad0",
+      "name": "Create Brand1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1680,
+        260
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item/{{$('Webhook').item.json[\"query\"][\"itemCode\"]}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n         \"item_name\":\"{{$('Webhook').item.json[\"query\"][\"itemName\"]}}\",\n         \"units_per_case\": {{$('Webhook').item.json[\"query\"][\"units\"]}},\n         \"brand\":\"{{$('Webhook').item.json[\"query\"][\"brand\"]}}\",\n         \"company\":\"Three Spears Limited\",\n         \"default_material_request_type\":\"{{$('Webhook').item.json[\"query\"][\"materialType\"]}}\",\n         \"stock_uom\":\"{{$('Webhook').item.json[\"query\"][\"uom\"]}}\",\n         \"taxes\":[\n            {\n               \"item_tax_template\": \"{{$('Webhook').item.json[\"query\"][\"taxes\"]*100}}% - TSL\"\n            },\n\t\t\t{\n               \"item_tax_template\": \"{{$('Webhook').item.json[\"query\"][\"taxes\"]*100}}% - EML\"\n            }\n         ],\n         \"item_defaults\":[{\n                \"default_supplier\":\"{{$('Webhook').item.json[\"query\"][\"supplier\"]}}\",\n                \"company\":\"Three Spears Limited\",\n\t\t\t\t\"default_warehouse\":\"Storage - TSL\",\n\t\t\t\t\"expense_account\":\"{{$('Webhook').item.json[\"query\"][\"expenseAccount\"]}} - TSL\",\n\t\t\t\t\"income_account\": \"{{$('Webhook').item.json[\"query\"][\"incomeAccount\"]}} - TSL\"\n            },\n\t\t\t{\n\t\t\t\"company\": \"Evryday Mart Ltd\",\n            \"default_warehouse\": \"Bolt Warehouse  - EML\",\n            \"expense_account\":\"{{$('Webhook').item.json[\"query\"][\"expenseAccount\"]}} - EML\",\n            \"income_account\": \"{{$('Webhook').item.json[\"query\"][\"incomeAccount\"]}} - EML\"\n\t\t\t}\n\t\t\t],\n         \"description\":\"{{$('Webhook').item.json[\"query\"][\"itemName\"]}}\",\n         \"item_group\":\"{{$('Webhook').item.json[\"query\"][\"itemGroup\"]}}\",\n         \"thumbnail\":\"{{$('Webhook').item.json[\"query\"][\"imageURL\"]}}\",\n         \"image\":\"{{$('Webhook').item.json[\"query\"][\"imageURL\"]}}\"\n      }\n   }",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "e82ce31f-ed49-4e74-bed7-10245f735b3c",
+      "name": "Update Product",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1240,
+        260
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item/{{$('Webhook').item.json[\"query\"][\"itemCode\"]}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "disabled",
+              "value": "1"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "fb206662-e782-4705-be7d-7596e9ca9802",
+      "name": "Disable product",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1240,
+        420
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item/{{$('Webhook').item.json[\"query\"][\"itemCode\"]}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "disabled",
+              "value": "0"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "85d4b2e2-d48f-482e-958e-f43cc85d9e00",
+      "name": "Enable product",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1240,
+        580
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Item",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"data\":{\n         \"item_code\":\"{{ $('Webhook').item.json.query.itemCode }}\",\n         \"item_name\":\"{{ $('Webhook').item.json.query.itemName }}\",\n         \"units_per_case\": {{ $('Webhook').item.json.query.units }},\n         \"brand\":\"{{ $('Webhook').item.json.query.brand }}\",\n         \"company\":\"Three Spears Limited\",\n         \"default_material_request_type\":\"{{$('Webhook').item.json[\"query\"][\"materialType\"]}}\",\n         \"stock_uom\":\"{{$('Webhook').item.json[\"query\"][\"uom\"]}}\",\"has_batch_no\": 1,\"create_new_batch\": 1,\"batch_number_series\": \"{{ $('Webhook').item.json.query.itemCode }}\",\"has_expiry_date\":1,\"shelf_life_in_days\": 180,\n         \"taxes\":[\n            {\n               \"item_tax_template\": \"{{ $('Webhook').item.json.query.taxes * 100 }}% - TSL\"\n            },\n\t\t\t{\n               \"item_tax_template\": \"{{ $('Webhook').item.json.query.taxes * 100 }}% - EML\"\n            }\n         ],\n         \"item_defaults\":[{\n                \"default_supplier\":\"{{$('Webhook').item.json[\"query\"][\"supplier\"]}}\",\n                \"company\":\"Three Spears Limited\",\n\t\t\t\t\"default_warehouse\":\"Storage - TSL\",\n\t\t\t\t\"expense_account\":\"{{$('Webhook').item.json[\"query\"][\"expenseAccount\"]}} - TSL\",\n\t\t\t\t\"income_account\": \"{{$('Webhook').item.json[\"query\"][\"incomeAccount\"]}} - TSL\"\n            },\n\t\t\t{\n\t\t\t\"company\": \"Evryday Mart Ltd\",\n            \"default_warehouse\": \"Bolt Warehouse  - EML\",\n            \"expense_account\":\"{{$('Webhook').item.json[\"query\"][\"expenseAccount\"]}} - EML\",\n            \"income_account\": \"{{$('Webhook').item.json[\"query\"][\"incomeAccount\"]}} - EML\"\n\t\t\t}\n\t\t\t],\n         \"description\":\"{{$('Webhook').item.json[\"query\"][\"description\"]}}\",\n         \"item_group\":\"{{ $('Webhook').item.json.query.itemGroup }}\",\n         \"thumbnail\":\"{{$('Webhook').item.json[\"query\"][\"imageURL\"]}}\",\n         \"image\":\"{{$('Webhook').item.json[\"query\"][\"imageURL\"]}}\"\n      }\n   }      ",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "a6d4c787-e061-42ce-87f9-1f6d72b5d485",
+      "name": "Create Item1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1680,
+        -280
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "67417016-5ee4-4390-891e-0541cf8c54a9",
+        "options": {}
+      },
+      "id": "de6c0c73-66e0-4a65-8aa9-aef701e966cb",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        720,
+        280
+      ],
+      "webhookId": "0823c491-11f1-4aaf-9517-f33048d176c6"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Brand",
+        "documentName": "={{ encodeURIComponent($('Webhook').item.json.query.brand) }}"
+      },
+      "id": "ef341bc6-3578-4197-874b-0152b847c8b3",
+      "name": "ERPNext",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        1240,
+        40
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-airtable-source": "appSCi0a1zPuJizxg/wflpwj9KeGwqD7jkc",
+            "x-forwarded-for": "3.235.228.182",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "3.235.228.182"
+          },
+          "params": {},
+          "query": {
+            "recordID": "recaARrcC2YaTRQLm",
+            "itemCode": "KSR037",
+            "units": "12",
+            "supplier": "Kapa Oil Refineries LTD",
+            "itemName": "Captain Cook Pure Corn Oil 1Kg",
+            "rate": "400.4303901860729",
+            "brand": "Captain Cook",
+            "description": "Captain Cook Pure Corn Oil 1Kg",
+            "itemGroup": "Corn & Sunflower Oil",
+            "materialType": "Purchase",
+            "uom": "PCS",
+            "taxes": "0.16",
+            "buyingPrice": "324.71264367816093",
+            "gtPrice": "378.37278394700957",
+            "disabled": "1",
+            "productNameExcl": "Captain Cook Pure Corn Oil",
+            "cscartStatus": "null",
+            "Flavour": "null",
+            "RetailPrice": "550",
+            "FullDescription": "null",
+            "imageURL": "",
+            "Taxes": "VAT",
+            "cscartCaseSize": "null",
+            "size": "1Kg",
+            "EcomRAteIncl": "464.49925261584457",
+            "CategoryID": "941",
+            "erpFunction": "Create Product",
+            "expenseAccount": "Ambient Foods COGS",
+            "incomeAccount": "Ambient Foods Sales"
+          },
+          "body": {},
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook/67417016-5ee4-4390-891e-0541cf8c54a9",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-09-17T04:13:44.000Z",
+  "versionId": "ad32aed2-a40e-408a-a418-0cb3d886b9d6"
+}
