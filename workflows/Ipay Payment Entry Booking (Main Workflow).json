@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Overdue": {
       "main": [
@@ -363,6 +363,11 @@
         [
           {
             "node": "Formatted Date - now",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -766,7 +771,7 @@
             {}
           ]
         },
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{ $('route_accounts').item.json.data[0].name }}\",\n      \"party_name\":\"{{ $('route_accounts').item.json.data[0].name }}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":1,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[{\"reference_doctype\":\"Sales Invoice\",\"reference_name\":\"{{ $('Overdue').item.json[\"data\"][0][\"name\"] }}\",\"allocated_amount\":{{ $('Webhook').item.json[\"body\"][\"amount\"] }}}\n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
+        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{ $('route_accounts').item.json.data[0].name }}\",\n      \"party_name\":\"{{ $('route_accounts').item.json.data[0].name }}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":1,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[{\"reference_doctype\":\"Sales Invoice\",\"reference_name\":\"{{ $('Unpaid').item.json[\"data\"][0][\"name\"] }}\",\"allocated_amount\":{{ $('Webhook').item.json[\"body\"][\"amount\"] }}}\n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
         "options": {}
       },
       "id": "6fd76aa5-6f32-4083-87f1-0447567b9858",
@@ -2063,7 +2068,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://n8n.bulkbox.cloud/webhook/2f893ced-c4df-40c4-a0fa-d13b7fea55d5",
+        "url": "https://n8n.bulkbox.cloud/webhook/ipay-fallback",
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={{ $('ipay_date').item.json.data }}",
@@ -2074,8 +2079,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -580,
-        1880
+        440,
+        1900
       ]
     },
     {
@@ -2237,13 +2242,13 @@
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2024-03-16T19:27:30.275Z",
-      "updatedAt": "2024-03-16T19:27:30.275Z",
-      "id": "UtqVXdbV8awAOmSA",
-      "name": "Ready for Production"
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
     }
   ],
-  "triggerCount": 0,
-  "updatedAt": "2024-09-17T17:37:34.000Z",
-  "versionId": "617f34f9-cad9-4d68-a52a-e5fdcb45ee92"
+  "triggerCount": 1,
+  "updatedAt": "2024-09-18T12:33:08.000Z",
+  "versionId": "936e5cf7-6675-41a8-851b-8afe8f4b3c76"
 }
