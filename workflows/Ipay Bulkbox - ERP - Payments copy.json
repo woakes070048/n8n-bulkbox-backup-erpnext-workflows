@@ -1,98 +1,11 @@
 {
   "active": false,
   "connections": {
-    "Check Payer Name 2 (msisdn)": {
-      "main": [
-        [
-          {
-            "node": "Payer Name 2 Exists?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Payer Name 2 Exists?": {
-      "main": [
-        [
-          {
-            "node": "More than One A/c ?",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Check for Exact Invoice Amount",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Check for Exact Invoice Amount": {
-      "main": [
-        [
-          {
-            "node": "Exact Invoice Identified",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Exact Invoice Identified": {
-      "main": [
-        [
-          {
-            "node": "Payment Entry with Exact Invoice",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "If",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Overdue": {
       "main": [
         [
           {
             "node": "Switch",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "More than One A/c ?": {
-      "main": [
-        [
-          {
-            "node": "Overdue1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "More than One A/C P.E1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Overdue1": {
-      "main": [
-        [
-          {
-            "node": "Switch3",
             "type": "main",
             "index": 0
           }
@@ -146,103 +59,6 @@
         ]
       ]
     },
-    "Unpaid1": {
-      "main": [
-        [
-          {
-            "node": "Switch4",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Exact Payment2": {
-      "main": [
-        [
-          {
-            "node": "Exact Invoice Amount2",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Overpaid One Invoice2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Exact Payment3": {
-      "main": [
-        [
-          {
-            "node": "Exact Invoice Amount3",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Overpaid One Invoice3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch4": {
-      "main": [
-        [
-          {
-            "node": "Payment Entry4",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Exact Payment3",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Payment Entry5",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch3": {
-      "main": [
-        [
-          {
-            "node": "Unpaid1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Exact Payment2",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Payment Entry3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Financial Services": {
       "main": [
         [
@@ -261,24 +77,6 @@
         ]
       ]
     },
-    "If": {
-      "main": [
-        [
-          {
-            "node": "P.E - No exact Invoice Identified1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "P.E - No exact Invoice Identified (Ipay Unallocated)",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Formatted Date - now": {
       "main": [
         [
@@ -286,155 +84,6 @@
             "node": "Financial Services",
             "type": "main",
             "index": 0
-          }
-        ]
-      ]
-    },
-    "Loop Over Items": {
-      "main": [
-        [
-          {
-            "node": "Aggregate",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Edit Fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Split Out": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Split Out1": {
-      "main": [
-        [
-          {
-            "node": "If2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Loop Over Items2": {
-      "main": [
-        [
-          {
-            "node": "Aggregate1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Exact person multiple accounts",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If2": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items2",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Loop Over Items3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Exact person multiple accounts": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Loop Over Items3": {
-      "main": [
-        [
-          {
-            "node": "Aggregate2",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Edit Fields1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields1": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Aggregate1": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Aggregate2": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
           }
         ]
       ]
@@ -666,17 +315,6 @@
         ]
       ]
     },
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "Formatted Date - now",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Switch5": {
       "main": [
         [
@@ -714,6 +352,28 @@
         [
           {
             "node": "Check Payer Name 1 (msisdn)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ipay_date": {
+      "main": [
+        [
+          {
+            "node": "Formatted Date - now",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "ipay_date",
             "type": "main",
             "index": 0
           }
@@ -785,217 +445,6 @@
     },
     {
       "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "4895bab3-3c84-4f0c-9973-79ca9df162ed",
-              "leftValue": "={{ $json.data[0].name }}",
-              "rightValue": "",
-              "operator": {
-                "type": "string",
-                "operation": "notEmpty",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "66d7660e-7dc3-43fd-92ce-a3b3877e5429",
-      "name": "Payer Name 1 Exists?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        3260,
-        1920
-      ]
-    },
-    {
-      "parameters": {
-        "url": "=https://dev.bulkbox.cloud/api/resource/Customer?filters=[[\"payer_name_2\", \"=\", \"{{encodeURIComponent($('Webhook').item.json[\"body\"][\"names\"])}}\"]]",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "options": {}
-      },
-      "id": "af73e72c-c99e-4f4b-b370-22cfabb5f02c",
-      "name": "Check Payer Name 2 (msisdn)",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        3140,
-        2520
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "97316816-efc4-4176-bc2d-3c61468de2b7",
-              "leftValue": "={{ $json.data[0].name }}",
-              "rightValue": "",
-              "operator": {
-                "type": "string",
-                "operation": "notEmpty",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "ecd9c01c-584b-4161-b33f-ad794f385609",
-      "name": "Payer Name 2 Exists?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        3360,
-        2520
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "96253f6a-7efa-4112-bf88-ccd260c92ac3",
-              "leftValue": "={{ $json.data }}",
-              "rightValue": 1,
-              "operator": {
-                "type": "array",
-                "operation": "lengthEquals",
-                "rightType": "number"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "eba3c41b-d2d1-4762-9a45-b7bec653c5f5",
-      "name": "More than One A/c ?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        3600,
-        2360
-      ]
-    },
-    {
-      "parameters": {
-        "url": "=https://dev.bulkbox.cloud/api/resource/Sales%20Invoice?fields=[\"name\",\"outstanding_amount\",\"customer_name\"]&filters=[[\"docstatus\", \"=\", 1], [\"outstanding_amount\", \"=\", \"{{ Math.round($('Webhook').item.json[\"body\"][\"amount\"])}}\"]]",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "options": {}
-      },
-      "id": "0cbae89e-545a-4c5a-9e7c-c940abd5c91d",
-      "name": "Check for Exact Invoice Amount",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        3600,
-        2620
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "a5165b63-e562-442d-8d8e-02d1ebf2f16f",
-              "leftValue": "={{ $json.data }}",
-              "rightValue": 1,
-              "operator": {
-                "type": "array",
-                "operation": "lengthEquals",
-                "rightType": "number"
-              }
-            },
-            {
-              "id": "4ad6d3a2-e1ea-4cad-8df0-26ae68711a8b",
-              "leftValue": "={{ Math.round($json.data[0].outstanding_amount) }}",
-              "rightValue": "={{ $('Webhook').item.json.body.amount.toInt() }}",
-              "operator": {
-                "type": "number",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "7ab749e5-db59-4081-8a03-9fd55ec81fd6",
-      "name": "Exact Invoice Identified",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        3820,
-        2660
-      ]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{$('Check for Exact Invoice Amount').item.json[\"data\"][0][\"customer_name\"]}}\",\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":1,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{$('Webhook').item.json[\"body\"][\"names\"]}}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[\n         {\n            \"reference_doctype\":\"Sales Invoice\",\n            \"reference_name\":\"{{$('Check for Exact Invoice Amount').item.json[\"data\"][0][\"name\"]}}\",\n            \"allocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}}\n         }\n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
-        "options": {}
-      },
-      "id": "d44f51bb-429b-4f5d-b186-60e6ecfb79b7",
-      "name": "Payment Entry with Exact Invoice",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        4020,
-        2540
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
         "url": "=https://dev.bulkbox.cloud/api/resource/Sales%20Invoice?fields=[\"name\",\"outstanding_amount\"]&filters=[[\"docstatus\", \"=\", 1], [\"customer_name\", \"=\", \"{{encodeURIComponent($json.data[0].name)}}\"], [\"status\", \"=\", \"Overdue\"]]&order_by=posting_date asc ",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "erpNextApi",
@@ -1008,54 +457,6 @@
       "position": [
         640,
         60
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "url": "=https://dev.bulkbox.cloud/api/resource/Sales%20Invoice?fields=[\"name\",\"outstanding_amount\"]&filters=[[\"docstatus\", \"=\", 1], [\"customer_name\", \"=\", \"{{encodeURIComponent($json.data[0].name)}}\"], [\"status\", \"=\", \"Overdue\"]]&order_by=posting_date asc ",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "options": {}
-      },
-      "id": "ad7606f8-e18f-469e-91aa-c7dfab7c450d",
-      "name": "Overdue1",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        3820,
-        2260
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"Ipay Unallocated\",\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":0,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{$('Webhook').item.json[\"body\"][\"names\"]}}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[\n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
-        "options": {}
-      },
-      "id": "2f475a67-beea-4203-a8c8-1d7adbc4e72f",
-      "name": "More than One A/C P.E1",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        3820,
-        2440
       ],
       "credentials": {
         "erpNextApi": {
@@ -1376,492 +777,6 @@
     },
     {
       "parameters": {
-        "url": "=https://dev.bulkbox.cloud/api/resource/Sales%20Invoice?fields=[\"name\",\"outstanding_amount\"]&filters=[[\"docstatus\", \"=\", 1], [\"customer_name\", \"=\", \"{{encodeURIComponent($json.data[0].name)}}\"], [\"status\", \"=\", \"Unpaid\"]]&order_by=posting_date asc ",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "options": {}
-      },
-      "id": "ec40166d-874c-4f38-90c1-54de455cc65d",
-      "name": "Unpaid1",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        4200,
-        2080
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "5063019a-b3ef-4316-9e8c-7d7e72d1f7fc",
-              "leftValue": "={{ Math.round($('Webhook').item.json.body.amount) }}",
-              "rightValue": "={{ Math.round($('Overdue1').item.json.data[0].outstanding_amount) }}",
-              "operator": {
-                "type": "number",
-                "operation": "lte"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "a92833fc-58f9-423d-979c-78c34fd2c67b",
-      "name": "Exact Payment2",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        4300,
-        2260
-      ]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "sendBody": true,
-        "contentType": "=json",
-        "specifyBody": "json",
-        "bodyParameters": {
-          "parameters": [
-            {}
-          ]
-        },
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{ $('Check Payer Name 2 (msisdn)').item.json[\"data\"][0][\"name\"] }}\",\n      \"party_name\":\"{{$('Check Payer Name 2 (msisdn)').item.json[\"data\"][0][\"name\"]}}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":0,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[\n         \n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
-        "options": {}
-      },
-      "id": "e61638ea-6905-49af-ae01-f01f768fc82c",
-      "name": "Payment Entry3",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        4300,
-        2440
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "sendBody": true,
-        "contentType": "=json",
-        "specifyBody": "json",
-        "bodyParameters": {
-          "parameters": [
-            {}
-          ]
-        },
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{ $('Check Payer Name 2 (msisdn)').item.json[\"data\"][0][\"name\"] }}\",\n      \"party_name\":\"{{$('Check Payer Name 2 (msisdn)').item.json[\"data\"][0][\"name\"]}}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":1,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[{\"reference_doctype\":\"Sales Invoice\",\"reference_name\":\"{{ $('Overdue1').item.json[\"data\"][0][\"name\"] }}\",\"allocated_amount\":{{ $('Webhook').item.json[\"body\"][\"amount\"] }}}\n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
-        "options": {}
-      },
-      "id": "a2008ef6-2db3-49e7-8775-c98d60ce44ed",
-      "name": "Exact Invoice Amount2",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        4520,
-        2100
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "sendBody": true,
-        "contentType": "=json",
-        "specifyBody": "json",
-        "bodyParameters": {
-          "parameters": [
-            {}
-          ]
-        },
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{ $('Check Payer Name 1 (msisdn)').item.json[\"data\"][0][\"name\"] }}\",\n      \"party_name\":\"{{$('Check Payer Name 1 (msisdn)').item.json[\"data\"][0][\"name\"]}}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":0,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[{\"reference_doctype\":\"Sales Invoice\",\"reference_name\":\"{{ $('Overdue1').item.json[\"data\"][0][\"name\"] }}\",\"allocated_amount\":{{ $('Overdue1').item.json[\"data\"][0][\"outstanding_amount\"] }}}\n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
-        "options": {}
-      },
-      "id": "4d0e3758-174c-4c18-a57f-1b04b3b05dd9",
-      "name": "Overpaid One Invoice2",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        4540,
-        2360
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "sendBody": true,
-        "contentType": "=json",
-        "specifyBody": "json",
-        "bodyParameters": {
-          "parameters": [
-            {}
-          ]
-        },
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{ $('Check Payer Name 2 (msisdn)').item.json[\"data\"][0][\"name\"] }}\",\n      \"party_name\":\"{{$('Check Payer Name 2 (msisdn)').item.json[\"data\"][0][\"name\"]}}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":0,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[\n         \n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
-        "options": {}
-      },
-      "id": "b033e0e0-5fe6-4eac-81fe-bacdc800baf6",
-      "name": "Payment Entry4",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        4700,
-        1360
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "sendBody": true,
-        "contentType": "=json",
-        "specifyBody": "json",
-        "bodyParameters": {
-          "parameters": [
-            {}
-          ]
-        },
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{ $('Check Payer Name 2 (msisdn)').item.json[\"data\"][0][\"name\"] }}\",\n      \"party_name\":\"{{$('Check Payer Name 2 (msisdn)').item.json[\"data\"][0][\"name\"]}}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":0,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[\n         \n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
-        "options": {}
-      },
-      "id": "dae15edf-fd5c-45b4-bde4-718a9b3f4c55",
-      "name": "Payment Entry5",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        4820,
-        1700
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "5063019a-b3ef-4316-9e8c-7d7e72d1f7fc",
-              "leftValue": "={{ Math.round($('Webhook').item.json.body.amount) }}",
-              "rightValue": "={{ Math.round($('Unpaid1').item.json.data[0].outstanding_amount) }}",
-              "operator": {
-                "type": "number",
-                "operation": "lte"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "5cade09f-3db8-42ad-9125-2cce8bd6f2be",
-      "name": "Exact Payment3",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        4860,
-        1520
-      ]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "sendBody": true,
-        "contentType": "=json",
-        "specifyBody": "json",
-        "bodyParameters": {
-          "parameters": [
-            {}
-          ]
-        },
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{ $('Check Payer Name 2 (msisdn)').item.json[\"data\"][0][\"name\"] }}\",\n      \"party_name\":\"{{$('Check Payer Name 2 (msisdn)').item.json[\"data\"][0][\"name\"]}}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":0,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[{\"reference_doctype\":\"Sales Invoice\",\"reference_name\":\"{{ $('Unpaid1').item.json[\"data\"][0][\"name\"] }}\",\"allocated_amount\":{{ $('Unpaid1').item.json[\"data\"][0][\"outstanding_amount\"] }}}\n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
-        "options": {}
-      },
-      "id": "cf4c926c-e2b6-4c57-827e-10862ed30eb7",
-      "name": "Overpaid One Invoice3",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        5160,
-        1620
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "sendBody": true,
-        "contentType": "=json",
-        "specifyBody": "json",
-        "bodyParameters": {
-          "parameters": [
-            {}
-          ]
-        },
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{ $('Check Payer Name 2 (msisdn)').item.json[\"data\"][0][\"name\"] }}\",\n      \"party_name\":\"{{$('Check Payer Name 2 (msisdn)').item.json[\"data\"][0][\"name\"]}}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":1,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[{\"reference_doctype\":\"Sales Invoice\",\"reference_name\":\"{{ $('Overdue1').item.json[\"data\"][0][\"name\"] }}\",\"allocated_amount\":{{ $('Webhook').item.json[\"body\"][\"amount\"] }}}\n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
-        "options": {}
-      },
-      "id": "409fe310-492e-4039-b08c-da37ba208a3b",
-      "name": "Exact Invoice Amount3",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        5140,
-        1320
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "leftValue": "={{ $json.data[0].name }}",
-                    "rightValue": "",
-                    "operator": {
-                      "type": "string",
-                      "operation": "empty",
-                      "singleValue": true
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "No Overdue & No Unpaid"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "1d2bca14-5c19-4bdd-8639-f343af86e66b",
-                    "leftValue": "={{ $json.data }}",
-                    "rightValue": 1,
-                    "operator": {
-                      "type": "array",
-                      "operation": "lengthEquals",
-                      "rightType": "number"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "One Invoice"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "6ee0f7d8-5864-4240-bcd7-f805f0248711",
-                    "leftValue": "={{ $json.data }}",
-                    "rightValue": 1,
-                    "operator": {
-                      "type": "array",
-                      "operation": "lengthGt",
-                      "rightType": "number"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "More than One Invoice"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "31118f34-8f0b-464f-a1b7-38c6f84690b3",
-      "name": "Switch4",
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3,
-      "position": [
-        4540,
-        1720
-      ]
-    },
-    {
-      "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "leftValue": "={{ $json.data[0].name }}",
-                    "rightValue": "",
-                    "operator": {
-                      "type": "string",
-                      "operation": "empty",
-                      "singleValue": true
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Check Unpaid (No Overdue)"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "1d2bca14-5c19-4bdd-8639-f343af86e66b",
-                    "leftValue": "={{ $json.data }}",
-                    "rightValue": 1,
-                    "operator": {
-                      "type": "array",
-                      "operation": "lengthEquals",
-                      "rightType": "number"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "One Invoice"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "6ee0f7d8-5864-4240-bcd7-f805f0248711",
-                    "leftValue": "={{ $json.data }}",
-                    "rightValue": 1,
-                    "operator": {
-                      "type": "array",
-                      "operation": "lengthGt",
-                      "rightType": "number"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "More than One Invoice"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "fe5edf94-1360-49c4-bda5-c8af39d29fcd",
-      "name": "Switch3",
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3,
-      "position": [
-        4060,
-        2260
-      ]
-    },
-    {
-      "parameters": {
         "operation": "create",
         "base": {
           "__rl": true,
@@ -2116,114 +1031,6 @@
     },
     {
       "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "db36504c-5f0c-43c1-983b-692573fa0f8c",
-              "leftValue": "={{ $json.data[0].name }}",
-              "rightValue": "",
-              "operator": {
-                "type": "string",
-                "operation": "exists",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "b79e48f1-b341-40e0-b475-5c263d29b9d7",
-      "name": "If",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        4020,
-        2780
-      ]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{$('Check for Exact Invoice Amount').item.json[\"data\"][0][\"customer_name\"]}}\",\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":0,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{$('Webhook').item.json[\"body\"][\"names\"]}}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[\n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
-        "options": {}
-      },
-      "id": "37251680-b7fd-4340-a519-9166df5d73f5",
-      "name": "P.E - No exact Invoice Identified1",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        4260,
-        2680
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"Ipay Unallocated\",\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":0,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{$('Webhook').item.json[\"body\"][\"names\"]}}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[\n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
-        "options": {}
-      },
-      "id": "12342478-e960-46d8-97eb-3466b357723f",
-      "name": "P.E - No exact Invoice Identified (Ipay Unallocated)",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        4260,
-        2900
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "63d98c4f-f2a0-4ec5-b7e8-4649e8e60c3d",
-              "name": "phone_identifier",
-              "value": "={{ $json.body.msisdn.match(/\\d{3}$/)[0] }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "61852501-c487-4b10-a93d-71d0c7aa3528",
-      "name": "Phone",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.3,
-      "position": [
-        -520,
-        1320
-      ]
-    },
-    {
-      "parameters": {
         "operation": "formatDate",
         "date": "={{ $now }}",
         "format": "yyyy/MM/dd",
@@ -2286,134 +1093,6 @@
     },
     {
       "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "a0f75132-66b9-4f98-91b7-7b1f82e96297",
-              "leftValue": "={{ $('Payer Name 1 Exists?').item.json.data }}",
-              "rightValue": 1,
-              "operator": {
-                "type": "array",
-                "operation": "lengthEquals",
-                "rightType": "number"
-              }
-            }
-          ],
-          "combinator": "or"
-        },
-        "options": {}
-      },
-      "id": "079deb08-0952-4d40-8c30-dc45db54a799",
-      "name": "More than One Account from payer_name_1?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        440,
-        2160
-      ]
-    },
-    {
-      "parameters": {
-        "content": "## More than one account.\n- get any other account with same name in payer_name_2\n- Store them as a list.\n-Loope through the list checking if the payer number is as similar to the payee_phone_number.\n- If found, ensure only one, then book amount.\n- Else book as payment unallocated.",
-        "height": 249.39379275846312,
-        "width": 206.31538243883998
-      },
-      "id": "c56812ee-08f7-46db-85d0-a86eb049ec97",
-      "name": "Sticky Note",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        1140,
-        2060
-      ]
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "ff57ea52-2b2c-4346-8483-9ba2ddbf25da",
-              "name": "name",
-              "value": "={{ $json.name }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "e0b229df-475e-4f67-87f5-56464cb34623",
-      "name": "Edit Fields",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.3,
-      "position": [
-        1700,
-        1760
-      ]
-    },
-    {
-      "parameters": {
-        "options": {
-          "reset": false
-        }
-      },
-      "id": "8646617c-8149-472e-b103-49afedfd7d86",
-      "name": "Loop Over Items",
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        1480,
-        1700
-      ]
-    },
-    {
-      "parameters": {
-        "fieldToSplitOut": "data",
-        "options": {}
-      },
-      "id": "34f40f49-4452-4b75-b5d1-4d345f1aefe7",
-      "name": "Split Out",
-      "type": "n8n-nodes-base.splitOut",
-      "typeVersion": 1,
-      "position": [
-        1260,
-        1700
-      ]
-    },
-    {
-      "parameters": {
-        "aggregate": "aggregateAllItemData",
-        "options": {}
-      },
-      "id": "33dc5519-2159-4a6d-8a61-e0428adc0883",
-      "name": "Aggregate",
-      "type": "n8n-nodes-base.aggregate",
-      "typeVersion": 1,
-      "position": [
-        1700,
-        1620
-      ]
-    },
-    {
-      "parameters": {
-        "fieldToSplitOut": "accounts",
-        "options": {}
-      },
-      "id": "cd507177-1ef5-4d3b-92f0-3975e0bcfc9b",
-      "name": "Split Out1",
-      "type": "n8n-nodes-base.splitOut",
-      "typeVersion": 1,
-      "position": [
-        960,
-        2440
-      ]
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
@@ -2437,222 +1116,6 @@
     },
     {
       "parameters": {
-        "content": "## Matching Numbers\n- Check fro any invoice with same amount.\n- if found, book entry attaching invoice.\n- If not there, book entry to customer with no atachment.",
-        "width": 343.64497711126154
-      },
-      "id": "1e3ce974-b1c8-4520-bc35-8ec3961b86d2",
-      "name": "Sticky Note1",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        4320,
-        1040
-      ]
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "id": "eb65482a-06ab-4f8f-addd-67e1e7948c0b",
-      "name": "Loop Over Items2",
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        1440,
-        2300
-      ]
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "6f07bcbf-21a8-484c-a582-810fad3d3610",
-              "name": "name",
-              "value": "={{ $json.name }}",
-              "type": "string"
-            }
-          ]
-        },
-        "includeOtherFields": true,
-        "options": {}
-      },
-      "id": "5af6d527-6069-4c83-9ff1-7be871c988b3",
-      "name": "Exact person multiple accounts",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.3,
-      "position": [
-        1660,
-        2400
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "da670982-59a0-4ad2-b328-fabd84bc4bcc",
-              "leftValue": "={{ $json.payee_phone_number.match(/\\d{3}$/)[0] }}",
-              "rightValue": "={{ $('Phone').item.json.phone_identifier }}",
-              "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "7611dd98-665f-49e4-b601-11317ea579ae",
-      "name": "If2",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        1200,
-        2440
-      ]
-    },
-    {
-      "parameters": {
-        "jsCode": "// Input data from previous node\nconst inputData = [\n  {\n    \"name\": \"Test Customer\",\n    \"payee_phone_number\": \"2547*****397\"\n  },\n  {\n    \"name\": \"TEST ACCOUNT\",\n    \"payee_phone_number\": \"2547*****123\"\n  },\n  {\n    \"name\": \"Test Company\",\n    \"payee_phone_number\": \"2547*****397\"\n  }\n];\n\n// Phone number to be compared (you can set it via n8n expression)\nconst phoneToCompare = '2547*****397'; // Example phone number to compare\n\n// Filter matching records\nconst matchingRecords = inputData.filter(item => item.payee_phone_number === phoneToCompare);\n\n// Return the result as an array with a 'json' key\nreturn [{ json: { matchingRecords } }];\n"
-      },
-      "id": "e92e92e6-23e7-454c-b0df-08a4523c4e75",
-      "name": "Code",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        940,
-        2180
-      ]
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "7ca1e0a8-5493-4d7b-9207-f58c8fff96e1",
-              "name": "name",
-              "value": "={{ $json.name }}",
-              "type": "string"
-            }
-          ]
-        },
-        "includeOtherFields": true,
-        "options": {}
-      },
-      "id": "d5d165ce-1dbb-49f5-9c11-cbaf26ab7c09",
-      "name": "Edit Fields1",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.3,
-      "position": [
-        1680,
-        2740
-      ]
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "id": "1a514950-689b-40e8-ab9e-84da2cf0bb6c",
-      "name": "Loop Over Items3",
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        1440,
-        2660
-      ]
-    },
-    {
-      "parameters": {
-        "aggregate": "aggregateAllItemData",
-        "options": {}
-      },
-      "id": "109a0aaa-6a23-4b8c-a18d-f2b2a3eee146",
-      "name": "Aggregate1",
-      "type": "n8n-nodes-base.aggregate",
-      "typeVersion": 1,
-      "position": [
-        1660,
-        2220
-      ]
-    },
-    {
-      "parameters": {
-        "aggregate": "aggregateAllItemData",
-        "options": {}
-      },
-      "id": "5c8e76d1-5442-4320-b2ae-967f69893431",
-      "name": "Aggregate2",
-      "type": "n8n-nodes-base.aggregate",
-      "typeVersion": 1,
-      "position": [
-        1680,
-        2580
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "87affdd2-03d1-4316-ae66-41f7ff59a2c5",
-      "name": "Merge",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        1960,
-        2460
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "5f2d1ab0-d809-44e6-a8ef-20869b0ad1b4",
-              "leftValue": "={{ $json.data }}",
-              "rightValue": "",
-              "operator": {
-                "type": "array",
-                "operation": "empty",
-                "singleValue": true
-              }
-            },
-            {
-              "id": "2a28b865-b3e8-4a60-b797-d38d5a2aed0b",
-              "leftValue": "=",
-              "rightValue": "",
-              "operator": {
-                "type": "array",
-                "operation": "empty",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "b41da628-5dac-473b-be2d-283d68273bf8",
-      "name": "If3",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        2180,
-        2460
-      ]
-    },
-    {
-      "parameters": {
         "url": "=https://dev.bulkbox.cloud/api/resource/Customer?fields=[\"name\", \"payee_phone_number\"]&filters=[[\"payee_phone_number\",\"=\",\"{{ $('Webhook').item.json[\"body\"][\"msisdn\"] }}\"]]",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "erpNextApi",
@@ -2672,19 +1135,6 @@
           "name": "ERPNext Dev"
         }
       }
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "id": "0d8e1002-635b-4f3e-9f5e-e0cb0af671a1",
-      "name": "If4",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        -460,
-        2020
-      ]
     },
     {
       "parameters": {
@@ -2893,32 +1343,6 @@
           "name": "ERPNext Prod"
         }
       }
-    },
-    {
-      "parameters": {},
-      "id": "ba0c14ab-3245-4259-b34f-587f5f86f515",
-      "name": "Merge1",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        2380,
-        1940
-      ],
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "aggregate": "aggregateAllItemData",
-        "options": {}
-      },
-      "id": "06058667-5609-41cf-9111-4b931bc795f0",
-      "name": "Aggregate3",
-      "type": "n8n-nodes-base.aggregate",
-      "typeVersion": 1,
-      "position": [
-        3000,
-        2380
-      ]
     },
     {
       "parameters": {
@@ -3186,38 +1610,6 @@
             {}
           ]
         },
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{ $('list_of_accounts').item.json[\"accounts\"][0][\"name\"] }}\",\n      \"party_name\":\"{{ $('list_of_accounts').item.json[\"accounts\"][0][\"name\"] }}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":0,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[\n         \n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
-        "options": {}
-      },
-      "id": "eb53bb33-59f6-4884-809e-f86f72338aff",
-      "name": "Payment Entry6",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        2120,
-        420
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "sendBody": true,
-        "contentType": "=json",
-        "specifyBody": "json",
-        "bodyParameters": {
-          "parameters": [
-            {}
-          ]
-        },
         "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{ $('list_of_accounts').item.json[\"accounts\"][0][\"name\"] }}\",\n      \"party_name\":\"{{ $('list_of_accounts').item.json[\"accounts\"][0][\"name\"] }}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":1,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[{\"reference_doctype\":\"Sales Invoice\",\"reference_name\":\"{{ $('Overdue2').item.json[\"data\"][0][\"name\"] }}\",\"allocated_amount\":{{ $('Webhook').item.json[\"body\"][\"amount\"] }}}\n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
         "options": {}
       },
@@ -3228,38 +1620,6 @@
       "position": [
         2380,
         60
-      ],
-      "credentials": {
-        "erpNextApi": {
-          "id": "UwR6VOkYeSrNBqb2",
-          "name": "ERPNext Dev"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "erpNextApi",
-        "sendBody": true,
-        "contentType": "=json",
-        "specifyBody": "json",
-        "bodyParameters": {
-          "parameters": [
-            {}
-          ]
-        },
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{ $('list_of_accounts').item.json[\"accounts\"][0][\"name\"] }}\",\n      \"party_name\":\"{{ $('list_of_accounts').item.json[\"accounts\"][0][\"name\"] }}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":0,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[{\"reference_doctype\":\"Sales Invoice\",\"reference_name\":\"{{ $('Overdue2').item.json[\"data\"][0][\"name\"] }}\",\"allocated_amount\":{{ $('Overdue2').item.json[\"data\"][0][\"outstanding_amount\"] }}}\n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
-        "options": {}
-      },
-      "id": "1ec9464b-a668-4e0b-8d91-eaced763aa9a",
-      "name": "Overpaid One Invoice4",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        2380,
-        260
       ],
       "credentials": {
         "erpNextApi": {
@@ -3550,22 +1910,6 @@
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "ipay-test-workflow",
-        "options": {}
-      },
-      "id": "271f1911-7686-44de-ae3a-2884ff50162c",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -800,
-        200
-      ],
-      "webhookId": "fa42eb16-aef1-4e4c-b3ac-5189e548b77f"
-    },
-    {
-      "parameters": {
         "rules": {
           "values": [
             {
@@ -3687,6 +2031,63 @@
     },
     {
       "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6137fe0e-7e43-4f53-8fa9-c73c4217ea65",
+              "name": "data",
+              "value": "={{ $json.body }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3a5d9f57-0c08-47da-bd0b-0694ea9dd9b8",
+      "name": "ipay_date",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        -820,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ipay-test-workflow",
+        "options": {}
+      },
+      "id": "271f1911-7686-44de-ae3a-2884ff50162c",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1040,
+        200
+      ],
+      "webhookId": "fa42eb16-aef1-4e4c-b3ac-5189e548b77f"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.bulkbox.cloud/webhook/2f893ced-c4df-40c4-a0fa-d13b7fea55d5",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $('ipay_date').item.json.data }}",
+        "options": {}
+      },
+      "id": "12f4abd2-cf1b-4fa1-aecb-538f91dc2f69",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -660,
+        680
+      ]
+    },
+    {
+      "parameters": {
         "method": "POST",
         "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
         "authentication": "predefinedCredentialType",
@@ -3709,6 +2110,70 @@
       "position": [
         1580,
         740
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "contentType": "=json",
+        "specifyBody": "json",
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{ $('list_of_accounts').item.json[\"accounts\"][0][\"name\"] }}\",\n      \"party_name\":\"{{ $('list_of_accounts').item.json[\"accounts\"][0][\"name\"] }}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":0,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[\n         \n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
+        "options": {}
+      },
+      "id": "eb53bb33-59f6-4884-809e-f86f72338aff",
+      "name": "Payment Entry6",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2140,
+        460
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://dev.bulkbox.cloud/api/resource/Payment%20Entry",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "contentType": "=json",
+        "specifyBody": "json",
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{ $('list_of_accounts').item.json[\"accounts\"][0][\"name\"] }}\",\n      \"party_name\":\"{{ $('list_of_accounts').item.json[\"accounts\"][0][\"name\"] }}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":0,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[{\"reference_doctype\":\"Sales Invoice\",\"reference_name\":\"{{ $('Overdue2').item.json[\"data\"][0][\"name\"] }}\",\"allocated_amount\":{{ $('Overdue2').item.json[\"data\"][0][\"outstanding_amount\"] }}}\n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
+        "options": {}
+      },
+      "id": "1ec9464b-a668-4e0b-8d91-eaced763aa9a",
+      "name": "Overpaid One Invoice4",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2380,
+        260
       ],
       "credentials": {
         "erpNextApi": {
@@ -3760,7 +2225,7 @@
     "timezone": "Africa/Nairobi",
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner",
-    "errorWorkflow": "pA3zEasbGp50knPq"
+    "errorWorkflow": "ZJOoKjCCoGuwJat7"
   },
   "staticData": null,
   "tags": [
@@ -3778,6 +2243,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-16T07:47:56.000Z",
-  "versionId": "891cb8d4-6049-4547-a016-70771201f2a8"
+  "updatedAt": "2024-09-17T16:53:16.000Z",
+  "versionId": "51aeefdd-85c4-4266-acf5-a6dfa95e1145"
 }
