@@ -400,23 +400,7 @@
     },
     "Webhook": {
       "main": [
-        [
-          {
-            "node": "Formatted Date - now",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Airtable",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Send SLack Notifications Channel",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     }
   },
@@ -2201,7 +2185,7 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "db470d2c-cc80-4668-977f-8a25c95e01c1",
+        "path": "ipay-fallback",
         "options": {}
       },
       "id": "702c43a8-7cf8-45fc-afdd-8f4521277ae4",
@@ -2209,8 +2193,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        280,
-        420
+        120,
+        600
       ],
       "webhookId": "db470d2c-cc80-4668-977f-8a25c95e01c1"
     }
@@ -2269,6 +2253,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-08-30T07:19:08.000Z",
-  "versionId": "e883ec99-1c69-4ca4-923d-332284bcdd14"
+  "updatedAt": "2024-09-18T04:26:47.000Z",
+  "versionId": "40585c80-3f1e-4c8a-a396-839d0a211feb"
 }
