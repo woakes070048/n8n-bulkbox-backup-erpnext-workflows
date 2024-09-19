@@ -1,0 +1,409 @@
+{
+  "active": false,
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request | convert to IMG1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking \"Test workflow\"": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request | download dummy PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request | download dummy PDF": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request | convert to IMG2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request | convert to IMG1": {
+      "main": [
+        [
+          {
+            "node": "Compression",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compression": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-19T09:33:16.081Z",
+  "id": "77vnwikcT9EMe6Ug",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Create Order from attachments",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "id": "ab44b3de-860d-453f-934c-0671b4054cc8",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        520
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "e31BkYjFO2Wy5vIi",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "627786cc-456a-4a1c-a4ac-9587ef2ae377",
+              "leftValue": "={{ $json.Subject }}",
+              "rightValue": "Order",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "id": "a17a8fc1-973e-4994-bf2d-e2636a0680e6",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        1280,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "messageId": "={{ $json.id }}",
+        "simple": false,
+        "options": {
+          "dataPropertyAttachmentsPrefixName": "data",
+          "downloadAttachments": true
+        }
+      },
+      "id": "076aa6ba-06ce-4c3a-98f2-aaf810086c25",
+      "name": "Gmail",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1500,
+        520
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "e31BkYjFO2Wy5vIi",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://pdf.gatuservices.info/api/v1/convert/pdf/img",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data0",
+        "options": {}
+      },
+      "id": "08ffde95-d36f-466d-ad6a-7395b341727d",
+      "name": "HTTP Request | convert to IMG",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1620,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://pdf.gatuservices.info/api/v1/convert/pdf/img",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "multipart/form-data"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "imageFormat",
+              "value": "png"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "fileInput",
+              "inputDataFieldName": "data0"
+            },
+            {
+              "name": "singleOrMultiple",
+              "value": "single"
+            },
+            {
+              "name": "colorType",
+              "value": "color"
+            },
+            {
+              "name": "dpi",
+              "value": "72"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c3555281-e218-473b-a8d4-2a8c9faf645b",
+      "name": "HTTP Request | convert to IMG1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1720,
+        520
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "b549fea2-3fc3-4ae5-a52e-0e309701eb7d",
+      "name": "When clicking \"Test workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        840
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+        "options": {}
+      },
+      "id": "f6395875-dce9-46ae-b0e5-4e0bce574771",
+      "name": "HTTP Request | download dummy PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1500,
+        840
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://pdf.gatuservices.info/api/v1/convert/pdf/img",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "multipart/form-data"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "imageFormat",
+              "value": "png"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "fileInput",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "singleOrMultiple",
+              "value": "muliple"
+            },
+            {
+              "name": "colorType",
+              "value": "color"
+            },
+            {
+              "name": "dpi",
+              "value": "72"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b7bffff9-4599-46a8-9f0d-0c49b88c464a",
+      "name": "HTTP Request | convert to IMG2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1720,
+        840
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "id": "678cf7fd-135b-48d3-82ea-590cffd8b1ac",
+      "name": "Compression",
+      "type": "n8n-nodes-base.compression",
+      "typeVersion": 1.1,
+      "position": [
+        1940,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "inputType": "base64",
+        "binaryPropertyName": "file_0",
+        "simplify": false,
+        "options": {}
+      },
+      "id": "99920f6e-56f0-481c-bdd0-af4ec765529c",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.3,
+      "position": [
+        2160,
+        520
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "21Uk9WXqj1QsfAiE",
+          "name": "My OpenAI Account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Gmail Trigger": [
+      {
+        "json": {
+          "id": "19209a5c7eeea21c",
+          "threadId": "19209a5c7eeea21c",
+          "snippet": "Find attached order",
+          "payload": {
+            "mimeType": "multipart/mixed"
+          },
+          "sizeEstimate": 420209,
+          "historyId": "428875",
+          "internalDate": "1726738699000",
+          "labels": [
+            {
+              "id": "INBOX",
+              "name": "INBOX"
+            },
+            {
+              "id": "IMPORTANT",
+              "name": "IMPORTANT"
+            },
+            {
+              "id": "CATEGORY_PERSONAL",
+              "name": "CATEGORY_PERSONAL"
+            },
+            {
+              "id": "UNREAD",
+              "name": "UNREAD"
+            }
+          ],
+          "From": "Francis Njenga <gaturanjenga@gmail.com>",
+          "Subject": "ORDER",
+          "To": "gatura@bulkbox.co.ke"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-09-19T12:05:15.000Z",
+  "versionId": "fc4f42fb-5dd5-435f-816f-2aa75d0b6c70"
+}
