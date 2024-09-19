@@ -1,17 +1,6 @@
 {
   "active": false,
   "connections": {
-    "Chat Trigger": {
-      "main": [
-        [
-          {
-            "node": "Set max chunks to send to model",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Download file": {
       "main": [
         [
@@ -166,11 +155,44 @@
         ]
       ]
     },
+    "Generate response": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Answer the query based on chunks": {
       "main": [
         [
           {
             "node": "Compose citations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set max chunks to send to model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Set max chunks to send to model",
             "type": "main",
             "index": 0
           }
@@ -336,18 +358,6 @@
       }
     },
     {
-      "parameters": {},
-      "id": "764a865c-7efe-4eec-a34c-cc87c5f085b1",
-      "name": "Chat Trigger",
-      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
-      "position": [
-        680,
-        1060
-      ],
-      "webhookId": "1727c687-aed0-49cf-96af-e7796819fbb3",
-      "typeVersion": 1
-    },
-    {
       "parameters": {
         "jsCode": "let out = \"\"\nfor (const i in $input.all()) {\n  let itemText = \"--- CHUNK \" + i + \" ---\\n\"\n  itemText += $input.all()[i].json.document.pageContent + \"\\n\"\n  itemText += \"\\n\"\n  out += itemText\n}\n\nreturn {\n  'context': out\n};"
       },
@@ -407,6 +417,12 @@
               "name": "chunks",
               "type": "number",
               "value": 4
+            },
+            {
+              "id": "3babab92-c278-48d4-aa97-668e448fd452",
+              "name": "question",
+              "value": "={{ $json.body.text }}",
+              "type": "string"
             }
           ]
         },
@@ -531,34 +547,6 @@
     },
     {
       "parameters": {
-        "mode": "load",
-        "pineconeIndex": {
-          "__rl": true,
-          "value": "n8nhrmanual",
-          "mode": "list",
-          "cachedResultName": "n8nhrmanual"
-        },
-        "prompt": "={{ $json.chatInput }}",
-        "topK": "={{ $json.chunks }}",
-        "options": {}
-      },
-      "id": "1a5511b9-5a24-40d5-a5b1-830376226e4e",
-      "name": "Get top chunks matching query",
-      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
-      "position": [
-        1120,
-        1060
-      ],
-      "typeVersion": 1,
-      "credentials": {
-        "pineconeApi": {
-          "id": "vwHdvjBKltDuvVNE",
-          "name": "MyPineCone Account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "mode": "insert",
         "pineconeIndex": {
           "__rl": true,
@@ -585,8 +573,77 @@
     },
     {
       "parameters": {
+        "public": true,
+        "mode": "webhook",
+        "options": {}
+      },
+      "id": "764a865c-7efe-4eec-a34c-cc87c5f085b1",
+      "name": "Chat Trigger",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "position": [
+        720,
+        1320
+      ],
+      "webhookId": "1727c687-aed0-49cf-96af-e7796819fbb3",
+      "typeVersion": 1,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8nhrmanual",
+          "mode": "list",
+          "cachedResultName": "n8nhrmanual"
+        },
+        "prompt": "={{ $('Webhook').item.json.body.text }}",
+        "topK": "={{ $json.chunks }}",
+        "options": {}
+      },
+      "id": "1a5511b9-5a24-40d5-a5b1-830376226e4e",
+      "name": "Get top chunks matching query",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "position": [
+        1120,
+        1060
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "pineconeApi": {
+          "id": "vwHdvjBKltDuvVNE",
+          "name": "MyPineCone Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Webhook').first().json.body.response_url }}",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "={{ $json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f6161f67-cc7d-47bb-87d7-41dc020e316d",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2540,
+        1060
+      ]
+    },
+    {
+      "parameters": {
         "promptType": "define",
-        "text": "=Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer. Important: In your response, also include the the indexes of the chunks you used to generate the answer.\n\n{{ $json.context }}\n\nQuestion: {{ $(\"Chat Trigger\").first().json.chatInput }}\nHelpful Answer:",
+        "text": "=Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer. Important: In your response, also include the the indexes of the chunks you used to generate the answer.\n\n{{ $json.context }}\n\nQuestion: {{ $('Webhook').first().json[\"body\"][\"text\"] }}\nHelpful Answer:",
         "hasOutputParser": true
       },
       "id": "ef357a2b-bc8d-43f7-982f-73c3a85a60be",
@@ -597,15 +654,82 @@
         1060
       ],
       "typeVersion": 1.4
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "a5a0d6f3-b024-46a1-ac68-b79d1b5ac6c7",
+        "options": {
+          "noResponseBody": true
+        }
+      },
+      "id": "f89e5a82-60bd-4611-9a89-31e02cc01281",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        700,
+        1060
+      ],
+      "webhookId": "a5a0d6f3-b024-46a1-ac68-b79d1b5ac6c7"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Generate response": [
+      {
+        "json": {
+          "text": "Eligible employees are entitled to time off with pay for vacation or other personal reasons as stipulated in their letters of employment. \n[Three Spears Ltd HR Policy (1).pdf, lines 518-550]"
+        }
+      }
+    ],
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "Slackbot 1.0 (+https://api.slack.com/robots)",
+            "content-length": "423",
+            "accept": "application/json,*/*",
+            "accept-encoding": "gzip,deflate",
+            "content-type": "application/x-www-form-urlencoded",
+            "x-forwarded-for": "3.238.74.32",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "3.238.74.32",
+            "x-slack-request-timestamp": "1726731704",
+            "x-slack-signature": "v0=fcd0fad109bc343129f8dd7bc52bdd1c29614b6f1b2c16ebbe0a80b64891c7d5"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "token": "CGdLRVWt3XuUDEx42BWEAqI8",
+            "team_id": "TGQ7AGHH6",
+            "team_domain": "bulkboxke",
+            "channel_id": "D06PH24TANN",
+            "channel_name": "directmessage",
+            "user_id": "U04PW767FT5",
+            "user_name": "francnjenga99",
+            "command": "/askhr",
+            "text": "HEllo",
+            "api_app_id": "A06PH0LEFK4",
+            "is_enterprise_install": "false",
+            "response_url": "https://hooks.slack.com/commands/TGQ7AGHH6/7751488680050/GFxOb2wAd3MY4Y96T0MrsIzw",
+            "trigger_id": "7753980586740.568248561584.d4293e17291949c9507a84afe5e301fb"
+          },
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook/a5a0d6f3-b024-46a1-ac68-b79d1b5ac6c7",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2024-09-12T09:07:24.000Z",
-  "versionId": "1a96f660-1a0f-4ab3-bafe-5f856bc62750"
+  "triggerCount": 1,
+  "updatedAt": "2024-09-19T09:09:43.000Z",
+  "versionId": "4edd4370-210b-45f8-8faf-2baa120e7711"
 }
