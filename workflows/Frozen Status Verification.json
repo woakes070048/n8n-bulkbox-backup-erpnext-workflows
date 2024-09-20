@@ -2251,7 +2251,8 @@
   },
   "staticData": {
     "node:Schedule Trigger": {
-      "recurrencyRules": []
+      "recurrencyRules": [],
+      "recurrenceRules": []
     },
     "node:Schedule Trigger1": {
       "recurrencyRules": []
