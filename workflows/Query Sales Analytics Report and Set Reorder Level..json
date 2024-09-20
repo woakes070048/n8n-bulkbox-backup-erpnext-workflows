@@ -8506,7 +8506,8 @@
   },
   "staticData": {
     "node:New Month": {
-      "recurrencyRules": []
+      "recurrencyRules": [],
+      "recurrenceRules": []
     },
     "node:New Month1": {
       "recurrencyRules": []
