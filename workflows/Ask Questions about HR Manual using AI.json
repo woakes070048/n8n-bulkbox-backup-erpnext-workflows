@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Download file": {
       "main": [
@@ -233,8 +233,8 @@
       "typeVersion": 1,
       "credentials": {
         "openAiApi": {
-          "id": "21Uk9WXqj1QsfAiE",
-          "name": "My OpenAI Account"
+          "id": "NSA87LmoV6UIm9Jm",
+          "name": "Bulkbox OPenAI Acc"
         }
       }
     },
@@ -384,8 +384,8 @@
       "typeVersion": 1,
       "credentials": {
         "openAiApi": {
-          "id": "21Uk9WXqj1QsfAiE",
-          "name": "My OpenAI Account"
+          "id": "NSA87LmoV6UIm9Jm",
+          "name": "Bulkbox OPenAI Acc"
         }
       }
     },
@@ -403,8 +403,8 @@
       "typeVersion": 1,
       "credentials": {
         "openAiApi": {
-          "id": "21Uk9WXqj1QsfAiE",
-          "name": "My OpenAI Account"
+          "id": "NSA87LmoV6UIm9Jm",
+          "name": "Bulkbox OPenAI Acc"
         }
       }
     },
@@ -730,6 +730,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-09-19T09:09:43.000Z",
-  "versionId": "4edd4370-210b-45f8-8faf-2baa120e7711"
+  "updatedAt": "2024-09-20T03:49:55.000Z",
+  "versionId": "e2e4dc63-7714-4d19-b909-1d8473182169"
 }
