@@ -99,31 +99,6 @@
         ]
       ]
     },
-    "Switch": {
-      "main": [
-        [
-          {
-            "node": "Unpaid",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Exact Payment",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Payment Entry",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Check Payer Name 1 (msisdn)": {
       "main": [
         [
@@ -389,6 +364,31 @@
           },
           {
             "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Unpaid",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Exact Payment",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Payment Entry",
             "type": "main",
             "index": 0
           }
@@ -1148,94 +1148,6 @@
           "name": "ERPNext Prod"
         }
       }
-    },
-    {
-      "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "leftValue": "={{ $json.data }}",
-                    "rightValue": "",
-                    "operator": {
-                      "type": "array",
-                      "operation": "empty",
-                      "singleValue": true
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "No overdue"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "1d2bca14-5c19-4bdd-8639-f343af86e66b",
-                    "leftValue": "={{ $json.data }}",
-                    "rightValue": 1,
-                    "operator": {
-                      "type": "array",
-                      "operation": "lengthEquals",
-                      "rightType": "number"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "One Invoice"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "6ee0f7d8-5864-4240-bcd7-f805f0248711",
-                    "leftValue": "={{ $json.data }}",
-                    "rightValue": 1,
-                    "operator": {
-                      "type": "array",
-                      "operation": "lengthGt",
-                      "rightType": "number"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "More than One Invoice"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "fe839814-4478-42c3-a00b-264d1180fb60",
-      "name": "Switch",
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3,
-      "position": [
-        1960,
-        1360
-      ]
     },
     {
       "parameters": {
@@ -2194,6 +2106,97 @@
         1660
       ],
       "webhookId": "fa42eb16-aef1-4e4c-b3ac-5189e548b77f"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.data }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "array",
+                      "operation": "empty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "No overdue"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "1d2bca14-5c19-4bdd-8639-f343af86e66b",
+                    "leftValue": "={{ $json.data }}",
+                    "rightValue": 1,
+                    "operator": {
+                      "type": "array",
+                      "operation": "lengthEquals",
+                      "rightType": "number"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "One Invoice"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "6ee0f7d8-5864-4240-bcd7-f805f0248711",
+                    "leftValue": "={{ $json.data }}",
+                    "rightValue": 1,
+                    "operator": {
+                      "type": "array",
+                      "operation": "lengthGt",
+                      "rightType": "number"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "More than One Invoice"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fe839814-4478-42c3-a00b-264d1180fb60",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        1960,
+        1360
+      ]
     }
   ],
   "pinData": {
@@ -2217,12 +2220,12 @@
           "params": {},
           "query": {},
           "body": {
-            "amount": "1344.00",
+            "amount": "3116.00",
             "channel": "MPESA",
-            "names": "GATURA GATURA",
-            "msisdn": "2547*****312",
+            "names": "RUGAIYA RUGAIYA",
+            "msisdn": "2547*****221",
             "tstamp": "2024-08-30 10:01:35",
-            "txnid": "SHU9S1THGD",
+            "txnid": "SIN0L1IJQK",
             "vendorid": "bulkbox",
             "courierid": "",
             "hash": "5902bf3d83080033830db61026e9005df9676268d1af99c160b2d9fcff94947c"
@@ -2249,6 +2252,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-19T05:45:07.000Z",
-  "versionId": "4dd515b2-c55f-49cb-a7e8-8296665c3f13"
+  "updatedAt": "2024-09-23T12:13:39.000Z",
+  "versionId": "7416e7de-5f2c-4fa7-8edf-1948eea21b73"
 }
