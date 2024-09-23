@@ -166,17 +166,6 @@
         ]
       ]
     },
-    "Answer the query based on chunks": {
-      "main": [
-        [
-          {
-            "node": "Compose citations",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Chat Trigger": {
       "main": [
         [
@@ -193,6 +182,17 @@
         [
           {
             "node": "Set max chunks to send to model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Answer the query based on chunks": {
+      "main": [
+        [
+          {
+            "node": "Compose citations",
             "type": "main",
             "index": 0
           }
@@ -642,21 +642,6 @@
     },
     {
       "parameters": {
-        "promptType": "define",
-        "text": "=Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer. Important: In your response, also include the the indexes of the chunks you used to generate the answer.\n\n{{ $json.context }}\n\nQuestion: {{ $('Webhook').first().json[\"body\"][\"text\"] }}\nHelpful Answer:",
-        "hasOutputParser": true
-      },
-      "id": "ef357a2b-bc8d-43f7-982f-73c3a85a60be",
-      "name": "Answer the query based on chunks",
-      "type": "@n8n/n8n-nodes-langchain.chainLlm",
-      "position": [
-        1720,
-        1060
-      ],
-      "typeVersion": 1.4
-    },
-    {
-      "parameters": {
         "httpMethod": "POST",
         "path": "a5a0d6f3-b024-46a1-ac68-b79d1b5ac6c7",
         "options": {
@@ -672,6 +657,21 @@
         1060
       ],
       "webhookId": "a5a0d6f3-b024-46a1-ac68-b79d1b5ac6c7"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer. Important: In your response, also include the the indexes of the chunks you used to generate the answer.\n\n{{ $json.context }}\n\nQuestion: {{ $('Webhook').first().json[\"body\"][\"text\"] }}\nHelpful Answer:",
+        "hasOutputParser": true
+      },
+      "id": "ef357a2b-bc8d-43f7-982f-73c3a85a60be",
+      "name": "Answer the query based on chunks",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "position": [
+        1720,
+        1060
+      ],
+      "typeVersion": 1.4
     }
   ],
   "pinData": {
@@ -725,11 +725,14 @@
     ]
   },
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-09-20T03:49:55.000Z",
-  "versionId": "e2e4dc63-7714-4d19-b909-1d8473182169"
+  "updatedAt": "2024-09-23T08:25:55.000Z",
+  "versionId": "59d3e12e-bf65-4d2d-b2f0-5f1cdffad9e4"
 }
