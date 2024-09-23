@@ -23,6 +23,57 @@
         ]
       ]
     },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI1": {
+      "main": [
+        [
+          {
+            "node": "List of Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request | convert to IMG1": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Gmail": {
       "main": [
         [
@@ -34,44 +85,84 @@
         ]
       ]
     },
-    "When clicking \"Test workflow\"": {
+    "List of Items": {
       "main": [
         [
           {
-            "node": "HTTP Request | download dummy PDF",
+            "node": "Split Out",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "HTTP Request | download dummy PDF": {
+    "Item exists": {
       "main": [
         [
           {
-            "node": "HTTP Request | convert to IMG2",
+            "node": "Order Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Items not recognized",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "HTTP Request | convert to IMG1": {
+    "Order Items": {
       "main": [
         [
           {
-            "node": "Compression",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Compression": {
+    "Items not recognized": {
       "main": [
         [
           {
-            "node": "OpenAI",
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "OpenAI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Item exists",
             "type": "main",
             "index": 0
           }
@@ -95,15 +186,17 @@
             }
           ]
         },
-        "filters": {}
+        "filters": {
+          "sender": "gaturanjenga@gmail.com"
+        }
       },
-      "id": "ab44b3de-860d-453f-934c-0671b4054cc8",
+      "id": "6b24980c-44e6-400c-80ad-87e8d59e6086",
       "name": "Gmail Trigger",
       "type": "n8n-nodes-base.gmailTrigger",
-      "typeVersion": 1,
+      "typeVersion": 1.1,
       "position": [
-        1060,
-        520
+        2160,
+        1100
       ],
       "credentials": {
         "gmailOAuth2": {
@@ -118,7 +211,8 @@
           "options": {
             "caseSensitive": false,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
@@ -137,63 +231,117 @@
           "ignoreCase": true
         }
       },
-      "id": "a17a8fc1-973e-4994-bf2d-e2636a0680e6",
+      "id": "a09a4c8f-506a-4e37-baa4-0296e12edab1",
       "name": "Filter",
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2,
       "position": [
-        1280,
-        520
+        2400,
+        1100
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "64279d07-5b17-46e5-990a-2acc05a2f0fc",
+      "name": "Compression",
+      "type": "n8n-nodes-base.compression",
+      "typeVersion": 1.1,
+      "position": [
+        2060,
+        860
       ]
     },
     {
       "parameters": {
-        "operation": "get",
-        "messageId": "={{ $json.id }}",
-        "simple": false,
-        "options": {
-          "dataPropertyAttachmentsPrefixName": "data",
-          "downloadAttachments": true
-        }
-      },
-      "id": "076aa6ba-06ce-4c3a-98f2-aaf810086c25",
-      "name": "Gmail",
-      "type": "n8n-nodes-base.gmail",
-      "typeVersion": 2.1,
-      "position": [
-        1500,
-        520
-      ],
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "e31BkYjFO2Wy5vIi",
-          "name": "Gmail account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://pdf.gatuservices.info/api/v1/convert/pdf/img",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {}
-          ]
-        },
-        "sendBody": true,
-        "contentType": "binaryData",
-        "inputDataFieldName": "data0",
+        "fieldToSplitOut": "Items",
         "options": {}
       },
-      "id": "08ffde95-d36f-466d-ad6a-7395b341727d",
-      "name": "HTTP Request | convert to IMG",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.1,
+      "id": "5999e0e5-d229-4fd9-8cdc-befea841c059",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
       "position": [
-        1620,
-        240
+        3900,
+        1100
       ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "2a6e1b11-e826-4549-841d-67a61533b743",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        4120,
+        1100
+      ]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "d356e4cd-7abc-4b03-8296-b729051037a4",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        4400,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "list",
+        "operation": "get",
+        "additionalFields": {}
+      },
+      "id": "9eaa09f6-dd34-4622-a49e-2e1dd344d356",
+      "name": "Trello",
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-3.5-turbo",
+          "mode": "list",
+          "cachedResultName": "GPT-3.5-TURBO"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Give a result of the items and their quantities from this response \n\n{{ $json.content }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {
+          "maxTokens": 1024,
+          "temperature": 0.3
+        }
+      },
+      "id": "50e37f41-436c-43b3-a74f-ca0c7fb8d04f",
+      "name": "OpenAI1",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.4,
+      "position": [
+        3300,
+        1100
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "NSA87LmoV6UIm9Jm",
+          "name": "Bulkbox OPenAI Acc"
+        }
+      }
     },
     {
       "parameters": {
@@ -237,142 +385,258 @@
         },
         "options": {}
       },
-      "id": "c3555281-e218-473b-a8d4-2a8c9faf645b",
+      "id": "d92ec180-e24b-4979-8a2e-62bab824c818",
       "name": "HTTP Request | convert to IMG1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1720,
-        520
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "b549fea2-3fc3-4ae5-a52e-0e309701eb7d",
-      "name": "When clicking \"Test workflow\"",
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        1280,
-        840
+        2840,
+        1100
       ]
     },
     {
       "parameters": {
-        "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-        "options": {}
+        "operation": "get",
+        "messageId": "={{ $json.id }}",
+        "simple": false,
+        "options": {
+          "dataPropertyAttachmentsPrefixName": "data",
+          "downloadAttachments": true
+        }
       },
-      "id": "f6395875-dce9-46ae-b0e5-4e0bce574771",
-      "name": "HTTP Request | download dummy PDF",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.1,
+      "id": "a3d6f1df-33ef-4571-8fe7-ab09bb4156b1",
+      "name": "Gmail",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
       "position": [
-        1500,
-        840
+        2620,
+        1100
       ],
-      "disabled": true
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "e31BkYjFO2Wy5vIi",
+          "name": "Gmail account"
+        }
+      }
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "http://pdf.gatuservices.info/api/v1/convert/pdf/img",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
+        "assignments": {
+          "assignments": [
             {
-              "name": "Content-Type",
-              "value": "multipart/form-data"
-            }
-          ]
-        },
-        "sendBody": true,
-        "contentType": "multipart-form-data",
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "imageFormat",
-              "value": "png"
-            },
-            {
-              "parameterType": "formBinaryData",
-              "name": "fileInput",
-              "inputDataFieldName": "data"
-            },
-            {
-              "name": "singleOrMultiple",
-              "value": "muliple"
-            },
-            {
-              "name": "colorType",
-              "value": "color"
-            },
-            {
-              "name": "dpi",
-              "value": "72"
+              "id": "3ed9563f-ac28-4bca-a429-6dc33a18d228",
+              "name": "Items",
+              "value": "={{ $json.message.content.items }}",
+              "type": "array"
             }
           ]
         },
         "options": {}
       },
-      "id": "b7bffff9-4599-46a8-9f0d-0c49b88c464a",
-      "name": "HTTP Request | convert to IMG2",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.1,
+      "id": "29536791-0286-4724-afa8-4c1e27835e8b",
+      "name": "List of Items",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
       "position": [
-        1720,
-        840
-      ],
-      "disabled": true
+        3680,
+        1100
+      ]
     },
     {
-      "parameters": {},
-      "id": "678cf7fd-135b-48d3-82ea-590cffd8b1ac",
-      "name": "Compression",
-      "type": "n8n-nodes-base.compression",
-      "typeVersion": 1.1,
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a6d38f91-4fba-433a-8555-bb58b36405ea",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "023668c9-916c-45a6-b26b-40a042a74df1",
+      "name": "Item exists",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
       "position": [
-        1940,
-        520
+        4820,
+        1180
       ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a0399ea5-bb7c-4259-8345-02d2533c82ea",
+              "name": "item_code",
+              "value": "={{ $json['Item Code'] }}",
+              "type": "string"
+            },
+            {
+              "id": "5f4e7615-f0b5-4792-a99a-0b34279a0de3",
+              "name": "qty",
+              "value": "={{ $('Split Out').item.json.quantity }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c4019884-c55b-4b23-bc3f-aa6171e0df90",
+      "name": "Order Items",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5300,
+        1380
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d9865c4e-8658-4b73-a517-138858c4f357",
+              "name": "item_name",
+              "value": "={{ $('Loop Over Items').item.json.product_name }}",
+              "type": "string"
+            },
+            {
+              "id": "c4cfdada-7c80-4aa7-8289-a099766499d5",
+              "name": "quanitty",
+              "value": "={{ $('Loop Over Items').item.json.quantity }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "879d199e-73f6-4caf-bcc2-695e3625e7e1",
+      "name": "Items not recognized",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4980,
+        1340
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appSCi0a1zPuJizxg",
+          "mode": "list",
+          "cachedResultName": "Bulkbox Final Master",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl2hGiQmpSg73Una",
+          "mode": "list",
+          "cachedResultName": "MASTER",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tbl2hGiQmpSg73Una"
+        },
+        "filterByFormula": "=FIND(\"{{ $json.item_name }}\", {item_name}) > 0",
+        "options": {}
+      },
+      "id": "85c6baae-036f-474c-aab6-0cd987de5c4a",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        4580,
+        1180
+      ],
+      "alwaysOutputData": true,
+      "executeOnce": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
     },
     {
       "parameters": {
         "resource": "image",
         "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "text": "=Extract only the ordered items and their quantities in a table. If available, return the Supplier SKU as 'Item Code'; otherwise, use the Item Code or SKU. Format item names as in the example: 'Bio Yoghurt Strawberry 1L'.",
         "inputType": "base64",
-        "binaryPropertyName": "file_0",
-        "simplify": false,
         "options": {}
       },
-      "id": "99920f6e-56f0-481c-bdd0-af4ec765529c",
+      "id": "202d5970-d82f-491a-9e0a-341e03f9aa77",
       "name": "OpenAI",
       "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.3,
+      "typeVersion": 1.4,
       "position": [
-        2160,
-        520
+        3080,
+        1100
       ],
       "credentials": {
         "openAiApi": {
-          "id": "21Uk9WXqj1QsfAiE",
-          "name": "My OpenAI Account"
+          "id": "NSA87LmoV6UIm9Jm",
+          "name": "Bulkbox OPenAI Acc"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "56d32086-6ecb-4c41-b23b-ff48f6f5808c",
+              "name": "item_name",
+              "value": "={{ $json.product }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "946ce295-ef50-4939-a786-ca865dee24c3",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4360,
+        1180
+      ]
     }
   ],
   "pinData": {
     "Gmail Trigger": [
       {
         "json": {
-          "id": "19209a5c7eeea21c",
-          "threadId": "19209a5c7eeea21c",
-          "snippet": "Find attached order",
+          "id": "1920a3a64835659c",
+          "threadId": "1920a3a64835659c",
+          "snippet": "",
           "payload": {
             "mimeType": "multipart/mixed"
           },
-          "sizeEstimate": 420209,
-          "historyId": "428875",
-          "internalDate": "1726738699000",
+          "sizeEstimate": 142771,
+          "historyId": "429205",
+          "internalDate": "1726748439000",
           "labels": [
             {
               "id": "INBOX",
@@ -392,7 +656,7 @@
             }
           ],
           "From": "Francis Njenga <gaturanjenga@gmail.com>",
-          "Subject": "ORDER",
+          "Subject": "Glovo Order",
           "To": "gatura@bulkbox.co.ke"
         }
       }
@@ -404,6 +668,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-09-19T12:05:15.000Z",
-  "versionId": "fc4f42fb-5dd5-435f-816f-2aa75d0b6c70"
+  "updatedAt": "2024-09-23T11:07:46.000Z",
+  "versionId": "cc08b71d-6571-499d-bf98-60fe728d95ee"
 }
