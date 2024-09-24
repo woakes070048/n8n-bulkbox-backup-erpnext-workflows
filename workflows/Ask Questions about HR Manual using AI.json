@@ -144,17 +144,6 @@
         ]
       ]
     },
-    "Get top chunks matching query": {
-      "main": [
-        [
-          {
-            "node": "Prepare chunks",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Generate response": {
       "main": [
         [
@@ -182,6 +171,17 @@
         [
           {
             "node": "Set max chunks to send to model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get top chunks matching query": {
+      "main": [
+        [
+          {
+            "node": "Prepare chunks",
             "type": "main",
             "index": 0
           }
@@ -391,7 +391,9 @@
     },
     {
       "parameters": {
-        "options": {}
+        "options": {
+          "maxTokens": 100
+        }
       },
       "id": "8fb697ea-f2e5-4105-b6c8-ab869c2e5ab2",
       "name": "OpenAI Chat Model",
@@ -440,7 +442,7 @@
     },
     {
       "parameters": {
-        "jsonSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"answer\": {\n      \"type\": \"string\"\n    },\n    \"citations\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"number\"\n      }\n    }\n  }\n}"
+        "jsonSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"answer\": {\n      \"type\": \"string\"\n    },\n    \"citations\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n}"
       },
       "id": "f2ab813f-0f0c-4d3a-a1de-7896ad736698",
       "name": "Structured Output Parser",
@@ -590,34 +592,6 @@
     },
     {
       "parameters": {
-        "mode": "load",
-        "pineconeIndex": {
-          "__rl": true,
-          "value": "n8nhrmanual",
-          "mode": "list",
-          "cachedResultName": "n8nhrmanual"
-        },
-        "prompt": "={{ $('Webhook').item.json.body.text }}",
-        "topK": "={{ $json.chunks }}",
-        "options": {}
-      },
-      "id": "1a5511b9-5a24-40d5-a5b1-830376226e4e",
-      "name": "Get top chunks matching query",
-      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
-      "position": [
-        1120,
-        1060
-      ],
-      "typeVersion": 1,
-      "credentials": {
-        "pineconeApi": {
-          "id": "vwHdvjBKltDuvVNE",
-          "name": "MyPineCone Account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "method": "POST",
         "url": "={{ $('Webhook').first().json.body.response_url }}",
         "sendBody": true,
@@ -657,6 +631,55 @@
         1060
       ],
       "webhookId": "a5a0d6f3-b024-46a1-ac68-b79d1b5ac6c7"
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8nhrmanual",
+          "mode": "list",
+          "cachedResultName": "n8nhrmanual"
+        },
+        "prompt": "={{ $('Webhook').item.json.body.text }}",
+        "topK": "={{ $json.chunks }}",
+        "options": {}
+      },
+      "id": "1a5511b9-5a24-40d5-a5b1-830376226e4e",
+      "name": "Get top chunks matching query",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "position": [
+        1120,
+        1060
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "pineconeApi": {
+          "id": "vwHdvjBKltDuvVNE",
+          "name": "MyPineCone Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxTokens": 100
+        }
+      },
+      "id": "97ecee1f-7a45-472a-a818-24a789e9c6c0",
+      "name": "OpenAI Chat Model1",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        460,
+        460
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "openAiApi": {
+          "id": "NSA87LmoV6UIm9Jm",
+          "name": "Bulkbox OPenAI Acc"
+        }
+      }
     },
     {
       "parameters": {
@@ -733,6 +756,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-09-23T08:25:55.000Z",
-  "versionId": "59d3e12e-bf65-4d2d-b2f0-5f1cdffad9e4"
+  "updatedAt": "2024-09-23T17:34:47.000Z",
+  "versionId": "004522ce-bd2e-490e-9643-f7ad7b09c3b6"
 }
