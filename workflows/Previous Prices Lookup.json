@@ -1,0 +1,519 @@
+{
+  "active": true,
+  "connections": {
+    "Buying": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Selling": {
+      "main": [
+        [
+          {
+            "node": "Filter1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GT": {
+      "main": [
+        [
+          {
+            "node": "Filter2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Filter2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Buying",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Selling",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "GT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-24T09:05:53.321Z",
+  "id": "OHzWzIL7N68GerM9",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Previous Prices Lookup",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Item%20Price",
+        "documentName": "={{ $json.query.st_buying_id }}"
+      },
+      "id": "de111498-cdba-4896-8b1d-1ce936a3fbca",
+      "name": "Buying",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        800,
+        300
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Item%20Price",
+        "documentName": "={{ $json.query.st_selling_id }}"
+      },
+      "id": "3c576b9a-cf5e-4dbe-87a6-673194975dbe",
+      "name": "Selling",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        800,
+        460
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Item%20Price",
+        "documentName": "={{ $json.query.gt_selling_id }}"
+      },
+      "id": "7ea016bd-995a-4980-8e93-811ab0dd9545",
+      "name": "GT",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        800,
+        640
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2d48c81d-5acc-4ebf-9492-70f0afc8fb52",
+              "leftValue": "={{ $json.item_code }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "8cb6b0df-bb35-4102-8393-b7d4b38b8f6c",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1020,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2d48c81d-5acc-4ebf-9492-70f0afc8fb52",
+              "leftValue": "={{ $json.item_code }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7bacf080-ab96-4eca-82c5-89624337e833",
+      "name": "Filter1",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1020,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2d48c81d-5acc-4ebf-9492-70f0afc8fb52",
+              "leftValue": "={{ $json.item_code }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "939b475c-8d16-4310-a9f7-ec59c9fac6ad",
+      "name": "Filter2",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1020,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "id": "6ed66727-a8eb-4b00-964b-a4fe8e479082",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        1320,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "94e01dd1-5f6f-4f43-ad6e-747e687ebbde",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1580,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a6546698-5c2c-4551-8e67-23a1dce4c838",
+              "name": "price_list",
+              "value": "={{ $json.price_list }}",
+              "type": "string"
+            },
+            {
+              "id": "d211e485-3e29-4afb-9aa8-2fe7282ba3fc",
+              "name": "rate",
+              "value": "={{ Math.round($json.price_list_rate * 100)/100 }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "87a598d8-b328-4b05-8f1f-19f065649ac1",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1820,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "price_list"
+            },
+            {
+              "fieldToAggregate": "rate"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "700a2294-30ad-48a8-a304-705a58c5d668",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1800,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Add filter for new items with no price list, trigger the webhook with empty data\n",
+        "height": 298
+      },
+      "id": "7b819851-6834-4e18-b36a-620fa410d850",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.airtable.com/workflows/v1/genericWebhook/appSCi0a1zPuJizxg/wfl9s4jYl6H0qR2H7/wtrRRNmQulHqjxQs7",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "record_id",
+              "value": "={{ $('Webhook').item.json.query.recordID }}"
+            },
+            {
+              "name": "={{ $json.price_list[0] }}",
+              "value": "={{ $json.rate[0] }}"
+            },
+            {
+              "name": "item_code",
+              "value": "={{ $('Webhook').item.json.query.item_code }}"
+            },
+            {
+              "name": "initiated_by",
+              "value": "={{ $('Webhook').item.json.query.initiated_by }}"
+            },
+            {
+              "name": "={{ $json.price_list[1] }}",
+              "value": "={{ $json.rate[1] }}"
+            },
+            {
+              "name": "={{ $json.price_list[2] }}",
+              "value": "={{ $json.rate[2] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e0f9b346-4fac-4254-b0be-ec75e0353536",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2020,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "path": "59ff36fc-96e5-4a0d-bd59-70ff309a4a47",
+        "options": {}
+      },
+      "id": "625a171f-105e-43b0-b49e-403249d96a1f",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        540,
+        460
+      ],
+      "webhookId": "59ff36fc-96e5-4a0d-bd59-70ff309a4a47"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-airtable-source": "appSCi0a1zPuJizxg/wflcMYb4g4YV6WH5H",
+            "x-forwarded-for": "3.86.111.64",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "3.86.111.64"
+          },
+          "params": {},
+          "query": {
+            "recordID": "reclU37B0btJM7XrO",
+            "st_buying_id": "8047f8d27c",
+            "st_selling_id": "4c98ef5713",
+            "gt_selling_id": "c1747675b2",
+            "item_code": "TEST002",
+            "initiated_by": "null"
+          },
+          "body": {},
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook/59ff36fc-96e5-4a0d-bd59-70ff309a4a47",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-09-24T12:09:16.000Z",
+  "versionId": "4031120c-5b76-4d61-9cf8-950dad956acd"
+}
