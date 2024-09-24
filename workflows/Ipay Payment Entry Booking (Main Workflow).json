@@ -349,27 +349,6 @@
         ]
       ]
     },
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "ipay_date",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Send SLack Notifications Channel",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Airtable",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Switch": {
       "main": [
         [
@@ -389,6 +368,27 @@
         [
           {
             "node": "Payment Entry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "ipay_date",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send SLack Notifications Channel",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Airtable",
             "type": "main",
             "index": 0
           }
@@ -1695,7 +1695,7 @@
             {}
           ]
         },
-        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{$('list_of_accounts').item.json[\"accounts\"][0][\"name\"]}}\",\n      \"party_name\":\"{{ $('list_of_accounts').item.json[\"accounts\"][0][\"name\"] }}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":1,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[{\"reference_doctype\":\"Sales Invoice\",\"reference_name\":\"{{ $('Overdue2').item.json[\"data\"][0][\"name\"] }}\",\"allocated_amount\":{{ $('Webhook').item.json[\"body\"][\"amount\"] }}}\n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
+        "jsonBody": "={\n   \"data\":{\n      \"payment_type\":\"Receive\",\n      \"payment_order_status\":\"Initiated\",\n      \"posting_date\":\"{{ $('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"company\":\"Three Spears Limited\",\n      \"mode_of_payment\":\"MPESA\",\n      \"party_type\":\"Customer\",\n      \"party\":\"{{$('list_of_accounts').item.json[\"accounts\"][0][\"name\"]}}\",\n      \"party_name\":\"{{ $('list_of_accounts').item.json[\"accounts\"][0][\"name\"] }}\",\n      \"party_balance\":0.0,\n      \"paid_from\":\"Debtors - TSL\",\n      \"paid_from_account_currency\":\"KES\",\n      \"paid_from_account_balance\":0.0,\n      \"paid_to\":\"Cash - TSL\",\n      \"paid_to_account_currency\":\"KES\",\n      \"paid_to_account_balance\":0.0,\n      \"paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"source_exchange_rate\":1.0,\n      \"base_paid_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"target_exchange_rate\":1.0,\n      \"base_received_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"total_allocated_amount\":0.0,\n      \"base_total_allocated_amount\":0.0,\n      \"unallocated_amount\":{{$('Webhook').item.json[\"body\"][\"amount\"]}},\n      \"difference_amount\":0.0,\n      \"reference_no\":\"{{$('Webhook').item.json[\"body\"][\"txnid\"]}}\",\n      \"payee_name_ipay\":\"{{$('Webhook').item.json[\"body\"][\"names\"]}}\",\"payee_phone_number\":\"{{$('Webhook').item.json[\"body\"][\"msisdn\"]}}\",\n      \"vendor_id\":\"{{$('Webhook').item.json[\"body\"][\"vendorid\"]}}\",\n      \"reference_date\":\"{{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"docstatus\":1,\"custom_remarks\":1,\n      \"remarks\":\"Amount KES {{$('Webhook').item.json[\"body\"][\"amount\"]}} received from {{ $('Webhook').item.json[\"body\"][\"names\"] }}\\nTransaction reference no {{$('Webhook').item.json[\"body\"][\"txnid\"]}} dated {{$('Formatted Date - now').item.json[\"formattedDate\"]}}\",\n      \"letter_head\":\"Bulkbox Letterhead\",\n      \"title\":\"Ipay Unallocated\",\n      \"doctype\":\"Payment Entry\",\n      \"references\":[{\"reference_doctype\":\"Sales Invoice\",\"reference_name\":\"{{ $('Unpaid2').item.json[\"data\"][0][\"name\"] }}\",\"allocated_amount\":{{ $('Webhook').item.json[\"body\"][\"amount\"] }}}\n      ],\n      \"deductions\":[\n         \n      ]\n   }\n}",
         "options": {}
       },
       "id": "4e25e651-0ec6-49e6-a0b4-d6ab2a2fbb1c",
@@ -2093,22 +2093,6 @@
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "db470d2c-cc80-4668-977f-8a25c95e01c1",
-        "options": {}
-      },
-      "id": "75be30d8-4ebc-4b16-b279-60d32e3b4607",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -40,
-        1660
-      ],
-      "webhookId": "fa42eb16-aef1-4e4c-b3ac-5189e548b77f"
-    },
-    {
-      "parameters": {
         "rules": {
           "values": [
             {
@@ -2197,6 +2181,22 @@
         1960,
         1360
       ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "db470d2c-cc80-4668-977f-8a25c95e01c1",
+        "options": {}
+      },
+      "id": "75be30d8-4ebc-4b16-b279-60d32e3b4607",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -40,
+        1660
+      ],
+      "webhookId": "fa42eb16-aef1-4e4c-b3ac-5189e548b77f"
     }
   ],
   "pinData": {
@@ -2205,7 +2205,7 @@
         "json": {
           "headers": {
             "host": "n8n.bulkbox.cloud",
-            "content-length": "250",
+            "content-length": "248",
             "accept": "application/json",
             "accept-encoding": "deflate, gzip",
             "cache-control": "no-cache",
@@ -2220,18 +2220,18 @@
           "params": {},
           "query": {},
           "body": {
-            "amount": "3116.00",
+            "amount": "3358.00",
             "channel": "MPESA",
-            "names": "RUGAIYA RUGAIYA",
-            "msisdn": "2547*****221",
-            "tstamp": "2024-08-30 10:01:35",
-            "txnid": "SIN0L1IJQK",
+            "msisdn": "2547*****554",
+            "names": "REGINA REGINA",
+            "tstamp": "2024-09-24 14:48:33",
+            "txnid": "SIO9OYO41H",
             "vendorid": "bulkbox",
             "courierid": "",
-            "hash": "5902bf3d83080033830db61026e9005df9676268d1af99c160b2d9fcff94947c"
+            "hash": "0a2e40ea16e9e08a17752424787a0563c342132078c7e0106da0bc970210d356"
           },
           "webhookUrl": "https://n8n.bulkbox.cloud/webhook/db470d2c-cc80-4668-977f-8a25c95e01c1",
-          "executionMode": "Devuction"
+          "executionMode": "production"
         }
       }
     ]
@@ -2252,6 +2252,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-23T12:13:39.000Z",
-  "versionId": "7416e7de-5f2c-4fa7-8edf-1948eea21b73"
+  "updatedAt": "2024-09-24T11:52:29.000Z",
+  "versionId": "3a81c0e1-5a9b-4083-8220-d5337848c9a9"
 }
