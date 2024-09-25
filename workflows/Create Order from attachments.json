@@ -87,13 +87,7 @@
     },
     "List of Items": {
       "main": [
-        [
-          {
-            "node": "Split Out",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Item exists": {
@@ -668,6 +662,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-09-23T11:07:46.000Z",
-  "versionId": "cc08b71d-6571-499d-bf98-60fe728d95ee"
+  "updatedAt": "2024-09-25T13:18:01.000Z",
+  "versionId": "34034ac4-340e-404f-9e8d-44434eebe0a4"
 }
