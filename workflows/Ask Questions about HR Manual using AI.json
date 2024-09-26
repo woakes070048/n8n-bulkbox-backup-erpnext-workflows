@@ -144,17 +144,6 @@
         ]
       ]
     },
-    "Generate response": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Chat Trigger": {
       "main": [
         [
@@ -177,22 +166,77 @@
         ]
       ]
     },
-    "Get top chunks matching query": {
+    "Answer the query based on chunks": {
       "main": [
         [
           {
-            "node": "Prepare chunks",
+            "node": "Compose citations",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Answer the query based on chunks": {
+    "Prepare chunks1": {
       "main": [
         [
           {
-            "node": "Compose citations",
+            "node": "Answer the query based on chunks1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Answer the query based on chunks1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compose citations1": {
+      "main": [
+        [
+          {
+            "node": "Generate response1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Answer the query based on chunks1",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Answer the query based on chunks1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get top chunks matching query": {
+      "main": [
+        [
+          {
+            "node": "Prepare chunks1",
             "type": "main",
             "index": 0
           }
@@ -359,14 +403,14 @@
     },
     {
       "parameters": {
-        "jsCode": "let out = \"\"\nfor (const i in $input.all()) {\n  let itemText = \"--- CHUNK \" + i + \" ---\\n\"\n  itemText += $input.all()[i].json.document.pageContent + \"\\n\"\n  itemText += \"\\n\"\n  out += itemText\n}\n\nreturn {\n  'context': out\n};"
+        "jsCode": "let out = \"\";\nconst input = $input.all();  // Store $input.all() in a variable for efficiency\n\nfor (let i = 0; i < input.length; i++) {\n  let itemText = `--- CHUNK ${i} ---\\n`;  // Using template literals for better readability\n  itemText += input[i].json.document.pageContent + \"\\n\";  // Access the item directly from the variable\n  out += itemText + \"\\n\";  // Append the chunk with an extra line break\n}\n\nreturn {\n  context: out  // Return context directly without quotes around the key\n};\n"
       },
       "id": "36cd9a8d-7d89-49b3-8a81-baa278201a21",
       "name": "Prepare chunks",
       "type": "n8n-nodes-base.code",
       "position": [
-        1500,
-        1060
+        2440,
+        480
       ],
       "typeVersion": 2
     },
@@ -399,8 +443,8 @@
       "name": "OpenAI Chat Model",
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "position": [
-        1740,
-        1280
+        2680,
+        700
       ],
       "typeVersion": 1,
       "credentials": {
@@ -418,7 +462,7 @@
               "id": "236047ff-75a2-47fd-b338-1e9763c4015e",
               "name": "chunks",
               "type": "number",
-              "value": 4
+              "value": 3
             },
             {
               "id": "3babab92-c278-48d4-aa97-668e448fd452",
@@ -442,14 +486,14 @@
     },
     {
       "parameters": {
-        "jsonSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"answer\": {\n      \"type\": \"string\"\n    },\n    \"citations\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n}"
+        "jsonSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"answer\": {\n      \"type\": \"string\"\n    }\n  }\n}\n"
       },
       "id": "f2ab813f-0f0c-4d3a-a1de-7896ad736698",
       "name": "Structured Output Parser",
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "position": [
-        1920,
-        1280
+        2860,
+        700
       ],
       "typeVersion": 1
     },
@@ -472,8 +516,8 @@
       "name": "Compose citations",
       "type": "n8n-nodes-base.set",
       "position": [
-        2100,
-        1060
+        3040,
+        480
       ],
       "typeVersion": 3.3
     },
@@ -495,8 +539,8 @@
       "name": "Generate response",
       "type": "n8n-nodes-base.set",
       "position": [
-        2320,
-        1060
+        3260,
+        480
       ],
       "typeVersion": 3.3
     },
@@ -511,8 +555,8 @@
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        848.715870642978,
-        940
+        -380,
+        960
       ],
       "typeVersion": 1
     },
@@ -599,7 +643,7 @@
           "parameters": [
             {
               "name": "text",
-              "value": "={{ $json.text }}"
+              "value": "={{ $json.answer }}"
             }
           ]
         },
@@ -610,7 +654,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2540,
+        2100,
         1060
       ]
     },
@@ -631,34 +675,6 @@
         1060
       ],
       "webhookId": "a5a0d6f3-b024-46a1-ac68-b79d1b5ac6c7"
-    },
-    {
-      "parameters": {
-        "mode": "load",
-        "pineconeIndex": {
-          "__rl": true,
-          "value": "n8nhrmanual",
-          "mode": "list",
-          "cachedResultName": "n8nhrmanual"
-        },
-        "prompt": "={{ $('Webhook').item.json.body.text }}",
-        "topK": "={{ $json.chunks }}",
-        "options": {}
-      },
-      "id": "1a5511b9-5a24-40d5-a5b1-830376226e4e",
-      "name": "Get top chunks matching query",
-      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
-      "position": [
-        1120,
-        1060
-      ],
-      "typeVersion": 1,
-      "credentials": {
-        "pineconeApi": {
-          "id": "vwHdvjBKltDuvVNE",
-          "name": "MyPineCone Account"
-        }
-      }
     },
     {
       "parameters": {
@@ -691,10 +707,147 @@
       "name": "Answer the query based on chunks",
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "position": [
+        2660,
+        480
+      ],
+      "typeVersion": 1.4
+    },
+    {
+      "parameters": {
+        "jsCode": "let out = \"\"\nfor (const i in $input.all()) {\n  let itemText = \"--- CHUNK \" + i + \" ---\\n\"\n  itemText += $input.all()[i].json.document.pageContent + \"\\n\"\n  itemText += \"\\n\"\n  out += itemText\n}\n\nreturn {\n  'context': out\n};"
+      },
+      "id": "00b99d15-0402-488c-9795-cc9e21ddd58b",
+      "name": "Prepare chunks1",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1480,
+        1060
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxTokens": 150
+        }
+      },
+      "id": "dd1f6029-477a-4f8f-b54b-c89f489b9337",
+      "name": "OpenAI Chat Model2",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
         1720,
+        1280
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "openAiApi": {
+          "id": "NSA87LmoV6UIm9Jm",
+          "name": "Bulkbox OPenAI Acc"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"answer\": {\n      \"type\": \"string\"\n    },\n    \"citations\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"number\"\n      }\n    }\n  }\n}"
+      },
+      "id": "8100b13e-ffcf-407c-9053-5d77f9444bb4",
+      "name": "Structured Output Parser1",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "position": [
+        1900,
+        1280
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "67ecefcf-a30c-4cc4-89ca-b9b23edd6585",
+              "name": "citations",
+              "type": "array",
+              "value": "={{ $json.citations.map(i => '[' + $('Get top chunks matching query').all()[$json.citations].json.document.metadata.file_name + ', lines ' + $('Get top chunks matching query').all()[$json.citations].json.document.metadata['loc.lines.from'] + '-' + $('Get top chunks matching query').all()[$json.citations].json.document.metadata['loc.lines.to'] + ']') }}"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "da45287b-4b7f-4184-af01-0f26b5a0e473",
+      "name": "Compose citations1",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        3220,
+        980
+      ],
+      "typeVersion": 3.3
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d77956c4-0ff4-4c64-80c2-9da9d4c8ad34",
+              "name": "text",
+              "type": "string",
+              "value": "={{ $json.answer }} {{ $if(!$json.citations.isEmpty(), \"\\n\" + $json.citations.join(\"\"), '') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4980b5cb-4570-4c84-bc9d-0bb0660ccd0f",
+      "name": "Generate response1",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        3440,
+        980
+      ],
+      "typeVersion": 3.3
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer. Important: In your response, also include the the indexes of the chunks you used to generate the answer.\n\n{{ $json.context }}\n\nQuestion: {{ $('Webhook').first().json[\"body\"][\"text\"] }}\nHelpful Answer:",
+        "hasOutputParser": true
+      },
+      "id": "9f428e55-5587-468e-9d5f-31d93812324b",
+      "name": "Answer the query based on chunks1",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "position": [
+        1700,
         1060
       ],
       "typeVersion": 1.4
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8nhrmanual",
+          "mode": "list",
+          "cachedResultName": "n8nhrmanual"
+        },
+        "prompt": "={{ $('Webhook').item.json.body.text }}",
+        "topK": "={{ $json.chunks }}",
+        "options": {}
+      },
+      "id": "1a5511b9-5a24-40d5-a5b1-830376226e4e",
+      "name": "Get top chunks matching query",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "position": [
+        1120,
+        1060
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "pineconeApi": {
+          "id": "vwHdvjBKltDuvVNE",
+          "name": "MyPineCone Account"
+        }
+      }
     }
   ],
   "pinData": {
@@ -745,6 +898,18 @@
           "executionMode": "production"
         }
       }
+    ],
+    "Answer the query based on chunks1": [
+      {
+        "json": {
+          "answer": "26 days",
+          "citations": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
     ]
   },
   "settings": {
@@ -756,6 +921,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-09-23T17:34:47.000Z",
-  "versionId": "004522ce-bd2e-490e-9643-f7ad7b09c3b6"
+  "updatedAt": "2024-09-26T07:02:38.000Z",
+  "versionId": "aaaa9e63-4bd7-4a46-9d10-d998ade8cff3"
 }
