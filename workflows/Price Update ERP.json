@@ -1,6 +1,17 @@
 {
   "active": true,
   "connections": {
+    "standard_selling_id": {
+      "main": [
+        [
+          {
+            "node": "price_change_doc",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Webhook": {
       "main": [
         [
@@ -30,22 +41,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "standard_selling_id": {
-      "main": [
-        [
-          {
-            "node": "price_change_doc",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "price_change_doc": {
-      "main": [
-        []
       ]
     }
   },
@@ -163,21 +158,6 @@
     },
     {
       "parameters": {
-        "path": "079cdbc3-2d44-452b-8b55-0e7cad24c73a",
-        "options": {}
-      },
-      "id": "07c2e327-fd20-4b1f-9b3e-cb166ebf0647",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1,
-      "position": [
-        -120,
-        880
-      ],
-      "webhookId": "079cdbc3-2d44-452b-8b55-0e7cad24c73a"
-    },
-    {
-      "parameters": {
         "operation": "get",
         "docType": "Item%20Price",
         "documentName": "={{ $json.query.ST_sellingID }}"
@@ -251,6 +231,21 @@
         }
       },
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "path": "079cdbc3-2d44-452b-8b55-0e7cad24c73a",
+        "options": {}
+      },
+      "id": "07c2e327-fd20-4b1f-9b3e-cb166ebf0647",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        880
+      ],
+      "webhookId": "079cdbc3-2d44-452b-8b55-0e7cad24c73a"
     }
   ],
   "pinData": {
@@ -312,6 +307,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-08-19T12:47:43.000Z",
-  "versionId": "05a84f49-f336-49dd-81a0-36f7c1ccd9a0"
+  "updatedAt": "2024-09-25T11:22:47.000Z",
+  "versionId": "bf260efb-50b8-43e5-8df4-99f554e60b76"
 }
