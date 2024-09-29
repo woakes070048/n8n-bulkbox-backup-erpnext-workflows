@@ -330,7 +330,8 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
@@ -1001,6 +1002,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-17T04:10:54.000Z",
-  "versionId": "3f268c44-72e5-47fb-87fd-c7be63926227"
+  "updatedAt": "2024-09-26T18:23:50.000Z",
+  "versionId": "bdc66dc1-2ae1-4941-b653-22e2ebe856c4"
 }
