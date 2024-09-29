@@ -1,0 +1,183 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Test workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "ERPNext",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ERPNext": {
+      "main": [
+        [
+          {
+            "node": "ERPNext1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-18T08:19:27.684Z",
+  "id": "cmripDgQYe1cKMPh",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Update records",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "73b74638-da17-49b6-a3c6-ce8478d717f8",
+      "name": "When clicking \"Test workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7f88420b-a5bc-43e4-aac5-7c9084cae301",
+              "name": "customer",
+              "value": "Bambino Kitchen",
+              "type": "string"
+            },
+            {
+              "id": "1bd6373e-d52d-4875-accf-a6be4ada12df",
+              "name": "Kra",
+              "value": "P000607511M",
+              "type": "string"
+            },
+            {
+              "id": "a7f98da1-d4f1-403f-b3f7-0dbf3c292391",
+              "name": "name",
+              "value": "Jit Mart Ltd",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "04e9134b-734e-4302-9437-b75d39faf6fb",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        1280,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Customer",
+        "documentName": "={{ $json.customer }}"
+      },
+      "id": "f7e6590a-505c-44f4-aa59-4e46816437ff",
+      "name": "ERPNext",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        520
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "Customer",
+        "documentName": "={{ $('Edit Fields').item.json.customer }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "basic_info",
+              "value": "={{ $('Edit Fields').item.json.name }}"
+            }
+          ]
+        }
+      },
+      "id": "35ebf450-8c51-47c0-a9c4-9b6f5d067587",
+      "name": "ERPNext1",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        1740,
+        520
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "https://portal.bulkbox.cloud/api/resource/Customer/Bambino Kitchen",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "Jit Mart Ltd"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "056b6747-2b5b-4143-a44d-0cfb54647e20",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2080,
+        240
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-09-18T13:39:15.000Z",
+  "versionId": "2815102c-9b3f-4c5d-babd-2f3cd15eae78"
+}
