@@ -1,0 +1,359 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "ERPNext",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ERPNext": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "ERPNext1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ERPNext1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Search Website Account",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "ERPNext2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ERPNext2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Website Account": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-26T18:51:43.143Z",
+  "id": "ji5uESxwcapwZagu",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Website ID on ERP",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "96ec8672-3232-43cd-b24e-f62440ef051c",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://bulkbox.co.ke/api/users?status=A&user_type=C&items_per_page=100&page=1",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Basic cmFzaGlkQGJ1bGtib3guY28ua2U6MTQwM1VEMnRTVzMyWjEzN3kzUEZrc3ZRRzFXNGt1d08="
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "0a939125-c6c2-408f-888b-9f74e57c50b8",
+      "name": "Update Website Stock",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1020,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "docType": "Customer",
+        "returnAll": true,
+        "options": {}
+      },
+      "id": "03f95b8f-1c13-4097-8999-9ff9eb91501e",
+      "name": "ERPNext",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        500
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "6086ab7a-80e2-4aba-940a-8bb913411d49",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1500,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Customer",
+        "documentName": "={{ $json.name }}"
+      },
+      "id": "d7a26ebf-574c-4ef3-9f51-aa70f30f2a62",
+      "name": "ERPNext1",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        560
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c252da74-e5bc-4407-97c3-fcf812518c30",
+              "leftValue": "={{ $json.email_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "bc7bbe05-a270-438e-8710-f5655743489f",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1940,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5c744c05-a459-426d-9acb-a2e7193fb292",
+              "leftValue": "={{ $json.body.users }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "94e098e3-f4a9-4ecc-8a6c-2436b63b11c0",
+      "name": "If1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2440,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "docType": "Customer",
+        "documentName": "={{ $('ERPNext1').item.json.name }}",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "=website_id",
+              "value": "={{ $json.body.users[0].user_id }}"
+            },
+            {
+              "field": "payment_terms",
+              "value": "={{ $ifEmpty($('ERPNext1').item.json.payment_terms, \"Cash on Delivery\") }}"
+            }
+          ]
+        }
+      },
+      "id": "649481af-3c23-4963-a339-2df62414996d",
+      "name": "ERPNext2",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        2660,
+        760
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "UwR6VOkYeSrNBqb2",
+          "name": "ERPNext Dev"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "url": "=https://bulkbox.co.ke/api/users?email={{ $json.email_id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Basic cmFzaGlkQGJ1bGtib3guY28ua2U6MTQwM1VEMnRTVzMyWjEzN3kzUEZrc3ZRRzFXNGt1d08="
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "bd08b031-4f90-4e9a-8442-aece558f6efe",
+      "name": "Search Website Account",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        2200,
+        620
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-09-26T19:41:44.000Z",
+  "versionId": "a472d9f1-573d-452a-ad6e-adf90c727610"
+}
