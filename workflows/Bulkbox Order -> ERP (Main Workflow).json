@@ -360,7 +360,7 @@
             "index": 0
           },
           {
-            "node": "Discrepancy in Order Amount",
+            "node": "Price Difference1",
             "type": "main",
             "index": 0
           }
@@ -376,7 +376,7 @@
             "index": 0
           },
           {
-            "node": "Discrepancy in Order Amount",
+            "node": "Price Difference2",
             "type": "main",
             "index": 0
           }
@@ -436,7 +436,7 @@
             "index": 0
           },
           {
-            "node": "Discrepancy in Order Amount",
+            "node": "Price Difference",
             "type": "main",
             "index": 0
           }
@@ -487,22 +487,30 @@
         ]
       ]
     },
-    "Discrepancy in Order Amount": {
+    "Price Difference2": {
       "main": [
         [
           {
-            "node": "Slack",
+            "node": "Slack2",
             "type": "main",
             "index": 0
           }
-        ],
+        ]
+      ]
+    },
+    "Price Difference1": {
+      "main": [
         [
           {
-            "node": "Slack",
+            "node": "Slack1",
             "type": "main",
             "index": 0
           }
-        ],
+        ]
+      ]
+    },
+    "Price Difference": {
+      "main": [
         [
           {
             "node": "Slack",
@@ -1562,8 +1570,8 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2,
       "position": [
-        6440,
-        100
+        6540,
+        80
       ]
     },
     {
@@ -1623,8 +1631,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        6680,
-        100
+        6820,
+        80
       ],
       "credentials": {
         "erpNextApi": {
@@ -2367,13 +2375,13 @@
     },
     {
       "parameters": {
-        "select": "user",
-        "user": {
+        "select": "channel",
+        "channelId": {
           "__rl": true,
-          "value": "D04PWAFCX18",
+          "value": "C07N0LHM5NG",
           "mode": "id"
         },
-        "text": "=Hello,\nFollowing order has a difference in price with the website:\n{{$('Update Sales Order with items3').item.json.name}}",
+        "text": "=Hello,\nFollowing order has a difference in price with the website, kindly investigate:\nWebsite Order ID: {{ $('Get Order from website').item.json.order_id }}\nERP Sales Order: {{ $('Update Sales Order with items3').item.json.name }}",
         "otherOptions": {
           "includeLinkToWorkflow": false
         }
@@ -2383,8 +2391,8 @@
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.1,
       "position": [
-        6980,
-        360
+        6800,
+        260
       ],
       "credentials": {
         "slackApi": {
@@ -2395,82 +2403,184 @@
     },
     {
       "parameters": {
-        "rules": {
-          "values": [
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
             {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "leftValue": "={{ Number($('Update Sales Order with items3').item.json.grand_total) - $('Get Order from website').item.json.total }}",
-                    "rightValue": "=50",
-                    "operator": {
-                      "type": "number",
-                      "operation": "gt"
-                    }
-                  }
-                ],
-                "combinator": "and"
+              "id": "f0dbdca3-92e5-4d9a-b99f-3c0ba916c3bc",
+              "leftValue": "={{ Number($('Update Sales Order with items3').item.json.grand_total) - $('Get Order from website').item.json.total }}",
+              "rightValue": 50,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
               }
             },
             {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "2826c86c-2d8c-4586-98bc-f491a58e9d26",
-                    "leftValue": "={{ Number($('Update Sales Order with items').item.json.grand_total) - $('Get Order from website').item.json.total }}",
-                    "rightValue": 50,
-                    "operator": {
-                      "type": "number",
-                      "operation": "gt"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              }
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "68ceb541-63f3-42c6-8c5b-9b60b2c3282a",
-                    "leftValue": "={{ Number($('Update Sales Order with items2').item.json.grand_total) - $('Get Order from website').item.json.total }}",
-                    "rightValue": 50,
-                    "operator": {
-                      "type": "number",
-                      "operation": "gt"
-                    }
-                  }
-                ],
-                "combinator": "and"
+              "id": "79e378ba-7b19-4fae-9adb-bc3d00493b57",
+              "leftValue": "={{ Number($('Update Sales Order with items3').item.json.grand_total) - $('Get Order from website').item.json.total }}",
+              "rightValue": -50,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
               }
             }
-          ]
+          ],
+          "combinator": "or"
         },
         "options": {}
       },
-      "id": "e2df5e5e-ef99-4721-b942-5eb67e33e807",
-      "name": "Discrepancy in Order Amount",
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3,
+      "id": "ad070ebe-e014-4e87-b499-09f6074dc0f5",
+      "name": "Price Difference",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
       "position": [
-        6680,
-        360
+        6580,
+        260
       ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "f0dbdca3-92e5-4d9a-b99f-3c0ba916c3bc",
+              "leftValue": "={{ Number($('Update Sales Order with items').item.json.grand_total) - $('Get Order from website').item.json.total }}",
+              "rightValue": 50,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            },
+            {
+              "id": "c131d945-0998-4e45-998a-ef459bd64e8e",
+              "leftValue": "={{ Number($('Update Sales Order with items').item.json.grand_total) - $('Get Order from website').item.json.total }}",
+              "rightValue": -50,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "37001c74-68a8-40d6-9e6c-30667602b57f",
+      "name": "Price Difference1",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        6580,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "f0dbdca3-92e5-4d9a-b99f-3c0ba916c3bc",
+              "leftValue": "={{ Number($('Update Sales Order with items2').item.json.grand_total) - $('Get Order from website').item.json.total }}",
+              "rightValue": 50,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            },
+            {
+              "id": "8ab0caf7-93f1-4e27-8e91-39c357556272",
+              "leftValue": "={{ Number($('Update Sales Order with items2').item.json.grand_total) - $('Get Order from website').item.json.total }}",
+              "rightValue": -50,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "2f18809e-67d5-4518-b8ea-aed77d465f0e",
+      "name": "Price Difference2",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        6580,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C07N0LHM5NG",
+          "mode": "id"
+        },
+        "text": "=Hello,\nFollowing order has a difference in price with the website, kindly investigate:\nWebsite Order ID: {{ $('Get Order from website').item.json.order_id }}\nERP Sales Order: {{ $('Update Sales Order with items').item.json.name }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "id": "14e22c33-02c4-4141-a0ae-9005a79a26e0",
+      "name": "Slack1",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        6820,
+        440
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C07N0LHM5NG",
+          "mode": "id"
+        },
+        "text": "=Hello,\nFollowing order has a difference in price with the website, kindly investigate:\nWebsite Order ID: {{ $('Get Order from website').item.json.order_id }}\nERP Sales Order: {{ $('Update Sales Order with items2').item.json.name }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "id": "e7be47be-8ff1-4016-a284-baae9935fdbe",
+      "name": "Slack2",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [
+        6820,
+        620
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "nHsD7aEjogT4fnip",
+          "name": "BBX Bot (n8n)"
+        }
+      }
     }
   ],
   "pinData": {
@@ -3778,6 +3888,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-16T13:26:37.000Z",
-  "versionId": "2b835bfd-50bd-47da-8521-5cd6357c4afa"
+  "updatedAt": "2024-09-20T06:34:02.000Z",
+  "versionId": "2e7ea200-8ad0-4449-aea8-2b0988b1779e"
 }
