@@ -182,22 +182,22 @@
         ]
       ]
     },
-    "Payment Entry Booked": {
+    "Aggregate": {
       "main": [
         [
           {
-            "node": "Filter1",
+            "node": "Unfreeze",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Aggregate": {
+    "Payment Entry Booked": {
       "main": [
         [
           {
-            "node": "Unfreeze",
+            "node": "Filter1",
             "type": "main",
             "index": 0
           }
@@ -1046,22 +1046,6 @@
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "payment-booked",
-        "options": {}
-      },
-      "id": "c8603f8f-cccd-488f-9435-10c8068ebd9f",
-      "name": "Payment Entry Booked",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1.1,
-      "position": [
-        580,
-        480
-      ],
-      "webhookId": "b517e6c7-72c6-4561-a552-618ee6c0ede5"
-    },
-    {
-      "parameters": {
         "aggregate": "aggregateAllItemData",
         "options": {}
       },
@@ -1089,6 +1073,22 @@
         1720,
         600
       ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "payment-booked",
+        "options": {}
+      },
+      "id": "c8603f8f-cccd-488f-9435-10c8068ebd9f",
+      "name": "Payment Entry Booked",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        580,
+        480
+      ],
+      "webhookId": "b517e6c7-72c6-4561-a552-618ee6c0ede5"
     }
   ],
   "pinData": {
@@ -1190,6 +1190,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-17T15:22:07.000Z",
-  "versionId": "24208044-3a80-407d-a2a9-a86ea07f880c"
+  "updatedAt": "2024-09-19T07:38:53.000Z",
+  "versionId": "d20de48e-d497-451c-842d-0da57a6f5418"
 }
