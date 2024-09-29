@@ -34,6 +34,28 @@
         ]
       ]
     },
+    "Emma": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sophia": {
+      "main": [
+        [
+          {
+            "node": "Airtable2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Switch": {
       "main": [
         [
@@ -67,28 +89,6 @@
         [
           {
             "node": "Elsie",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Emma": {
-      "main": [
-        [
-          {
-            "node": "Airtable",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Sophia": {
-      "main": [
-        [
-          {
-            "node": "Airtable2",
             "type": "main",
             "index": 0
           }
@@ -1841,138 +1841,6 @@
     },
     {
       "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "46a46082-8b6d-4159-b981-c093dc3990e5",
-                    "leftValue": "={{ $json.query.salesTeam }}",
-                    "rightValue": "Sophia",
-                    "operator": {
-                      "type": "string",
-                      "operation": "contains"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Sophia"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "336ab0cc-0bb6-4d61-948d-2bd993588ac6",
-                    "leftValue": "={{ $json.query.salesTeam }}",
-                    "rightValue": "Emma",
-                    "operator": {
-                      "type": "string",
-                      "operation": "contains"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Emma"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "4922249f-2fb0-48f7-af0b-124d67dd73b7",
-                    "leftValue": "={{ $json.query.salesTeam }}",
-                    "rightValue": "Rashid",
-                    "operator": {
-                      "type": "string",
-                      "operation": "contains"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Rashid"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "3df5ad56-1459-4a17-b757-cb23d64fc068",
-                    "leftValue": "={{ $json.query.salesTeam }}",
-                    "rightValue": "Eugene",
-                    "operator": {
-                      "type": "string",
-                      "operation": "contains"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Eugene"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "907e74e1-b3b0-47ae-a541-479127ca40e6",
-                    "leftValue": "={{ $json.query.salesTeam }}",
-                    "rightValue": "Elsie",
-                    "operator": {
-                      "type": "string",
-                      "operation": "contains"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Elsie"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "eb01e453-047a-42c3-aabc-6d7cbc130eb6",
-      "name": "Switch",
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3,
-      "position": [
-        1000,
-        1100
-      ]
-    },
-    {
-      "parameters": {
         "method": "PUT",
         "url": "=https://portal.bulkbox.cloud/api/resource/Customer/{{ $('Switch').item.json[\"query\"][\"customer\"] }}",
         "authentication": "predefinedCredentialType",
@@ -2110,6 +1978,143 @@
         }
       },
       "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "46a46082-8b6d-4159-b981-c093dc3990e5",
+                    "leftValue": "={{ $json.query.salesTeam }}",
+                    "rightValue": "Sophia",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Sophia"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "336ab0cc-0bb6-4d61-948d-2bd993588ac6",
+                    "leftValue": "={{ $json.query.salesTeam }}",
+                    "rightValue": "Emma",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Emma"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "4922249f-2fb0-48f7-af0b-124d67dd73b7",
+                    "leftValue": "={{ $json.query.salesTeam }}",
+                    "rightValue": "Rashid",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Rashid"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "3df5ad56-1459-4a17-b757-cb23d64fc068",
+                    "leftValue": "={{ $json.query.salesTeam }}",
+                    "rightValue": "Eugene",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Eugene"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "907e74e1-b3b0-47ae-a541-479127ca40e6",
+                    "leftValue": "={{ $json.query.salesTeam }}",
+                    "rightValue": "Elsie",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Elsie"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "eb01e453-047a-42c3-aabc-6d7cbc130eb6",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        1000,
+        1100
+      ]
     }
   ],
   "pinData": {
@@ -2158,6 +2163,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-08-16T08:40:59.000Z",
-  "versionId": "12b7b3a1-fbd2-4946-a171-b34b4cbdb1bb"
+  "updatedAt": "2024-09-24T07:59:58.000Z",
+  "versionId": "0166fe91-4a2a-4220-9bb6-a96f58288102"
 }
