@@ -1032,13 +1032,13 @@
           "mappingMode": "defineBelow",
           "value": {
             "Company Name": "={{ $('Webhook').item.json.body.customer_name }}",
-            "Contact Status": "Account",
-            "Contact Type": "={{ $('Webhook').item.json.body.customer_group }}",
-            "Tel": "={{ $('Webhook').item.json.body.mobile_no }}",
-            "Email": "={{ $('Webhook').item.json.body.email_id }}",
-            "Source": "ERP",
             "First Name": "={{ $('Webhook').item.json.body.customer_name.trim().split(' ')[0] }}",
             "Last Name": "={{ $('Webhook').item.json.body.customer_name.trim().split(' ')[1] }}",
+            "Contact Status": "Account",
+            "Contact Type": "={{ $('Webhook').item.json.body.customer_group }}",
+            "Source": "ERP",
+            "Tel": "={{ $('Webhook').item.json.body.mobile_no }}",
+            "Email": "={{ $('Webhook').item.json.body.email_id }}",
             "Assign Sales Member": "={{ $('Webhook').item.json.body.sales_team[0].sales_person }}"
           },
           "matchingColumns": [],
@@ -1199,12 +1199,24 @@
                   "value": "Consumer"
                 },
                 {
-                  "name": "Restaurant",
-                  "value": "Restaurant"
+                  "name": "Other Business",
+                  "value": "Other Business"
                 },
                 {
                   "name": "Retailer",
                   "value": "Retailer"
+                },
+                {
+                  "name": "Office",
+                  "value": "Office"
+                },
+                {
+                  "name": "NGO",
+                  "value": "NGO"
+                },
+                {
+                  "name": "Restaurant",
+                  "value": "Restaurant"
                 },
                 {
                   "name": "Other",
@@ -1262,6 +1274,18 @@
                 {
                   "name": "Customer Referall",
                   "value": "Customer Referall"
+                },
+                {
+                  "name": "Outbound",
+                  "value": "Outbound"
+                },
+                {
+                  "name": "Live Chat",
+                  "value": "Live Chat"
+                },
+                {
+                  "name": "",
+                  "value": ""
                 }
               ],
               "readOnly": false,
@@ -1409,17 +1433,6 @@
               "removed": true
             },
             {
-              "id": "Bio Check",
-              "displayName": "Bio Check",
-              "required": false,
-              "defaultMatch": false,
-              "canBeUsedToMatch": true,
-              "display": true,
-              "type": "boolean",
-              "readOnly": false,
-              "removed": true
-            },
-            {
               "id": "New Opportunity Stage",
               "displayName": "New Opportunity Stage",
               "required": false,
@@ -1518,8 +1531,8 @@
               "defaultMatch": false,
               "canBeUsedToMatch": true,
               "display": true,
-              "type": "string",
-              "readOnly": true,
+              "type": "array",
+              "readOnly": false,
               "removed": true
             },
             {
@@ -1545,14 +1558,14 @@
               "removed": true
             },
             {
-              "id": "Deals copy",
-              "displayName": "Deals copy",
+              "id": "Interactions",
+              "displayName": "Interactions",
               "required": false,
               "defaultMatch": false,
               "canBeUsedToMatch": true,
               "display": true,
-              "type": "string",
-              "readOnly": true,
+              "type": "array",
+              "readOnly": false,
               "removed": true
             },
             {
@@ -1573,16 +1586,16 @@
                   "value": "Assign Sales Member"
                 },
                 {
-                  "name": "Brian Mong'are",
-                  "value": "Brian Mong'are"
+                  "name": "Betty Wangari",
+                  "value": "Betty Wangari"
                 },
                 {
                   "name": "Elsie Watare",
                   "value": "Elsie Watare"
                 },
                 {
-                  "name": "Emma Anagei",
-                  "value": "Emma Anagei"
+                  "name": "Emma Anagei Anagei",
+                  "value": "Emma Anagei Anagei"
                 },
                 {
                   "name": "Eugene Aaron",
@@ -1599,6 +1612,50 @@
               ],
               "readOnly": false,
               "removed": false
+            },
+            {
+              "id": "Lead Allocation",
+              "displayName": "Lead Allocation",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Assign Sales (Round Robin)",
+              "displayName": "Assign Sales (Round Robin)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Calendar Week Check",
+              "displayName": "Last Calendar Week Check",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Last Calendar Month",
+              "displayName": "Last Calendar Month",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
             }
           ]
         },
@@ -1609,7 +1666,7 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2,
       "position": [
-        1280,
+        1300,
         440
       ],
       "credentials": {
@@ -1785,6 +1842,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-07-07T07:40:21.000Z",
-  "versionId": "9844b80c-1cac-409c-af5f-8bec7eaf8f88"
+  "updatedAt": "2024-09-24T08:23:22.000Z",
+  "versionId": "b5b4cb07-6375-4f75-96e1-98da3ff2db7d"
 }
