@@ -35,11 +35,21 @@
             "node": "Update Selling Rate",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Update GT Selling",
+            "type": "main",
+            "index": 0
           }
         ],
         [
           {
             "node": "Create Selling Rate",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create GT Selling",
             "type": "main",
             "index": 0
           }
@@ -129,22 +139,33 @@
         ]
       ]
     },
-    "Webhook": {
+    "Create Purchase Receipt": {
       "main": [
         [
           {
-            "node": "Filter",
+            "node": "Submit Purchase Receipt",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Create Purchase Receipt": {
+    "Create GT Selling": {
       "main": [
         [
           {
-            "node": "Submit Purchase Receipt",
+            "node": "Update GT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Filter",
             "type": "main",
             "index": 0
           }
@@ -217,7 +238,8 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
@@ -481,7 +503,8 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
@@ -524,7 +547,7 @@
       "typeVersion": 4.2,
       "position": [
         1480,
-        420
+        380
       ],
       "credentials": {
         "erpNextApi": {
@@ -572,7 +595,8 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
@@ -605,7 +629,8 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
@@ -649,7 +674,7 @@
       "typeVersion": 4.2,
       "position": [
         1480,
-        600
+        660
       ],
       "credentials": {
         "erpNextApi": {
@@ -690,7 +715,8 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
@@ -745,22 +771,6 @@
     },
     {
       "parameters": {
-        "path": "c070daa3-2ad7-4ef2-b7dd-569d6fece89a",
-        "authentication": "=none",
-        "options": {}
-      },
-      "id": "e9a20235-abc2-4ef0-9020-1c54280f96fd",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        340,
-        360
-      ],
-      "webhookId": "c070daa3-2ad7-4ef2-b7dd-569d6fece89a"
-    },
-    {
-      "parameters": {
         "method": "POST",
         "url": "https://portal.bulkbox.cloud/api/resource/Purchase%20Receipt",
         "authentication": "predefinedCredentialType",
@@ -803,7 +813,7 @@
       "typeVersion": 4.2,
       "position": [
         1480,
-        260
+        220
       ],
       "alwaysOutputData": false,
       "credentials": {
@@ -812,6 +822,297 @@
           "name": "ERPNext Prod"
         }
       }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://portal.bulkbox.cloud/api/resource/Item%20Price/{{ $('Webhook').item.json.query.gtID }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": [\n    {\n      \"item_code\": \"{{ $('Webhook').item.json[\"query\"][\"itemCode\"] }}\",\n      \"price_list\": \"GT Selling\",\n      \"price_list_rate\": {{ $('Webhook').item.json.query.rate }}\n    }\n  ]\n}  ",
+        "options": {}
+      },
+      "id": "64fd75cf-38e3-4da1-9ceb-726c65898c19",
+      "name": "Update GT Selling",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1480,
+        520
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://portal.bulkbox.cloud/api/resource/Item Price",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": [\n    {\n      \"item_code\": \"{{ $('Webhook').item.json[\"query\"][\"itemCode\"] }}\",\n      \"price_list\": \"GT Selling\",\n      \"price_list_rate\": {{ $('Webhook').item.json.query.rate }}\n    }\n  ]\n}  ",
+        "options": {}
+      },
+      "id": "9cd6c80d-531c-4b98-82c3-cff2d0334fd3",
+      "name": "Create GT Selling",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1220,
+        -100
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appSCi0a1zPuJizxg",
+          "mode": "list",
+          "cachedResultName": "Bulkbox Final Master",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHwkMVbotHdnwON",
+          "mode": "list",
+          "cachedResultName": "Shipping Rule",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tblHwkMVbotHdnwON"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Webhook').item.json.query.recordID }}",
+            "Standard Selling ID": "={{ $json.data.name }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Shipping CS Code",
+              "displayName": "Shipping CS Code",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "A",
+                  "value": "A"
+                },
+                {
+                  "name": "D",
+                  "value": "D"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Shipping CS Name",
+              "displayName": "Shipping CS Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Shipping Group",
+              "displayName": "Shipping Group",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Shipping Rate",
+              "displayName": "Shipping Rate",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Item Code",
+              "displayName": "Item Code",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Taxes",
+              "displayName": "Taxes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Quantity",
+              "displayName": "Quantity",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "VAT",
+              "displayName": "VAT",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Standard Selling ID",
+              "displayName": "Standard Selling ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Delivery Rate",
+              "displayName": "Delivery Rate",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Functions",
+              "displayName": "Functions",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Create Shipping as Item",
+                  "value": "Create Shipping as Item"
+                },
+                {
+                  "name": "Update Price",
+                  "value": "Update Price"
+                },
+                {
+                  "name": "Delete Shipping as Item",
+                  "value": "Delete Shipping as Item"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "809679d8-d2a0-4502-b4da-8bce85ee815e",
+      "name": "Update GT",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1480,
+        -100
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "c070daa3-2ad7-4ef2-b7dd-569d6fece89a",
+        "authentication": "=none",
+        "options": {}
+      },
+      "id": "e9a20235-abc2-4ef0-9020-1c54280f96fd",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        340,
+        360
+      ],
+      "webhookId": "c070daa3-2ad7-4ef2-b7dd-569d6fece89a"
     }
   ],
   "pinData": {
@@ -865,6 +1166,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-08-23T12:12:08.000Z",
-  "versionId": "5cdf5673-33f9-4612-a6f8-f8a2b5253be5"
+  "updatedAt": "2024-09-24T20:36:05.000Z",
+  "versionId": "74be8560-5e81-4e4a-bfa2-efd0b7664ade"
 }
