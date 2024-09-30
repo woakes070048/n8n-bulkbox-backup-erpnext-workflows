@@ -1,17 +1,6 @@
 {
   "active": true,
   "connections": {
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "Code",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Split Out": {
       "main": [
         [
@@ -66,6 +55,17 @@
           }
         ]
       ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-03-07T13:29:31.456Z",
@@ -75,22 +75,6 @@
   },
   "name": "Batch Expiry Date",
   "nodes": [
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "batch-expiry",
-        "options": {}
-      },
-      "id": "58ed17a7-92b1-495c-838d-5c280c5f6884",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1.1,
-      "position": [
-        160,
-        480
-      ],
-      "webhookId": "47b420c9-e7cd-4275-8cdf-5675cf5af663"
-    },
     {
       "parameters": {
         "fieldToSplitOut": "data.items",
@@ -179,7 +163,7 @@
       "credentials": {
         "erpNextApi": {
           "id": "OVfEC6rfwqA5vwcf",
-          "name": "ERPNext account"
+          "name": "ERPNext Prod"
         }
       }
     },
@@ -234,6 +218,22 @@
         380,
         480
       ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "batch-expiry",
+        "options": {}
+      },
+      "id": "58ed17a7-92b1-495c-838d-5c280c5f6884",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        160,
+        480
+      ],
+      "webhookId": "47b420c9-e7cd-4275-8cdf-5675cf5af663"
     }
   ],
   "pinData": {
@@ -286,6 +286,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-05-21T11:34:05.000Z",
-  "versionId": "dad3e7b3-9eda-4f8e-b6a4-d845bf95be98"
+  "updatedAt": "2024-09-30T11:51:40.000Z",
+  "versionId": "6122a11e-73b5-4699-9c79-fe928e73a12e"
 }
