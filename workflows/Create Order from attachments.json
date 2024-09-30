@@ -85,11 +85,6 @@
         ]
       ]
     },
-    "List of Items": {
-      "main": [
-        []
-      ]
-    },
     "Item exists": {
       "main": [
         [
@@ -130,17 +125,6 @@
         ]
       ]
     },
-    "OpenAI": {
-      "main": [
-        [
-          {
-            "node": "OpenAI1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Edit Fields": {
       "main": [
         [
@@ -157,6 +141,17 @@
         [
           {
             "node": "Item exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "OpenAI1",
             "type": "main",
             "index": 0
           }
@@ -567,6 +562,29 @@
     },
     {
       "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "56d32086-6ecb-4c41-b23b-ff48f6f5808c",
+              "name": "item_name",
+              "value": "={{ $json.product }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "946ce295-ef50-4939-a786-ca865dee24c3",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4360,
+        1180
+      ]
+    },
+    {
+      "parameters": {
         "resource": "image",
         "operation": "analyze",
         "modelId": {
@@ -593,29 +611,6 @@
           "name": "Bulkbox OPenAI Acc"
         }
       }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "56d32086-6ecb-4c41-b23b-ff48f6f5808c",
-              "name": "item_name",
-              "value": "={{ $json.product }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "946ce295-ef50-4939-a786-ca865dee24c3",
-      "name": "Edit Fields",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        4360,
-        1180
-      ]
     }
   ],
   "pinData": {
@@ -662,6 +657,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-09-25T13:18:01.000Z",
-  "versionId": "34034ac4-340e-404f-9e8d-44434eebe0a4"
+  "updatedAt": "2024-09-30T12:49:54.000Z",
+  "versionId": "81ca7fbd-4754-4836-8497-2678965aaf68"
 }
