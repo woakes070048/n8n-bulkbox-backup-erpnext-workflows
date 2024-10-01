@@ -66,6 +66,100 @@
           }
         ]
       ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "get Batch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out2": {
+      "main": [
+        [
+          {
+            "node": "Filter1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
+        [
+          {
+            "node": "Change Expiry Date1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get Batch": {
+      "main": [
+        [
+          {
+            "node": "Get P.R",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get P.R": {
+      "main": [
+        [
+          {
+            "node": "Split Out2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Change Expiry Date1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-09-30T11:25:43.703Z",
@@ -95,7 +189,8 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
@@ -142,6 +237,11 @@
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "erpNextApi",
         "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
         "options": {}
       },
       "id": "b73749ef-84b9-44e8-8973-12686285afe0",
@@ -170,7 +270,7 @@
           "parameters": [
             {
               "name": "expiry_date",
-              "value": "={{ $('Split Out').item.json[\"expiry_date\"] }}"
+              "value": "={{ $json.data[0].custom_expiry_date }}"
             }
           ]
         },
@@ -225,6 +325,196 @@
         480
       ],
       "webhookId": "15d72cd4-d482-4769-88da-80ef63222e44"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "id": "ce65d69d-9a1d-41fc-a0de-65ee1b09a96a",
+      "name": "Split Out1",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        500,
+        980
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "3b178bb3-0497-4f7c-bc45-0331a2b7bed0",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        100,
+        980
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://erp.drs.co.ke/api/resource/Batch?limit_page_length=10000",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "0c592de5-d23e-4831-88dd-39062035888e",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        320,
+        980
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "ZrBeIJFUaDDuqHht",
+          "name": "DRS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "80ab9fe9-083d-4da7-810e-2fecfa340b8c",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        700,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data.items",
+        "options": {}
+      },
+      "id": "8ddb7160-3673-402f-843d-f52924b9854f",
+      "name": "Split Out2",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        1120
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "87367612-9ec2-499b-b8d3-eb24855fb862",
+              "leftValue": "={{ $('get Batch').item.json.data.item }}",
+              "rightValue": "={{ $json.item_code }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d27b3128-333d-4f00-891d-282e30417aab",
+      "name": "Filter1",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1580,
+        1120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://erp.drs.co.ke/api/resource/Batch/{{ $('get Batch').first().json.data.batch_id }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "expiry_date",
+              "value": "={{ $('Split Out2').item.json.custom_expiry_date }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "61b1391c-038f-4521-87ac-1f7e938dca69",
+      "name": "Change Expiry Date1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1800,
+        1120
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "ZrBeIJFUaDDuqHht",
+          "name": "DRS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://erp.drs.co.ke/api/resource/Batch/{{ $json.name }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "443e1c91-c48a-47ba-a56e-9c4cf190cfa1",
+      "name": "get Batch",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        920,
+        1120
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "ZrBeIJFUaDDuqHht",
+          "name": "DRS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://erp.drs.co.ke/api/resource/Purchase Receipt/{{ $json.data.reference_name }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "options": {}
+      },
+      "id": "955243c0-a292-422c-b824-31f4e9aa6c72",
+      "name": "Get P.R",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1140,
+        1120
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "ZrBeIJFUaDDuqHht",
+          "name": "DRS"
+        }
+      }
     }
   ],
   "pinData": {
@@ -233,30 +523,32 @@
         "json": {
           "headers": {
             "host": "n8n.bulkbox.cloud",
-            "user-agent": "python-requests/2.31.0",
-            "content-length": "234",
+            "user-agent": "python-requests/2.32.3",
+            "content-length": "237",
             "accept": "*/*",
             "accept-encoding": "gzip, deflate",
             "content-type": "application/json",
-            "x-forwarded-for": "167.235.206.20",
+            "x-forwarded-for": "116.203.156.88",
             "x-forwarded-host": "n8n.bulkbox.cloud",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
             "x-forwarded-server": "19ac6f0cdfeb",
-            "x-real-ip": "167.235.206.20"
+            "x-real-ip": "116.203.156.88"
           },
           "params": {},
           "query": {},
           "body": {
-            "name": "PPK03300003",
-            "item": "PPK033",
+            "name": "BAL28000001",
+            "item": "BAL280",
             "batch_qty": 0,
-            "expiry_date": "2024-09-04",
-            "manufacturing_date": "2024-03-08",
+            "expiry_date": "2025-03-30",
+            "manufacturing_date": "2024-10-01",
+            "supplier": "Three Spears LTD",
             "reference_doctype": "Purchase Receipt",
-            "reference_name": "MAT-PRE-2024-00385",
-            "supplier": "Propack Kenya"
-          }
+            "reference_name": "MAT-PRE-2024-00003"
+          },
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook/batch-expiry-drs",
+          "executionMode": "production"
         }
       }
     ]
@@ -277,6 +569,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-30T11:50:34.000Z",
-  "versionId": "7ba9bb6c-e8ac-4a40-86f9-6de5ef05355d"
+  "updatedAt": "2024-10-01T13:38:40.000Z",
+  "versionId": "da27dff4-854a-4ca6-a5f4-4ccd8d0d2761"
 }
