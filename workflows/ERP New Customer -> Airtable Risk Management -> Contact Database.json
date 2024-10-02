@@ -1668,12 +1668,12 @@
               "type": "options",
               "options": [
                 {
-                  "name": "Betty Wangari",
-                  "value": "Betty Wangari"
+                  "name": "betty@bulkbox.co.ke",
+                  "value": "betty@bulkbox.co.ke"
                 },
                 {
-                  "name": "Loise",
-                  "value": "Loise"
+                  "name": "elsie@bulkbox.co.ke",
+                  "value": "elsie@bulkbox.co.ke"
                 }
               ],
               "readOnly": false,
@@ -1762,22 +1762,6 @@
         1700,
         440
       ]
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "7559e9e4-820e-4307-8f91-c52b1510c811",
-        "options": {}
-      },
-      "id": "8ad56630-ed67-45c5-8a85-46ba2292573f",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        400,
-        320
-      ],
-      "webhookId": "7559e9e4-820e-4307-8f91-c52b1510c811"
     },
     {
       "parameters": {
@@ -2443,6 +2427,22 @@
           "name": "Airtable Personal Access Token account"
         }
       }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "7559e9e4-820e-4307-8f91-c52b1510c811",
+        "options": {}
+      },
+      "id": "8ad56630-ed67-45c5-8a85-46ba2292573f",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        400,
+        320
+      ],
+      "webhookId": "7559e9e4-820e-4307-8f91-c52b1510c811"
     }
   ],
   "pinData": {
@@ -2452,50 +2452,66 @@
           "headers": {
             "host": "n8n.bulkbox.cloud",
             "user-agent": "python-requests/2.31.0",
-            "content-length": "1359",
+            "content-length": "1322",
             "accept": "*/*",
             "accept-encoding": "gzip, deflate",
             "content-type": "application/json",
-            "x-forwarded-for": "49.13.52.40",
+            "x-forwarded-for": "167.235.206.20",
             "x-forwarded-host": "n8n.bulkbox.cloud",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
             "x-forwarded-server": "19ac6f0cdfeb",
-            "x-real-ip": "49.13.52.40"
+            "x-real-ip": "167.235.206.20"
           },
           "params": {},
           "query": {},
           "body": {
-            "name": "Customer New",
-            "customer_name": "Customer New",
+            "name": "Enna",
+            "customer_name": "Enna",
             "customer_type": "Company",
-            "customer_group": "Service Sales",
+            "customer_group": "Food Service",
             "territory": "All Territories",
-            "account_manager": null,
+            "account_manager": "betty@bulkbox.co.ke",
             "disabled": 0,
             "represents_company": null,
             "customer_primary_contact": null,
-            "mobile_no": null,
-            "email_id": "123@23.com",
+            "mobile_no": "+254724113990",
+            "email_id": "annengng@yahoo.com",
             "primary_address": null,
             "payment_terms": "Cash on Delivery",
             "credit_limits": [
-              {}
+              {
+                "name": "9995f19232",
+                "owner": "apik@bulkbox.co.ke",
+                "creation": "2024-10-02 15:26:58.315312",
+                "modified": "2024-10-02 15:26:58.315312",
+                "modified_by": "apik@bulkbox.co.ke",
+                "parent": "Enna",
+                "parentfield": "credit_limits",
+                "parenttype": "Customer",
+                "idx": 1,
+                "docstatus": 0,
+                "company": "Three Spears Limited",
+                "credit_limit": 50000,
+                "bypass_credit_limit_check": 0,
+                "doctype": "Customer Credit Limit",
+                "__unsaved": 1
+              }
             ],
             "is_frozen": 0,
             "sales_team": [
               {
-                "name": "443b93b455",
-                "owner": "francnjenga99@gmail.com",
-                "creation": "2024-07-04 12:01:03.711485",
-                "modified": "2024-07-04 12:01:03.711485",
-                "modified_by": "francnjenga99@gmail.com",
-                "parent": "Customer New",
+                "name": "a8ab8b8549",
+                "owner": "apik@bulkbox.co.ke",
+                "creation": "2024-10-02 15:26:58.315312",
+                "modified": "2024-10-02 15:26:58.315312",
+                "modified_by": "apik@bulkbox.co.ke",
+                "parent": "Enna",
                 "parentfield": "sales_team",
                 "parenttype": "Customer",
                 "idx": 1,
                 "docstatus": 0,
-                "sales_person": "Rashid Salim",
+                "sales_person": "Betty Wangari",
                 "contact_no": null,
                 "allocated_percentage": 100,
                 "allocated_amount": 0,
@@ -2504,8 +2520,7 @@
                 "doctype": "Sales Team",
                 "__unsaved": 1
               }
-            ],
-            "default_sales_partner": ""
+            ]
           },
           "webhookUrl": "https://n8n.bulkbox.cloud/webhook/7559e9e4-820e-4307-8f91-c52b1510c811",
           "executionMode": "production"
@@ -2529,6 +2544,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-01T09:03:34.000Z",
-  "versionId": "29e8cca1-0e9b-4d67-96db-772823d81016"
+  "updatedAt": "2024-10-02T12:44:17.000Z",
+  "versionId": "4ac1c317-c09b-4a46-a8e3-e15934e38425"
 }
