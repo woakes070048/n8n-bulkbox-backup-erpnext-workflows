@@ -1,0 +1,1129 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "zone",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "zone": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items2": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-03T11:12:26.103Z",
+  "id": "CEzNHCVwM9aM3TjA",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Update Website Shipping Rates",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "0314dfda-d7ba-41c8-91a4-94d0e76614dc",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        420,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appSCi0a1zPuJizxg",
+          "mode": "list",
+          "cachedResultName": "Bulkbox Final Master",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHwkMVbotHdnwON",
+          "mode": "list",
+          "cachedResultName": "Shipping Rule",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tblHwkMVbotHdnwON"
+        },
+        "options": {
+          "view": {
+            "__rl": true,
+            "value": "viw00frRceXRz1tcJ",
+            "mode": "list",
+            "cachedResultName": "Active",
+            "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tblHwkMVbotHdnwON/viw00frRceXRz1tcJ"
+          }
+        }
+      },
+      "id": "e4e95f99-59c8-4562-907c-1251c47f17c2",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        600,
+        460
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "be5a76e3-1973-42c7-87f9-fa3daefd2582",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        820,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9ed2a4db-3b91-4d0f-91ba-dcf95303dd5d",
+              "leftValue": "={{ $('Loop Over Items').item.json.Zone }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "91282e6f-9c79-4e4e-be5d-4e89504b2e95",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1060,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2f60703b-c491-4d6b-a5cf-34808f1eb248",
+              "name": "Zone",
+              "value": "={{ $json.Zone.split(\",\") }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "id": "d3bb4a01-7a3f-4475-b87e-b215a11d234e",
+      "name": "zone",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1260,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "Zone",
+        "options": {}
+      },
+      "id": "3899409b-51e6-412e-b87c-bbbd563ba4bd",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "24898425-58b2-4edf-bc4c-ed1930488de0",
+      "name": "Loop Over Items1",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1700,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://bulkbox.co.ke/api/shippings/8",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "8df4870c-f4e1-4c41-b341-bdd42ac52dcc",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1920,
+        600
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ttlwVRmZ1lkIHlXQ",
+          "name": "Website"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "rates",
+        "options": {}
+      },
+      "id": "465ec0cc-797c-40c0-bfe3-7bd926d442d4",
+      "name": "Split Out1",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        2140,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c3dfdd05-4f18-4fc2-975c-1dd8ae2653a5",
+              "leftValue": "={{ $json.destination }}",
+              "rightValue": "={{ $('Split Out').item.json.Zone }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "09ba4644-0b37-4305-a686-970522f726ad",
+      "name": "If1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2600,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "239f284a-5615-46f2-a7fb-14a85cd2011f",
+      "name": "Loop Over Items2",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2360,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "https://bulkbox.co.ke/api/shippings/8",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"shipping_id\": \"8\",\n    \"rates\": {\n        \"DF 2\": {\n            \"destination\": \"DF 2\",\n            \"status\": \"A\",\n            \"delivery_time\": \"8am - 4pm\",\n            \"rate_value\": {\n                \"C\": [\n                    {\n                        \"amount\": \"0\",\n                        \"value\": 300,\n                        \"type\": \"F\",\n                        \"per_unit\": \"N\"\n                    }\n                ]\n            }\n        }\n    }\n}\n",
+        "options": {}
+      },
+      "id": "2a28d75c-664c-4274-b081-f27c9b401cdf",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2820,
+        680
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ttlwVRmZ1lkIHlXQ",
+          "name": "Website"
+        }
+      },
+      "disabled": true
+    }
+  ],
+  "pinData": {
+    "Airtable": [
+      {
+        "json": {
+          "id": "recSH1tCQMRq4bMYo",
+          "createdTime": "2024-05-28T07:04:08.000Z",
+          "Shipping CS Code": "PICKUP",
+          "status": "A",
+          "Shipping CS Name": "Pickup Your Order",
+          "ID": 1,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Item Code": "SH001",
+          "Taxes": 0.16,
+          "Delivery Rate": 0,
+          "Shipping Name - ERP": "Pickup Your Order Delivery: /="
+        }
+      },
+      {
+        "json": {
+          "id": "rec5idKk8wpCZ4nRy",
+          "createdTime": "2024-05-28T07:04:08.000Z",
+          "Shipping CS Code": "SELECT",
+          "status": "A",
+          "Shipping CS Name": "Select Your Area",
+          "ID": 2,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Item Code": "SH002",
+          "Taxes": 0.16,
+          "Delivery Rate": 0,
+          "Shipping Name - ERP": "Select Your Area Delivery: /="
+        }
+      },
+      {
+        "json": {
+          "id": "recSqu68bslsCWwhQ",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "LKBT",
+          "status": "A",
+          "Shipping CS Name": "Lower Kabete",
+          "ID": 3,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "843f6e277d",
+          "Rate w VAT": 300,
+          "Zone": "DF 2",
+          "GT Selling ID": "41e5cf75ce",
+          "Item Code": "SH003",
+          "Taxes": 0.16,
+          "Delivery Rate": 258.62068965517244,
+          "Shipping Name - ERP": "Lower Kabete Delivery: 300/="
+        }
+      },
+      {
+        "json": {
+          "id": "recUIjGnRjnLlSGxY",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "KILE",
+          "status": "A",
+          "Shipping CS Name": "Kileleshwa",
+          "ID": 4,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "a19314a915",
+          "Rate w VAT": 200,
+          "Zone": "DF 0",
+          "GT Selling ID": "736ea220fb",
+          "Item Code": "SH004",
+          "Taxes": 0.16,
+          "Delivery Rate": 172.41379310344828,
+          "Shipping Name - ERP": "Kileleshwa Delivery: 200/="
+        }
+      },
+      {
+        "json": {
+          "id": "recVnoMpsVgQBy0rv",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "NGRA",
+          "status": "A",
+          "Shipping CS Name": "Ngara",
+          "ID": 5,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "bfee5edf80",
+          "Rate w VAT": 300,
+          "Zone": "DF 3",
+          "GT Selling ID": "1538668105",
+          "Item Code": "SH005",
+          "Taxes": 0.16,
+          "Delivery Rate": 258.62068965517244,
+          "Shipping Name - ERP": "Ngara Delivery: 300/="
+        }
+      },
+      {
+        "json": {
+          "id": "rec0CE3H2HvE5S0Dj",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "LAVI",
+          "status": "A",
+          "Shipping CS Name": "Lavington",
+          "ID": 6,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "348cd9c2b5",
+          "Rate w VAT": 250,
+          "Zone": "DF 1",
+          "GT Selling ID": "576f726a0d",
+          "Item Code": "SH006",
+          "Taxes": 0.16,
+          "Delivery Rate": 215.51724137931035,
+          "Shipping Name - ERP": "Lavington Delivery: 250/="
+        }
+      },
+      {
+        "json": {
+          "id": "rec1OLy8ixaAf40rk",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "IND",
+          "status": "A",
+          "Shipping CS Name": "Industrial Area",
+          "ID": 7,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "e0a3e8d609",
+          "Rate w VAT": 400,
+          "Zone": "DF 4",
+          "GT Selling ID": "b7f3749e22",
+          "Item Code": "SH007",
+          "Taxes": 0.16,
+          "Delivery Rate": 344.82758620689657,
+          "Shipping Name - ERP": "Industrial Area Delivery: 400/="
+        }
+      },
+      {
+        "json": {
+          "id": "recwpS49zYr8GZRil",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "KRC",
+          "status": "A",
+          "Shipping CS Name": "Kericho",
+          "ID": 8,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "c97f9b126b",
+          "Rate w VAT": 500,
+          "Zone": "LAKE",
+          "GT Selling ID": "24e695fce7",
+          "Item Code": "SH008",
+          "Taxes": 0.16,
+          "Delivery Rate": 431.0344827586207,
+          "Shipping Name - ERP": "Kericho Delivery: 500/="
+        }
+      },
+      {
+        "json": {
+          "id": "recxUKtMjb5CsAdJ5",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "MLMN",
+          "status": "A",
+          "Shipping CS Name": "Milimani",
+          "ID": 9,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "0a8cb995ce",
+          "Rate w VAT": 250,
+          "Zone": "DF 3",
+          "GT Selling ID": "12b1da3f71",
+          "Item Code": "SH009",
+          "Taxes": 0.16,
+          "Delivery Rate": 215.51724137931035,
+          "Shipping Name - ERP": "Milimani Delivery: 250/="
+        }
+      },
+      {
+        "json": {
+          "id": "recywwYz7eDbwom4z",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "LRSH",
+          "status": "A",
+          "Shipping CS Name": "Loresho",
+          "ID": 10,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "50b7947fad",
+          "Rate w VAT": 250,
+          "Zone": "DF 2",
+          "GT Selling ID": "ad73f7c82f",
+          "Item Code": "SH010",
+          "Taxes": 0.16,
+          "Delivery Rate": 215.51724137931035,
+          "Shipping Name - ERP": "Loresho Delivery: 250/="
+        }
+      },
+      {
+        "json": {
+          "id": "recBTQFoH2oaRjGit",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "RUKA",
+          "status": "A",
+          "Shipping CS Name": "Ruaka ",
+          "ID": 11,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "910c569f6b",
+          "Rate w VAT": 400,
+          "Zone": "DF 6",
+          "GT Selling ID": "f2697dde82",
+          "Item Code": "SH011",
+          "Taxes": 0.16,
+          "Delivery Rate": 344.82758620689657,
+          "Shipping Name - ERP": "Ruaka  Delivery: 400/="
+        }
+      },
+      {
+        "json": {
+          "id": "recCXOg7vnHZgA0dq",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "LANG",
+          "status": "A",
+          "Shipping CS Name": "Langata",
+          "ID": 12,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "57a3684b32",
+          "Rate w VAT": 400,
+          "Zone": "DF 4, DF 5",
+          "GT Selling ID": "c4dddbc222",
+          "Item Code": "SH012",
+          "Taxes": 0.16,
+          "Delivery Rate": 344.82758620689657,
+          "Shipping Name - ERP": "Langata Delivery: 400/="
+        }
+      },
+      {
+        "json": {
+          "id": "recC6V9YIDR1lueTQ",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "STHC",
+          "status": "A",
+          "Shipping CS Name": "South C",
+          "ID": 13,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "23ecf4efe1",
+          "Rate w VAT": 350,
+          "Zone": "DF 4",
+          "GT Selling ID": "79af969f84",
+          "Item Code": "SH013",
+          "Taxes": 0.16,
+          "Delivery Rate": 301.7241379310345,
+          "Shipping Name - ERP": "South C Delivery: 350/="
+        }
+      },
+      {
+        "json": {
+          "id": "recEZLGlBya7L7Dir",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "RIV",
+          "status": "A",
+          "Shipping CS Name": "Riverside",
+          "ID": 14,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "6586b3a595",
+          "Rate w VAT": 200,
+          "Zone": "DF 0",
+          "GT Selling ID": "39e03d1c4b",
+          "Item Code": "SH014",
+          "Taxes": 0.16,
+          "Delivery Rate": 172.41379310344828,
+          "Shipping Name - ERP": "Riverside Delivery: 200/="
+        }
+      },
+      {
+        "json": {
+          "id": "recHFzdYbtFLiyxqD",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "SKMU",
+          "status": "A",
+          "Shipping CS Name": "Syokimau",
+          "ID": 15,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "15560fbb94",
+          "Rate w VAT": 500,
+          "Zone": "DF 7",
+          "GT Selling ID": "01410b19e0",
+          "Item Code": "SH015",
+          "Taxes": 0.16,
+          "Delivery Rate": 431.0344827586207,
+          "Shipping Name - ERP": "Syokimau Delivery: 500/="
+        }
+      },
+      {
+        "json": {
+          "id": "recHwq4ytdr5uUCJe",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "KTSU",
+          "status": "A",
+          "Shipping CS Name": "Kitisuru",
+          "ID": 16,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "dcccce0bbc",
+          "Rate w VAT": 300,
+          "Zone": "DF 3",
+          "GT Selling ID": "193e2b6f83",
+          "Item Code": "SH016",
+          "Taxes": 0.16,
+          "Delivery Rate": 258.62068965517244,
+          "Shipping Name - ERP": "Kitisuru Delivery: 300/="
+        }
+      },
+      {
+        "json": {
+          "id": "recJK1c5yda7Nh4pX",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "GRE",
+          "status": "A",
+          "Shipping CS Name": "Grevilea",
+          "ID": 17,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "9942212bc4",
+          "Rate w VAT": 200,
+          "Zone": "DF 1",
+          "GT Selling ID": "080bb99e4c",
+          "Item Code": "SH017",
+          "Taxes": 0.16,
+          "Delivery Rate": 172.41379310344828,
+          "Shipping Name - ERP": "Grevilea Delivery: 200/="
+        }
+      },
+      {
+        "json": {
+          "id": "recKsGi4S70vV7T88",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "BROOK",
+          "status": "A",
+          "Shipping CS Name": "Brookside",
+          "ID": 18,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "8be059fecb",
+          "Rate w VAT": 200,
+          "Zone": "DF 1",
+          "GT Selling ID": "086d9e4251",
+          "Item Code": "SH018",
+          "Taxes": 0.16,
+          "Delivery Rate": 172.41379310344828,
+          "Shipping Name - ERP": "Brookside Delivery: 200/="
+        }
+      },
+      {
+        "json": {
+          "id": "recM9PxvnmPDlQyXb",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "UPHL",
+          "status": "A",
+          "Shipping CS Name": "Upperhill",
+          "ID": 19,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "8dc8d5b091",
+          "Rate w VAT": 250,
+          "Zone": "DF 3, Upperhill",
+          "GT Selling ID": "4c8742376c",
+          "Item Code": "SH019",
+          "Taxes": 0.16,
+          "Delivery Rate": 215.51724137931035,
+          "Shipping Name - ERP": "Upperhill Delivery: 250/="
+        }
+      },
+      {
+        "json": {
+          "id": "recNUGBM83fjWKanT",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "PKLD",
+          "status": "A",
+          "Shipping CS Name": "Parklands ",
+          "ID": 20,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "0621e77d51",
+          "Rate w VAT": 250,
+          "Zone": "DF 2",
+          "GT Selling ID": "99d2f20281",
+          "Item Code": "SH020",
+          "Taxes": 0.16,
+          "Delivery Rate": 215.51724137931035,
+          "Shipping Name - ERP": "Parklands  Delivery: 250/="
+        }
+      },
+      {
+        "json": {
+          "id": "rec4xdJGNvJUul3gd",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "KKYU",
+          "status": "A",
+          "Shipping CS Name": "Kikuyu",
+          "ID": 21,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "aa6bc8da42",
+          "Rate w VAT": 550,
+          "Zone": "MT KENYA, NAIROBI",
+          "GT Selling ID": "74b1742feb",
+          "Item Code": "SH021",
+          "Taxes": 0.16,
+          "Delivery Rate": 474.1379310344828,
+          "Shipping Name - ERP": "Kikuyu Delivery: 550/="
+        }
+      },
+      {
+        "json": {
+          "id": "rec5m4ifOJ2SUuiCU",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "GIRI",
+          "status": "A",
+          "Shipping CS Name": "Gigiri",
+          "ID": 22,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "b0db4a1978",
+          "Rate w VAT": 300,
+          "Zone": "DF 3",
+          "GT Selling ID": "050c1ce198",
+          "Item Code": "SH022",
+          "Taxes": 0.16,
+          "Delivery Rate": 258.62068965517244,
+          "Shipping Name - ERP": "Gigiri Delivery: 300/="
+        }
+      },
+      {
+        "json": {
+          "id": "rec8hupBNb3zMrQvw",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "RNDA",
+          "status": "A",
+          "Shipping CS Name": "Runda ",
+          "ID": 23,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "20df6dfd31",
+          "Rate w VAT": 500,
+          "Zone": "DF 6",
+          "GT Selling ID": "5ffc6d9aa6",
+          "Item Code": "SH023",
+          "Taxes": 0.16,
+          "Delivery Rate": 431.0344827586207,
+          "Shipping Name - ERP": "Runda  Delivery: 500/="
+        }
+      },
+      {
+        "json": {
+          "id": "rec8W5GLHPADtscbC",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "MOUV",
+          "status": "A",
+          "Shipping CS Name": "Mountain View",
+          "ID": 24,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "b1b8f4a7e5",
+          "Rate w VAT": 250,
+          "Zone": "DF 2",
+          "GT Selling ID": "da8117618e",
+          "Item Code": "SH024",
+          "Taxes": 0.16,
+          "Delivery Rate": 215.51724137931035,
+          "Shipping Name - ERP": "Mountain View Delivery: 250/="
+        }
+      },
+      {
+        "json": {
+          "id": "recaPs7PLaWuGPv4h",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "CBD",
+          "status": "A",
+          "Shipping CS Name": "CBD",
+          "ID": 25,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "cd069983d0",
+          "Rate w VAT": 250,
+          "Zone": "DF 2, NAIROBI",
+          "GT Selling ID": "e4a0529e5d",
+          "Item Code": "SH025",
+          "Taxes": 0.16,
+          "Delivery Rate": 215.51724137931035,
+          "Shipping Name - ERP": "CBD Delivery: 250/="
+        }
+      },
+      {
+        "json": {
+          "id": "reca1D2utplQNZMTj",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "LMRU",
+          "status": "A",
+          "Shipping CS Name": "Limuru",
+          "ID": 26,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "d69896f656",
+          "Rate w VAT": 700,
+          "Zone": "DF 7, FLAMINGO",
+          "GT Selling ID": "e8f5d9980c",
+          "Item Code": "SH026",
+          "Taxes": 0.16,
+          "Delivery Rate": 603.448275862069,
+          "Shipping Name - ERP": "Limuru Delivery: 700/="
+        }
+      },
+      {
+        "json": {
+          "id": "reccicofy1xoH7Tlk",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "JGRD",
+          "status": "A",
+          "Shipping CS Name": "Jogoo Road ",
+          "ID": 27,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "f9cfb2f148",
+          "Rate w VAT": 350,
+          "Zone": "DF 4",
+          "GT Selling ID": "afd3472938",
+          "Item Code": "SH027",
+          "Taxes": 0.16,
+          "Delivery Rate": 301.7241379310345,
+          "Shipping Name - ERP": "Jogoo Road  Delivery: 350/="
+        }
+      },
+      {
+        "json": {
+          "id": "reccTJqZRbwRVffY3",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "KILI",
+          "status": "A",
+          "Shipping CS Name": "Kilimani",
+          "ID": 28,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "9dbfb0b93c",
+          "Rate w VAT": 250,
+          "Zone": "DF 2",
+          "GT Selling ID": "c68bc5c903",
+          "Item Code": "SH028",
+          "Taxes": 0.16,
+          "Delivery Rate": 215.51724137931035,
+          "Shipping Name - ERP": "Kilimani Delivery: 250/="
+        }
+      },
+      {
+        "json": {
+          "id": "recku4yV6A5zPi0DL",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "WEST",
+          "status": "A",
+          "Shipping CS Name": "Westlands",
+          "ID": 29,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "85093f1676",
+          "Rate w VAT": 250,
+          "Zone": "DF 1",
+          "GT Selling ID": "d9296bb42d",
+          "Item Code": "SH029",
+          "Taxes": 0.16,
+          "Delivery Rate": 215.51724137931035,
+          "Shipping Name - ERP": "Westlands Delivery: 250/="
+        }
+      },
+      {
+        "json": {
+          "id": "recky9rNuhTXZAkzq",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "NGRD",
+          "status": "A",
+          "Shipping CS Name": "Ngong Road ",
+          "ID": 30,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "8275156f13",
+          "Rate w VAT": 300,
+          "Zone": "DF 3",
+          "GT Selling ID": "f46f7941cc",
+          "Item Code": "SH030",
+          "Taxes": 0.16,
+          "Delivery Rate": 258.62068965517244,
+          "Shipping Name - ERP": "Ngong Road  Delivery: 300/="
+        }
+      },
+      {
+        "json": {
+          "id": "reckQCN4Or7dRYdXw",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "SPGV",
+          "status": "A",
+          "Shipping CS Name": "Spring Valley ",
+          "ID": 31,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "c83f708afd",
+          "Rate w VAT": 250,
+          "Zone": "DF 2",
+          "GT Selling ID": "8a73b5b9db",
+          "Item Code": "SH031",
+          "Taxes": 0.16,
+          "Delivery Rate": 215.51724137931035,
+          "Shipping Name - ERP": "Spring Valley  Delivery: 250/="
+        }
+      },
+      {
+        "json": {
+          "id": "recpZUgJ5wxqNhm6m",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "KYU",
+          "status": "A",
+          "Shipping CS Name": "Kyuna",
+          "ID": 32,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "4b0c7b112a",
+          "Rate w VAT": 200,
+          "Zone": "DF 1",
+          "GT Selling ID": "303140bca6",
+          "Item Code": "SH032",
+          "Taxes": 0.16,
+          "Delivery Rate": 172.41379310344828,
+          "Shipping Name - ERP": "Kyuna Delivery: 200/="
+        }
+      },
+      {
+        "json": {
+          "id": "recqmAdx8T4qf93gf",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "KRN",
+          "status": "A",
+          "Shipping CS Name": "Karen ",
+          "ID": 33,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "7d67f9add4",
+          "Rate w VAT": 500,
+          "Zone": "DF 6",
+          "GT Selling ID": "aeeb89228a",
+          "Item Code": "SH033",
+          "Taxes": 0.16,
+          "Delivery Rate": 431.0344827586207,
+          "Shipping Name - ERP": "Karen  Delivery: 500/="
+        }
+      },
+      {
+        "json": {
+          "id": "recr9qCtsyL8XTW9P",
+          "createdTime": "2024-05-28T07:06:24.000Z",
+          "Shipping CS Code": "STHB",
+          "status": "A",
+          "Shipping CS Name": "South B",
+          "ID": 34,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "7462d1e4c1",
+          "Rate w VAT": 350,
+          "Zone": "DF 4",
+          "GT Selling ID": "dff8c98756",
+          "Item Code": "SH034",
+          "Taxes": 0.16,
+          "Delivery Rate": 301.7241379310345,
+          "Shipping Name - ERP": "South B Delivery: 350/="
+        }
+      },
+      {
+        "json": {
+          "id": "recF2vsxJGyBLgf15",
+          "createdTime": "2024-07-06T10:05:16.000Z",
+          "Shipping CS Code": "LNT",
+          "status": "A",
+          "Shipping CS Name": "Lantana",
+          "ID": 140,
+          "Quantity": 1000,
+          "VAT": 0.16,
+          "Standard Selling ID": "c2c89943be",
+          "Rate w VAT": 150,
+          "GT Selling ID": "c96ea332f9",
+          "Item Code": "SH140",
+          "Taxes": 0.16,
+          "Delivery Rate": 129.31034482758622,
+          "Shipping Name - ERP": "Lantana Delivery: 150/="
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-04-13T07:17:56.132Z",
+      "updatedAt": "2024-04-13T07:17:56.132Z",
+      "id": "BREwPdgeEC5njFaD",
+      "name": "In Development"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-03T13:35:45.000Z",
+  "versionId": "4a0e76f0-455e-47c6-81d1-eeff8e7fcb87"
+}
