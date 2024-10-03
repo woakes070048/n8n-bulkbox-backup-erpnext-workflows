@@ -1039,8 +1039,8 @@
             "Source": "ERP",
             "Tel": "={{ $('Webhook').item.json.body.mobile_no }}",
             "Email": "={{ $('Webhook').item.json.body.email_id }}",
-            "Assign Sales Member": "={{ $('Webhook').item.json.body.sales_team[0].sales_person }}",
-            "Account Manager": "={{ $('Webhook').item.json.body.account_manager }}"
+            "Account Manager": "={{ $('Webhook').item.json.body.account_manager }}",
+            "Assign Sales Member": "={{ $('Webhook').item.json.body.sales_team[0].sales_person }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -1595,8 +1595,8 @@
                   "value": "Elsie Watare"
                 },
                 {
-                  "name": "Emma Anagei Anagei",
-                  "value": "Emma Anagei Anagei"
+                  "name": "Emma Anagei",
+                  "value": "Emma Anagei"
                 },
                 {
                   "name": "Eugene Aaron",
@@ -1674,6 +1674,10 @@
                 {
                   "name": "elsie@bulkbox.co.ke",
                   "value": "elsie@bulkbox.co.ke"
+                },
+                {
+                  "name": "",
+                  "value": ""
                 }
               ],
               "readOnly": false,
@@ -2452,7 +2456,7 @@
           "headers": {
             "host": "n8n.bulkbox.cloud",
             "user-agent": "python-requests/2.31.0",
-            "content-length": "1322",
+            "content-length": "1374",
             "accept": "*/*",
             "accept-encoding": "gzip, deflate",
             "content-type": "application/json",
@@ -2466,27 +2470,27 @@
           "params": {},
           "query": {},
           "body": {
-            "name": "Enna",
-            "customer_name": "Enna",
+            "name": "Hello Vietnam Limited",
+            "customer_name": "Hello Vietnam Limited",
             "customer_type": "Company",
             "customer_group": "Food Service",
             "territory": "All Territories",
-            "account_manager": "betty@bulkbox.co.ke",
+            "account_manager": "",
             "disabled": 0,
             "represents_company": null,
             "customer_primary_contact": null,
-            "mobile_no": "+254724113990",
-            "email_id": "annengng@yahoo.com",
+            "mobile_no": "+254790120276",
+            "email_id": "Victormacha2k@gmail.com",
             "primary_address": null,
             "payment_terms": "Cash on Delivery",
             "credit_limits": [
               {
-                "name": "9995f19232",
+                "name": "a9f3b9ee3f",
                 "owner": "apik@bulkbox.co.ke",
-                "creation": "2024-10-02 15:26:58.315312",
-                "modified": "2024-10-02 15:26:58.315312",
+                "creation": "2024-10-03 09:01:19.778143",
+                "modified": "2024-10-03 09:01:19.778143",
                 "modified_by": "apik@bulkbox.co.ke",
-                "parent": "Enna",
+                "parent": "Hello Vietnam Limited",
                 "parentfield": "credit_limits",
                 "parenttype": "Customer",
                 "idx": 1,
@@ -2501,17 +2505,17 @@
             "is_frozen": 0,
             "sales_team": [
               {
-                "name": "a8ab8b8549",
+                "name": "c850434e46",
                 "owner": "apik@bulkbox.co.ke",
-                "creation": "2024-10-02 15:26:58.315312",
-                "modified": "2024-10-02 15:26:58.315312",
+                "creation": "2024-10-03 09:01:19.778143",
+                "modified": "2024-10-03 09:01:19.778143",
                 "modified_by": "apik@bulkbox.co.ke",
-                "parent": "Enna",
+                "parent": "Hello Vietnam Limited",
                 "parentfield": "sales_team",
                 "parenttype": "Customer",
                 "idx": 1,
                 "docstatus": 0,
-                "sales_person": "Betty Wangari",
+                "sales_person": "Emma Anagei",
                 "contact_no": null,
                 "allocated_percentage": 100,
                 "allocated_amount": 0,
@@ -2544,6 +2548,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-02T12:44:17.000Z",
-  "versionId": "4ac1c317-c09b-4a46-a8e3-e15934e38425"
+  "updatedAt": "2024-10-03T06:38:04.000Z",
+  "versionId": "45a67b5b-5e82-4ccf-9df6-a68ce0327ea6"
 }
