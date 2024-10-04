@@ -1040,7 +1040,7 @@
             "Tel": "={{ $('Webhook').item.json.body.mobile_no }}",
             "Email": "={{ $('Webhook').item.json.body.email_id }}",
             "Account Manager": "={{ $('Webhook').item.json.body.account_manager }}",
-            "Assign Sales Member": "={{ $('Webhook').item.json.body.sales_team[0].sales_person }}"
+            "Assign Sales Member": "={{ $if($('Webhook').item.json.body.sales_team[0].sales_person == 'Emma Anagei', 'Emma Anagei Anagei', $('Webhook').item.json.body.sales_team[0].sales_person) }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -1595,8 +1595,8 @@
                   "value": "Elsie Watare"
                 },
                 {
-                  "name": "Emma Anagei",
-                  "value": "Emma Anagei"
+                  "name": "Emma Anagei Anagei",
+                  "value": "Emma Anagei Anagei"
                 },
                 {
                   "name": "Eugene Aaron",
@@ -2548,6 +2548,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-03T06:38:04.000Z",
-  "versionId": "45a67b5b-5e82-4ccf-9df6-a68ce0327ea6"
+  "updatedAt": "2024-10-04T09:52:45.000Z",
+  "versionId": "7d38cd7a-4cf4-4623-ba46-d5785f927021"
 }
