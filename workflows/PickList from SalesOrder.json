@@ -1,0 +1,117 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "sales_order",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "sales_order": {
+      "main": [
+        [
+          {
+            "node": "ERPNext1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-07T06:44:04.173Z",
+  "id": "qveYiUFQJ3bm7I0m",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "PickList from SalesOrder",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "f1460b2e-79c7-4e1b-a3e4-dbcdf7ce62f2",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        340,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Sales%20Order",
+        "documentName": "SAL-ORD-2024-06110-1"
+      },
+      "id": "1c734c3b-c8c8-4d5d-8c1a-768ec2a48ecf",
+      "name": "sales_order",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        560,
+        460
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "docType": "Pick%20List"
+      },
+      "id": "fa5f2ea4-ebe7-48e7-b73c-a0bbf972c20b",
+      "name": "ERPNext",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        360,
+        760
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Pick%20List",
+        "documentName": "STO-PICK-2024-06469"
+      },
+      "id": "4ae4b33a-bfb2-4a4c-8c63-0ca09c7d9e81",
+      "name": "ERPNext1",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        780,
+        460
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-07T11:42:46.000Z",
+  "versionId": "41d10ab8-7be8-430d-9ff0-754f70d3a6ca"
+}
