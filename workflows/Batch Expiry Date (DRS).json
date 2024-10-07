@@ -56,17 +56,6 @@
         ]
       ]
     },
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "Code",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Split Out1": {
       "main": [
         [
@@ -76,11 +65,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "When clicking ‘Test workflow’": {
-      "main": [
-        []
       ]
     },
     "HTTP Request": {
@@ -155,6 +139,28 @@
         [
           {
             "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "purchase_receipt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "purchase_receipt": {
+      "main": [
+        [
+          {
+            "node": "Code",
             "type": "main",
             "index": 0
           }
@@ -306,25 +312,9 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        400,
+        460,
         480
       ]
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "batch-expiry-drs",
-        "options": {}
-      },
-      "id": "f3406025-9d7b-45d2-8dd1-2561ee77e6e6",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1.1,
-      "position": [
-        160,
-        480
-      ],
-      "webhookId": "15d72cd4-d482-4769-88da-80ef63222e44"
     },
     {
       "parameters": {
@@ -515,6 +505,56 @@
           "name": "DRS"
         }
       }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "batch-expiry-drs",
+        "options": {}
+      },
+      "id": "f3406025-9d7b-45d2-8dd1-2561ee77e6e6",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        20,
+        480
+      ],
+      "webhookId": "15d72cd4-d482-4769-88da-80ef63222e44"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f54727d8-2651-4196-852f-61e0dde4ce53",
+              "leftValue": "={{ $json.body.reference_doctype }}",
+              "rightValue": "Purchase Receipt",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "336da817-6b04-4061-8163-474759385bde",
+      "name": "purchase_receipt",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        220,
+        480
+      ]
     }
   ],
   "pinData": {
@@ -569,6 +609,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-01T13:38:40.000Z",
-  "versionId": "da27dff4-854a-4ca6-a5f4-4ccd8d0d2761"
+  "updatedAt": "2024-10-07T11:46:52.000Z",
+  "versionId": "22b4d59c-e6fc-4b3a-9d1b-2c9a7b261977"
 }
