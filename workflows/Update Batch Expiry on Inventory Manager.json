@@ -1,0 +1,510 @@
+{
+  "active": true,
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "batch_expiry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "batch_expiry": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Airtable1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "get_batch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_batch": {
+      "main": [
+        [
+          {
+            "node": "Airtable2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-09T13:19:15.040Z",
+  "id": "gq0iQuRVYZa3qZFb",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Update Batch Expiry on Inventory Manager",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "id": "e7fb971a-3f19-4350-b964-5629f4411485",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        940,
+        460
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "e31BkYjFO2Wy5vIi",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "messageId": "={{ $json.id }}",
+        "simple": false,
+        "options": {
+          "downloadAttachments": true
+        }
+      },
+      "id": "4d696b2a-b7b3-4fd6-9778-dbe53474a619",
+      "name": "Gmail",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1480,
+        520
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "e31BkYjFO2Wy5vIi",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2c572a34-0668-4564-870a-b6a798c34d2b",
+              "leftValue": "={{ $json.Subject }}",
+              "rightValue": "Batch-Expiry-Report",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "30398940-3fea-43d2-95b7-e0247f376658",
+      "name": "batch_expiry",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1160,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "binaryPropertyName": "attachment_0",
+        "options": {}
+      },
+      "id": "dd778f44-faa5-4c90-819e-2f625352c2e5",
+      "name": "Extract from File",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "apppMcUAglwU1JD9u",
+          "mode": "list",
+          "cachedResultName": "Inventory Manager",
+          "cachedResultUrl": "https://airtable.com/apppMcUAglwU1JD9u"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbljVA5wo0zvFjH3x",
+          "mode": "list",
+          "cachedResultName": "Batch Expiry Report",
+          "cachedResultUrl": "https://airtable.com/apppMcUAglwU1JD9u/tbljVA5wo0zvFjH3x"
+        },
+        "options": {}
+      },
+      "id": "763ce12f-6533-4db1-9dcc-840725b37661",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1460,
+        280
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deleteRecord",
+        "base": {
+          "__rl": true,
+          "value": "apppMcUAglwU1JD9u",
+          "mode": "list",
+          "cachedResultName": "Inventory Manager",
+          "cachedResultUrl": "https://airtable.com/apppMcUAglwU1JD9u"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbljVA5wo0zvFjH3x",
+          "mode": "list",
+          "cachedResultName": "Batch Expiry Report",
+          "cachedResultUrl": "https://airtable.com/apppMcUAglwU1JD9u/tbljVA5wo0zvFjH3x"
+        },
+        "id": "={{ $json.id }}"
+      },
+      "id": "f3ff7cbf-b531-43e5-9c0b-3a5ea65796ac",
+      "name": "Airtable1",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1680,
+        280
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "6b412eea-d57e-4274-ad58-9fd636c262ce",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1940,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "apppMcUAglwU1JD9u",
+          "mode": "list",
+          "cachedResultName": "Inventory Manager",
+          "cachedResultUrl": "https://airtable.com/apppMcUAglwU1JD9u"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbljVA5wo0zvFjH3x",
+          "mode": "list",
+          "cachedResultName": "Batch Expiry Report",
+          "cachedResultUrl": "https://airtable.com/apppMcUAglwU1JD9u/tbljVA5wo0zvFjH3x"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Item Code": "={{ $('Loop Over Items').item.json.item_code }}",
+            "Item Name": "={{ $('Loop Over Items').item.json.item_name }}",
+            "Batch": "={{ $('Loop Over Items').item.json.batch_id }}",
+            "Quantity": "={{ $('Loop Over Items').item.json.batch_qty }}",
+            "Manufacturing Date": "={{ $json.manufacturing_date }}",
+            "Expiry Date": "={{ $json.expiry_date }}",
+            "Days to Expiry": "={{ $('Loop Over Items').item.json.days_to_expiry }}",
+            "Warehouse": "={{ $('Loop Over Items').item.json.warehouse }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Item Code",
+              "displayName": "Item Code",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Item Name",
+              "displayName": "Item Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Batch",
+              "displayName": "Batch",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Quantity",
+              "displayName": "Quantity",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Manufacturing Date",
+              "displayName": "Manufacturing Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Expiry Date",
+              "displayName": "Expiry Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Days to Expiry",
+              "displayName": "Days to Expiry",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Warehouse",
+              "displayName": "Warehouse",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ]
+        },
+        "options": {
+          "typecast": false
+        }
+      },
+      "id": "38f1e00b-f61b-44d9-a860-7c1fbbeee62b",
+      "name": "Airtable2",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        2380,
+        580
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "q5ICF2DzH8KpL3Ai",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Batch",
+        "documentName": "={{ $json.batch_id }}"
+      },
+      "id": "0369ed02-d435-4ca6-85f3-2dc6cef726f2",
+      "name": "get_batch",
+      "type": "n8n-nodes-base.erpNext",
+      "typeVersion": 1,
+      "position": [
+        2180,
+        580
+      ],
+      "credentials": {
+        "erpNextApi": {
+          "id": "OVfEC6rfwqA5vwcf",
+          "name": "ERPNext Prod"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Gmail Trigger": [
+      {
+        "json": {
+          "id": "1927170cd39222c7",
+          "threadId": "1927170cd39222c7",
+          "snippet": "Batch-Expiry-Report Hello, Find attached the report for items with batches expiring in 2 months.",
+          "payload": {
+            "mimeType": "multipart/mixed"
+          },
+          "sizeEstimate": 22212,
+          "historyId": "452124",
+          "internalDate": "1728479999000",
+          "labels": [
+            {
+              "id": "INBOX",
+              "name": "INBOX"
+            },
+            {
+              "id": "IMPORTANT",
+              "name": "IMPORTANT"
+            },
+            {
+              "id": "CATEGORY_UPDATES",
+              "name": "CATEGORY_UPDATES"
+            },
+            {
+              "id": "UNREAD",
+              "name": "UNREAD"
+            }
+          ],
+          "Subject": "Batch-Expiry-Report",
+          "To": "<gatura@bulkbox.co.ke>",
+          "From": "Bulkbox <portal@bulkbox.co.ke>"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "pA3zEasbGp50knPq"
+  },
+  "staticData": {
+    "node:Gmail Trigger": {
+      "Gmail Trigger": {
+        "lastTimeChecked": 1728483907
+      }
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-10-09T14:25:07.000Z",
+  "versionId": "ca362e20-bb35-4537-883d-f82cac770e03"
+}
