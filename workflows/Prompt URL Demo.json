@@ -1,0 +1,37 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2024-10-09T07:48:34.045Z",
+  "id": "fYCLY9HxH3HjM4Ur",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Prompt URL Demo",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "d34e404f-b1ca-4087-a885-ef57a6b0405f",
+        "options": {}
+      },
+      "id": "64e0988b-39d9-460f-b25e-530fa8f8e5bb",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        940,
+        460
+      ],
+      "webhookId": "d34e404f-b1ca-4087-a885-ef57a6b0405f"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-09T07:49:50.000Z",
+  "versionId": "0efcc037-d490-4467-aa62-6b6e03b00a93"
+}
