@@ -1,6 +1,17 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Loop Over Items": {
       "main": [
         [],
@@ -121,17 +132,6 @@
         ]
       ]
     },
-    "Airtable": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "50% > 30": {
       "main": [
         [
@@ -216,6 +216,17 @@
         ]
       ]
     },
+    "empty": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "update_0.5%1": {
       "main": [
         [
@@ -227,11 +238,11 @@
         ]
       ]
     },
-    "empty": {
+    "Webhook": {
       "main": [
         [
           {
-            "node": "Loop Over Items",
+            "node": "Airtable",
             "type": "main",
             "index": 0
           }
@@ -239,16 +250,16 @@
       ]
     }
   },
-  "createdAt": "2024-09-26T09:48:31.339Z",
-  "id": "MoCAgzCpvDuPgih2",
+  "createdAt": "2024-10-09T11:16:16.308Z",
+  "id": "Y0NRbR47M04tw3EE",
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Margin Share",
+  "name": "JBP Margin Update",
   "nodes": [
     {
       "parameters": {
-        "operation": "search",
+        "operation": "get",
         "base": {
           "__rl": true,
           "value": "appSCi0a1zPuJizxg",
@@ -263,15 +274,16 @@
           "cachedResultName": "MASTER",
           "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tbl2hGiQmpSg73Una"
         },
+        "id": "={{ $json.query.recordID }}",
         "options": {}
       },
-      "id": "7654d9ec-7b9f-48e0-8c11-58b593ddd32b",
+      "id": "d62c018d-219a-4594-b6ac-ca82599128d7",
       "name": "Airtable",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
         1120,
-        520
+        360
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -284,13 +296,13 @@
       "parameters": {
         "options": {}
       },
-      "id": "7eeb0b94-de8e-4fed-8cc4-d6f8d9958d57",
+      "id": "7ab1e1ff-0e55-412c-9335-5b5b2028e90c",
       "name": "Loop Over Items",
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
         1340,
-        520
+        360
       ]
     },
     {
@@ -318,13 +330,13 @@
         "looseTypeValidation": "=",
         "options": {}
       },
-      "id": "943502c5-971b-4d55-b3ee-d05a5b5d1376",
+      "id": "186b2df8-2d34-4028-b3cc-64c61a2ba524",
       "name": "0%",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
         1560,
-        640
+        480
       ]
     },
     {
@@ -360,13 +372,13 @@
         },
         "options": {}
       },
-      "id": "b1623c92-9d79-4101-9131-2eae7bed9988",
+      "id": "e9fca4a1-3f99-4413-b0a0-304735445425",
       "name": "35%",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
         1800,
-        720
+        560
       ]
     },
     {
@@ -402,13 +414,13 @@
         },
         "options": {}
       },
-      "id": "0bfefec2-0d1b-42ee-a030-3589b31c5fed",
+      "id": "cebaf1c8-9564-4f54-9cce-e4aa64d944f2",
       "name": "30%",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
         2040,
-        800
+        640
       ]
     },
     {
@@ -444,13 +456,13 @@
         },
         "options": {}
       },
-      "id": "aa321446-cd3c-4a3a-a212-a368ecd63269",
+      "id": "759433d9-80a7-4fb4-9617-0c7afb67d3ee",
       "name": "40%",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
         2260,
-        880
+        720
       ]
     },
     {
@@ -486,13 +498,13 @@
         },
         "options": {}
       },
-      "id": "91d83061-da35-4980-9461-1f9ab55f33f7",
+      "id": "f69f17ff-d123-49fe-b96b-2d26b1142f4c",
       "name": "45%",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
         2440,
-        1000
+        840
       ]
     },
     {
@@ -528,24 +540,13 @@
         },
         "options": {}
       },
-      "id": "f28c4ee0-55fc-4681-8584-05efe65291fd",
+      "id": "8c669e8a-4f7a-4ba0-918b-f80f9d7216a8",
       "name": "50%",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
         2680,
-        1080
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "5a86e9ac-96d5-454f-8c29-f1ec0e60af1f",
-      "name": "When clicking ‘Test workflow’",
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        840,
-        520
+        920
       ]
     },
     {
@@ -572,13 +573,13 @@
         },
         "options": {}
       },
-      "id": "1d966405-e27e-4636-a30d-72a5ee66e9d1",
+      "id": "26a1a5a3-aeb8-4208-825e-fd6344cef7ac",
       "name": "50% > 30",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
         2900,
-        1240
+        1080
       ]
     },
     {
@@ -3994,13 +3995,13 @@
         },
         "options": {}
       },
-      "id": "5ee632b7-e8a3-44f3-954f-066c77fb330f",
+      "id": "ad620e31-1947-47a1-a78e-a39a39f8298f",
       "name": "update_0%",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
         1800,
-        560
+        380
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -7422,13 +7423,13 @@
         },
         "options": {}
       },
-      "id": "0b887abc-ba1a-478e-bc5c-07eeacc9ac9a",
+      "id": "1f55da4a-48cc-4fb6-88ed-e738b5a41513",
       "name": "update_0.35%",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
-        2040,
-        640
+        2060,
+        460
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -10850,13 +10851,13 @@
         },
         "options": {}
       },
-      "id": "0bc9e4e5-15d3-4ad1-bec2-242a6362e75a",
+      "id": "245b4826-a215-47ef-90c7-d461e8b9bbcb",
       "name": "update_0.3%",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
-        2260,
-        720
+        2280,
+        540
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -14278,13 +14279,13 @@
         },
         "options": {}
       },
-      "id": "18012f7d-1a01-47e7-b90f-4e7caa228672",
+      "id": "62c6808e-b075-485a-9a9e-8e9eaa49ffdf",
       "name": "update_0.4%",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
         2480,
-        820
+        620
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -17706,13 +17707,13 @@
         },
         "options": {}
       },
-      "id": "b0e17a6b-da7b-40e7-b8ac-93b2b4b70457",
+      "id": "c09c001a-fd55-430a-a346-bd75ded5f501",
       "name": "update_0.45%",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
         2660,
-        900
+        740
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -21134,13 +21135,13 @@
         },
         "options": {}
       },
-      "id": "ec1ed335-2e06-4d82-bda0-e56b9b31e1f9",
+      "id": "a1ed82dc-4290-4200-afaa-05c38e69d043",
       "name": "update_0.5%",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
         2900,
-        1000
+        840
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -24562,13 +24563,13 @@
         },
         "options": {}
       },
-      "id": "077635b4-361f-4c0b-a594-1d58c961af7e",
+      "id": "26c0d619-b358-4df3-939e-56af94ba9cd6",
       "name": "empty",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
         3100,
-        1380
+        1200
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -27990,13 +27991,13 @@
         },
         "options": {}
       },
-      "id": "7d56a986-33f2-4bc2-9598-02d7824719b5",
+      "id": "81ee9dfd-e57b-403f-a914-6e3e066c69a7",
       "name": "update_0.5%1",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
         3080,
-        1120
+        960
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -28004,22 +28005,68 @@
           "name": "Airtable Personal Access Token account"
         }
       }
+    },
+    {
+      "parameters": {
+        "path": "aa213336-48bc-4bcc-a8fa-37346f57cf6a",
+        "options": {}
+      },
+      "id": "b88571c5-f711-4942-8960-4f71f7cac4b0",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        920,
+        360
+      ],
+      "webhookId": "aa213336-48bc-4bcc-a8fa-37346f57cf6a"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bulkbox.cloud",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-airtable-source": "appSCi0a1zPuJizxg/wflTDEWgZtX5YGvip",
+            "x-forwarded-for": "3.227.208.14",
+            "x-forwarded-host": "n8n.bulkbox.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "19ac6f0cdfeb",
+            "x-real-ip": "3.227.208.14"
+          },
+          "params": {},
+          "query": {
+            "recordID": "recVncSyfUeyavOIf",
+            "rrp_margin": "0.24999999999999997"
+          },
+          "body": {},
+          "webhookUrl": "https://n8n.bulkbox.cloud/webhook/aa213336-48bc-4bcc-a8fa-37346f57cf6a",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1",
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner",
     "errorWorkflow": "pA3zEasbGp50knPq"
   },
-  "staticData": {
-    "node:Airtable Trigger": {
-      "lastTimeChecked": "2024-09-27T09:42:27Z"
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-05T20:25:50.007Z",
+      "updatedAt": "2024-03-05T20:25:50.007Z",
+      "id": "Axa7tUwnaZFPBQmp",
+      "name": "Production"
     }
-  },
-  "tags": [],
+  ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-09T11:26:20.000Z",
-  "versionId": "a11a1848-1110-46ba-b74f-0cac0704ad3a"
+  "updatedAt": "2024-10-09T11:47:37.000Z",
+  "versionId": "e12a5cea-91c2-4d13-8e2e-7c8352401a16"
 }
